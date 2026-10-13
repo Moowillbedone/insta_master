@@ -1,0 +1,170 @@
+# 비율 공식 01. 다음 편: 비율 공식 02 · 크롭 vs 롱 재킷
+# WEEK 3 (11/2–11/8) 아우터 전환 (입동 11/7) · 월요일 카드뉴스
+# 코트 길이 3가지 = 무릎 위 카멜 · 무릎 아래 오트밀 · 발목 위 네이비. 네이비 롱코트는 11/8 주간 플랜과도 이어진다
+# s02(B)와 s05(A)는 같은 카멜 코트·같은 하의·같은 자리·같은 자세로, 신발만 다르게 (비교 슬라이드용: 변수 하나)
+# LOOK 03은 안쪽(연회색)과 신발(회색 스웨이드)을 한 톤으로 이어 '하의와 신발 색 잇기' 원칙을 지킨다
+id: 2026-11-02-long-coat-length-ratio
+date: 2026-11-02
+time: "07:40"
+status: draft
+series: 비율 공식
+format: carousel
+pillar: 비율
+goal: save
+hook: "롱코트 길이별 비율 공식"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      navy wool-blend single-breasted long coat with notch lapels and matte navy buttons, ending just above the ankle bone, worn open;
+      light grey fine-gauge wool turtleneck knit; light grey high-waisted wide-leg wool slacks grazing the top of the shoes;
+      mid-grey suede penny loafers close in tone to the slacks; slim silver watch
+    prompt: >-
+      full-body shot walking toward the camera on a quiet tree-lined sidewalk in central Seoul on a crisp November morning,
+      pale yellow ginkgo leaves scattered on the pavement and softly blurred ginkgo trees behind,
+      the open coat swinging slightly with her stride so the light grey inner column runs unbroken from neck to shoes,
+      low soft sunlight from the side, calm composed expression, camera at waist height so proportions look natural,
+      no readable signage, generous empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      camel wool single-breasted coat with notch lapels and matte brown buttons, ending about 5 cm above the knee, worn open;
+      ivory crew-neck wool knit; black high-waisted straight-leg wool slacks long enough to touch the top of the shoes;
+      black socks; black leather penny loafers; small black leather shoulder bag
+    prompt: >-
+      full-body shot standing on a quiet Seongsu-dong street at 8am in front of a light red-brick wall,
+      facing the camera at a slight angle, left hand holding the bag strap at the shoulder, right arm relaxed,
+      soft overcast morning light, the whole figure from head to shoes in frame so the coat hem, trouser line and shoes
+      are easy to read, camera at waist height, no readable signage, empty space above her head
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      oatmeal wool-blend single-breasted long coat ending at mid-calf, worn open;
+      ivory fine-gauge turtleneck knit tucked into a dark brown ribbed knit midi skirt;
+      dark brown smooth leather knee-high boots with a low block heel, the boot shafts rising under the coat hem
+      so only brown shows below it; dark brown leather shoulder bag
+    prompt: >-
+      full-body shot walking slowly across a wide stone-paved plaza near Gwanghwamun on a cool morning,
+      softly blurred trees and low stone buildings behind, coat hem moving slightly with her step,
+      soft diffused daylight, warm neutral tones, camera at waist height, no readable signage or logos,
+      empty space in the upper third
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same navy wool-blend single-breasted long coat with notch lapels and matte navy buttons, ending just above the ankle bone, worn open;
+      light grey fine-gauge wool turtleneck knit; light grey high-waisted wide-leg wool slacks grazing the top of the shoes;
+      mid-grey suede penny loafers close in tone to the slacks, the toes just showing; slim silver watch
+    prompt: >-
+      full-body shot standing in a minimal Seoul office lobby with a light stone floor and tall windows,
+      front view with the coat open so the light grey inner column runs from neck to the grey shoes, hands relaxed at her sides,
+      soft daylight from the left, quiet polished mood, background softly blurred, empty space above her head
+  s05:
+    file: images/s05.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same camel wool single-breasted coat with notch lapels and matte brown buttons, ending about 5 cm above the knee, worn open;
+      ivory crew-neck wool knit; black high-waisted straight-leg wool slacks long enough to touch the top of the shoes;
+      bright white leather low-top sneakers with white soles; small black leather shoulder bag
+    prompt: >-
+      full-body shot standing on a quiet Seongsu-dong street at 8am in front of a light red-brick wall,
+      facing the camera at a slight angle, left hand holding the bag strap at the shoulder, right arm relaxed,
+      soft overcast morning light, the whole figure from head to shoes in frame so the coat hem, trouser line and shoes
+      are easy to read, camera at waist height, no readable signage, empty space above her head
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "비율 공식 · 01"
+    title: "롱코트 길이별\n비율 공식"
+    subtitle: "밑단 위치만 알면 하의·신발이 정해져요"
+  - layout: tip
+    number: "원리"
+    title: "코트 밑단은\n다리 위의 가로선이에요"
+    body: "밑단이 어디에 걸리는지에 따라 그 아래를 채우는 방법이 달라져요."
+    bullets: ["무릎 위 → 하의·신발을 한 색으로", "무릎 아래 → 밑단 아래를 부츠로", "발목 위 → 열어 입고 안쪽은 한 톤"]
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 무릎 위"
+    title: "검정을 발끝까지 이어요"
+    items: ["카멜 울 코트 (무릎 위)", "아이보리 크루넥 니트", "검정 일자 슬랙스", "검정 양말 + 검정 로퍼"]
+    tip: "슬랙스·양말·로퍼가 한 색이라 코트 아래 다리가 길게 이어져 보여요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 무릎 아래"
+    title: "밑단 아래는 부츠로 채워요"
+    items: ["오트밀 울 롱코트", "아이보리 터틀넥 니트", "브라운 니트 스커트", "브라운 롱부츠"]
+    tip: "밑단 아래가 브라운 한 색으로 채워져 종아리에서 선이 안 끊겨요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 발목 위"
+    title: "열어 입고 안쪽은 한 톤"
+    items: ["네이비 울 롱코트", "연회색 터틀넥 니트", "연회색 와이드 슬랙스", "회색 스웨이드 로퍼"]
+    tip: "니트부터 로퍼까지 회색 톤으로 이어 열면 목부터 발끝까지 한 줄이에요."
+  - layout: compare
+    title: "같은 코트·같은 바지, 신발만 달라요"
+    left: { image: s05, label: "A", caption: "흰 스니커즈에서 다리 선이 끊겨요" }
+    right: { image: s02, label: "B", caption: "바지·양말·로퍼가 이어져 길어 보여요" }
+    verdict: "핵심은 하의와 신발 색 잇기예요.\n흰 스니커즈를 신는 날엔 하의도 밝게 맞춰요."
+  - layout: tip
+    number: "TIP"
+    title: "키보다\n밑단 위치로 골라요"
+    body: "같은 코트도 키에 따라 무릎 아래가 되기도, 발목 위가 되기도 해요."
+    bullets: ["어깨부터 원하는 밑단까지 재기", "상세페이지 '총장'과 비교하기", "길이보다 어깨선이 먼저 맞게"]
+  - layout: checklist
+    image: s03
+    title: "코트 입고 거울 앞 30초"
+    checks: ["밑단이 다리 어디에 오나요?", "하의와 신발 색이 이어지나요?", "밑단 아래 보이는 색이 1~2개인가요?", "열었을 때 안쪽이 한 톤인가요?", "소매가 손목뼈를 덮나요?"]
+  - layout: cta
+    title: "저장해두고\n코트 꺼낼 때 보세요"
+    body: "다음 편: 비율 공식 02 · 크롭 vs 롱 재킷"
+
+products: []
+
+reel:
+  audio: null
+  scenes: []
+
+caption: |
+  롱코트 길이별 비율 공식
+
+  같은 코트도 하의·신발 색에 따라
+  길어 보이기도, 뚝 끊겨 보이기도 해요.
+  밑단이 다리 어디에 걸리는지만 보면 고르기 쉬워져요.
+
+  ✔ 무릎 위: 하의·양말·신발을 한 색으로
+  ✔ 무릎 아래: 부츠로 밑단 아래를 채워요
+  ✔ 발목 위: 앞을 열고 안쪽부터 신발까지 한 톤으로
+  ✔ 살 때는 키보다 밑단 위치로: 어깨부터 원하는 밑단까지 재고 '총장'과 비교해요
+
+  저장해두고 코트 꺼내는 날 다시 보세요.
+  롱코트 고민하는 동료에게 보내줘도 좋아요.
+  다음 편은 '비율 공식 02 · 크롭 vs 롱 재킷'이에요.
+
+hashtags: [롱코트코디, 코트코디, 출근룩, 직장인코디, 오피스룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 무릎 위 카멜 코트, 무릎 아래 오트밀 롱코트, 발목 위 네이비 롱코트에 하의와 신발 색을 이어 입는 방법을 보여주는 롱코트 길이별 비율 공식 카드뉴스"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

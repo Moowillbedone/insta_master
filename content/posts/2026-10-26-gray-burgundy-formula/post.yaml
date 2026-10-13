@@ -1,0 +1,161 @@
+# 컬러 공식 02. 이전 편: 컬러 공식 01 · 네이비+카멜 (10/19). 다음 편: 컬러 공식 03 · 아이보리+브라운
+# WEEK 2 (10/26–11/1) 니트 시즌 · 월요일 카드뉴스
+id: 2026-10-26-gray-burgundy-formula
+date: 2026-10-26
+time: "07:40"
+status: draft
+series: 컬러 공식
+format: carousel
+pillar: 컬러공식
+goal: save
+hook: "회색 출근룩엔 버건디 딱 한 곳"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      mid-grey single-breasted wool coat worn open, deep burgundy fine-gauge merino crew-neck knit
+      with the front hem lightly tucked in, light heather-grey high-waisted wide-leg wool slacks,
+      black leather penny loafers, small black leather shoulder bag with no visible logo
+    prompt: >-
+      full-body shot walking along a quiet Seongsu-dong side street at 8am, pale grey concrete wall behind her
+      and a few dry fallen leaves on the sidewalk, soft overcast autumn light from the left,
+      right hand lightly holding the bag strap, the open coat moving slightly so the burgundy knit shows
+      only as a narrow vertical band down the center, calm forward gaze,
+      no readable signage, generous empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same mid-grey single-breasted wool coat worn open, the same deep burgundy fine-gauge merino crew-neck knit
+      with the front hem lightly tucked in, the same light heather-grey high-waisted wide-leg wool slacks, slim silver watch
+    prompt: >-
+      three-quarter shot standing in a minimal Seoul office lobby with a light stone floor,
+      the coat hanging open naturally so the burgundy knit reads as a narrow vertical band between the coat fronts,
+      right hand resting in the coat pocket, soft daylight from tall windows on the left,
+      muted cool-grey surroundings so the burgundy is the only color in the frame, background softly blurred,
+      clear space above her head
+  s03:
+    file: images/s03.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      mid-grey ribbed wool crew-neck knit tucked in at the front, charcoal straight-leg wool slacks,
+      deep burgundy smooth leather small structured tote with two short top handles and no visible logo,
+      black leather ankle boots with a low block heel
+    prompt: >-
+      three-quarter shot on a quiet, nearly empty subway platform with soft ambient light, standing beside a pale tiled pillar,
+      the burgundy tote held by its handles at hip height in her right hand so it reads clearly, calm waiting pose,
+      cool grey surroundings with warm natural skin tones, no readable signage or route maps, background softly blurred
+  s04:
+    file: images/s04.png
+    framing: waist-up
+    status: todo
+    outfit: >-
+      pale grey fine-gauge wool turtleneck, mid-grey herringbone wool blazer worn open,
+      light grey wide-leg wool slacks (mostly out of frame), slim silver watch;
+      makeup for this image only: deep burgundy matte lipstick instead of her usual rosy-beige lip, everything else minimal
+    prompt: >-
+      waist-up shot at a cafe window seat near Gwanghwamun in morning light, sitting with both hands
+      loosely around a plain white ceramic cup with no logo, body turned slightly toward the window,
+      soft side light from the window on the right so the burgundy lip reads clearly as the only color,
+      muted grey-beige interior, no readable signage, empty wall space above her head
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      grey pieces as the large base: light heather-grey wide-leg slacks, mid-grey ribbed knit, mid-grey wool coat folded;
+      small burgundy accents: a folded deep burgundy crew-neck knit, a small deep burgundy leather structured tote
+      with two short handles, a plain black lipstick tube with the cap off showing a deep burgundy shade; black penny loafers
+    prompt: >-
+      top-down flat lay on a pale warm-grey linen surface, even soft daylight, neat spacing,
+      all items arranged in one wide horizontal band across the middle of the frame,
+      grey garments in the center and the three burgundy accents placed at the left and right ends of the band,
+      realistic wool and leather textures, no people, no hands, no text or logos on any item
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "컬러 공식 · 02"
+    title: "회색 출근룩엔\n버건디 딱 한 곳"
+    subtitle: "니트·가방·립 중 하나만 골라요"
+  - layout: tip
+    number: "공식"
+    title: "회색은 넓게,\n버건디는 한 곳만"
+    body: "무채색인 회색 위에선 버건디 한 곳만으로도 충분히 눈에 띄어요."
+    bullets: ["회색: 코트·니트·슬랙스처럼 넓게", "버건디: 니트·가방·립 중 한 곳", "나머지 색은 검정·아이보리만"]
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 니트"
+    title: "버건디 니트는 코트 안에"
+    items: ["버건디 크루넥 니트", "회색 울 코트", "연회색 와이드 슬랙스", "검정 로퍼"]
+    tip: "코트를 열면 버건디가 세로로 좁게 보여 과하지 않아요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 가방"
+    title: "회색 위아래에 버건디 가방"
+    items: ["회색 골지 니트", "차콜 일자 슬랙스", "버건디 토트백", "검정 앵클부츠"]
+    tip: "가방은 면적이 작아 회색의 차분함은 그대로 두고 색만 더해요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 립"
+    title: "회색 톤온톤엔 립으로"
+    items: ["연회색 터틀넥", "회색 헤링본 블레이저", "연회색 와이드 슬랙스", "버건디 립"]
+    tip: "옷이 모두 회색인 날은 얼굴에 색을 두면 인상이 또렷해져요."
+  - layout: tip
+    number: "TIP"
+    title: "회색 밝기로\n인상을 골라요"
+    body: "밝은 회색일수록 버건디가 또렷해지고, 차콜일수록 깊게 섞여요."
+    bullets: ["연회색 + 버건디 → 대비가 커서 또렷하게", "중간 회색 + 버건디 → 가장 차분하게", "차콜 + 버건디 → 깊고 무게 있게"]
+  - layout: checklist
+    image: s05
+    title: "출근 전 컬러 체크"
+    checks: ["버건디는 한 곳, 많아도 두 곳", "두 곳이면 립+가방처럼 떨어뜨리기", "두 버건디는 깊이를 비슷하게", "나머지는 회색·검정·아이보리", "새빨강 말고 와인빛 레드로"]
+    note: "두 곳이 떨어져 있어야 색이 한 덩어리로 뭉쳐 보이지 않아요"
+  - layout: cta
+    title: "저장해두고\n회색 입는 날 꺼내보세요"
+    body: "다음 편: 컬러 공식 03 · 아이보리+브라운"
+
+products: []
+
+reel:
+  audio: null
+  scenes: []
+
+caption: |
+  회색 출근룩엔 버건디 딱 한 곳
+
+  회색만 입은 날이 밋밋하게 느껴진다면 깊은 레드를 한 곳에만 더해보세요.
+  니트, 가방, 립 중 하나면 충분해요.
+
+  ✔ 회색은 넓게, 버건디는 한 곳만
+  ✔ 니트는 코트 안에 입으면 세로로 좁게 보여 과하지 않아요
+  ✔ 가방은 면적이 작아 차분함은 그대로 두고 색만 더해요
+  ✔ 옷이 전부 회색인 날은 립으로 얼굴에 색을 둬요
+  ✔ 연회색과는 또렷하게, 차콜과는 깊게 어울려요
+
+  저장해두고 회색 입는 날 꺼내보세요.
+  다음 편은 '컬러 공식 03 · 아이보리+브라운'이에요.
+
+hashtags: [출근룩, 컬러조합, 그레이코디, 버건디코디, 직장인코디]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 회색 코트·니트·슬랙스를 바탕으로 버건디 니트, 버건디 토트백, 버건디 립 중 한 곳씩만 색을 더한 그레이+버건디 출근룩 3가지와 컬러 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

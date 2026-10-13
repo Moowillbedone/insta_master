@@ -1,0 +1,182 @@
+# WEEK 1 (10/19–10/25) 환절기 레이어링 · 일요일 저녁 카드뉴스
+# 주간 출근룩 플랜 01 (10/26–10/30 주를 위한 플랜). 다음 편: 다음 주 플랜 · 회의 많은 주 (11/1)
+# 캡슐 8벌: 베이지 트렌치 · 네이비 카디건 · 흰 셔츠 · 회색 니트 · 네이비 스트라이프 긴팔 티 · 검은 와이드 슬랙스 · 카멜 미디 스커트 · 연청 일자 데님
+# 회색 니트는 10/30 '회색 니트 하나로 3가지'와 같은 미디엄 그레이 멜란지 크루넥
+# 신발 2켤레: 브라운 로퍼 · 흰 스니커즈. 트렌치는 10/21·10/23 편과 같은 베이지 더블 트렌치
+id: 2026-10-25-weekly-plan-temp-gap
+date: 2026-10-25
+time: "20:30"
+status: draft
+series: 주간 출근룩 플랜
+format: carousel
+pillar: 상황별
+goal: save
+hook: "일교차 10도 주간, 옷 8벌로 월~금 출근룩"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      a ten-item capsule laid out in neat rows: beige double-breasted cotton-gabardine trench coat (folded, top row),
+      navy fine-gauge wool cardigan, white cotton poplin shirt, mid-grey melange wool crew-neck knit,
+      navy-and-white striped long-sleeve cotton T-shirt (middle row),
+      black wide-leg wool slacks, camel A-line wool midi skirt, light-blue straight-leg jeans (bottom row),
+      brown leather penny loafers and white leather sneakers along the bottom edge
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, clear spacing so every piece is readable,
+      realistic gabardine, wool, cotton and denim textures with gentle natural folds, no people, no hands
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      beige double-breasted cotton-gabardine knee-length trench coat worn open, mid-grey melange wool crew-neck knit
+      over a white cotton poplin shirt with the collar laid out over the knit neckline, black high-waisted wide-leg wool slacks,
+      brown leather penny loafers
+    prompt: >-
+      three-quarter shot just inside the glass entrance of a minimal Seoul office lobby with a light stone floor,
+      holding a plain white takeaway cup without any logo, soft morning daylight from the left,
+      fresh Monday-morning mood, background softly blurred
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat worn open, navy fine-gauge crew-neck wool cardigan fully buttoned and worn as a top
+      over a navy-and-white striped long-sleeve cotton T-shirt (only a narrow strip of stripes shows at the neckline),
+      camel A-line wool midi skirt, sheer dark brown tights, brown leather penny loafers, small brown leather shoulder bag
+    prompt: >-
+      full-body shot walking on a quiet Seongsu-dong street in the morning, red-brick wall behind her,
+      soft overcast light, one hand on the shoulder-bag strap, relaxed steady stride, no readable signage
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat wrapped closed with the belt tied in one flat knot at the left hip,
+      the same mid-grey melange wool crew-neck knit showing at the neckline,
+      the same camel A-line wool midi skirt showing about a hand's width below the knee-length trench hem,
+      sheer dark brown tights, brown leather penny loafers
+    prompt: >-
+      full-body shot standing on a wide, quiet sidewalk in a central Seoul office district at 8am,
+      pale stone buildings and ginkgo trees turning yellow softly blurred behind her, soft overcast light from the left,
+      calm forward gaze, no readable signage, empty space in the upper third for a headline
+  s05:
+    file: images/s05.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      white cotton poplin shirt, navy fine-gauge wool cardigan draped over the shoulders with the sleeves hanging loose,
+      black high-waisted wide-leg wool slacks, brown leather penny loafers
+    prompt: >-
+      three-quarter shot inside a bright office lounge by a large window, holding a plain notebook against her side,
+      soft natural window light, warm neutral color grade, relaxed midday mood, background softly blurred,
+      no readable screens or signage
+  s06:
+    file: images/s06.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat worn open, white cotton poplin shirt worn fully unbuttoned like a light jacket
+      over a navy-and-white striped long-sleeve cotton T-shirt, light-blue straight-leg jeans, white leather sneakers,
+      small brown leather shoulder bag
+    prompt: >-
+      full-body shot on a subway platform with soft ambient light, no readable signage,
+      she walks toward the camera with an easy Friday-morning smile, softly blurred tiled wall behind her
+
+slides:
+  - layout: cover
+    image: s04
+    kicker: "주간 출근룩 플랜 · 01"
+    title: "일교차 10도 주간\n옷 8벌로 월~금"
+    subtitle: "얇게 여러 겹, 낮엔 한 겹씩 벗어요"
+  - layout: tip
+    number: "규칙"
+    title: "두꺼운 한 장보다 얇은 여러 겹"
+    body: "겹 사이 공기층이 온기를 잡아 아침엔 따뜻하고, 낮엔 바깥부터 한 겹씩 벗으면 돼요."
+    bullets:
+      - "안: 티셔츠·셔츠처럼 얇은 한 겹"
+      - "중간: 니트·카디건으로 온기 더하기"
+      - "바깥: 트렌치로 아침 바람 막기"
+  - layout: look
+    image: s02
+    label: "MON · 월요일"
+    title: "셔츠 위에 회색 니트"
+    items: ["흰 셔츠", "회색 라운드 니트", "검은 와이드 슬랙스", "베이지 트렌치"]
+    tip: "셔츠 칼라를 니트 밖으로 꺼내면 얼굴 쪽이 밝아 보여요."
+  - layout: look
+    image: s03
+    label: "TUE · 화요일"
+    title: "카디건을 상의처럼"
+    items: ["스트라이프 긴팔 티", "네이비 카디건", "카멜 미디 스커트", "베이지 트렌치"]
+    tip: "단추를 다 잠그면 니트 상의처럼 깔끔하고, 줄무늬는 목선에만 살짝 보여요."
+  - layout: look
+    image: s04
+    label: "WED · 수요일"
+    title: "트렌치 벨트로 허리 잡기"
+    items: ["회색 라운드 니트", "카멜 미디 스커트", "베이지 트렌치 (매듭)", "브라운 로퍼"]
+    tip: "벨트로 허리를 잡으면 아래가 A라인으로 퍼져 스커트와 이어져요."
+  - layout: look
+    image: s05
+    label: "THU · 목요일"
+    title: "카디건은 어깨에 걸치기"
+    items: ["흰 셔츠", "네이비 카디건 (어깨)", "검은 와이드 슬랙스", "브라운 로퍼"]
+    tip: "출근길엔 입고, 실내에선 어깨에 걸쳐 두면 추울 때 바로 입어요."
+  - layout: look
+    image: s06
+    label: "FRI · 금요일"
+    title: "셔츠를 겉옷처럼 열어서"
+    items: ["스트라이프 긴팔 티", "흰 셔츠 (열어서)", "연청 일자 데님", "흰 스니커즈"]
+    tip: "셔츠를 열어 걸치면 가벼운 겉옷이 돼요. 낮엔 트렌치만 벗어도 충분해요."
+  - layout: checklist
+    image: s01
+    title: "이번 주 옷 8벌 + 신발 2켤레"
+    checks:
+      - "바깥: 베이지 트렌치"
+      - "중간: 회색 니트·네이비 카디건"
+      - "안: 흰 셔츠·스트라이프 티"
+      - "하의: 검은 슬랙스·카멜 스커트·데님"
+      - "신발: 브라운 로퍼·흰 스니커즈"
+    note: "일요일 밤에 한 번에 꺼내두세요"
+  - layout: cta
+    title: "저장해두고\n아침마다 꺼내보세요"
+    body: "다음 편: 다음 주 플랜 · 회의 많은 주"
+
+products: []
+
+caption: |
+  일교차 10도 주간, 옷 8벌로 월~금 출근룩
+
+  아침 8°C, 낮 18°C처럼 일교차가 10도쯤 벌어지는 주에 맞춘 플랜이에요.
+  옷 8벌과 신발 2켤레로 5일을 돌려 입어요. 이번 주 예보와 같이 확인해보세요.
+
+  ✔ 월: 셔츠 칼라를 니트 밖으로 꺼내 얼굴 쪽을 밝게
+  ✔ 화: 카디건 단추를 다 잠가 니트 상의처럼 (네이비+카멜 공식)
+  ✔ 수: 트렌치 벨트를 한쪽 매듭으로 묶어 허리 잡기
+  ✔ 목: 출근길엔 카디건을 입고, 실내에선 어깨에 걸치기
+  ✔ 금: 스트라이프 티 위에 셔츠를 열어 걸쳐 한 겹 더하기
+
+  규칙은 하나예요. 얇게 여러 겹 입고, 낮엔 바깥부터 한 겹씩 벗기.
+  저장해두고 일요일 밤에 옷을 미리 꺼내두세요.
+  다음 편은 '다음 주 플랜 · 회의 많은 주'예요.
+
+hashtags: [출근룩, 일교차코디, 레이어드룩, 캡슐옷장, 직장인코디]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 베이지 트렌치와 네이비 카디건 등 옷 8벌과 신발 2켤레로 월요일부터 금요일까지 입는 일교차 대비 출근룩 5가지와 레이어링 규칙, 준비물 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

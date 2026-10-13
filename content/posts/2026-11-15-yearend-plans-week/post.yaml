@@ -1,0 +1,184 @@
+# 주간 출근룩 플랜 04 (11/16–11/20 주를 위한 플랜). 이전 편: 입동 주간 (11/8). 다음 편: 다음 주 플랜 · 첫 추위 주간
+# WEEK 4 (11/9–11/15) 연말 준비·세일 시즌 · 일요일 저녁 게시
+# 요일마다 저녁 약속 하나: 월 회식 · 화 친구 저녁 · 수 격식 자리 · 목 동기 모임 · 금 송년회
+# 아침 옷은 그대로, 저녁엔 '하나만' 바꾸는 규칙. 수요일 릴스(11/11)의 도구를 요일에 하나씩 나눠 쓴다:
+#   월 바꿀 것 없음(처음부터 편한 하의) · 화 카디건 벗기(=재킷 벗기) · 수 립 · 목 벨트 · 금 드롭 귀걸이
+# 목요일 니트 원피스는 11/13 한 벌 3가지와 같은 원피스, 차콜 코트는 11/6과 같은 코트 (영문 묘사를 글자 그대로 복사)
+# 겉옷은 주 전반 카멜 하프코트, 후반 차콜 울 코트로 돌려 입는다
+# 페르소나 기본값(작은 금 허기 귀걸이·로지 베이지 립)이 자동으로 붙으므로, 바꾼 장면에만 'instead of'를 적는다
+id: 2026-11-15-yearend-plans-week
+date: 2026-11-15
+time: "20:30"
+status: draft
+series: 주간 출근룩 플랜
+format: carousel
+pillar: 상황별
+goal: save
+hook: "연말 약속 많은 주 출근룩 플랜"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      relaxed Sunday homewear: oatmeal knit cardigan over an ivory cotton long-sleeve tee, soft grey knit wide pants;
+      on a slim wooden clothing rail beside her hang a burgundy crew-neck knit, a black satin midi skirt, a navy wool blazer,
+      a chocolate brown knit midi dress and a charcoal knee-length wool coat
+    prompt: >-
+      three-quarter shot in a bright apartment entryway on Sunday evening, standing beside the clothing rail,
+      holding the hangers of the burgundy knit and the black satin skirt together in one raised hand to see them side by side,
+      warm lamp light mixed with soft blue dusk light from a window, calm planning mood,
+      plain wall with empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      navy fine-gauge crew-neck wool knit loosely tucked in at the front, charcoal high-waisted wide-leg wool slacks,
+      camel wool half coat worn open, black leather penny loafers, plain black leather tote bag, slim silver watch
+    prompt: >-
+      full-body shot walking out through the glass door of a minimal Seoul office lobby with a light stone floor in the morning,
+      soft daylight from the left, relaxed stride, composed weekday mood, background softly blurred, no readable signage
+  s03:
+    file: images/s03.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      ivory soft crepe long-sleeve blouse with a small round neckline tucked into black straight-leg wool slacks,
+      a mid-grey fine-knit crew-neck cardigan taken off and draped over the back of her chair,
+      black leather ankle boots with a low block heel, slim silver watch
+    prompt: >-
+      three-quarter shot at a cafe window seat near Gwanghwamun in the early evening, sitting sideways on the chair
+      and turning toward the camera with a warm smile as if a friend just arrived, warm interior light with blue dusk outside,
+      background softly blurred, no readable text or signage
+  s04:
+    file: images/s04.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      navy single-breasted wool blazer with defined shoulders, ivory fine-gauge turtleneck knit,
+      matching navy high-waisted wide-leg wool slacks in the same fabric and tone so the blazer and slacks read as a suit,
+      black leather ankle boots with a low block heel, slim silver watch;
+      makeup for this image only: deeper brick-rose lip instead of her usual rosy-beige lip, everything else minimal
+    prompt: >-
+      three-quarter shot in a minimal Seoul office lobby with a light stone floor in the early evening,
+      fastening the single blazer button as she gets ready to leave for a dinner meeting, warm interior light,
+      poised calm mood, background softly blurred, no readable signage
+  s05:
+    file: images/s05.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      chocolate brown ribbed wool-blend knit midi dress with a crew neck and long sleeves, straight relaxed fit that skims the body without clinging, hem at mid-calf;
+      cinched at the natural waist with a thin black leather belt with a small plain buckle;
+      charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets, ending just below the knee, relaxed straight fit with room in the shoulders, worn open; black smooth leather knee-high boots with a low block heel whose tops sit hidden under the dress hem so no skin shows;
+      small black leather shoulder bag, slim silver watch
+    prompt: >-
+      full-body shot walking on a quiet Seoul side street in the evening, warm light from cafe windows softly blurred behind her,
+      relaxed smile, cool dusk light, cozy year-end mood, no readable signage
+  s06:
+    file: images/s06.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      deep burgundy fine-gauge crew-neck wool knit with a matte finish tucked into a black satin A-line midi skirt with a soft sheen,
+      sheer black tights, black leather ankle boots with a low block heel,
+      the charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets, ending just below the knee, relaxed straight fit with room in the shoulders, folded over her left arm,
+      slim gold drop earrings instead of her usual small gold huggies, slim silver watch
+    prompt: >-
+      full-body shot standing in the warm-lit entrance area of a restaurant with wooden walls on a Friday evening,
+      soft pendant light catching the satin skirt, festive but understated year-end mood,
+      background softly blurred, no readable signage or menus
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "주간 출근룩 플랜 · 04"
+    title: "연말 약속 많은 주\n출근룩 플랜"
+    subtitle: "아침 옷 그대로, 저녁엔 하나만 바꿔요"
+  - layout: tip
+    number: "PLAN"
+    title: "저녁에 바꿀 건\n하나만 정해요"
+    body: "약속이 몰린 주엔 갈아입을 시간이 없어요. 아침에 옷을 고를 때 저녁에 바꿀 한 가지까지 정해 두세요."
+    bullets: ["월 회식 → 바꿀 것 없이 편한 하의", "화 친구 저녁 → 카디건 벗기", "수 격식 자리 → 립만 한 톤 진하게", "목 동기 모임 → 얇은 벨트 하나", "금 송년회 → 드롭 귀걸이로 바꾸기"]
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 월 회식"
+    title: "회식 날엔 와이드 슬랙스"
+    items: ["네이비 크루넥 니트", "차콜 와이드 슬랙스", "카멜 울 하프코트", "검정 로퍼"]
+    tip: "좌식 자리에서도 편하고, 어두운 색이라 얼룩이 덜 보여요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 화 친구 저녁"
+    title: "카디건만 벗으면 저녁 모드"
+    items: ["아이보리 블라우스", "회색 얇은 카디건", "검정 일자 슬랙스", "검정 앵클부츠"]
+    tip: "낮엔 카디건으로 차분하게, 벗으면 블라우스 결이 살아나요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 수 격식 자리"
+    title: "네이비 셋업처럼 맞춰요"
+    items: ["네이비 울 블레이저", "아이보리 터틀넥", "네이비 와이드 슬랙스", "검정 앵클부츠"]
+    tip: "위아래를 같은 네이비로 맞춰 정장처럼 단정해요. 저녁엔 립만 진하게."
+  - layout: look
+    image: s05
+    label: "LOOK 04 · 목 동기 모임"
+    title: "니트 원피스에 벨트 하나"
+    items: ["브라운 니트 원피스", "얇은 검정 벨트", "차콜 울 코트", "검정 롱부츠"]
+    tip: "낮엔 벨트 없이 편하게, 저녁엔 허리에 둘러 실루엣을 잡아요."
+  - layout: look
+    image: s06
+    label: "LOOK 05 · 금 송년회"
+    title: "버건디 니트에 새틴 스커트"
+    items: ["버건디 크루넥 니트", "검정 새틴 미디스커트", "검정 앵클부츠", "금색 드롭 귀걸이"]
+    tip: "무광 니트가 새틴 광택을 눌러 낮엔 단정해요. 저녁엔 귀걸이만 드롭으로."
+  - layout: checklist
+    image: s01
+    title: "약속 전날 밤 5분 체크"
+    checks: ["귀걸이·립·벨트 가방에 넣기", "약속 장소가 좌식인지 확인", "밤 기온 보고 머플러 챙기기", "코트 보풀·먼지 털어두기", "2차가 있으면 굽 낮은 신발로"]
+    note: "회식 다녀온 울 코트는 밤새 바람 통하게 걸어 두세요"
+  - layout: cta
+    title: "저장해두고\n약속 있는 날 꺼내보세요"
+    body: "다음 편: 다음 주 플랜 · 첫 추위 주간"
+
+products: []
+
+reel:
+  audio: null
+  scenes: []
+
+caption: |
+  연말 약속 많은 주 출근룩 플랜
+
+  약속이 몰린 주엔 갈아입을 시간이 없어요.
+  아침 옷은 그대로 두고, 저녁엔 하나만 바꿔요.
+
+  ✔ 월 회식: 바꿀 것 없이, 좌식에도 편한 와이드 슬랙스
+  ✔ 화 친구 저녁: 카디건만 벗어요
+  ✔ 수 격식 자리: 네이비 셋업 그대로, 립만 한 톤 진하게
+  ✔ 목 동기 모임: 금요일 편 니트 원피스에 벨트 하나
+  ✔ 금 송년회: 버건디 니트 + 새틴 스커트, 귀걸이만 드롭으로
+
+  귀걸이·립·벨트는 아침에 가방에 넣어 두세요.
+  일요일 밤에 저장해두고 아침마다 꺼내보세요.
+  약속 많은 동료에게 보내줘도 좋아요.
+  다음 주 플랜은 '첫 추위 주간'이에요.
+
+hashtags: [출근룩, 약속룩, 연말룩, 직장인코디, 오피스룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 회식 날 와이드 슬랙스, 친구 저녁 블라우스와 카디건, 격식 자리 네이비 셋업, 동기 모임 니트 원피스와 벨트, 송년회 버건디 니트와 새틴 스커트로 짠 연말 약속 많은 주의 출근룩 플랜과 저녁에 바꿀 한 가지, 전날 밤 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

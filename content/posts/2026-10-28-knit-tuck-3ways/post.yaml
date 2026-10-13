@@ -1,0 +1,146 @@
+# 출근 15초 02. 이전 편: 트렌치 벨트 묶는 법 (10/21). 다음 편: 출근 15초 · 블레이저 소매 걷는 법
+# WEEK 2 (10/26–11/1) 니트 시즌 · 수요일 릴스
+id: 2026-10-28-knit-tuck-3ways
+date: 2026-10-28
+time: "07:40"
+status: draft
+series: 출근 15초
+format: reel
+pillar: 비율
+goal: reach
+hook: "니트 넣는 법, 바지마다 달라요"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      oatmeal medium-gauge wool crew-neck knit, charcoal high-waisted wide-leg wool slacks,
+      black leather penny loafers, slim silver watch
+    prompt: >-
+      three-quarter shot in a bright apartment entryway beside a full-length mirror (the mirror shows only a soft blur),
+      mid-action tucking just the front hem of the knit into the waistband with both hands, glancing down at the waist,
+      soft morning light from a side window on the left, warm neutral tones, clear space in the upper third for text
+  s02:
+    file: images/s02.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same oatmeal medium-gauge wool crew-neck knit with only the front hem tucked in and the back hem left loose over the hip,
+      the same charcoal high-waisted wide-leg wool slacks, black leather penny loafers, small black leather shoulder bag with no visible logo
+    prompt: >-
+      full-body shot walking slowly across a minimal Seoul office lobby with a light stone floor, body turned at a slight
+      three-quarter angle so both the tucked front and the loose back hem are visible, right hand holding the bag strap,
+      wide trouser legs moving softly, daylight from tall windows on the left, calm confident mood, empty space above her head
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      navy fine-gauge merino crew-neck knit fully tucked in and gently pulled out so it blouses slightly over the waistband,
+      beige high-waisted straight-leg wool-blend slacks with a pressed crease, dark brown leather loafers
+    prompt: >-
+      full-body shot standing by the window of a quiet cafe near Gwanghwamun in morning light, a camel wool coat
+      hung on the chair beside her, one hand lightly adjusting the bloused knit at the waist, the straight trouser line
+      clearly visible from hip to ankle, soft daylight from the window on the right, muted wood and stone interior,
+      relaxed weekday mood, no readable signage or menus, clear space in the upper third
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      ivory fine-gauge mock-neck knit fully tucked in, thin dark brown leather belt with a plain unbranded buckle,
+      mid-grey high-waisted front-pleated (pintuck) wool trousers with the pleats falling straight from the waistband,
+      dark brown leather loafers
+    prompt: >-
+      full-body shot standing by a large window in a bright office lounge, both hands lightly settling the belt buckle
+      at the center of the waist, natural window light from the right, the trouser pleats falling cleanly to the hem,
+      background softly blurred, empty space above her head for text
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      flat lay comparing knit thickness: the thick oatmeal medium-gauge wool knit placed above the charcoal wide-leg slacks on the left,
+      the thin ivory fine-gauge mock-neck knit placed above the mid-grey pintuck trousers on the right,
+      a thin dark brown leather belt coiled between them
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, two neat columns with clear spacing,
+      the difference in knit texture and thickness clearly visible, realistic fabric folds,
+      no people, no hands, no text or logos, all items kept within the central area of the frame
+
+slides: []
+
+products: []
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "니트 넣는 법\n바지마다 달라요"
+      seconds: 2.0
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "01"
+      text: "앞만 넣기 → 와이드\n다리는 길게, 뒤는 편하게"
+      seconds: 2.6
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "02"
+      text: "다 넣고 살짝 빼기 → 일자\n위는 여유, 아래는 곧게"
+      seconds: 2.7
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "03"
+      text: "벨트로 잡기 → 핀턱\n주름이 허리부터 곧게"
+      seconds: 2.6
+      motion: zoom-out
+    - layout: reel-text
+      label: "TIP"
+      text: "두꺼운 니트는 앞만\n얇은 니트는 전체\n그래야 허리가 안 뭉쳐요"
+      seconds: 2.3
+      motion: still
+    - image: s05
+      layout: reel-end
+      text: "저장해두고\n내일 바지에 맞춰보세요"
+      cta: "니트 자주 입는 동료에게 보내기"
+      seconds: 2.3
+      motion: zoom-out
+
+caption: |
+  니트 넣는 법, 바지마다 달라요
+
+  같은 니트도 어떻게 넣느냐에 따라 허리선과 실루엣이 달라져요.
+
+  ✔ 와이드 슬랙스 → 앞만 넣기: 허리선이 보여 다리는 길어 보이고, 뒤는 편해요
+  ✔ 일자 슬랙스 → 다 넣고 살짝 빼기: 위에 여유가 생겨 곧은 바지와 균형이 맞아요
+  ✔ 핀턱 슬랙스 → 벨트로 잡기: 주름이 허리부터 곧게 떨어져요
+  ✔ 두꺼운 니트는 앞만, 얇은 니트는 전체: 그래야 허리가 뭉치지 않아요
+
+  저장해두고 내일 입을 바지에 맞춰보세요.
+  니트 자주 입는 동료에게 보내줘도 좋아요.
+  다음 편은 '출근 15초 · 블레이저 소매 걷는 법'이에요.
+
+hashtags: [니트코디, 출근룩, 슬랙스코디, 직장인코디, 오피스룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 니트를 앞만 넣기, 다 넣고 살짝 빼기, 벨트로 잡기 세 가지 방식으로 와이드·일자·핀턱 슬랙스에 맞춰 입은 모습과 두꺼운 니트·얇은 니트 비교를 보여주는 릴스"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

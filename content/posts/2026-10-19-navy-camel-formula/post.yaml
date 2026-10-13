@@ -1,0 +1,170 @@
+# WEEK 1 (10/19–10/25) 환절기 레이어링 · 월요일 카드뉴스
+# 컬러 공식 01. 다음 편: 컬러 공식 02 · 그레이+버건디 (10/26)
+id: 2026-10-19-navy-camel-formula
+date: 2026-10-19
+time: "07:40"
+status: draft
+series: 컬러 공식
+format: carousel
+pillar: 컬러공식
+goal: save
+hook: "네이비+카멜, 비율만 바꾸면 출근룩 3가지"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      lightweight camel wool-blend single-breasted knee-length coat worn open, navy fine-gauge merino crew-neck knit,
+      navy high-waisted straight-leg wool slacks with a pressed center crease, dark brown leather penny loafers,
+      small dark brown leather shoulder bag without visible hardware logos
+    prompt: >-
+      full-body shot walking along a wide, quiet sidewalk in a central Seoul office district at 8am,
+      pale stone-clad buildings and a few ginkgo trees just starting to turn yellow softly blurred behind her,
+      soft overcast morning light from the left, the open coat moving slightly with her stride,
+      calm forward gaze, no readable signage, empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      navy single-breasted wool blazer with matching navy straight-leg wool slacks (a soft-shouldered suit set),
+      camel fine-gauge V-neck wool knit worn underneath so a clear camel V shows between the blazer lapels near her face,
+      dark brown leather penny loafers
+    prompt: >-
+      three-quarter shot standing in a minimal Seoul office lobby with a light stone floor,
+      one hand resting in the trouser pocket and the other holding a slim plain folder at her side,
+      soft daylight from tall windows on the left, composed and quietly confident mood, background softly blurred
+  s03:
+    file: images/s03.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      camel crew-neck wool knit with only the front hem tucked in at the center, navy knife-pleated midi skirt in matte wool,
+      thin dark brown leather belt, opaque navy tights, dark brown leather ankle boots with a low block heel
+    prompt: >-
+      three-quarter shot on a quiet Seongsu-dong street in the morning, red-brick wall behind her,
+      soft overcast light, she takes a light step forward so the skirt pleats move a little,
+      relaxed weekday mood, warm neutral color grade, no readable signage
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same lightweight camel wool-blend single-breasted knee-length coat worn open, navy fine-gauge merino crew-neck knit,
+      navy high-waisted straight-leg wool slacks, dark brown leather penny loafers
+    prompt: >-
+      full-body shot in a bright apartment entryway in front of a full-length mirror (the mirror shows only a soft blur),
+      she straightens the coat lapel with one hand, the open coat framing a long unbroken navy column from neck to shoes,
+      morning light from a side window, warm and calm mood
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      navy pieces grouped on the left: navy wool blazer, navy crew-neck knit, navy straight-leg slacks, navy pleated midi skirt;
+      camel pieces grouped on the right: folded camel wool coat, camel crew-neck knit, camel V-neck knit;
+      along the bottom: dark brown penny loafers, dark brown ankle boots, small dark brown leather shoulder bag
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, neat spacing between pieces,
+      realistic wool and knit textures with gentle natural folds, no people, no hands
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "컬러 공식 · 01"
+    title: "네이비 + 카멜\n차분한데 따뜻한\n출근룩 공식"
+    subtitle: "비율만 바꿔 3가지로 입어요"
+  - layout: tip
+    number: "WHY"
+    title: "회사에서 잘 통하는 이유"
+    body: "네이비는 차가운 색, 카멜은 따뜻한 색이에요.\n둘 다 채도가 낮아 섞어도 튀지 않아요."
+    bullets:
+      - "네이비: 검정보다 부드럽게 단정해요"
+      - "카멜: 얼굴 가까이 오면 화사해 보여요"
+      - "둘 다 기본색이라 가진 옷과 잘 섞여요"
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 네이비 7 : 카멜 3"
+    title: "네이비 셋업에 카멜 니트"
+    items: ["네이비 블레이저", "네이비 일자 슬랙스", "카멜 브이넥 니트", "브라운 로퍼"]
+    tip: "얼굴 가까이 카멜이 들어가 네이비가 무거워 보이지 않아요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 반반 5 : 5"
+    title: "카멜 니트에 네이비 스커트"
+    items: ["카멜 라운드 니트", "네이비 플리츠 스커트", "얇은 브라운 벨트", "브라운 앵클부츠"]
+    tip: "5:5는 몸이 반으로 나뉘어 보여요. 상의 앞만 넣어 허리선을 올려요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 네이비 3 : 카멜 7"
+    title: "카멜 코트로 부드럽게"
+    items: ["카멜 울 코트", "네이비 라운드 니트", "네이비 일자 슬랙스", "브라운 로퍼"]
+    tip: "코트 앞을 열면 안쪽 네이비가 세로선이 돼 길어 보여요."
+  - layout: tip
+    number: "비율"
+    title: "넓게 쓰는 색이 그날 인상을 정해요"
+    body: "같은 두 색이어도 어느 쪽을 더 많이 쓰느냐에 따라 분위기가 달라져요."
+    bullets:
+      - "네이비가 7 → 단정해서 회의 날에"
+      - "반반 5:5 → 균형이 맞아 평소 출근에"
+      - "카멜이 7 → 부드러워서 금요일에"
+  - layout: tip
+    number: "주의"
+    title: "이 세 가지는 피하세요"
+    body: "세 번째 색은 흰색·아이보리까지만,\n신발과 가방은 브라운으로 이어요."
+    bullets:
+      - "검정 소품 → 네이비가 바래 보여요"
+      - "톤이 다른 카멜끼리 → 탁해 보여요"
+      - "빨강·초록 같은 강한 색 → 시선이 흩어져요"
+  - layout: checklist
+    image: s05
+    title: "옷장에서 먼저 찾을 것"
+    checks:
+      - "네이비 상의 1장 (니트·블레이저)"
+      - "네이비 하의 1벌 (슬랙스·스커트)"
+      - "카멜 니트 1장"
+      - "카멜 아우터 1벌"
+      - "브라운 신발·가방 하나씩"
+    note: "새로 사기 전에 있는 옷부터 맞춰보세요"
+  - layout: cta
+    title: "저장해두고\n출근 전에 꺼내보세요"
+    body: "다음 편: 컬러 공식 02 · 그레이+버건디"
+
+products: []
+
+caption: |
+  네이비+카멜, 비율만 바꾸면 출근룩 3가지 🤎
+
+  네이비는 차분하고 카멜은 따뜻해서
+  둘을 섞으면 단정한데 딱딱하지 않아요.
+  같은 두 색도 비율만 바꾸면 인상이 달라져요.
+
+  ✔ 네이비 7 : 카멜 3 → 회의 있는 날, 단정하게
+  ✔ 반반 5 : 5 → 상의 앞만 넣어 허리선 올리기
+  ✔ 네이비 3 : 카멜 7 → 코트를 열어 세로선 만들기
+  ✔ 소품은 검정 대신 브라운으로 이어주기
+
+  저장해두고 옷장 앞에서 꺼내보세요.
+  네이비 좋아하는 동료에게 보내줘도 좋아요.
+  다음 편은 '컬러 공식 02 · 그레이+버건디'예요.
+
+hashtags: [출근룩, 오피스룩, 직장인코디, 네이비코디, 컬러조합]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 네이비와 카멜을 7:3, 5:5, 3:7 비율로 섞은 출근룩 3가지와 피하면 좋은 조합, 옷장 체크리스트를 보여주는 카드뉴스"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

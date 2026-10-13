@@ -1,0 +1,168 @@
+# 주간 출근룩 플랜 03 (11/9–11/13 주를 위한 플랜). 이전 편: 회의 많은 주 (11/1). 다음 편: 다음 주 플랜 · 연말 약속 많은 주
+# WEEK 3 (11/2–11/8) 아우터 전환 (입동 11/7) · 일요일 저녁 카드뉴스
+# 3겹 공식: 얇은 이너 → 니트 → 아우터. 아우터 2벌 + 재킷 1벌로 한 주를 돈다
+# 카멜 코트는 11/2 비율 공식(무릎 위)과 같은 코트, 차콜 울 코트는 11/6 한 벌 3가지와 같은 코트로 맞춘다 (영문 묘사를 글자 그대로 복사)
+# 슬라이드 역할 나누기: 02 공식 = 겹마다 두께·조건 / 07 TIP = 사무실에서 벗는 순서 / 08 체크 = 일요일 밤 준비물 (같은 말 반복 금지)
+id: 2026-11-08-ipdong-layered-plan
+date: 2026-11-08
+time: "20:30"
+status: draft
+series: 주간 출근룩 플랜
+format: carousel
+pillar: 상황별
+goal: save
+hook: "입동 주간 3겹 레이어드 플랜"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      camel wool single-breasted coat with notch lapels and matte brown buttons, ending about 5 cm above the knee, worn open;
+      navy fine-gauge wool V-neck cardigan buttoned; ivory thin fine-rib turtleneck top;
+      mid-grey high-waisted wide-leg wool slacks; brown leather penny loafers; slim silver watch
+    prompt: >-
+      three-quarter shot waiting at a crosswalk in a Seoul business district on a cold clear morning,
+      holding a plain takeaway cup with no logo, the three layers clearly visible at the neckline
+      (turtleneck, cardigan, coat), office buildings softly blurred behind, crisp low sunlight,
+      calm awake expression, no readable signage or logos, generous empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same navy V-neck cardigan buttoned over the ivory fine-rib turtleneck, mid-grey wide-leg wool slacks,
+      slim silver watch; coat off: she holds her camel wool single-breasted coat (notch lapels, matte brown buttons,
+      ending about 5 cm above the knee) by the collar as she hangs it on the back of an office chair
+    prompt: >-
+      three-quarter shot in a calm open-plan office with light wood desks, standing beside her desk and
+      hanging the coat over the back of her chair with both hands at the collar, soft daylight from large windows, relaxed start-of-day mood,
+      no readable screens or text, background softly blurred, clear space above her head
+  s03:
+    file: images/s03.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      oatmeal fine-knit V-neck sweater vest over a light blue and white pinstripe cotton shirt with the cuffs buttoned;
+      charcoal high-waisted wide-leg wool slacks; black leather penny loafers;
+      a charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets,
+      ending just below the knee, relaxed straight fit with room in the shoulders, folded over her left forearm
+    prompt: >-
+      three-quarter shot by a large window in a bright, warm office lounge, the coat folded over her forearm,
+      the right hand holding a plain matte tumbler with no logo, natural window light, comfortable easy expression,
+      background softly blurred, empty space above her head
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same camel wool single-breasted coat with notch lapels and matte brown buttons, ending about 5 cm above the knee,
+      worn open; light grey fine-gauge crew-neck wool knit over a crisp white
+      cotton shirt with only the collar showing outside the neckline; navy high-waisted straight-leg wool slacks;
+      black leather penny loafers; slim plain laptop sleeve held under one arm
+    prompt: >-
+      full-body shot walking along a wide sidewalk near Gwanghwamun on the way to a meeting,
+      stone buildings and bare-branched trees softly blurred behind, crisp clear daylight,
+      composed confident expression, no readable signage or logos, empty space in the upper third
+  s05:
+    file: images/s05.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      olive green quilted cotton jacket with a collarless neckline, worn open; grey melange knit zip-up cardigan
+      unzipped halfway; white long-sleeve cotton T-shirt; dark indigo straight-leg denim; white leather low-top sneakers;
+      natural canvas tote bag without print
+    prompt: >-
+      full-body shot walking on a quiet park path lined with yellow-leafed trees near a Seoul office district
+      on a Friday morning, hands in the jacket pockets, light easy smile, soft warm daylight,
+      no readable signage, empty space in the upper third
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "주간 출근룩 플랜 · 03"
+    title: "입동 주간\n3겹 레이어드 플랜"
+    subtitle: "이너 → 니트 → 아우터, 벗는 순서까지"
+  - layout: tip
+    number: "공식"
+    title: "이너, 니트, 아우터\n3겹으로 입어요"
+    body: "얇은 세 겹은 겹 사이 공기층 덕에 따뜻하고,\n실내에선 한 겹씩 벗기 쉬워요."
+    bullets: ["이너: 얇고 매끈한 톱·셔츠", "니트: 중간 두께, 앞여밈이면 더 편해요", "아우터: 바람을 막는 코트·재킷"]
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 추운 아침"
+    title: "목을 덮는 이너로 시작"
+    items: ["카멜 울 코트", "네이비 카디건", "아이보리 얇은 터틀넥", "회색 와이드 슬랙스"]
+    tip: "터틀넥이 아침 바람을 막고, 실내에선 코트·카디건 순서로 벗어요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 난방 센 날"
+    title: "가운데는 니트 조끼로"
+    items: ["차콜 울 코트", "오트밀 니트 조끼", "하늘색 줄무늬 셔츠", "차콜 와이드 슬랙스"]
+    tip: "조끼라 팔은 셔츠 한 겹이에요. 난방이 세도 덜 덥고 단정해요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 미팅 있는 날"
+    title: "셔츠 깃으로 단정하게"
+    items: ["카멜 울 코트", "연회색 크루넥 니트", "흰 셔츠 (깃만 꺼내기)", "네이비 일자 슬랙스"]
+    tip: "코트를 벗어도 셔츠 깃이 얼굴 가까이 선을 잡아 회의에서 단정해요."
+  - layout: look
+    image: s05
+    label: "LOOK 04 · 금요일"
+    title: "지퍼 하나로 온도 맞추기"
+    items: ["올리브 퀼팅 재킷", "회색 니트 집업", "흰 긴소매 티셔츠", "진청 일자 데님"]
+    tip: "니트 집업은 지퍼를 반쯤 내리면 실내 온도에 맞추기 쉬워요."
+  - layout: tip
+    number: "TIP"
+    title: "난방 켜진 사무실,\n벗는 순서를 정해요"
+    body: "벗고 남은 옷이 그대로 출근룩이 되게 입으면 돼요."
+    bullets: ["코트: 자리에 오면 바로 걸어두기", "니트: 더우면 단추·지퍼부터 열기", "이너: 끝까지 입으니 단정한 걸로"]
+  - layout: checklist
+    image: s01
+    title: "일요일 밤 5분 준비"
+    checks: ["월요일 아침 기온 먼저 확인", "아우터는 코트 2벌 + 재킷 1벌", "요일별 이너 미리 걸어두기", "코트 보풀·구김 한 번 정리", "벗은 니트 넣을 큰 토트백"]
+  - layout: cta
+    title: "저장해두고\n아침마다 꺼내보세요"
+    body: "다음 편: 다음 주 플랜 · 연말 약속 많은 주"
+
+products: []
+
+reel:
+  audio: null
+  scenes: []
+
+caption: |
+  입동 주간 3겹 레이어드 플랜
+
+  출근길은 춥고 사무실은 더운 계절이 왔어요.
+  다음 주는 두꺼운 한 벌 대신 얇게 세 겹으로 입어요.
+  아침엔 따뜻하게, 난방 켜진 사무실에선 한 겹씩 벗기 쉽게요.
+
+  ✔ 추운 아침: 터틀넥 + 카디건 + 카멜 코트
+  ✔ 난방 센 날: 셔츠 + 니트 조끼 + 차콜 코트
+  ✔ 미팅 있는 날: 셔츠 + 얇은 니트, 깃은 밖으로
+  ✔ 금요일: 긴소매 티 + 니트 집업 + 퀼팅 재킷
+  ✔ 벗는 순서는 코트 → 니트, 이너는 끝까지 입으니 단정한 걸로
+
+  일요일 밤에 저장해두고 아침마다 꺼내보세요.
+  다음 주 플랜은 '연말 약속 많은 주'예요.
+
+hashtags: [출근룩, 레이어드룩, 직장인코디, 오피스룩, 데일리룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 얇은 이너, 니트, 아우터 3겹 공식으로 추운 아침·난방 센 날·미팅 있는 날·금요일 출근룩을 짜고 사무실에서 벗는 순서까지 정리한 입동 주간 레이어드 플랜"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

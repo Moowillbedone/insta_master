@@ -1,0 +1,188 @@
+# 한 벌 3가지 05. 이전 편: 차콜 울 코트 하나로 3가지 (11/6). 다음 편: 한 벌 3가지 · 와이드 데님 하나로 3가지
+# WEEK 4 (11/9–11/15) 연말 준비·세일 시즌 · 금요일 카드뉴스 + 릴스
+# 모든 사진에서 같은 초콜릿 브라운 골지 니트 원피스(종아리 중간 길이)를 입고, 한 겹(블레이저 / 롱코트+부츠 / 셔츠)만 바꾼다
+# 이 원피스는 11/15 주간 플랜 목요일 룩에서 다시 쓴다. 이미지마다 원피스 영문 묘사를 글자 그대로 복사한다 (the same 만으로는 생성할 때 이어지지 않음)
+# 11월 중순이라 맨다리는 피한다: 로퍼·스니커즈 룩은 브라운 불투명 타이츠, 롱부츠 룩은 부츠 목이 밑단 안으로
+# 셔츠 레이어드는 얇은 포플린 (옥스퍼드는 두꺼워 니트 겉으로 주름이 드러남 — TIP 슬라이드와 일치)
+id: 2026-11-13-knit-dress-3ways
+date: 2026-11-13
+time: "07:40"
+status: draft
+series: 한 벌 3가지
+format: both
+pillar: 돌려입기
+goal: save
+hook: "니트 원피스 하나로 3일 출근룩"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      chocolate brown ribbed wool-blend knit midi dress with a crew neck and long sleeves, straight relaxed fit that skims the body without clinging, hem at mid-calf;
+      dark brown opaque tights, dark brown leather penny loafers, small dark brown leather shoulder bag, slim silver watch
+    prompt: >-
+      full-body shot standing near the tall window of a minimal Seoul office lobby with a light stone floor in the morning,
+      one hand holding the bag strap, weight on one leg, soft daylight from the left, calm composed mood,
+      empty wall space in the upper third for a headline, no readable signage
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same chocolate brown ribbed wool-blend knit midi dress with a crew neck and long sleeves, straight relaxed fit that skims the body without clinging, hem at mid-calf;
+      ivory single-breasted hip-length wool blazer with natural shoulders worn open, dark brown opaque tights,
+      dark brown leather penny loafers, slim silver watch
+    prompt: >-
+      three-quarter shot standing by a large window in a bright office lounge on a Monday morning,
+      holding a plain takeaway coffee cup in one hand, the other hand in the blazer pocket, natural window light,
+      warm neutral color grade, background softly blurred, no logos on the cup
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same chocolate brown ribbed wool-blend knit midi dress with a crew neck and long sleeves, straight relaxed fit that skims the body without clinging, hem at mid-calf;
+      camel double-faced wool long coat with notch lapels worn open, its hem ending just above the ankle a few centimeters below the dress hem,
+      dark brown smooth leather knee-high boots with a low block heel whose tops sit hidden under the dress hem so no skin shows,
+      small dark brown leather shoulder bag
+    prompt: >-
+      full-body shot walking on a quiet Seongsu-dong street on a crisp morning, red-brick wall behind her,
+      the coat hem moving slightly with her stride, soft overcast light, relaxed confident mood, no readable signage
+  s04:
+    file: images/s04.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same chocolate brown ribbed wool-blend knit midi dress with a crew neck and long sleeves, straight relaxed fit that skims the body without clinging, hem at mid-calf, worn over a thin smooth light blue cotton poplin shirt,
+      the pointed shirt collar laid flat outside the crew neck and about 1–2 cm of shirt cuff showing past each knit sleeve,
+      dark brown opaque tights, white leather low-top sneakers, natural canvas tote bag without print
+    prompt: >-
+      three-quarter shot beside a cafe window seat near Gwanghwamun on a Friday morning,
+      standing with the tote on her left shoulder, her right hand lightly straightening the left shirt cuff, soft morning light,
+      relaxed easy smile, background softly blurred, no readable text
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      flat lay with the chocolate brown ribbed wool-blend knit crew-neck midi dress laid in the center and around it:
+      an ivory hip-length wool blazer, a folded camel double-faced wool long coat, a folded light blue cotton poplin shirt;
+      dark brown penny loafers, dark brown knee-high boots and white leather sneakers along the bottom edge
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, the dress clearly the center of the layout,
+      neat spacing, realistic rib-knit, wool and cotton textures, no people, no hands, no text or logos
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "한 벌 3가지 · 05"
+    title: "니트 원피스 하나로\n출근룩 3가지"
+    subtitle: "원피스는 그대로, 한 겹만 더해요"
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 월요일"
+    title: "아이보리 블레이저로 단정하게"
+    items: ["브라운 니트 원피스", "아이보리 울 블레이저", "브라운 타이츠", "다크브라운 로퍼"]
+    tip: "어깨선 있는 재킷이 부드러운 니트를 단정하게 잡아줘요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 수요일"
+    title: "롱코트와 롱부츠로 길게"
+    items: ["브라운 니트 원피스", "카멜 울 롱코트", "다크브라운 롱부츠", "다크브라운 숄더백"]
+    tip: "부츠를 밑단 안에 숨기고 브라운 한 톤으로 이어서 세로선이 길어져요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 금요일"
+    title: "셔츠 깃으로 가볍게"
+    items: ["하늘색 면 셔츠", "브라운 니트 원피스", "브라운 타이츠", "흰 가죽 스니커즈"]
+    tip: "하늘색 깃이 브라운 옆에서 밝게 떠서 얼굴 아래가 환해져요."
+  - layout: tip
+    number: "공식"
+    title: "한 겹을 어디에\n더할지만 정해요"
+    body: "원피스는 그대로 두세요. 한 겹을 짧게 걸칠지, 길게 덮을지, 안에 받칠지만 정하면 돼요."
+    bullets: ["짧은 재킷 → 어깨선으로 단정 (월)", "긴 코트 → 세로선으로 길게 (수)", "안에 셔츠 → 깃·소매로 가볍게 (금)"]
+  - layout: tip
+    number: "TIP"
+    title: "셔츠 레이어드는\n깃과 소매만 꺼내요"
+    body: "두꺼운 셔츠는 니트 겉으로 주름이 드러나요. 얇은 셔츠라야 원피스 안에 매끈하게 들어가요."
+    bullets: ["옥스퍼드보다 얇은 포플린 셔츠", "깃은 니트 밖으로 펴서 내기", "소매 끝은 1~2cm만 보이게"]
+  - layout: checklist
+    image: s05
+    title: "니트 원피스 고를 때"
+    checks: ["종아리 중간쯤 오는 길이", "몸에 붙지 않는 일자 핏", "비치지 않는 촘촘한 짜임", "셔츠를 받쳐 입을 크루넥", "브라운·회색 같은 기본색"]
+    note: "종아리 중간 길이라야 롱부츠가 밑단에 가려져요"
+  - layout: cta
+    title: "저장해두고\n다음 주에 돌려 입어요"
+    body: "다음 편: 한 벌 3가지 · 와이드 데님 하나로 3가지"
+
+products: []
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "니트 원피스 하나로\n3일 출근룩"
+      seconds: 2.2
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "MON"
+      text: "아이보리 블레이저\n어깨선으로 단정하게"
+      seconds: 2.8
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "WED"
+      text: "카멜 롱코트 + 롱부츠\n세로선이 길게 이어져요"
+      seconds: 2.8
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "FRI"
+      text: "하늘색 셔츠 레이어드\n깃과 소매로 가볍게"
+      seconds: 2.8
+      motion: zoom-out
+    - image: s05
+      layout: reel-end
+      text: "한 겹만 더해도\n다른 날이 돼요"
+      cta: "다음 편 · 와이드 데님 하나로 3가지"
+      seconds: 3.0
+      motion: still
+
+caption: |
+  니트 원피스 하나로 3일 출근룩
+
+  원피스는 그대로 두고 한 겹만 더해요.
+  월 아이보리 블레이저 · 수 카멜 롱코트 · 금 하늘색 셔츠
+
+  ✔ 블레이저는 어깨선으로 부드러운 니트를 단정하게 잡아요
+  ✔ 롱코트 날엔 부츠를 밑단 안에 숨기고 브라운으로 이어요
+  ✔ 셔츠는 얇은 포플린으로, 깃과 소매 끝만 꺼내요
+  ✔ 종아리 중간 길이라야 세 가지가 다 어울려요
+
+  저장해두고 다음 주 출근 전에 꺼내보세요.
+  니트 원피스 있는 동료에게 보내줘도 좋아요.
+  다음 편은 '한 벌 3가지 · 와이드 데님 하나로 3가지'예요.
+
+hashtags: [니트원피스, 원피스코디, 출근룩, 돌려입기, 직장인코디]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 초콜릿 브라운 골지 니트 원피스 하나에 아이보리 블레이저, 카멜 롱코트와 다크브라운 롱부츠, 하늘색 면 셔츠 레이어드를 각각 더한 출근룩 3가지와 니트 원피스 고르는 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  reel_url: ""
+  posted_at: ""

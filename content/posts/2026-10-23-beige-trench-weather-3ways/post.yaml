@@ -1,0 +1,191 @@
+# WEEK 1 (10/19–10/25) 환절기 레이어링 · 금요일 카드뉴스 + 릴스
+# 한 벌 3가지 02. 검은 슬랙스 편(10/15)이 예고한 회차. 다음 편: 한 벌 3가지 · 회색 니트 하나로 3가지 (10/30)
+# 트렌치는 수요일 벨트 릴스(10/21)와 같은 베이지 더블 트렌치로 맞춘다
+id: 2026-10-23-beige-trench-weather-3ways
+date: 2026-10-23
+time: "07:40"
+status: draft
+series: 한 벌 3가지
+format: both
+pillar: 돌려입기
+goal: save
+hook: "베이지 트렌치 하나로 날씨별 3가지"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      classic beige cotton-gabardine double-breasted knee-length trench coat worn open with the belt hanging loose,
+      light blue and white thin-striped cotton shirt with the front hem tucked in, ivory high-waisted wide-leg slacks,
+      brown leather penny loafers, small brown leather shoulder bag
+    prompt: >-
+      full-body shot walking on a quiet Seongsu-dong street on a clear sunny morning, red-brick buildings softly blurred,
+      warm low sunlight from the left with gentle shadows on the pavement, the open trench moving slightly with her stride,
+      light and easy mood, no readable signage, empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat worn open with the cuffs folded back once so the wrists show,
+      light blue and white thin-striped cotton shirt with the front hem tucked in, ivory high-waisted wide-leg slacks,
+      brown leather penny loafers
+    prompt: >-
+      three-quarter shot standing by the large window of a quiet cafe near Gwanghwamun, bright morning sun,
+      holding a plain white ceramic cup in one hand, relaxed half-smile, warm neutral color grade,
+      background softly blurred, no readable signage
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat wrapped closed with the belt tied in one flat knot at the left hip,
+      charcoal thin merino high-neck knit (mock neck reaching mid-neck), black high-waisted wide-leg wool slacks,
+      black leather ankle boots with a low block heel
+    prompt: >-
+      full-body shot on a subway platform in the early morning with soft cool ambient light, no readable signage,
+      she stands with both hands in the coat pockets waiting for the train, calm composed expression,
+      clean tiled wall and a softly blurred platform behind her
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat fully buttoned with the collar turned up and the belt tied in one flat knot at the side,
+      ivory crew-neck knit just visible at the neck, charcoal straight-leg wool slacks cut at ankle length,
+      black rubber-soled leather Chelsea boots, long plain black umbrella held closed
+    prompt: >-
+      full-body shot under the canopy at the entrance of a minimal office building on a rainy morning,
+      wet stone pavement with soft reflections, light rain falling in the background, she has just closed the umbrella
+      and holds it by the handle at her side with the tip resting on the ground, ankle-length hem clearly above the wet pavement,
+      soft grey daylight, calm mood, no readable signage
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      the beige double-breasted trench coat laid flat in the center with three inner sets around it:
+      top left, light blue striped shirt with ivory wide-leg slacks and brown penny loafers;
+      top right, charcoal mock-neck knit with black wide-leg slacks and black ankle boots;
+      bottom, ivory crew-neck knit with charcoal ankle-length slacks, black Chelsea boots and a folded black umbrella
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, neat spacing between the three sets,
+      realistic cotton gabardine, wool and knit textures, no people, no hands
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "한 벌 3가지 · 02"
+    title: "베이지 트렌치 하나로\n날씨별 출근룩 3가지"
+    subtitle: "맑은 날 · 쌀쌀한 아침 · 비 오는 날"
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 맑음 18°C"
+    title: "셔츠 한 장, 앞은 열어서"
+    items: ["베이지 트렌치 (앞 열기)", "하늘색 줄무늬 셔츠", "아이보리 와이드 슬랙스", "브라운 로퍼"]
+    tip: "앞을 열면 밝은 셔츠와 슬랙스가 세로로 이어져 길어 보여요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 쌀쌀한 아침 12°C"
+    title: "하이넥 니트로 목까지"
+    items: ["베이지 트렌치 (벨트 매듭)", "차콜 하이넥 니트", "검은 와이드 슬랙스", "검정 앵클부츠"]
+    tip: "목을 덮으면 아침 바람이 덜 들어와요. 낮엔 벨트를 풀고 앞을 열어요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 비 오는 날"
+    title: "짙은 하의에 발목 기장"
+    items: ["베이지 트렌치 (단추 잠그기)", "아이보리 라운드 니트", "차콜 발목 기장 슬랙스", "검정 첼시부츠"]
+    tip: "발목 기장은 밑단이 덜 젖고, 짙은 색은 물 자국이 덜 보여요."
+  - layout: tip
+    number: "공식"
+    title: "트렌치는 그대로, 안만 바꿔요"
+    body: "출근 시간 기온과 비 예보만 보고 안에 입을 옷과 여밈을 정해요."
+    bullets:
+      - "16°C 이상: 셔츠 한 장 + 앞 열기"
+      - "10~15°C: 얇은 니트 + 벨트 매듭"
+      - "비 예보: 짙은 하의 + 발목 기장"
+  - layout: checklist
+    image: s05
+    title: "트렌치 출근 전 30초 체크"
+    checks:
+      - "출근 시간 기온 먼저 보기"
+      - "15°C 아래면 셔츠 대신 얇은 니트"
+      - "10°C 아래면 트렌치보다 코트"
+      - "비 예보엔 짙은 발목 기장 하의"
+      - "벨트는 리본 대신 매듭 한 번"
+  - layout: cta
+    title: "저장해두고\n날씨 보고 꺼내보세요"
+    body: "다음 편: 한 벌 3가지 · 회색 니트 하나로 3가지"
+
+products: []
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "트렌치 하나로\n날씨별 3가지"
+      seconds: 2.2
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "SUNNY"
+      text: "맑은 18°C\n셔츠 한 장 + 앞 열기"
+      seconds: 2.6
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "CHILLY"
+      text: "쌀쌀한 12°C 아침\n하이넥 니트 + 벨트 매듭"
+      seconds: 2.6
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "RAINY"
+      text: "비 오는 날\n짙은 하의 + 발목 기장"
+      seconds: 2.6
+      motion: zoom-out
+    - image: s05
+      layout: reel-end
+      text: "저장해두고\n날씨 보고 골라 입어요"
+      cta: "다음 편 · 회색 니트 하나로 3가지"
+      seconds: 2.6
+      motion: still
+
+caption: |
+  베이지 트렌치 하나로 날씨별 3가지 🧥
+
+  트렌치는 그대로 두고, 안에 입는 옷과 여밈만 바꿔요.
+  기준은 출근 시간 기온과 비 예보 두 가지예요.
+
+  ✔ 맑음 18°C: 셔츠 한 장에 앞을 열어 세로선을 길게
+  ✔ 쌀쌀한 12°C 아침: 하이넥 니트로 목까지 덮기
+  ✔ 비 오는 날: 짙은 발목 기장 하의로 밑단 젖음과 물 자국 줄이기
+  ✔ 10°C 아래로 내려가면 트렌치보다 코트가 맞아요
+  ✔ 벨트는 리본보다 매듭 한 번이 단정해요
+
+  저장해두고 아침에 날씨 앱과 같이 보세요.
+  벨트 묶는 법은 수요일 '출근 15초'에 있어요.
+  다음 편은 '한 벌 3가지 · 회색 니트 하나로 3가지'예요.
+
+hashtags: [트렌치코디, 출근룩, 환절기코디, 비오는날코디, 직장인코디]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 베이지 트렌치코트 하나를 맑은 날 셔츠, 쌀쌀한 아침 하이넥 니트, 비 오는 날 발목 기장 슬랙스와 각각 매치한 날씨별 출근룩 3가지"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  reel_url: ""
+  posted_at: ""

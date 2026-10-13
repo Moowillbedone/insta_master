@@ -1,0 +1,156 @@
+# 주간 출근룩 플랜 02 (11/2–11/6 주를 위한 플랜). 이전 편: 일교차 10도 주간 (10/25). 다음 편: 다음 주 플랜 · 입동 주간
+# WEEK 2 (10/26–11/1) 니트 시즌 · 일요일 저녁 게시
+id: 2026-11-01-meeting-week-plan
+date: 2026-11-01
+time: "20:30"
+status: draft
+series: 주간 출근룩 플랜
+format: carousel
+pillar: 상황별
+goal: save
+hook: "회의 많은 주, 일정별 출근룩 플랜"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      relaxed Sunday homewear: oatmeal knit cardigan over an ivory cotton long-sleeve tee, soft grey knit wide pants;
+      on a slim wooden clothing rail beside her hang a navy blazer, a camel wool half coat, a sage green cardigan
+      and a chocolate brown knit
+    prompt: >-
+      three-quarter shot in a calm apartment living room corner on Sunday evening, standing beside the slim wooden clothing rail,
+      holding up the navy blazer on its hanger with her right hand and looking at it thoughtfully,
+      warm light from a floor lamp on the left, the window behind her already dark with only a soft blurred city glow,
+      calm planning mood, uncluttered pale wall with empty space in the upper third, no readable text anywhere
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      navy single-breasted wool blazer with defined shoulders, navy fine-gauge merino crew-neck knit,
+      light grey high-waisted wide-leg wool slacks, dark brown leather penny loafers, slim silver watch
+    prompt: >-
+      three-quarter shot in a glass-walled meeting room of a bright Seoul office, standing at the front beside a blank wall screen
+      that shows only soft even light (no text, no charts), holding a slim plain folder in her left hand,
+      right hand resting lightly on the edge of the table, composed confident expression as if about to present,
+      even daylight from the windows on the right, background softly blurred
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      camel wool half coat worn open, ivory crew-neck wool knit, charcoal straight-leg ankle-length wool slacks,
+      white leather low-top sneakers with no logo, small black leather crossbody bag worn across the body
+    prompt: >-
+      full-body shot mid-stride on a wide crosswalk in a Seoul business district on a crisp clear morning,
+      office buildings softly blurred behind her, both hands free and swinging naturally, coat hem moving,
+      sunlight from the right, energetic but composed mood, no readable signage or logos, empty sky area in the upper third
+  s04:
+    file: images/s04.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      sage green fine-knit crew-neck cardigan worn open, white fine-rib long-sleeve top, beige high-waisted wide-leg wool slacks,
+      brown leather penny loafers, slim silver watch
+    prompt: >-
+      three-quarter shot in a calm open-plan office corner with light wood desks, standing beside a desk,
+      one hand lightly holding the open front edge of the cardigan, the other arm holding a plain closed notebook against her side,
+      soft daylight from large windows on the left, relaxed everyday mood,
+      background softly blurred with no readable screens or text
+  s05:
+    file: images/s05.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      chocolate brown fine-gauge wool crew-neck knit loosely tucked at the front, ecru high-waisted wide-leg denim,
+      the same camel wool half coat worn open, camel suede penny loafers, natural canvas tote bag without print
+    prompt: >-
+      full-body shot on a quiet Seongsu-dong street on a Friday morning, light red-brick wall and a large window behind her,
+      walking with the tote on her right shoulder and a light easy smile, soft warm daylight from the left,
+      no readable signage, empty space in the upper third
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "주간 출근룩 플랜 · 02"
+    title: "회의 많은 주\n일정별 출근룩"
+    subtitle: "발표·외근·평소·금요일, 이유까지"
+  - layout: tip
+    number: "PLAN"
+    title: "그날 할 일로\n옷을 먼저 정해요"
+    body: "일정표를 보고 날마다 옷을 정해 두면 아침 고민이 줄어요."
+    bullets: ["발표날 → 어두운 상의 + 재킷", "외근날 → 굽 낮은 신발 + 크로스백", "평소 → 벗고 입기 쉬운 카디건", "금요일 → 밝은 하의로 가볍게"]
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 발표날"
+    title: "네이비 블레이저로 단단하게"
+    items: ["네이비 울 블레이저", "네이비 얇은 니트", "연회색 와이드 슬랙스", "다크 브라운 로퍼"]
+    tip: "어두운 상의와 각 잡힌 어깨선이 차분하고 믿음직한 인상을 줘요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 외근날"
+    title: "걷기 편한 신발부터"
+    items: ["카멜 울 하프코트", "차콜 일자 슬랙스", "흰 가죽 스니커즈", "작은 검정 크로스백"]
+    tip: "굽 낮은 신발은 오래 걸어도 편하고, 크로스백은 두 손을 비워줘요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 평소"
+    title: "벗기 쉬운 카디건 한 장"
+    items: ["세이지 카디건", "흰 골지 긴소매 톱", "베이지 와이드 슬랙스", "갈색 로퍼"]
+    tip: "회의실과 자리 온도가 달라도 카디건 하나로 맞추기 쉬워요."
+  - layout: look
+    image: s05
+    label: "LOOK 04 · 금요일"
+    title: "밝은 데님으로 가볍게"
+    items: ["브라운 크루넥 니트", "에크루 와이드 데님", "카멜 하프코트", "카멜 스웨이드 로퍼"]
+    tip: "하의가 밝아도 진한 니트가 중심을 잡아 출근룩답게 보여요."
+  - layout: checklist
+    image: s01
+    title: "일요일 밤 5분 체크"
+    checks: ["발표날 재킷 구김 확인", "외근날엔 새 신발 피하기", "아침 기온 보고 겉옷 정하기", "회의실용 카디건 챙기기", "화상 회의엔 잔 줄무늬 피하기"]
+    note: "잔 줄무늬는 화면에서 일렁여 보일 수 있어요"
+  - layout: cta
+    title: "저장해두고\n아침마다 꺼내보세요"
+    body: "다음 편: 다음 주 플랜 · 입동 주간"
+
+products: []
+
+reel:
+  audio: null
+  scenes: []
+
+caption: |
+  회의 많은 주, 일정별 출근룩 플랜
+
+  다음 주 일정표를 먼저 보고 날마다 옷을 정해요.
+  발표·외근이 없는 날은 '평소' 룩을 돌려 입어요.
+
+  ✔ 발표날: 어두운 상의 + 어깨선 있는 재킷 → 차분하고 믿음직해 보여요
+  ✔ 외근날: 굽 낮은 신발 + 크로스백 → 오래 걸어도 편하고 두 손이 자유로워요
+  ✔ 평소: 카디건 한 장 → 회의실 온도에 맞춰 입고 벗기 쉬워요
+  ✔ 금요일: 밝은 데님 + 진한 니트 → 가벼워도 단정해요 (외근날 하프코트를 한 번 더)
+
+  일요일 밤에 저장해두고 아침마다 꺼내보세요.
+  회의 많은 동료에게 보내줘도 좋아요.
+  다음 편은 '다음 주 플랜 · 입동 주간'이에요.
+
+hashtags: [출근룩, 직장인코디, 오피스룩, 발표룩, 데일리룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 발표날 네이비 블레이저와 니트, 외근날 카멜 하프코트와 흰 스니커즈, 평소 세이지 카디건, 금요일 에크루 데님과 브라운 니트로 짠 회의 많은 주의 출근룩 플랜과 일요일 밤 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

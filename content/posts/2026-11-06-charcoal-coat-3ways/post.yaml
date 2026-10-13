@@ -1,0 +1,189 @@
+# 한 벌 3가지 04. 이전 편: 회색 니트 하나로 3일 출근룩 (10/30). 다음 편: 한 벌 3가지 · 니트 원피스 하나로 3가지
+# WEEK 3 (11/2–11/8) 아우터 전환 (입동 11/7) · 금요일 카드뉴스 + 릴스
+# 모든 사진에서 같은 차콜 울 코트(싱글, 노치 라펠, 무광 차콜 단추 3개, 무릎을 살짝 덮는 길이, 어깨 여유 있는 일자 핏)를 입고 안쪽만 바꾼다
+# 이미지마다 코트 묘사를 글자 그대로 복사한다 ('the same'만 쓰면 생성할 때마다 코트가 달라짐)
+# LOOK 02의 '무릎 아래 코트 + 롱부츠'는 11/2 비율 공식과 같은 원리. 이 코트는 11/8 주간 플랜에서 다시 쓴다
+id: 2026-11-06-charcoal-coat-3ways
+date: 2026-11-06
+time: "07:40"
+status: draft
+series: 한 벌 3가지
+format: both
+pillar: 돌려입기
+goal: save
+hook: "차콜 울 코트 하나로 3가지 출근룩"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets,
+      ending just below the knee, relaxed straight fit with room in the shoulders, buttoned; charcoal high-waisted wide-leg wool slacks showing below the hem;
+      black leather penny loafers; small black leather shoulder bag
+    prompt: >-
+      full-body shot walking in through the glass doors of a minimal Seoul office lobby with a light stone floor
+      on a cold clear morning, coat buttoned, soft daylight from tall windows, calm focused expression,
+      the coat clearly the hero of the frame, background softly blurred,
+      generous empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets,
+      ending just below the knee, relaxed straight fit with room in the shoulders, worn open; light grey fine-gauge wool mock-neck knit;
+      charcoal high-waisted wide-leg wool slacks; black leather penny loafers; slim silver watch
+    prompt: >-
+      full-body shot standing beside a glass-walled meeting room in a bright Seoul office,
+      holding a slim plain folder against her side, even daylight, composed confident expression,
+      background softly blurred with no readable screens or text, clear space above her head
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets,
+      ending just below the knee, relaxed straight fit with room in the shoulders, worn open; oatmeal ribbed wool knit midi dress ending at mid-calf with a relaxed straight silhouette
+      and a crew neck; black smooth leather knee-high boots with a low block heel so no skin shows
+      between the dress hem and the boots; small dark brown leather shoulder bag
+    prompt: >-
+      full-body shot standing on a calm Seoul subway platform with soft ambient light while waiting for the train,
+      body turned slightly so the open coat frames the light dress as a clear vertical line,
+      gentle calm expression, clean tiled walls softly blurred, no readable signage or screens,
+      empty space in the upper third
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets,
+      ending just below the knee, relaxed straight fit with room in the shoulders, worn open; heather grey cotton-fleece pullover hoodie with the hood laid neatly
+      outside over the coat collar; mid-blue straight-leg denim at full length; white leather low-top sneakers;
+      natural canvas tote bag without print
+    prompt: >-
+      full-body shot on a quiet Seongsu-dong street on a Friday morning, light red-brick wall and a large window behind her,
+      walking with her right hand in the coat pocket and the tote on her left shoulder, relaxed easy smile, soft overcast light,
+      no readable signage, empty space in the upper third
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      flat lay with one charcoal wool-blend single-breasted coat with notch lapels, three matte charcoal buttons and flap pockets,
+      ending just below the knee, relaxed straight fit with room in the shoulders, laid open in the center, and three inner sets around it:
+      light grey mock-neck knit with charcoal wide-leg slacks and black penny loafers;
+      oatmeal ribbed knit midi dress with black knee-high boots;
+      heather grey hoodie with mid-blue straight denim and white leather sneakers
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, the charcoal coat clearly the center
+      of the layout, neat spacing, realistic wool, knit and denim textures, no people, no hands, no text or logos,
+      all items kept within the central area of the frame
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "한 벌 3가지 · 04"
+    title: "차콜 울 코트 하나로\n출근룩 3가지"
+    subtitle: "코트는 그대로, 안쪽만 바꿔요"
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 포멀"
+    title: "회색 톤온톤으로 단정하게"
+    items: ["차콜 울 코트", "연회색 모크넥 니트", "차콜 와이드 슬랙스", "검정 로퍼"]
+    tip: "같은 회색 계열을 밝기만 달리 겹치면 차분하고 단정해 보여요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 소프트"
+    title: "니트 원피스에 롱부츠"
+    items: ["차콜 울 코트", "오트밀 골지 니트 원피스", "검정 롱부츠", "갈색 숄더백"]
+    tip: "밝은 원피스를 어두운 코트와 부츠가 감싸서 세로로 길어 보여요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 금요일 캐주얼"
+    title: "후드는 깃 밖으로 꺼내요"
+    items: ["차콜 울 코트", "회색 후드 티셔츠", "중청 일자 데님", "흰 가죽 스니커즈"]
+    tip: "후드를 안에 넣으면 등이 불룩해져요. 깃 위로 꺼내야 코트 선이 살아요."
+  - layout: tip
+    number: "공식"
+    title: "차콜 코트는\n안쪽 소재를 가리지 않아요"
+    body: "검정보다 부드럽고 회색보다 무게감 있는 색이라\n고운 울 니트부터 면 후드까지 다 어울려요."
+    bullets: ["고운 울 니트 + 슬랙스 → 포멀", "골지 니트 원피스 + 부츠 → 소프트", "면 후드 + 데님 → 금요일 캐주얼"]
+  - layout: checklist
+    image: s05
+    title: "돌려 입을 차콜 코트 고르기"
+    checks: ["검정에 가까운 짙은 차콜", "니트·후드가 들어가는 어깨 여유", "무릎을 살짝 덮는 길이", "단추는 무광 검정이나 같은 색", "표면이 촘촘하고 매끈한 울 혼방"]
+  - layout: cta
+    title: "저장해두고\n다음 주에 돌려 입어요"
+    body: "다음 편: 한 벌 3가지 · 니트 원피스 하나로 3가지"
+
+products: []
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "차콜 코트 하나로\n출근룩 3가지"
+      seconds: 2.2
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "FORMAL"
+      text: "연회색 니트 + 슬랙스\n톤온톤으로 단정하게"
+      seconds: 2.6
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "SOFT"
+      text: "니트 원피스 + 롱부츠\n코트 사이로 세로선이 생겨요"
+      seconds: 2.6
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "CASUAL"
+      text: "후드 + 일자 데님\n금요일엔 가볍게"
+      seconds: 2.6
+      motion: zoom-out
+    - image: s05
+      layout: reel-end
+      text: "코트는 그대로\n안쪽만 바꿔요"
+      cta: "저장하고 코트 꺼내는 날 보기"
+      seconds: 2.6
+      motion: still
+
+caption: |
+  차콜 울 코트 하나로 3가지 출근룩
+
+  코트를 하나 더 사기 전에, 한 벌을 세 번 쓰는 법이에요.
+  코트는 그대로 두고 안쪽만 바꿔요.
+
+  ✔ 포멀: 연회색 니트 + 차콜 슬랙스, 톤온톤으로 단정하게
+  ✔ 소프트: 밝은 니트 원피스를 코트·롱부츠가 감싸 세로로 길게
+  ✔ 캐주얼: 후드는 깃 밖으로 꺼내야 등이 불룩하지 않아요
+  ✔ 돌려 입을 코트는 니트·후드가 들어가는 어깨 여유부터 확인해요
+
+  입동 무렵부터는 코트 입는 날이 늘어요.
+  저장해두고 다음 주에 하나씩 돌려 입어보세요.
+  다음 편은 '한 벌 3가지 · 니트 원피스 하나로 3가지'예요.
+
+hashtags: [코트코디, 출근룩, 돌려입기, 직장인코디, 오피스룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 차콜 울 코트 하나에 연회색 니트와 차콜 슬랙스, 오트밀 니트 원피스와 검정 롱부츠, 회색 후드와 중청 데님을 각각 매치한 출근룩 3가지와 코트 고르는 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  reel_url: ""
+  posted_at: ""

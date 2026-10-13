@@ -1,0 +1,154 @@
+# 출근 15초 03. 이전 편: 니트 넣는 법, 바지마다 달라요 (10/28). 다음 편: 출근 15초 · 머플러 매는 법 3가지
+# WEEK 3 (11/2–11/8) 아우터 전환 (입동 11/7) · 수요일 릴스
+# 모든 사진에서 같은 카멜 블레이저·같은 아이보리 니트·같은 하의를 입고 소매만 바꾼다 (차이가 소매에서만 보이도록)
+# 장면 글자는 '방법 이름 + 얼마나'(숫자)로, 이유(손목 쪽이 가벼워지면 전체가 가벼워 보임)는 reel-text 한 장면에 모은다
+id: 2026-11-04-blazer-sleeve-3ways
+date: 2026-11-04
+time: "07:40"
+status: draft
+series: 출근 15초
+format: reel
+pillar: 아이템가이드
+goal: reach
+hook: "블레이저 소매, 걷는 법 3가지"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: waist-up
+    status: todo
+    outfit: >-
+      camel wool-blend single-breasted blazer with soft natural shoulders, two matte brown buttons and a camel-toned lining, worn open, sleeves fully down
+      covering the wrists; ivory fine-gauge crew-neck wool knit; dark brown high-waisted straight-leg wool slacks;
+      slim silver watch hidden under the left cuff
+    prompt: >-
+      waist-up shot in a bright apartment entryway beside a full-length mirror (the mirror shows only a soft blur),
+      mid-action holding the edge of her left blazer cuff between the thumb and index finger of her right hand
+      as if about to fold it,
+      glancing down at the cuff, soft morning light from a side window, warm neutral tones,
+      clear empty space in the upper third for text
+  s02:
+    file: images/s02.png
+    framing: waist-up
+    status: todo
+    outfit: >-
+      the same camel wool-blend single-breasted blazer with soft natural shoulders, two matte brown buttons and a camel-toned lining, worn open, both cuffs folded back once into a neat flat 4 cm band showing a thin edge of
+      the lining, wrist bones and the slim silver watch visible, the ivory crew-neck knit sleeves folded up neatly under;
+      dark brown high-waisted straight-leg wool slacks
+    prompt: >-
+      waist-up shot by a large window in a bright office lounge, holding a plain matte ceramic coffee cup
+      at chest height with both hands so both folded cuffs and the watch are clearly visible,
+      natural window light from the right, calm half-smile, background softly blurred, empty space above her head
+  s03:
+    file: images/s03.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same camel wool-blend single-breasted blazer with soft natural shoulders, two matte brown buttons and a camel-toned lining, worn open, both sleeves pushed up to just below the elbows in soft natural gathers,
+      the ivory crew-neck knit sleeves pushed up together underneath, forearms visible;
+      dark brown high-waisted straight-leg wool slacks; slim silver watch
+    prompt: >-
+      three-quarter shot walking along a bright office corridor with light wood panels and glass walls,
+      carrying a slim plain folder in one hand with the forearm relaxed so the gathered sleeve is clearly visible,
+      soft daylight, easy confident mood, no readable screens or text, background softly blurred,
+      clear space above her head
+  s04:
+    file: images/s04.png
+    framing: waist-up
+    status: todo
+    outfit: >-
+      the same camel wool-blend single-breasted blazer with soft natural shoulders, two matte brown buttons and a camel-toned lining, worn open, sleeves nudged up about 2 cm so the ivory crew-neck knit cuffs extend
+      past the blazer cuffs, a clean 2 cm band of ivory knit showing at each wrist; dark brown high-waisted straight-leg
+      wool slacks; slim silver watch
+    prompt: >-
+      waist-up shot at a cafe window seat near Gwanghwamun in the morning, both hands resting around a plain cup
+      on a light wood table so both knit cuffs are clearly visible, soft warm daylight, quiet relaxed mood,
+      no readable signage, background softly blurred, clear space in the upper third
+  s05:
+    file: images/s05.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same camel wool-blend single-breasted blazer with soft natural shoulders, two matte brown buttons and a camel-toned lining, worn open, both cuffs folded back once into a flat 4 cm band, ivory crew-neck knit,
+      dark brown high-waisted straight-leg wool slacks, dark brown leather penny loafers,
+      small dark brown leather shoulder bag, slim silver watch
+    prompt: >-
+      full-body shot walking across a minimal Seoul office lobby with a light stone floor,
+      left hand resting on the bag strap so the folded cuff and the watch catch the light, right arm relaxed, soft daylight from tall windows,
+      relaxed confident mood, background softly blurred, empty space in the upper third
+
+slides: []
+
+products: []
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "블레이저 소매\n걷는 법 3가지"
+      seconds: 2.0
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "01"
+      text: "한 번 접기\n4cm, 손목뼈가 보일 만큼"
+      seconds: 2.6
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "02"
+      text: "밀어 올리기\n팔꿈치 아래에서 멈춰요"
+      seconds: 2.6
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "03"
+      text: "니트 소매 빼기\n블레이저 밖으로 2cm만"
+      seconds: 2.6
+      motion: zoom-out
+    - layout: reel-text
+      text: "손목이 드러나거나 밝아지면\n블레이저가 가벼워 보여요"
+      seconds: 2.0
+      motion: still
+    - image: s05
+      layout: reel-end
+      text: "저장해두고\n내일 소매부터 바꿔요"
+      cta: "블레이저 자주 입는 동료에게 보내기"
+      seconds: 2.4
+      motion: zoom-in
+
+caption: |
+  블레이저 소매, 걷는 법 3가지
+
+  손등까지 덮는 소매는 블레이저를 무거워 보이게 해요.
+  소매 끝을 조금만 올려 손목을 드러내면 같은 옷도 한결 가벼워 보여요.
+
+  ✔ 한 번 접기: 4cm 정도 납작하게 한 번. 손목뼈와 시계가 보여요
+  ✔ 밀어 올리기(푸시업): 팔꿈치 아래에서 멈추면 주름이 자연스럽게 모여요
+  ✔ 니트 소매 빼기: 블레이저 밖으로 2cm만. 손목에 밝은 색이 한 줄 생겨요
+  ✔ 어깨가 각진 블레이저는 접기, 부드러운 블레이저는 밀어 올리기가 잘 맞아요
+  ✔ 회의 들어가기 전엔 소매만 내리면 다시 단정해요
+
+  저장해두고 내일 아침 출근 전에 해보세요.
+  블레이저 자주 입는 동료에게 보내줘도 좋아요.
+  다음 편은 '출근 15초 · 머플러 매는 법 3가지'예요.
+
+hashtags: [블레이저코디, 출근룩, 직장인코디, 오피스룩, 데일리룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 카멜 울 블레이저 소매를 한 번 접기, 팔꿈치 아래까지 밀어 올리기, 안에 입은 아이보리 니트 소매를 2cm 빼기 세 가지 방식으로 연출하는 릴스"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

@@ -1,0 +1,165 @@
+# 출근 15초 04. 이전 편: 블레이저 소매 걷는 법 (11/4). 다음 편: 출근 15초 · 머플러 매는 법 3가지
+# WEEK 4 (11/9–11/15) 연말 준비·세일 시즌 · 수요일 릴스
+# 같은 출근룩(차콜 블레이저 + 검정 터틀넥 + 검정 와이드 슬랙스)에서 귀걸이 → 립 → 재킷 → 벨트 순서로 하나씩 바꾼다
+# 낮 장면(s01)은 작은 금 귀걸이·로지 베이지 립, s02부터 드롭 귀걸이, s03부터 진한 립, s04부터 재킷 벗음, s05부터 벨트
+# 페르소나 기본값(작은 금 허기 귀걸이·로지 베이지 립)이 프롬프트에 자동으로 붙으므로, 바뀐 장면마다 'instead of'를 적는다
+# 실험 E1-B 반전·문제형 hook (docs/02-content-strategy.md §9-2, §11-1 ⚠ 반영: 시간형 '30초 변신'에서 교체)
+id: 2026-11-11-after-work-switch
+date: 2026-11-11
+time: "07:40"
+status: draft
+series: 출근 15초
+format: reel
+pillar: 상황별
+goal: reach
+hook: "퇴근 후 약속, 옷 안 갈아입어도 돼요"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      day office look: charcoal single-breasted wool blazer worn open, black fine-gauge merino turtleneck knit
+      tucked into black high-waisted wide-leg wool slacks, black leather penny loafers, small gold huggie earrings,
+      slim silver watch, plain black leather tote bag on her shoulder
+    prompt: >-
+      three-quarter shot in a minimal Seoul office lobby with a light stone floor just after work in the early evening,
+      warm interior lights and deep blue dusk visible through tall glass doors behind her,
+      she glances at the silver watch on her left wrist with a small smile, background softly blurred,
+      empty space in the upper third for text, no readable signage
+  s02:
+    file: images/s02.png
+    framing: waist-up
+    status: todo
+    outfit: >-
+      the same charcoal single-breasted wool blazer worn open over the black fine-gauge merino turtleneck knit;
+      instead of her usual small gold huggies she now wears slim gold drop earrings about 4 cm long; her usual rosy-beige lip
+    prompt: >-
+      waist-up shot by a large office window at dusk, head turned slightly to one side,
+      one hand lightly touching the drop earring as it catches warm light, city lights softly blurred outside the window,
+      calm getting-ready mood, no readable text
+  s03:
+    file: images/s03.png
+    framing: waist-up
+    status: todo
+    outfit: >-
+      the same charcoal single-breasted wool blazer worn open over the black fine-gauge merino turtleneck knit,
+      slim gold drop earrings instead of her usual huggies;
+      makeup for this image only: deeper brick-rose lip instead of her usual rosy-beige lip, everything else minimal
+    prompt: >-
+      waist-up shot at a small table in a quiet office lounge at dusk, holding a small plain round compact mirror at chest height
+      and glancing into it with a soft smile, the deeper lip color clearly visible, warm table-lamp light mixed with cool window light,
+      background softly blurred, no logos or readable text on the compact
+  s04:
+    file: images/s04.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      black fine-gauge merino turtleneck knit tucked into black high-waisted wide-leg wool slacks,
+      the charcoal single-breasted wool blazer now taken off and being hung on the back of a wooden chair,
+      slim gold drop earrings instead of her usual huggies, slim silver watch;
+      makeup for this image only: deeper brick-rose lip instead of her usual rosy-beige lip
+    prompt: >-
+      three-quarter shot beside a wooden dining table in a warm-lit restaurant in the evening,
+      she hangs the blazer on the back of her chair with one hand, soft warm pendant light,
+      cozy year-end dinner mood, background softly blurred, no readable signage or menus
+  s05:
+    file: images/s05.png
+    framing: detail
+    status: todo
+    outfit: >-
+      black fine-gauge merino turtleneck knit tucked into black high-waisted wide-leg wool slacks,
+      a thin 2 cm cognac-brown leather belt with a small round gold buckle threaded through the belt loops at the natural waist
+    prompt: >-
+      detail shot at waist level in the same warm-lit restaurant, one relaxed hand resting lightly at her hip beside the small gold buckle,
+      warm evening light from the side, realistic merino knit and wool twill textures, face out of frame,
+      softly blurred warm wooden background
+  s06:
+    file: images/s06.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      evening look: black fine-gauge merino turtleneck knit tucked into black high-waisted wide-leg wool slacks,
+      thin cognac-brown leather belt with a small round gold buckle, slim gold drop earrings instead of her usual huggies,
+      black leather penny loafers, slim silver watch, the charcoal blazer hanging on the chair behind her;
+      makeup for this image only: deeper brick-rose lip instead of her usual rosy-beige lip
+    prompt: >-
+      full-body shot standing beside the wooden dining table in the same warm-lit restaurant,
+      relaxed easy smile as if greeting a friend who just arrived, soft warm pendant light, wooden interior softly blurred,
+      festive but understated year-end mood, no readable signage or menus
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "퇴근 후 약속\n옷 안 갈아입어도 돼요"
+      seconds: 2.0
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "EARRING"
+      text: "작은 링 → 드롭 귀걸이\n얼굴 옆이 반짝여요"
+      seconds: 2.4
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "LIP"
+      text: "립은 한 톤 진하게\n저녁 조명에서도 또렷해요"
+      seconds: 2.4
+      motion: zoom-in
+    - image: s04
+      layout: reel-look
+      label: "JACKET"
+      text: "재킷은 벗어 의자에\n어깨 각이 빠져 부드러워요"
+      seconds: 2.4
+      motion: pan-left
+    - image: s05
+      layout: reel-look
+      label: "BELT"
+      text: "얇은 벨트 하나\n허리선이 또렷해져요"
+      seconds: 2.4
+      motion: zoom-out
+    - image: s06
+      layout: reel-end
+      text: "출근룩 그대로\n저녁 약속까지"
+      cta: "약속 있는 동료에게 보내기"
+      seconds: 2.4
+      motion: still
+
+products: []
+
+caption: |
+  퇴근 후 약속, 옷 안 갈아입어도 돼요
+
+  출근룩은 그대로 두고 네 가지만 바꾸면 저녁 모드가 돼요.
+
+  ✔ 귀걸이: 작은 링 → 드롭형, 얼굴 옆이 반짝여요
+  ✔ 립: 한 톤 진하게, 저녁 조명에서도 또렷해요
+  ✔ 재킷: 벗어서 의자에, 어깨 각이 빠져 부드러워요
+  ✔ 벨트: 얇은 벨트 하나로 허리선이 또렷해져요
+
+  드롭 귀걸이·립·벨트는 아침에 가방에 넣어 두세요.
+  저장해두고 약속 있는 날 꺼내보세요.
+  같이 약속 가는 동료에게 보내줘도 좋아요.
+  다음 출근 15초는 '머플러 매는 법 3가지'예요.
+
+hashtags: [퇴근룩, 약속룩, 출근룩, 직장인코디, 오피스룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 차콜 블레이저와 검정 터틀넥, 검정 와이드 슬랙스 출근룩에서 드롭 귀걸이, 진한 립, 재킷 벗기, 얇은 벨트로 저녁 약속룩을 만드는 과정을 보여주는 릴스"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

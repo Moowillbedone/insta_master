@@ -1,0 +1,142 @@
+# WEEK 1 (10/19–10/25) 환절기 레이어링 · 수요일 릴스
+# 출근 15초 01. 다음 편: 출근 15초 · 니트 넣어 입기 3가지 (10/28)
+# 모든 사진에서 같은 트렌치·같은 이너를 입고 벨트만 바꾼다 (차이가 벨트에서만 보이도록)
+id: 2026-10-21-trench-belt-3ways
+date: 2026-10-21
+time: "07:40"
+status: draft
+series: 출근 15초
+format: reel
+pillar: 아이템가이드
+goal: reach
+hook: "트렌치 벨트, 묶는 위치만 바꿔도 실루엣 3가지"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      classic beige cotton-gabardine double-breasted knee-length trench coat worn open with the belt hanging loose from its loops,
+      ivory fine-gauge crew-neck knit, black high-waisted wide-leg wool slacks, dark brown leather penny loafers
+    prompt: >-
+      three-quarter shot in a bright apartment entryway beside a full-length mirror (the mirror shows only a soft blur),
+      she holds one end of the loose trench belt in each hand at waist height, about to tie it, eyes on the belt,
+      soft morning light from a side window, quiet getting-ready mood, plain wall above her head
+      leaving empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat worn open at the front, the belt drawn to the back and tied in one neat knot at the center back,
+      ivory fine-gauge crew-neck knit, black high-waisted wide-leg wool slacks, dark brown leather penny loafers
+    prompt: >-
+      full-body shot from behind at a three-quarter angle on a quiet Seongsu-dong street at 8am, red-brick wall beside her,
+      she glances back over her shoulder, the belt knot at the center back clearly visible and cinching only the back,
+      while the open front panels fall straight down,
+      soft overcast light, relaxed walking pose, no readable signage
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat wrapped closed at the front without buttoning,
+      the belt tied in one flat knot at her left hip with both ends hanging straight down,
+      ivory fine-gauge crew-neck knit, black high-waisted wide-leg wool slacks, dark brown leather penny loafers
+    prompt: >-
+      full-body front shot standing near the glass entrance of a minimal Seoul office lobby with a light stone floor,
+      one hand lightly resting on the knot at her hip, soft daylight from the left, composed morning mood,
+      background softly blurred
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same beige double-breasted trench coat worn open, the belt left untied with each loose end tucked into the side pocket on its own side,
+      ivory fine-gauge crew-neck knit, black high-waisted wide-leg wool slacks, dark brown leather penny loafers
+    prompt: >-
+      full-body shot standing on a quiet tree-lined sidewalk in a Seoul office district in the morning,
+      she tucks the last few centimeters of the loose belt end into her right coat pocket with her right hand,
+      left hand relaxed at her side, nothing cinched at the waist so the coat falls in a straight line from shoulder to hem,
+      soft overcast light, relaxed posture, no readable signage
+  s05:
+    file: images/s05.png
+    framing: detail
+    status: todo
+    outfit: >-
+      close-up of the beige cotton-gabardine trench belt tied in one flat knot at the left hip, both ends hanging straight down,
+      the wrapped coat front, a strip of ivory knit and black wool slacks visible at the edges
+    prompt: >-
+      detail shot at waist level, one hand smoothing the knot so the belt ends fall neatly,
+      soft side daylight, realistic gabardine twill texture and topstitching, face out of frame,
+      plain warm-neutral background
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "벨트만 바꿔도\n트렌치 실루엣 3가지"
+      seconds: 2.2
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "BACK"
+      text: "뒤로 묶기\n앞은 일자로, 뒤만 허리를 잡아요"
+      seconds: 2.8
+      motion: pan-left
+    - image: s03
+      layout: reel-look
+      label: "SIDE"
+      text: "한쪽 매듭\n허리가 잡히고 앞은 깔끔해요"
+      seconds: 2.8
+      motion: zoom-in
+    - image: s04
+      layout: reel-look
+      label: "POCKET"
+      text: "풀어서 주머니에\n일자로 떨어져 여유 있어 보여요"
+      seconds: 2.8
+      motion: pan-right
+    - image: s05
+      layout: reel-end
+      text: "저장해두고\n내일 아침 따라 해보세요"
+      cta: "다음 편 · 니트 넣어 입기 3가지"
+      seconds: 2.6
+      motion: still
+
+products: []
+
+caption: |
+  트렌치 벨트, 묶는 위치만 바꿔도 실루엣 3가지
+
+  같은 트렌치도 벨트를 어디서 묶느냐에 따라 선이 달라져요.
+
+  ✔ 뒤로 묶기: 앞은 열어 세로선을 길게, 뒤쪽만 허리를 잡아요
+  ✔ 한쪽 매듭: 허리가 잡히고, 매듭이 옆으로 가서 앞이 깔끔해요
+  ✔ 풀어서 주머니: 조이는 곳 없이 일자로 떨어지고 벨트 끝이 덜렁이지 않아요
+  ✔ 리본보다 매듭 한 번이 끝이 깔끔하게 떨어져요
+
+  저장해두고 내일 아침 거울 앞에서 따라 해보세요.
+  트렌치 꺼낸 동료에게 보내줘도 좋아요.
+  금요일엔 이 트렌치 하나로 날씨별 3가지를 올려요.
+  다음 출근 15초는 '니트 넣어 입기 3가지'예요.
+
+hashtags: [트렌치코트, 트렌치코디, 출근룩, 가을출근룩, 스타일링팁]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 베이지 트렌치코트 벨트를 뒤로 묶기, 한쪽 매듭, 풀어서 주머니에 넣기의 세 가지 방법으로 연출한 짧은 릴스"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

@@ -131,6 +131,7 @@ posted:                  # 게시 후 기록 (insights 명령이 이 주소로 �
 | `badge_position` | `left` / `center` / `right` | 'AI 가상인물' 배지 위치. 인물이 한쪽에 치우친 사진이면 인물 쪽으로 (공정위 지침: 인물 가까이 표시) |
 | `title` | 문자열 | compare 레이아웃의 상단 제목 |
 | `note` | 문자열 | checklist 하단 안내 문구 |
+| `cta` | 문자열 | 릴스 `reel-end` 장면의 저장·공유 유도 문구. 없으면 "저장하고 출근 전에 보기" |
 
 ## 키트 이전 게시물 (`legacy: true`)
 

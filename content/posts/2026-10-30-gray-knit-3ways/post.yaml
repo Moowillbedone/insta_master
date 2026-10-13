@@ -1,0 +1,182 @@
+# 한 벌 3가지 03. 이전 편: 베이지 트렌치 하나로 날씨별 3가지 (10/23). 다음 편: 한 벌 3가지 · 차콜 울 코트 하나로 3가지
+# WEEK 2 (10/26–11/1) 니트 시즌 · 금요일 카드뉴스 + 릴스
+# 연속성: 세 룩의 니트는 모두 같은 한 장 (KNIT 문구를 바꾸지 말고 그대로 복사)
+#   KNIT = mid-grey melange fine-gauge merino wool crew-neck knit with ribbed cuffs and hem, regular fit, hip length
+id: 2026-10-30-gray-knit-3ways
+date: 2026-10-30
+time: "07:40"
+status: draft
+series: 한 벌 3가지
+format: both
+pillar: 돌려입기
+goal: save
+hook: "회색 니트 하나로 3일 출근룩"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      mid-grey melange fine-gauge merino wool crew-neck knit with ribbed cuffs and hem, regular fit, hip length,
+      with only the front hem tucked in; ivory high-waisted wide-leg wool slacks, black leather penny loafers,
+      small black leather shoulder bag with no visible logo, charcoal wool coat folded over the left forearm
+    prompt: >-
+      full-body shot walking along a quiet tree-lined sidewalk beside an old stone wall in central Seoul in the morning,
+      softly blurred autumn trees with leaves just turning yellow, crisp clear light from the left,
+      right hand lightly holding the bag strap, calm half-smile, no readable signage,
+      generous empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same mid-grey melange fine-gauge merino wool crew-neck knit with ribbed cuffs and hem, regular fit, hip length,
+      with only the front hem tucked in; the same ivory high-waisted wide-leg wool slacks, slim silver watch
+    prompt: >-
+      three-quarter shot by a large window in a bright office lounge, one hand holding a plain matte tumbler with no logo,
+      natural window light from the left, warm neutral color grade, the front tuck at the waist clearly visible,
+      background softly blurred, clear space above her head
+  s03:
+    file: images/s03.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same mid-grey melange fine-gauge merino wool crew-neck knit with ribbed cuffs and hem, regular fit, hip length,
+      fully tucked in and slightly bloused over the waistband; camel wool A-line long skirt reaching the lower calf,
+      black opaque tights, black leather ankle boots with a low block heel, the same small black leather shoulder bag
+    prompt: >-
+      full-body shot standing inside a quiet cafe near Gwanghwamun beside a large window in the morning,
+      the skirt hem moving slightly as she turns toward the window, warm soft daylight from the right,
+      muted wood and stone textures, no readable signage or menus, empty space in the upper third
+  s04:
+    file: images/s04.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same mid-grey melange fine-gauge merino wool crew-neck knit with ribbed cuffs and hem, regular fit, hip length,
+      worn untucked with the hem resting at the hip, slightly shorter than the blazer;
+      navy single-breasted wool blazer worn open, dark indigo straight-leg denim, white leather sneakers with no logo,
+      slim silver watch
+    prompt: >-
+      three-quarter shot on a quiet Seongsu-dong street on a Friday morning, light red-brick wall behind her,
+      right hand resting in the blazer pocket, relaxed easy posture, soft overcast light from the left,
+      no readable signage, background softly blurred, clear space above her head
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      one mid-grey melange fine-gauge merino wool crew-neck knit in the center, with three bottoms beside it:
+      ivory wide-leg wool slacks, camel wool A-line long skirt, dark indigo straight denim with a folded navy wool blazer;
+      black penny loafers, black ankle boots, white leather sneakers
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, the grey knit clearly the center of the layout,
+      the three bottoms and shoes arranged in a wide horizontal band across the middle of the frame, neat spacing,
+      realistic knit and wool textures, no people, no hands, no text or logos
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "한 벌 3가지 · 03"
+    title: "회색 니트 하나로\n출근룩 3가지"
+    subtitle: "니트는 그대로, 하의만 바꿔요"
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 월요일"
+    title: "아이보리 슬랙스로 단정하게"
+    items: ["회색 크루넥 니트", "아이보리 와이드 슬랙스", "검정 로퍼", "검정 숄더백"]
+    tip: "밝은 하의를 두면 회색이 무겁지 않고 부드러워 보여요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 수요일"
+    title: "카멜 롱스커트로 따뜻하게"
+    items: ["회색 크루넥 니트", "카멜 울 롱스커트", "검정 타이츠", "검정 앵클부츠"]
+    tip: "차가운 회색 옆에 카멜을 두면 전체가 한결 따뜻해 보여요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 금요일"
+    title: "데님 날엔 블레이저를 더해요"
+    items: ["회색 크루넥 니트", "네이비 울 블레이저", "진청 일자 데님", "흰 가죽 스니커즈"]
+    tip: "어깨선 있는 블레이저와 진한 데님이 금요일도 단정하게 잡아줘요."
+  - layout: tip
+    number: "공식"
+    title: "하의가 바뀌면\n넣는 법도 바꿔요"
+    body: "허리선이 보이는 정도가 달라져서 같은 니트도 다른 옷처럼 보여요."
+    bullets: ["와이드 슬랙스 → 앞만 넣기 (월)", "롱스커트 → 다 넣고 살짝 빼기 (수)", "데님 → 빼 입고 블레이저 걸치기 (금)"]
+  - layout: checklist
+    image: s05
+    title: "옷장 속 회색 니트 체크"
+    checks: ["밝지도 어둡지도 않은 중간 회색", "넣어 입기 좋은 얇은~중간 두께", "골반에 닿는 기본 길이", "블레이저 안에 들어가는 슬림 핏", "촘촘해서 늘어지지 않는 짜임"]
+    note: "새로 사기 전에 있는 니트부터 맞춰보세요"
+  - layout: cta
+    title: "저장해두고\n다음 주에 돌려 입어요"
+    body: "다음 편: 한 벌 3가지 · 차콜 울 코트 하나로 3가지"
+
+products: []
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "회색 니트 하나로\n3일 출근룩"
+      seconds: 2.2
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "MON"
+      text: "아이보리 와이드 슬랙스\n밝은 하의로 부드럽게"
+      seconds: 2.6
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "WED"
+      text: "카멜 롱스커트 + 앵클부츠\n회색에 따뜻함을 더해요"
+      seconds: 2.6
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "FRI"
+      text: "진청 데님 + 네이비 블레이저\n어깨선으로 단정하게"
+      seconds: 2.6
+      motion: zoom-out
+    - image: s05
+      layout: reel-end
+      text: "니트는 그대로\n하의만 바꾸면 3일"
+      seconds: 2.6
+      motion: still
+
+caption: |
+  회색 니트 하나로 3일 출근룩
+
+  니트는 그대로 두고 하의만 바꿔요.
+  월 아이보리 슬랙스 · 수 카멜 롱스커트 · 금 진청 데님
+
+  ✔ 중간 밝기 회색이라 아이보리·카멜·데님 모두와 잘 어울려요
+  ✔ 와이드 슬랙스엔 니트 앞만 넣어 허리선을 보여줘요
+  ✔ 롱스커트엔 다 넣고 살짝 빼서 허리를 높게 잡아요
+  ✔ 데님 날엔 니트를 빼 입고 블레이저로 어깨선을 잡아요
+
+  저장해두고 다음 주 출근 전에 꺼내보세요.
+  다음 편은 '한 벌 3가지 · 차콜 울 코트 하나로 3가지'예요.
+
+hashtags: [출근룩, 니트코디, 돌려입기, 직장인코디, 오피스룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 같은 회색 크루넥 니트 한 장을 아이보리 와이드 슬랙스, 카멜 울 롱스커트와 검정 타이츠, 진청 데님과 네이비 블레이저에 각각 매치한 출근룩 3가지와 옷장 속 회색 니트 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  reel_url: ""
+  posted_at: ""

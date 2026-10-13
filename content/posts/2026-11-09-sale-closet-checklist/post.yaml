@@ -1,0 +1,168 @@
+# 체크리스트 01 (새 시리즈). 다음 편: 체크리스트 02 · 코트 살 때 매장에서 볼 5가지
+# WEEK 4 (11/9–11/15) 연말 준비·세일 시즌 · 월요일 카드뉴스
+# 나중에 제휴 링크를 붙일 형식이지만 이번 편은 일반 게시물: 브랜드·가격·링크 없음 (products: [])
+# 기본템 8가지 = 셔츠 · 얇은 니트 · 카디건 · 블레이저 / 슬랙스 · 스커트나 데님 · 울 코트 · 로퍼
+# 살 때 볼 것 4가지 = 혼용률 · 안감 · 어깨선 · 밑단 길이 (한 장에 하나씩). 어깨는 수선이 어렵고 밑단은 쉬운 대비로 '왜'를 붙인다
+# 블레이저는 s01 옷걸이·s02 플랫레이·s04 안감·s05 어깨선 모두 같은 네이비 블레이저로 맞춘다
+id: 2026-11-09-sale-closet-checklist
+date: 2026-11-09
+time: "07:40"
+status: draft
+series: 체크리스트
+format: carousel
+pillar: 아이템가이드
+goal: save
+hook: "세일 전에 옷장부터, 출근 기본템 8가지"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      oatmeal fine-gauge crew-neck wool knit loosely tucked in at the front, charcoal high-waisted wide-leg wool slacks,
+      slim silver watch; on a slim wooden clothing rail beside her hang a white cotton shirt, a light blue oxford shirt,
+      an oatmeal cardigan, a navy wool blazer and a charcoal knee-length wool coat, all on plain wooden hangers
+    prompt: >-
+      three-quarter shot in a bright apartment entryway on a weekday morning, standing beside the clothing rail,
+      sliding two hangers apart with one hand as if taking stock of what she already owns, a calm thoughtful look,
+      soft window light from the left, tidy uncluttered space, plain wall with empty space in the upper third for a headline,
+      no readable text or labels anywhere
+  s02:
+    file: images/s02.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      flat lay of upper-body office basics: a white cotton poplin shirt folded with the collar showing,
+      two folded fine-gauge crew-neck knits (one ivory, one mid-grey melange), a folded oatmeal V-neck wool cardigan,
+      and a navy single-breasted wool blazer laid flat with the front open
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, neat grid spacing with room around each piece,
+      realistic cotton, knit and wool textures, no people, no hands, no tags or labels with readable text, no logos
+  s03:
+    file: images/s03.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      flat lay of lower-body and outerwear basics: black high-waisted wide-leg wool slacks folded lengthwise,
+      a camel wool A-line midi skirt, a folded charcoal knee-length single-breasted wool coat,
+      and a pair of black leather penny loafers
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, neat spacing, the coat placed at the top,
+      realistic wool texture and leather grain, no people, no hands, no tags or labels with readable text, no logos
+  s04:
+    file: images/s04.png
+    framing: detail
+    status: todo
+    outfit: >-
+      navy single-breasted wool blazer held open to show a smooth navy satin-weave lining through the body and sleeves,
+      with a small plain white care label sewn at the inner side seam
+    prompt: >-
+      close-up detail of two hands holding the front of the blazer open on a light wooden table near a window,
+      soft side daylight, the sheen of the lining and the wool twill texture clearly visible,
+      the care label blank with no readable text, face out of frame, calm warm-neutral background
+  s05:
+    file: images/s05.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same navy single-breasted wool blazer with natural shoulders, the shoulder seam sitting exactly at the outer edge of her shoulder bone,
+      sleeves ending at the wrist bone, worn buttoned over an ivory fine-gauge crew-neck knit, charcoal high-waisted wide-leg wool slacks
+    prompt: >-
+      three-quarter shot in a bright apartment entryway in front of a full-length mirror (the mirror shows only a soft blur),
+      her right hand lightly touching the left shoulder seam while she checks the fit with a calm focused look,
+      soft even daylight from a side window, uncluttered plain wall, no readable text
+  s06:
+    file: images/s06.png
+    framing: detail
+    status: todo
+    outfit: >-
+      charcoal high-waisted wide-leg wool slacks with a clean straight hem that covers most of the shoe,
+      leaving only the toe of black leather penny loafers visible, the hem clearing the floor by about 1 cm
+    prompt: >-
+      detail shot from the knees down, standing still on a light stone floor near a window, soft side daylight,
+      the trouser hem falling straight with realistic wool drape, face out of frame, plain warm-neutral background
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "체크리스트 · 01"
+    title: "세일 전에 옷장부터\n출근 기본템 8가지"
+    subtitle: "있는 건 지우고, 빈칸만 채워요"
+  - layout: tip
+    number: "WHY"
+    title: "사기 전에\n옷장부터 열어봐요"
+    body: "세일 땐 가진 옷과 비슷한 걸 또 담기 쉬워요. 옷장부터 확인하면 꼭 필요한 것만 남아요."
+    bullets: ["기본템 8가지가 있는지 체크", "빈칸만 쇼핑 목록에 적기", "살 땐 혼용률·안감·어깨선·밑단 보기"]
+  - layout: checklist
+    image: s02
+    title: "기본템 ① 상의·재킷"
+    checks: ["셔츠 1장 (단독으로도, 니트 안에도)", "얇은 니트 2장 (밝은 톤·중간 톤)", "카디건 1장 (실내외 온도 차에)", "블레이저 1벌 (회의·발표 날에)"]
+    note: "있는데 안 입는 옷은 이유(핏·색)를 적어 두세요"
+  - layout: checklist
+    image: s03
+    title: "기본템 ② 하의·코트·신발"
+    checks: ["검정·차콜 슬랙스 (어느 상의와도 맞아요)", "미디 스커트나 데님 (슬랙스 쉬는 날)", "무릎 기장 울 코트 (11월 아침 추위에)", "굽 낮은 로퍼 (바지·치마 다 어울려요)"]
+    note: "체크 안 된 칸만 쇼핑 목록에 적어요"
+  - layout: tip
+    number: "01"
+    title: "라벨·상세페이지\n혼용률부터 봐요"
+    body: "색과 핏이 같아도 섞인 소재에 따라 보온과 관리가 달라요. 온라인에선 상세페이지 '소재' 칸을 먼저 봐요."
+    bullets: ["코트·니트: 울 비율이 높을수록 따뜻해요", "아크릴이 많으면 보풀이 잘 생겨요", "셔츠: 폴리가 조금 섞이면 구김이 덜해요"]
+  - layout: tip
+    image: s04
+    number: "02"
+    title: "재킷·코트는\n안감을 확인해요"
+    body: "니트 위에 걸칠 겉옷은 안감이 있어야 입고 벗을 때 매끄러워요."
+    bullets: ["몸판 안감 → 니트에 덜 걸려요", "소매 안감 → 니트 소매가 안 딸려 올라가요", "안감이 짧아 겉감이 당기지 않는지"]
+  - layout: tip
+    image: s05
+    number: "03"
+    title: "어깨선은\n어깨 끝에 맞춰요"
+    body: "어깨는 수선이 어려워서 살 때 맞아야 해요. 봉제선이 어깨 끝 뼈에 오면 맞는 거예요."
+    bullets: ["팔을 앞으로 뻗어도 등이 안 당기게", "니트 위에 걸쳐 보고 고르기", "드롭숄더는 원래 어깨선이 내려와요"]
+  - layout: tip
+    image: s06
+    number: "04"
+    title: "밑단 길이는\n신발을 신고 봐요"
+    body: "밑단은 수선이 쉽지만 굽 높이에 따라 맞는 길이가 달라요. 자주 신는 신발을 신고 정해요."
+    bullets: ["와이드: 앞코만 보이고 바닥엔 안 닿게", "일자: 복숭아뼈가 살짝 보이게", "코트: 자주 입는 스커트보다 길게"]
+  - layout: cta
+    title: "저장해두고\n결제 전에 꺼내보세요"
+    body: "다음 편: 체크리스트 02 · 코트 살 때 매장에서 볼 5가지"
+
+products: []
+
+caption: |
+  세일 전에 옷장부터, 출근 기본템 8가지
+
+  장바구니를 열기 전에 기본템 8가지가 옷장에 있는지 먼저 체크해 보세요.
+  빈칸만 채우면 비슷한 옷을 또 사는 일이 줄어요.
+
+  ✔ 상의·재킷: 셔츠, 얇은 니트 2장, 카디건, 블레이저
+  ✔ 하의·코트·신발: 슬랙스, 스커트나 데님, 울 코트, 로퍼
+  ✔ 살 때는 혼용률 → 안감 → 어깨선 → 밑단 순서로
+  ✔ 어깨는 수선이 어려우니 딱 맞게, 밑단은 신발을 신고 정해요
+
+  저장해두고 결제 전에 꺼내보세요.
+  세일 기다리는 동료에게 보내줘도 좋아요.
+  다음 편은 '체크리스트 02 · 코트 살 때 매장에서 볼 5가지'예요.
+
+hashtags: [출근룩, 옷장정리, 기본템, 직장인코디, 오피스룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 옷걸이 앞에서 가진 옷을 살펴보는 모습, 셔츠·니트·카디건·블레이저와 슬랙스·스커트·울 코트·로퍼 플랫레이, 네이비 블레이저의 안감과 어깨선, 와이드 슬랙스 밑단 길이로 정리한 세일 전 출근 기본템 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""
