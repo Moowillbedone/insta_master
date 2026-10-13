@@ -139,6 +139,7 @@ products: []
 
 caption: |
   퇴근 후 약속, 옷 안 갈아입어도 돼요
+  퇴근 후 약속룩 코디, 출근룩에서 저녁룩으로 바꾸는 법이에요.
 
   출근룩은 그대로 두고 네 가지만 바꾸면 저녁 모드가 돼요.
 
@@ -158,7 +159,7 @@ alt_text: "AI로 만든 가상 스타일리스트 도하가 차콜 블레이저�
 review:
   approved_by: ""
   approved_at: ""
-  notes: ""
+  notes: "실험 E1-B 반전형"
 
 posted:
   url: ""

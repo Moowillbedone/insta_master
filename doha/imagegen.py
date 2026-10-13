@@ -48,7 +48,19 @@ NARROW_CROP = {"reel-hook", "reel-look", "compare"}
 REFERENCE_NOTE = ("Reference photos are attached: keep exactly the same face, hairstyle and skin tone as the "
                   "reference person; take the outfit, pose and setting only from this prompt.")
 
-CHATGPT_LEAD = "Generate one photorealistic image in vertical 2:3 portrait format ({size})."
+CHATGPT_LEAD = "Generate one photorealistic image in vertical {aspect} portrait format ({size})."
+
+
+def aspect_label(size: str) -> str:
+    """'1024x1536' → '2:3', '1152x1536' → '3:4'. 형식이 다르면 '세로'."""
+    from math import gcd
+
+    try:
+        w, h = (int(x) for x in str(size).lower().split("x"))
+    except ValueError:
+        return "세로"
+    g = gcd(w, h)
+    return f"{w // g}:{h // g}"
 
 # 인물이 없는 사진에서는 손·피부 관련 금지어를 빼서 오히려 손이 그려지는 것을 막는다
 PERSON_ONLY_NEGATIVE = re.compile(r"finger|hand|skin|makeup", re.I)
@@ -238,7 +250,7 @@ def build_prompts_md(post: Post, keys: list[str], persona: dict, config: dict) -
     md = [
         f"# 이미지 프롬프트 · {post.id}",
         "",
-        f"> 만든 날 {_today(config).isoformat()} · 권장 크기 {size} (2:3 세로) · {len(keys)}장  ",
+        f"> 만든 날 {_today(config).isoformat()} · 권장 크기 {size} ({aspect_label(size)} 세로) · {len(keys)}장  ",
         "> `python doha.py prompts` 가 다시 만드는 파일이에요. 고칠 내용은 post.yaml(의상·장면)이나 "
         "brand/doha.yaml(인물·스타일)에 쓰세요.",
         "",
@@ -248,7 +260,7 @@ def build_prompts_md(post: Post, keys: list[str], persona: dict, config: dict) -
         "",
         "1. ChatGPT 앱에서 **이미지마다 새 채팅**을 엽니다 (앞 이미지의 영향을 줄이기 위해).",
         "2. 항목의 '첨부'에 적힌 얼굴 기준 이미지를 먼저 첨부합니다. 없으면 첨부 없이 진행해요.",
-        "3. 아래 `text` 블록 전체를 복사해 붙여넣고 보냅니다. 첫 줄이 비율(2:3 세로)을 지정해요.",
+        f"3. 아래 `text` 블록 전체를 복사해 붙여넣고 보냅니다. 첫 줄이 비율({aspect_label(size)} 세로)을 지정해요.",
         "4. 결과를 [검수 체크리스트](../../../../brand/prompt-guide.md)로 확인합니다. 고칠 곳이 있으면 같은 채팅에서 "
         "\"얼굴과 옷은 그대로 두고 ○○만 바꿔 주세요\"처럼 한 가지씩 요청해요.",
         "5. 마음에 드는 이미지를 내려받아 항목의 **저장 위치**에 PNG로 저장합니다 (파일 이름 그대로).",
@@ -276,7 +288,7 @@ def build_prompts_md(post: Post, keys: list[str], persona: dict, config: dict) -
         md.append(f"- 저장 위치: `{_rel(target)}`" + (" (이미 있음 — 새로 저장하면 기존 파일은 다른 이름으로 보관하세요)"
                                                    if target.exists() else ""))
         md.append(f"- 쓰이는 곳: {', '.join(usage) or '아직 없음'}")
-        md.append(f"- 권장 크기: {size} (2:3 세로)")
+        md.append(f"- 권장 크기: {size} ({aspect_label(size)} 세로)")
         if not person:
             md.append("- 첨부: 없음 (인물 없는 사진)")
         elif refs:
@@ -286,7 +298,7 @@ def build_prompts_md(post: Post, keys: list[str], persona: dict, config: dict) -
         if others:
             md.append("- 선택 첨부 (옷·톤 일관성): " + ", ".join(f"`{_rel(post.image_path(k))}`" for k in others))
         md += [f"- 프롬프트 ({len(prompt):,}자):", "", "```text",
-               CHATGPT_LEAD.format(size=size), prompt, "```", ""]
+               CHATGPT_LEAD.format(size=size, aspect=aspect_label(size)), prompt, "```", ""]
         rows.append({"key": key, "framing": spec.get("framing", "-"), "chars": len(prompt),
                      "refs": len(refs) if person else 0, "exists": target.exists()})
     return "\n".join(md), rows
@@ -298,7 +310,8 @@ def run_prompts(args) -> int:
         print("# 얼굴 기준 이미지용 프롬프트 (ChatGPT 앱에 하나씩 붙여넣기 · brand/reference/README.md 참고)\n")
         for name, text in compose_reference_prompts(persona):
             print(f"## brand/reference/{name}\n")
-            print(CHATGPT_LEAD.format(size=config["image_generation"].get("size", "1024x1536")))
+            ref_size = config["image_generation"].get("size", "1024x1536")
+            print(CHATGPT_LEAD.format(size=ref_size, aspect=aspect_label(ref_size)))
             print(text + "\n")
         return 0
     if not args.post:

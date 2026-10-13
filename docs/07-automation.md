@@ -4,12 +4,12 @@
 - 한 줄 요약: **만들기와 검수는 키트가 돕고, 게시와 사람 사이의 일은 사람이 합니다.**
 - 원칙 (근거: 00-master-plan.md §1, §4, §7)
   - 모든 게시물은 게시 전에 사람이 검수합니다.
-  - 자동 게시, 자동 DM, 스크래핑, 참여 자동화(팔로우·좋아요·댓글)는 하지 않습니다.
+  - 자동 게시, 자동 DM, 스크래핑, 참여 자동화(팔로우·좋아요·댓글)는 하지 않습니다. 댓글 키워드 DM만 조건부 예외로 두고, 지금은 쓰지 않습니다 (§6-1).
   - API는 내 계정에만 씁니다.
 
-**신뢰도 표시**: [확인] 공식 출처 · [보도] 언론 · [주장] 업체·블로그 · [미확인] 확인 못 함 · (해석) 리서치 판단 · (확인 필요) 리서치에 없음, 맨 아래 목록
+**신뢰도 표시**: [확인] 공식 출처 · [보도] 언론 · [주장] 업체·블로그 · [미확인] 확인 못 함 · (해석) 리서치 판단 · (운영 규칙) 우리가 정한 규칙 · (키트 동작) 코드 기준 · (확인 필요) 리서치에 없음, 맨 아래 목록
 
-**근거 문서**: [research/ig-platform.md](research/ig-platform.md) · [research/kr-compliance.md](research/kr-compliance.md) · [research/sponsorship-kr.md](research/sponsorship-kr.md) · [00-master-plan.md](00-master-plan.md) · [config.yaml](../config.yaml) · [content/SCHEMA.md](../content/SCHEMA.md)
+**근거 문서**: [research/ig-platform.md](research/ig-platform.md) · [research/kr-compliance.md](research/kr-compliance.md) · [research/sponsorship-kr.md](research/sponsorship-kr.md) · [research/image-gen-tech.md](research/image-gen-tech.md) · [research/affiliate-kr.md](research/affiliate-kr.md) · [research/content-trends.md](research/content-trends.md) · [00-master-plan.md](00-master-plan.md) · [config.yaml](../config.yaml) · [content/SCHEMA.md](../content/SCHEMA.md)
 
 ---
 
@@ -22,7 +22,7 @@
 | 기획 | `python doha.py new "제목(hook)" --date YYYY-MM-DD` | `content/posts/<날짜>-<슬러그>/post.yaml` 뼈대 생성 | hook, pillar, goal, `disclosure` 플래그를 직접 채움 |
 | 얼굴 기준 | `python doha.py prompts --reference` | 얼굴 기준 이미지용 프롬프트 출력 | 얼굴 승인, 역이미지 검색, `brand/doha.yaml` `face_reference` 등록 |
 | 프롬프트 | `python doha.py prompts <게시물>` | `out/prompts.md` 생성. 인물·촬영 스타일은 페르소나 파일에서 자동 조합 | ChatGPT 앱에 붙여넣어 생성, `images/sNN.png` 저장 |
-| 이미지 (API, 선택) | `python doha.py generate <게시물> --only s01 --dry-run` → `--dry-run` 빼고 실행 | 예상 비용 계산, 한도 초과 시 거절, 실행 전 y 확인, `tracking/costs.csv` 기록 | 비용 승인, 결과 검수 후 `images.<키>.status: approved` |
+| 이미지 (API: 확정·협찬 컷) | `python doha.py generate <게시물> --only s01 --dry-run` → `--dry-run` 빼고 실행 | 예상 비용 계산, 한도 초과 시 거절, 실행 전 y 확인, 응답 토큰 수로 실제 금액을 `tracking/costs.csv`에 기록 | 비용 승인, 결과 검수 후 `images.<키>.status: approved` |
 | 검수 | `python doha.py check <게시물>` (`--all`) | 광고·AI 표시, 체험 표현, 효능 표현, 상품 출처·확인일, 글자 수, 필수 항목 검사. 오류가 있으면 `build`가 멈춤 | 주의(warn) 항목 판단 |
 | 카드뉴스 | `python doha.py render <게시물>` | `out/slides/NN.png` (1080×1440, `--size 4x5`면 1080×1350). 인물 슬라이드에 `AI 가상인물` 배지, 커버에 광고 표시 자동 | 글자 겹침, 배지 위치, 얼굴·손·옷 |
 | 릴스 | `python doha.py reel <게시물>` | `out/reel/reel.mp4` (1080×1920), `cover.png` | 첫·끝 장면 표시, 세이프존, 음원 |
@@ -48,7 +48,7 @@
 
 | 요일 | 할 일 | 명령 | 사람 확인 |
 |---|---|---|---|
-| **월** | 07:40 게시 · 다음 주 게시물 기획, 프롬프트 내보내기, 이미지 생성 | `new` → `prompts` → (ChatGPT 앱) 또는 `generate --dry-run` | 의상·장면 묘사, 비용 승인 |
+| **월** | 07:40 게시 · 무신사 '급상승 일간 랭킹 아카이브' 확인 → 다음 주 게시물 기획, 프롬프트 내보내기, 시안(앱)·확정 컷(API) 생성 | `new` → `prompts` → (ChatGPT 앱) → `generate --dry-run` | 소재 선택, 의상·장면 묘사, 비용 승인 |
 | **화** | 이미지 선별, 렌더링, 검수 | `check` → `build` | 얼굴 일관성, 손·옷 왜곡, 글자 배치, `check` 오류 0 |
 | **수** | 07:40 게시 · 휴대폰 미리보기, 최종 승인 | `preview` | 표시 문구·배지·캡션 첫 줄, `review.approved_by` |
 | **목** | 브랜드 아웃리치(이메일·개별 DM), 미디어킷 갱신 | `media-kit` | 한 곳씩 직접 작성 |
@@ -59,45 +59,51 @@
 게시일마다 하는 일
 
 - 정해진 시각에 앱에서 직접 게시합니다. 유료 파트너십 레이블, 'AI 정보' 라벨, 대체 텍스트를 확인합니다 (docs/04-compliance-checklist.md). 기본 시각 07:40은 가설이며 성과로 조정합니다. (근거: config.yaml `publishing.default_time`)
+- 날씨 숫자가 들어간 편(주간 플랜, 날씨형 훅)은 **게시 전날 기상청 예보로 숫자를 다시 확인**합니다. (근거: research/content-trends.md 운영 결론 7, docs/02-content-strategy.md §11-2)
 - 게시 24시간 뒤, 7일 뒤: 지표 기록. 도달, 조회, 저장, 공유, 댓글, 프로필 방문, 팔로우, 링크 클릭, 제작 시간·비용. (근거: 00-master-plan.md §8)
 
 매주 하는 일
 
 - 계정 상태에서 추천 가능 여부 확인, 'AI 생성 프로필' 라벨이 켜져 있는지 확인. (근거: docs/06-account-setup.md §3, §4)
+- 월요일: 무신사 '급상승 일간 랭킹 아카이브'로 소재 점검. 손으로 봅니다. 랭킹 데이터를 긁어 오지 않습니다(§6 스크래핑). (근거: research/content-trends.md §1-1, 운영 결론 11)
 - 판단 지표: 공유/도달, 저장/도달. 팔로워 수나 조회수 하나로 판단하지 않습니다. (근거: research/ig-platform.md §6-3, 00-master-plan.md §8)
 
 ---
 
 ## 3. 이미지 생성: 두 가지 길
 
+**시안은 ChatGPT 앱, 확정 컷과 협찬 컷은 API**로 나눕니다. 앱은 장당 추가 비용이 0원이라 후보 뽑기에, API는 비용·토큰·파일 기록이 남아 견적·정산 근거가 필요한 컷에 씁니다. (해석) (근거: research/image-gen-tech.md §7-1, 운영 결론) 자세한 기준·단가·예상 비용은 [03-image-production.md](03-image-production.md) §6.
+
 | 항목 | ChatGPT 앱 (수동) | OpenAI API (`generate`) |
 |---|---|---|
+| 쓰는 곳 | 얼굴 기준 사진 후보, 게시물 시안. API 준비 전에는 일반 게시물 확정 컷까지 | 확정 컷, 협찬 컷, 앱 한도에 걸렸을 때 |
 | 명령 | `python doha.py prompts <게시물>` → 앱에 붙여넣기 | `python doha.py generate <게시물> --only s01` |
-| 비용 | **API 비용 없음.** ChatGPT 구독료와 API 요금은 따로입니다 | **장당 비용 발생** (사용량 과금) |
+| 비용 | **장당 추가 비용 없음.** 구독료는 따로 (03 §6-1) | **장당 비용 발생** (사용량 과금, 03 §6-2) |
 | 사람 손 | 붙여넣기, 고치기, 내려받기, 파일 저장 (요령: brand/prompt-guide.md) | 명령 한 번, 실행 전 비용 확인 |
-| 기록 | 대화 링크·캡처를 직접 보관 | `tracking/costs.csv` 자동 기록 |
+| 기록 | 대화 링크·캡처를 직접 보관, 구독료는 `costs.csv`에 손으로 | `tracking/costs.csv` 자동 기록 (금액·토큰 수) |
 | 키 | 필요 없음 | `.env`의 `OPENAI_API_KEY` |
-| 권장 | 지금 기본값 | 얼굴 기준이 고정되고 장수가 많아질 때 |
 
-(근거: 00-master-plan.md §4, doha.py 명령 설명)
+(근거: 00-master-plan.md §4, doha.py 명령 설명, research/image-gen-tech.md §2)
 
 **API 비용 안전장치** (키트 설정값, 근거: config.yaml `image_generation`, .env.example)
 
 | 설정 | 값 | 뜻 |
 |---|---|---|
-| `model` | `gpt-image-2` | 키트 기본 모델 |
-| `size` | `1024x1536` | 세로 2:3 |
+| `model` | `gpt-image-2` | 키트 기본 모델. 2.5-sunburst 비교 시험은 03 §6-5 |
+| `size` | `1024x1536` | 세로 2:3. 3:4(1152x1536) 시험은 03 §6-5 |
 | `quality` | `medium` | 시안은 medium, 확정 컷만 high |
-| `est_cost_usd` | low 0.02 / medium 0.05 / high 0.17 | 키트가 쓰는 **장당 예상치**. 실제 단가가 아님 |
+| `token_prices_usd_per_1m` | text_input 5 / image_input 8 / image_output 30 | 응답 토큰 수로 **실제 금액**을 계산해 기록 (`usage-based`). 2026-10 공개 자료 값 [보도], 결제 전 OpenAI 가격 페이지에서 확인 |
+| `est_cost_usd` | low 0.02 / medium 0.05 / high 0.17 | 실행 전 상한 계산용 **장당 예상치**. 응답에 사용량이 없을 때만 이 값으로 기록 (`estimate`) |
 | `max_cost_per_run_usd` | 1.00 | 한 번 실행 상한. 넘으면 실행 거절 |
 | `require_confirmation` | true | 비용 발생 전 터미널에서 y 입력 |
 | `DOHA_MAX_COST_USD` (.env) | 1.00 | 실행 상한을 .env에서 덮어씀. `--max-cost`로도 지정 |
 
-- 처음에는 `--dry-run`으로 프롬프트와 예상 비용만 봅니다. 그다음 한 장만 생성해 실제 사용량을 확인합니다. (근거: 00-master-plan.md §9)
+- 처음에는 `--dry-run`으로 프롬프트와 예상 비용만 봅니다. 그다음 한 장만 생성해 `costs.csv`의 실제 금액·토큰 수를 확인합니다. (근거: 00-master-plan.md §9)
 - `--mock`은 API 없이 자리표시 PNG만 만듭니다(비용 기록 없음). 렌더링 테스트용입니다.
-- 선불 결제를 쓰면 자동 충전이 기본으로 켜질 수 있습니다. 원치 않으면 끕니다. (근거: 00-master-plan.md §4)
+- gpt-image-2에는 `input_fidelity`를 보내지 않습니다. 입력 이미지를 항상 고충실도로 처리합니다 [확인]. 키트는 gpt-image-1 계열에만 보냅니다 (키트 동작). (근거: research/image-gen-tech.md §1-3, 검증 메모 #4)
+- 선불 결제는 $10만 넣고, 자동 충전(설정 과정에서 기본으로 켜짐 [확인])은 끄거나 월 한도 $20 이하로 둡니다 (해석). 키트 상한과 y 확인은 2차 안전장치입니다. 자세한 내용은 03 §6-4. (근거: research/image-gen-tech.md §1-5, 운영 결론)
 - 키는 채팅·문서에 붙여넣지 않고 `.env`에만 둡니다. (근거: .env.example)
-- 모델별 실제 단가, ChatGPT 플랜별 생성 한도, 다른 생성 툴 비교: **추가 조사 예정: docs/research/image-gen-tech.md**
+- 단가, ChatGPT 플랜별 한도, 대안 이미지 도구, 영상 도구는 03-image-production.md §2-4, §6, §7-2에 정리돼 있습니다.
 - 어느 길이든 결과는 사람이 검수한 뒤에만 `approved`로 바꿉니다.
 
 ---
@@ -143,7 +149,7 @@
 | 미디어 | **공개 URL**이어야 함. 컨테이너 생성 → (영상은 처리 상태 FINISHED 확인) → `media_publish` | [확인] |
 | 게시 한도 | 가이드는 24시간 100건, 레퍼런스는 50건. 숫자를 코드에 박지 말고 `GET /{ig-user-id}/content_publishing_limit`로 조회 | [확인]/[주장] |
 | 예약 | `scheduled_publish_time` 같은 예약 파라미터 없음. 자체 작업 큐가 필요 | [주장] |
-| 캐러셀 장수 | API는 10장 (앱은 20장) | [주장] |
+| 캐러셀 장수 | API는 10장 [주장]. 앱은 20장 [보도] | 혼재 |
 | 비율 | API는 4:5~1.91:1(공식 문서 구버전 기준). 3:4(1080×1440)는 거부되거나 잘릴 수 있음 → API로 올린다면 1080×1350 | [확인] |
 | AI 라벨 파라미터 | 있는지 확인 못 함 | [미확인] |
 | 유료 파트너십 라벨 | 앱에서만 추가 [확인]. 2026-04부터 Facebook Login 게시 API로 가능하다는 보도 [보도] | 혼재 |
@@ -215,6 +221,22 @@ python doha.py insights --checkpoint 7d  # 경과 시간과 상관없이 이 시
 - 커뮤니티 가이드라인 근거 자료는 2019년 법원 제출본이라 현행 문구와 다를 수 있습니다. (근거: research/ig-platform.md §6-5)
 - 신규 AI 계정은 신뢰 신호가 약해 한 번 제재를 받으면 회복하기 어렵습니다. (해석) (근거: research/ig-platform.md 운영 결론)
 
+### 6-1. 댓글 키워드 → DM: 조건부 예외 (지금은 쓰지 않음)
+
+제휴 링크를 전하는 경로로 "댓글에 키워드를 남기면 링크를 DM으로 받는" 방식이 거론됩니다. (근거: research/affiliate-kr.md §2-10, 운영 결론) 콜드 DM과 다르지만 자동 발송이므로, 아래 조건을 **모두** 지킬 때만 씁니다.
+
+| 조건 | 내용 | 근거 |
+|---|---|---|
+| 사용자가 먼저 | 사용자가 **먼저 단 댓글**(또는 먼저 보낸 메시지)에 대한 답장만 보냅니다. 댓글을 달지 않은 사람, 팔로워 전체, 브랜드에게 먼저 보내지 않습니다 | research/ig-platform.md §6-5 |
+| 공식 경로만 | Instagram 공식 메시징 API, 또는 그 API를 쓰는 승인된 도구만 씁니다. 서드파티 앱으로 DM을 자동화하는 것도 위반으로 본다는 설명이 있습니다 [주장] | research/ig-platform.md §6-5 |
+| 플랫폼 한도 | 메시징 API는 사용자가 먼저 보낸 메시지에 24시간 안에만 답할 수 있고, 댓글에 대한 비공개 답장은 댓글 하나당 1회·7일 이내만 가능하다는 설명 [주장] | research/ig-platform.md §6-5 |
+| 시작 시점 | **처음에는 쓰지 않습니다.** 제휴 게시를 시작한 뒤(08-affiliate-guide.md §2), 프로필 링크 실측이 3개월 쌓이면 선택합니다 | 08-affiliate-guide.md §5 |
+| 도구 확인 | 인포크링크에 인스타그램 자동화 기능이 있습니다 [확인]. 무료인지, 공식 API를 쓰는지는 [미확인] → 확인 전에는 켜지 않습니다 | research/affiliate-kr.md §2-11, 남은 확인 사항 |
+| 표시 | DM 답장에도 캡션과 같은 대가성 문구와 AI 가상인물 표시를 넣습니다 (운영 규칙) | 문구: 08-affiliate-guide.md §4 |
+
+- "DM 자동화 클릭률 12~18% vs 프로필 링크 2~3%"는 DM 자동화를 파는 업체의 자료입니다 [주장]. 이해관계가 있어 도입 근거로 쓰지 않습니다. (해석) (근거: research/affiliate-kr.md §4-2)
+- 키트는 DM을 보내는 기능을 만들지 않습니다. 쓰게 되면 외부 도구 설정이고, 유료면 `tracking/costs.csv`에 `category: subscription`으로 적습니다.
+
 ---
 
 ## 7. 비밀값과 비용 관리
@@ -235,5 +257,6 @@ python doha.py insights --checkpoint 7d  # 경과 시간과 상관없이 이 시
 5. Instagram Login 경로에서 유료 파트너십 라벨 API, 광고 포함 합산 지표가 되는지.
 6. Meta Business Suite 예약 화면에서 AI 라벨·유료 파트너십 레이블 지원 여부 (docs/06-account-setup.md §10).
 7. 최신 Instagram Platform changelog의 현재 API 버전과 `profile_views` 대체 지표.
-8. 이미지 모델 단가, ChatGPT 플랜별 이미지 생성 한도 — 추가 조사 예정: docs/research/image-gen-tech.md.
-9. `insights`에 필요한 Instagram Login 권한 범위(인사이트 읽기 포함)와 `profile_visits`·`ig_reels_avg_watch_time` 지표가 실제로 반환되는지.
+8. `insights`에 필요한 Instagram Login 권한 범위(인사이트 읽기 포함)와 `profile_visits`·`ig_reels_avg_watch_time` 지표가 실제로 반환되는지.
+9. 댓글 키워드 DM을 검토할 때: 인포크링크 등 도구의 인스타그램 자동화가 공식 메시징 API를 쓰는지, 무료인지, 메시징 API의 24시간·댓글 비공개 답장 1회·7일 조건이 지금도 같은지 (§6-1).
+10. 이미지 생성 단가·한도·약관의 남은 확인 사항은 03-image-production.md '확인 필요'에서 관리합니다.

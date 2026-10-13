@@ -1,7 +1,7 @@
 /* 자동 생성 파일: python doha.py board — 직접 고치지 마세요. 원본은 content/, tracking/, outreach/ */
 window.DOHA_DATA = {
  "version": 1,
- "generated_at": "2026-10-13T13:50:38+09:00",
+ "generated_at": "2026-10-13T14:23:12+09:00",
  "account": {
   "handle": "doha.dailyfit",
   "display_name": "도하 | AI 스타일리스트",

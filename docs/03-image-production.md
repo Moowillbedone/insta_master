@@ -1,12 +1,13 @@
 # 실사 이미지 제작 매뉴얼
 
 - 기준일: 2026-10-13 (KST)
-- 한 줄 요약: **프롬프트는 키트가 만들고, 생성은 ChatGPT 앱(기본) 또는 API로, 승인은 사람이 한다. 얼굴은 기준 사진에서, 글자는 렌더러에서.**
-- 이 문서는 제작 순서, 승인 기준, 파일·상태, 비용, 기록을 다룬다. 프롬프트 쓰는 법과 고치는 문장은 [brand/prompt-guide.md](../brand/prompt-guide.md)에 있다.
+- 한 줄 요약: **프롬프트는 키트가 만들고, 시안은 ChatGPT 앱(장당 추가 비용 0원), 확정 컷과 협찬 컷은 API(비용·토큰 기록)로 만든다. 승인은 사람이 한다. 얼굴은 기준 사진에서, 글자는 렌더러에서.**
+- 이 문서는 제작 순서, 승인 기준, 파일·상태, 비용, 영상, 약관·표시를 다룬다. 프롬프트 쓰는 법과 고치는 문장은 [brand/prompt-guide.md](../brand/prompt-guide.md)에 있다.
+- 가격·모델 정보는 2026-10 공개 자료 기준이고 자주 바뀐다. 대부분 제3자 추적 사이트 수치다. 결제 전에 각 회사 공식 가격 페이지에서 다시 확인한다. (근거: research/image-gen-tech.md 머리말)
 
-**신뢰도 표시**: [확인] 공식 출처 · [보도] 언론 · [주장] 업체·블로그 · [미확인] 확인 못 함 · (해석) 리서치의 판단 · (운영 규칙) 우리가 정한 규칙 · (가정) 계산용 가정 · (확인 필요) 리서치에 없음, 맨 아래 목록
+**신뢰도 표시**: [확인] 공식 출처 · [보도] 언론 · [주장] 업체·블로그 · [미확인] 확인 못 함 · (해석) 리서치의 판단 · (운영 규칙) 우리가 정한 규칙 · (가정) 계산용 가정 · (키트 동작) 코드 기준 · (확인 필요) 리서치에 없음, 맨 아래 목록
 
-**근거 문서**: [research/ig-platform.md](research/ig-platform.md) · [research/kr-compliance.md](research/kr-compliance.md) · [research/sponsorship-kr.md](research/sponsorship-kr.md) · [00-master-plan.md](00-master-plan.md) §3, §4 · [brand/doha.yaml](../brand/doha.yaml) · [brand/prompt-guide.md](../brand/prompt-guide.md) · [brand/reference/README.md](../brand/reference/README.md) · [config.yaml](../config.yaml) · [content/SCHEMA.md](../content/SCHEMA.md)
+**근거 문서**: [research/image-gen-tech.md](research/image-gen-tech.md) · [research/ig-platform.md](research/ig-platform.md) · [research/kr-compliance.md](research/kr-compliance.md) · [research/sponsorship-kr.md](research/sponsorship-kr.md) · [00-master-plan.md](00-master-plan.md) §3, §4 · [brand/doha.yaml](../brand/doha.yaml) · [brand/prompt-guide.md](../brand/prompt-guide.md) · [brand/reference/README.md](../brand/reference/README.md) · [config.yaml](../config.yaml) · [content/SCHEMA.md](../content/SCHEMA.md)
 
 ---
 
@@ -16,8 +17,8 @@
 post.yaml  images.sNN (outfit · prompt · framing)
    │
    │  python doha.py prompts <게시물>              → out/prompts.md
-   ├─ (기본) ChatGPT 앱 + 얼굴 기준 사진 첨부      → images/sNN.png   status: generated (손으로)
-   └─ (선택) python doha.py generate <게시물> …    → images/sNN.png   status: generated (자동) + costs.csv
+   ├─ (시안) ChatGPT 앱 + 얼굴 기준 사진 첨부      → images/sNN.png   status: generated (손으로)
+   └─ (확정·협찬) python doha.py generate <게시물> … → images/sNN.png   status: generated (자동) + costs.csv
    │
    사람 QA (§3) ── 통과 → approved
    │            └─ 실패 → 고치기 / rejected (§4)
@@ -31,6 +32,7 @@ post.yaml  images.sNN (outfit · prompt · framing)
 
 - 사진에 글자를 그리지 않는다. 제목·라벨·광고 표시·'AI 가상인물' 배지는 렌더러가 얹는다.
 - 자동으로 공개하지 않는다. 사람이 승인한 파일만 게시한다.
+- 앱과 API를 나눠 쓴다. 앱은 장당 추가 비용이 0원이라 후보를 많이 뽑는 시안에, API는 비용·토큰·파일 기록이 남아 견적·정산 근거가 필요한 확정·협찬 컷에 쓴다. (해석) (근거: research/image-gen-tech.md §7-1, 운영 결론) 자세한 기준은 §6-1.
 - "멋져 보이는가"와 "사진처럼 설득력 있는가"는 따로 검수한다.
 
 ---
@@ -43,8 +45,8 @@ post.yaml  images.sNN (outfit · prompt · framing)
 | 1 | 기획 | 뼈대를 만들고 hook·slides·reel 채우기 | `python doha.py new "주제" --date YYYY-MM-DD --series "…"` | `post.yaml`, `images/` | draft |
 | 2 | 사진 묘사 | `images.<키>`에 `outfit`(소재·색·핏·여밈), `prompt`(영어, 장면만), `framing` | 편집기 | — | draft |
 | 3 | 프롬프트 | 붙여넣을 프롬프트 만들기 | `python doha.py prompts <게시물>` (`--only s01,s02`) | `out/prompts.md` | — |
-| 4a | 생성 (기본) | ChatGPT 앱: 이미지마다 새 채팅, 기준 사진 첨부, 블록 붙여넣기, 원본 파일 저장 | — | `images/sNN.png` | 사진별 `generated` (직접) |
-| 4b | 생성 (선택) | API: 미리보기 → 한 장씩 → `y` 확인 | `python doha.py generate <게시물> --only s01 --dry-run` → `--dry-run` 빼고 실행 | `images/sNN.png`, `tracking/costs.csv` 한 줄 | 사진별 `generated` (자동) |
+| 4a | 시안 (앱) | ChatGPT 앱: 이미지마다 새 채팅, 기준 사진 첨부, 블록 붙여넣기, 원본 파일 저장 | — | `images/sNN.png` | 사진별 `generated` (직접) |
+| 4b | 확정·협찬 (API) | API: 미리보기 → 한 장씩 → `y` 확인. 시안에서 정한 `prompt`·`outfit`·`framing`을 그대로 쓴다 | `python doha.py generate <게시물> --only s01 --dry-run` → `--dry-run` 빼고 실행 | `images/sNN.png`, `tracking/costs.csv` 한 줄 | 사진별 `generated` (자동) |
 | 5 | QA | §3 체크리스트. 원본 크기로 확대 | — | — | 사진별 `approved` / `rejected` (사람) |
 | 6 | 사진 완료 | 쓰는 사진이 모두 `approved` | — | — | images |
 | 7 | 검수 | 오류 0이 될 때까지 | `python doha.py check <게시물>` | 터미널 리포트 | — |
@@ -53,6 +55,8 @@ post.yaml  images.sNN (outfit · prompt · framing)
 | 10 | 승인 | `review.approved_by`, `approved_at` 기록 | — | — | approved |
 | 11 | 게시 | 앱에서. 'AI 정보' 라벨, 릴스 음원, 대체 텍스트, (협찬) 유료 파트너십 라벨 | — | `posted.url`, `posted_at` | posted |
 
+- 4b는 4a 사진을 다듬는 것이 아니라 **새로 만든다** (`generate`는 매번 새로 생성, 키트 동작). 결과는 §3 QA를 처음부터 다시 한다.
+- API 준비(키·선불 결제) 전에는 4a 사진이 §3을 통과하면 그대로 쓴다. 협찬 컷은 API 준비 뒤에만 만든다. (운영 규칙) (근거: 00-master-plan.md §4 '현재 상태')
 - 사진이 아직 없어도 `render`는 자리표시 이미지로 배치를 보여 준다. 글자 자리를 먼저 확인할 수 있다.
 - `build --force`는 검수 오류가 있어도 시안을 만든다. **게시 금지.**
 - 게시물마다 제작 시간과 후보 수를 `review.notes`에 적는다 (예: `제작 3.0h · 후보 14장`). 견적 변수 `H`, `n_img`의 근거가 된다. (근거: 01-monetization-playbook.md §6)
@@ -77,7 +81,7 @@ post.yaml  images.sNN (outfit · prompt · framing)
 **지킬 것**
 
 - 기준 사진은 **AI로 만든 도하 이미지만** 쓴다. 연예인·모델·지인·본인 사진, 얼굴 합성, 실존 인물로 학습한 모델(LoRA 등)은 쓰지 않는다. (해석) (근거: research/kr-compliance.md §5-1)
-- 2~3장이면 충분하다. 많을수록 API 입력 비용이 는다 (키트는 1장당 $0.01을 예상치에 더함).
+- 2~3장이면 충분하다. 많을수록 API 입력 비용이 늘고 얼굴이 섞일 수 있다 (해석) (근거: research/image-gen-tech.md §5-2). 키트는 1장당 $0.01을 예상치에 더한다.
 - 한번 정한 세트는 바꾸지 않는다. 꼭 바꿔야 하면 새 번호로 추가하고, 이전 파일은 지우지 않고 목록에서만 뺀다.
 - 게시물용 사진을 승인 절차 없이 기준 사진으로 올리지 않는다.
 - 역이미지 검색은 승인할 때 한 번, 그 뒤 매달 한 번. (근거: 04-compliance-checklist.md §8-2)
@@ -91,6 +95,7 @@ post.yaml  images.sNN (outfit · prompt · framing)
 
 - `brand/doha.yaml`의 `visual.identity` 문장은 고치지 않는다. 줄이면 다른 사람이 된다. (근거: brand/prompt-guide.md §2)
 - 같은 옷이 여러 장에 나오면 `outfit`에 "the same …" 문장을 그대로 복사한다.
+- OpenAI 가이드는 신원 유지 편집에 gpt-image-2를 권하고, 바꿀 것과 **바꾸지 말 것**을 따로 적으라고 안내한다 [확인]. 키트가 붙이는 기준 사진 문장(얼굴·머리·피부 톤은 그대로, 옷·자세·장소만 프롬프트에서)이 이 방식이다. (근거: research/image-gen-tech.md §5-1)
 
 ### 2-3. 얼굴이 흔들릴 때
 
@@ -100,6 +105,24 @@ post.yaml  images.sNN (outfit · prompt · framing)
 | 왼쪽 눈 아래 점이 반대쪽 | 좌우 반전이나 거울 장면인지 본다. 거울 장면은 피한다 |
 | 어려 보이거나 인형 같음 | 고치지 말고 반려한 뒤 새로 만든다 |
 | 게시물마다 조금씩 달라짐 | 매주 한 번, 그 주 승인 사진을 `doha-face-01.png` 옆에 놓고 비교한다 |
+| 같은 채팅에서 고칠수록 흐려짐 | 수정이 이어지면 얼굴이 조금씩 흐려진다 (해석). 3번 안에 안 되면 기준 사진에서 새로 시작한다 (§4) |
+| 특정 장면에서 계속 흔들림 | 그 장면만 다른 도구로 교차 시도할 수 있다 (§2-4). 기본 도구는 바꾸지 않는다 |
+
+(근거: research/image-gen-tech.md §5-2, §7-1)
+
+### 2-4. 다른 얼굴 일관성 방법 (참고, 지금은 쓰지 않음)
+
+| 방법 | 알려진 내용 | 신뢰도 | 판단 |
+|---|---|---|---|
+| Gemini 이미지 (Nano Banana Pro) | 인물 일관성용 기준 이미지 최대 5장. 생성물에 SynthID·C2PA 포함 | [확인] | 얼굴이 계속 흔들리는 장면만 교차 시도하는 보조 후보 (해석). **유료 등급에서만** 기준 사진을 넣는다. 무료 등급 입력·응답은 Google 제품 개선에 쓰인다 [확인] |
+| 기준 얼굴 15~30장으로 LoRA 학습 | 2026 가이드들이 공통으로 권한다는 업체·블로그 서술 | [주장] | 쓰지 않는다 |
+| Higgsfield 'Soul ID' | 같은 인물 사진 20~80장으로 캐릭터 학습. 가격은 출처마다 크게 다르고 무료 플랜 없음이라는 주장 | [주장] | 공식 가격·약관 확인 전에는 구독하지 않는다 (해석) |
+| Midjourney | 비공개(Stealth) 모드는 Pro·Mega에서만. 공식 API는 재판매사 주장뿐 | [주장] | 협찬 신제품이 공개 갤러리에 보일 위험, API 자동화 어려움 → 쓰지 않는다 (해석) |
+
+(근거: research/image-gen-tech.md §3-1, §3-2, §3-4 · research/market-cases.md §4-3)
+
+- 키트가 이미 기준 사진 기반 편집 흐름을 갖추고 있어 당장 필요하지 않다 (해석) (근거: research/image-gen-tech.md §3-4).
+- 어느 방법이든 학습·기준 자료는 **승인된 도하 AI 이미지만** 쓴다. 실존 인물 사진·실존 인물로 학습한 모델은 쓰지 않는다 (§2-1 지킬 것).
 
 ---
 
@@ -126,6 +149,7 @@ post.yaml  images.sNN (outfit · prompt · framing)
 - 6번 근거: 협찬받지 않은 브랜드 로고를 AI로 재현해 제휴한 것처럼 보이게 하지 않는다 (해석). (근거: research/kr-compliance.md §5-3)
 - 11번 근거: 협찬 의류는 실물 사진·실측 기준으로 만들고 브랜드 승인 뒤 게시한다 (해석). AI 이미지가 소비자를 오인하게 하면 허위광고로 볼 수 있다 [보도]. (근거: research/kr-compliance.md §4-1)
 - 고치는 문장 예시는 brand/prompt-guide.md §5에 있다.
+- 함께 볼 흔한 결함 (해석) (근거: research/image-gen-tech.md §5-3): 얼굴이 나이 들어 보임 · 체크·스트라이프 무늬 왜곡 · 지퍼·주머니 좌우 비대칭 · 니트 짜임 뭉개짐 · 귀걸이 좌우 다름 · 시계 바늘·숫자 깨짐 · 가방 스트랩이 몸을 관통 · 배경 사람·차량 왜곡 · 실존 장소로 오인될 간판.
 
 ---
 
@@ -182,53 +206,124 @@ post.yaml  images.sNN (outfit · prompt · framing)
 
 ## 6. 비용 관리
 
-### 6-1. 두 길
+가격은 2026-10 공개 자료 기준이고 자주 바뀐다. 결제 전에 OpenAI 가격 페이지에서 다시 확인한다. 원화 환산은 `config.yaml` `fx.usd_krw`(1400). (근거: research/image-gen-tech.md 머리말, §1-4)
+
+### 6-1. 두 길: 앱은 시안, API는 확정·협찬
 
 | | ChatGPT 앱 | API (`generate`) |
 |---|---|---|
-| 비용 | API 비용 없음. ChatGPT 구독료와 API 요금은 따로다 | 사용량에 따라 과금. 장당 금액은 키트 추정치 |
-| 언제 | 지금 기본값 | 얼굴 기준이 고정되고 장수가 많을 때 |
-| 기록 | 구독료를 `tracking/costs.csv`에 손으로 (`category: subscription`) | `tracking/costs.csv`에 자동 (`category: image_api`) |
+| 쓰는 곳 | 얼굴 기준 사진 후보, 게시물 시안(후보 뽑기). API 준비 전에는 일반 게시물 확정 컷까지 (§1) | 확정 컷, 협찬 컷(견적·정산 근거), 앱 한도에 걸렸을 때, 기록·재현이 필요할 때 |
+| 비용 | 장당 추가 비용 0원. 구독료는 따로: Go 월 13,000원 · Plus 월 29,000원 · Pro 월 159,000원부터 (부가세 포함, 한국 블로그 기준) [주장] | 사용량 과금 (§6-2). ChatGPT 구독과 API 결제는 별개 |
+| 한도 | 플랜별 고정 장수는 공개되지 않았다 [주장]. Plus는 3시간에 약 40~50장이라는 사용자 보고가 많다 [주장] | 사용 등급별 월 사용 한도 (§6-4) [확인] |
+| 기록 | 구독료를 `tracking/costs.csv`에 손으로 (`category: subscription`). 대화 링크는 `review.notes` | `tracking/costs.csv`에 자동 (`category: image_api`), 토큰 수까지 |
+| 약점 | 한도가 들쭉날쭉하고, 크기·품질을 정확히 고정하기 어렵고, 비용·토큰 기록이 자동으로 남지 않는다 (해석) | 키와 선불 결제가 필요하다 (§6-4) |
 
-(근거: 00-master-plan.md §4, 07-automation.md §3)
+(근거: research/image-gen-tech.md §2, §7-1, 운영 결론, 검증 메모 #11)
 
-### 6-2. 키트 설정 (`config.yaml` `image_generation`)
+- 구독료는 결제 화면의 최종 금액으로 적는다. Pro 구성과 가격은 2026-09 이후 여러 번 바뀌었다는 기록이 있다 [주장].
+
+### 6-2. 단가 (2026-10 공개 자료)
+
+**장당 출력 비용: gpt-image-2, 1024×1536 세로** [보도] (여러 사이트가 OpenAI 예시로 같은 수치를 인용)
+
+| 품질 | 장당 | 쓰는 곳 |
+|---|---|---|
+| low | 약 $0.005 | 구도 확인 |
+| medium | 약 $0.041 | API 시안 |
+| high | 약 $0.165 | 확정 컷 (커버, 협찬 납품) |
+
+- 여기에 **기준 사진 입력 비용**이 붙는다. gpt-image-2는 입력 이미지를 항상 고충실도로 처리해 기준 사진마다 이미지 입력 토큰이 꽤 붙는다. 장당 토큰 수의 공식 수치는 찾지 못했다 [미확인]. 실제 값은 응답의 `usage`로 본다 (`costs.csv` `notes`의 `image` 토큰 수).
+- Batch API는 약 50% 싸다는 설명이 일치한다 [보도]. 키트는 Batch를 쓰지 않는다 (키트 동작).
+
+**토큰 단가 (100만 토큰당)**
+
+| 항목 | gpt-image-2 | gpt-image-2.5 (flare·sunburst) |
+|---|---|---|
+| 텍스트 입력 | $5 [보도] | $5 [보도] |
+| 이미지 입력 | $8 [보도] | $8, 캐시 입력 $2 [보도] |
+| 이미지 출력 | $30 [보도] | $30, Batch $15 [보도] |
+
+- 2.5 단가가 gpt-image-2의 **2배라는 설명도 검색됐다** (원문 출처 특정 못 함) [미확인]. OpenAI 가격 페이지에서 두 모델을 나란히 확인한다.
+- 재판매사 가격(Segmind, CometAPI 등)은 기준으로 쓰지 않는다 [주장].
+
+(근거: research/image-gen-tech.md §1-4, 검증 메모 #1·#2)
+
+### 6-3. 키트 설정 (`config.yaml` `image_generation`)
 
 | 설정 | 값 | 운영 |
 |---|---|---|
-| `quality` | `medium` | 시안은 medium. high는 확정 컷에만 |
-| `est_cost_usd` | low 0.02 / medium 0.05 / high 0.17 | **키트 예상치.** 실제 단가가 아님 |
+| `model` | `gpt-image-2` | 기본 모델. 비교 시험은 §6-5 |
+| `size` | `1024x1536` (2:3 세로) | 3:4 시험은 §6-5 |
+| `quality` | `medium` | API 시안은 medium. high는 확정 컷에만 |
+| `token_prices_usd_per_1m` | text_input 5 / image_input 8 / image_output 30 [보도] | 응답의 토큰 수로 실제 금액을 계산해 `costs.csv`에 남긴다 (`notes`: `usage-based`). 결제 전에 OpenAI 가격 페이지에서 한 번 확인 |
+| `est_cost_usd` | low 0.02 / medium 0.05 / high 0.17 | 실행 전 상한 계산용 **예상치**. §6-2 출력 단가보다 높게 잡은 보수적인 값(low 0.02는 약 $0.005의 4배). 응답에 사용량이 없을 때만 이 값으로 기록 (`notes`: `estimate`) |
 | `max_cost_per_run_usd` | 1.00 | 한 번 실행 상한. 넘으면 실행하지 않음. 우선순위: `--max-cost` > `.env`의 `DOHA_MAX_COST_USD` > config |
 | `require_confirmation` | true | 비용이 나기 전에 터미널에서 `y` |
 
+(근거: config.yaml, research/image-gen-tech.md §1-4, 운영 결론)
+
+- **`input_fidelity`**: gpt-image-2는 입력 이미지를 항상 고충실도로 처리하므로 이 값을 보내지 않는다 [확인]. 보내면 오류가 난다는 제3자 문서도 있다 [주장]. 키트는 gpt-image-1 계열 모델에만 `input_fidelity="high"`를 보낸다 (키트 동작). `costs.csv` `notes`에 `input_fidelity=high`가 보이면 1.x 모델로 만든 것이다. (근거: research/image-gen-tech.md §1-2, §1-3, 검증 메모 #4)
 - 상한 $1.00이면 한 번에 medium 약 12장, high 약 5장이다 (기준 사진 3장 포함, 키트 예상치 기준). 넘으면 `--only`로 나눈다.
 - **high는 업스케일이 아니다.** `generate`는 매번 새로 만든다. medium 시안을 high로 다시 만들면 다른 사진이 나오고 QA를 다시 해야 한다. 그래서 high는 처음부터 확정 컷(커버, 협찬 납품)으로 쓸 때만 쓴다. medium이 휴대폰 미리보기에서 충분하면 그대로 승인한다. (운영 규칙)
-- **주간 예상** (가정, 키트 예상치 기준, 모두 API로 만들 때): 주 20장 × 평균 1.5회 = 후보 30장, 모두 medium(기준 사진 포함 장당 약 $0.08) → 약 $2.40/주, 약 ₩3,360 (`fx.usd_krw` 1400). 4주 약 $9.60. 모두 high면 약 2.5배. 실제 단가가 확인되면 다시 계산한다.
 
-### 6-3. 처음 돈을 쓰기 전에
+### 6-4. 처음 돈을 쓰기 전에
 
 - [ ] `.env`에 `OPENAI_API_KEY`. 키는 채팅·문서·커밋에 넣지 않는다. (근거: 00-master-plan.md §4, .env.example)
-- [ ] 선불 결제: 기록상 최소 충전액 $5, 자동 충전이 기본으로 켜질 수 있다. 원치 않으면 끈다. (근거: 00-master-plan.md §4)
-- [ ] 첫 실행은 `--dry-run`, 그다음 한 장만 생성해 실제 사용량을 본다. (근거: 00-master-plan.md §9)
-- [ ] 조직 인증·한도 오류 대응은 brand/prompt-guide.md §6.
+- [ ] **선불 결제는 $10만 넣고, 자동 충전은 끄거나 월 충전 한도를 $20 이하로 둔다** (해석). 키트의 `max_cost_per_run_usd`와 실행 전 `y` 확인이 2차 안전장치다. (근거: research/image-gen-tech.md §1-5, 운영 결론)
+  - 첫 구매는 최소 $5(기본값 $10). 자동 충전도 최소 $5이고 설정 과정에서 **기본으로 켜져 있다**. 잔액 기준선, 충전 후 잔액, 월 충전 한도를 정할 수 있다. 잔액이 0이 되면 API가 결제 오류를 낸다 [확인].
+  - 구매 크레딧은 1년 뒤 만료되고 환불되지 않는다는 도움말이 있다 [확인]. 도움말 작성 시점이 오래됐을 수 있고 검증 검색에서 다시 확인하지 못했다. 충전 화면에서 확인한다.
+- [ ] **사용 등급**: 2026-10-06부터 3단계다. 누적 구매 $5면 Build(월 사용 한도 $500), $100면 Launch($5,000), $500면 Grow($200,000) [확인]. 이 계정의 생산량(주 수십 장)에는 Build면 충분하다 (해석). 분당 이미지 수는 대시보드 Limits에서 본다.
+- [ ] **조직 인증**: OpenAI는 일부 모델에 조직 인증을 요구할 수 있다. 개인 인증에는 지원 국가의 실물 정부 신분증 원본과 카메라가 있는 기기가 필요하다 [확인]. GPT Image 모델이 지금 인증을 요구하는지는 확인하지 못했다 [미확인]. 첫 호출이 인증 오류를 내면 키트가 안내를 출력한다. 대응은 brand/prompt-guide.md §6.
+- [ ] 첫 실행은 `--dry-run`, 그다음 한 장만 생성해 `costs.csv`의 실제 금액과 토큰 수를 본다. (근거: 00-master-plan.md §9)
 
-### 6-4. 기록과 대조
+### 6-5. 시험 두 가지 (선택, API 준비 뒤)
 
-- `generate`는 생성할 때마다 `tracking/costs.csv`에 한 줄을 쓴다. 메모에 `estimate` 또는 `usage-based`가 남는다.
-- 공식 토큰 단가를 `config.yaml` `image_generation.token_prices_usd_per_1m`에 넣으면 응답 사용량으로 계산한다. 없으면 예상치로 적는다. (근거: brand/prompt-guide.md §6)
-- 매달 한 번 OpenAI 사용량 화면과 `costs.csv`의 `image_api` 합계를 비교한다. 차이가 크면 `est_cost_usd`를 고친다. (운영 규칙)
+**① 3:4 크기 (`size: 1152x1536`)**
+
+- 지금 쓰는 1024×1536(2:3)은 인스타 3:4(1080×1440)로 자르면 세로가 약 11% 잘린다 (해석). (근거: research/image-gen-tech.md §1-3)
+- gpt-image-2는 양쪽 변이 16의 배수, 긴 변 3840px 이하, 가로세로 비 3:1 이하, 총 화소 655,360~8,294,400이면 자유 크기를 받는다는 설명이 여러 문서에서 일치한다 [보도]. 공식 가이드는 2560×1440을 넘는 크기를 '실험적'으로 본다 [확인]. 1152×1536은 정확히 3:4다 (해석).
+- 방법: `config.yaml`에서 `size: 1152x1536`으로 바꾸고 1장만 `python doha.py generate <게시물> --only s01 --dry-run` → 실행. 거부되면(400 오류, 키트가 크기 안내를 출력) `1024x1536`으로 되돌린다.
+- 출력 화소가 늘어 장당 비용이 조금 오를 수 있다 (해석). `costs.csv`의 usage 금액으로 비교한다.
+- `prompts` 출력(ChatGPT용 첫 문장, `prompts.md` 권장 크기)은 '2:3 세로' 문구가 고정돼 있다 (키트 동작). 3:4로 정하면 이 문구도 함께 고친다.
+
+**② 모델 비교: gpt-image-2 vs gpt-image-2.5-sunburst**
+
+- gpt-image-2.5-flare(빠른 일반용)와 gpt-image-2.5-sunburst(정밀 편집용)가 2026-09-08 API로 나왔다는 보도가 일치한다 [보도]. 지금 기본 모델을 바꿀 필요는 없다. 다만 얼굴 유지가 핵심이므로 sunburst를 같은 기준 사진·프롬프트로 gpt-image-2와 나란히 만들어 **10장쯤** 비교한 뒤 정한다 (해석). (근거: research/image-gen-tech.md §1-1, 운영 결론)
+- 방법:
+  1. 승인되지 않은 이미지 키나 시험용 게시물로 한다. `--only`로 지정하면 승인된 사진도 다시 만들고 상태가 `generated`로 돌아간다 (키트 동작).
+  2. 예: 키 5개를 gpt-image-2로 만든 뒤 `config.yaml` `model: gpt-image-2.5-sunburst`로 바꿔 같은 키 5개를 다시 만든다(합계 10장). 이전 파일은 `sNN.vN.png`로 보관되고 `costs.csv` `description`에 모델 이름이 남는다 (키트 동작).
+  3. 같은 품질(medium 또는 high)로 비교한다. 2.5에는 `xhigh`·`max` 품질이 있다고 하지만 [보도/주장], 키트 `--quality`는 low·medium·high만 받는다 (키트 동작).
+  4. 기록: 얼굴 일치(§3 #1), 손·옷 결함 수, 장당 실제 금액(usage), 생성 시간. 2.5 단가가 같은지 2배인지 출처가 엇갈리므로 실제 금액으로 비교한다.
+  5. 결과를 시험용 게시물의 `review.notes`에 남기고 `config.yaml` `model`을 정한다.
+- 한 번에 1회 상한($1.00)을 넘으면 `--only`로 나눈다.
+
+### 6-6. 기록과 대조
+
+- `generate`는 생성할 때마다 `tracking/costs.csv`에 한 줄을 쓴다. `notes`에 `usage-based` 또는 `estimate`, 편집 방식(`edit refs=N`), 토큰 수가 남는다.
+- 매달 한 번 OpenAI 사용량 화면과 `costs.csv`의 `image_api` 합계를 비교한다. 차이가 크면 `token_prices_usd_per_1m`을 공식 가격 페이지와 다시 맞춘다. (운영 규칙)
+- 기준 사진 1장당 `image` 토큰 수가 쌓이면 §6-7의 '기준 사진 입력 비용' 가정을 실제 값으로 바꾼다.
+- ChatGPT 구독료는 결제할 때마다 손으로 적는다 (`category: subscription`).
 - 비용은 월 순수익에서 빠진다. `python doha.py metrics` 리포트에 비용 합계가 나온다. (근거: 00-master-plan.md §2)
 
-### 6-5. 아직 모르는 숫자
+### 6-7. 예상 비용 (가정)
 
-- 00-master-plan.md §4는 OpenAI 공식 비용표 기준으로 GPT Image 2 세로 1024×1536 고화질 1장을 약 $0.165로 적었다. 사용자의 원 계획에 있던 기록이다. 다시 확인이 필요하다.
-- low·medium 실제 단가, 입력 토큰 단가, ChatGPT 플랜별 생성 한도, 다른 생성 툴 비교는 추가 조사 예정: docs/research/image-gen-tech.md
+리서치의 계산 가정: 카드뉴스 1건에 사진 5장, 사진마다 시안 3장, 기준 사진 2장, 기준 사진 입력 비용은 생성 1회당 $0.01~0.04 (공식 토큰 수 미확인). 계산은 검증 메모에서 다시 확인됐다. (근거: research/image-gen-tech.md §7-2, 검증 메모)
+
+| 경로 | 게시물 1건 | 언제 |
+|---|---|---|
+| A. 전부 ChatGPT 앱 | 0원 (구독료 별도) | API 준비 전 |
+| B. API 시안만 (medium 15장) | $0.77~1.22 (약 1,100~1,700원) | 앱 한도에 걸릴 때 |
+| C. API 시안 + 확정 (B + high 5장) | $1.64~2.24 (약 2,300~3,100원) | 시안까지 기록이 필요할 때 |
+| **D. 앱 시안 + API 확정 (권장)** | $0.88~1.03 (약 1,200~1,400원) | 기본 |
+
+- 우리 물량(주 약 20장, 02-content-strategy.md §3)을 경로 D로 만들면: 20 × ($0.165 + $0.01~0.04) ≈ **$3.5~4.1/주** (약 4,900~5,700원), 4주 약 $14~16이다 (가정·계산). 여기에 ChatGPT 구독료(Plus 월 29,000원 [주장])가 더해진다.
+- 리서치 판단 (월 12건 기준): API·영상 도구비는 목표 매출(월 500만 원)의 약 1.5% 이하이고, Plus 구독료를 더해도 약 2% 수준이다. 실제 병목은 **검수 시간과 재생성 횟수**다 (해석). 그래서 `review.notes`에 '제작 시간·후보 수'를 남긴다 (§1).
 
 ---
 
 ## 7. 스틸 사진으로 릴스 만들기
 
-### 7-1. 지금: 켄 번스 (`python doha.py reel <게시물>`)
+### 7-1. 기본: 켄 번스 (`python doha.py reel <게시물>`, 0원)
 
 - 장면은 `post.yaml`의 `reel.scenes`에서 온다 (`image`, `layout`, `text`, `seconds`, `motion`).
 - `motion`: `zoom-in` · `zoom-out` · `pan-left` · `pan-right` · `still`. 최대 1.08배로 느리게 움직이고, 장면 사이 0.3초 크로스페이드. 1080×1920, 30fps. (키트 값)
@@ -239,13 +334,33 @@ post.yaml  images.sNN (outfit · prompt · framing)
 - **검수**: 화면 떨림, 글자가 세이프존 안에 있는지, 첫·끝 장면 표시, 커버(`cover.png`)의 그리드 3:4 크롭.
 - 문제를 찾을 때는 `--keep-frames`로 프레임 PNG를 남긴다.
 
-### 7-2. 나중: 이미지→영상 도구
+### 7-2. AI 영상 도구 (협찬·대표 릴스에만)
 
-- 아직 쓰지 않는다. 도구·가격·약관은 추가 조사 예정: docs/research/image-gen-tech.md
-- 쓰게 되면:
-  - 사실적인 영상은 AI 라벨 공개가 의무다 [확인]. (근거: research/ig-platform.md §3-1)
-  - 프레임마다 얼굴·손이 이어지는지 §3 기준으로 본다. 시도 3회 규칙도 같다.
-  - 비용은 `tracking/costs.csv`에 적는다.
+기본 릴스는 키트의 사진 기반 영상(0원)이다. AI 영상은 협찬·대표 릴스에만 쓴다. (해석) (근거: research/image-gen-tech.md §7-1, 운영 결론)
+
+| 도구 | 1080p 단가 (초당) | 상태·조건 | 신뢰도 |
+|---|---|---|---|
+| Sora 2 / Sora 2 Pro (API) | — | **2026-09-24 API 종료**(2026-03-24 예고, 공식 대체 모델 없음). Sora 웹·앱은 2026-04-26 종료. 후보에서 뺀다 | [보도] |
+| Kling 3.0 API | 무음 $0.112, 소리 포함 $0.168 | $0.07, $0.0896(재판매사)로 적은 출처도 있다. 공식 가격 페이지 미확인 | [주장] |
+| Kling 3.0 구독 | 크레딧제 | 무료 등급은 워터마크가 붙고 상업 이용 불가 | [주장] |
+| Veo 3.1 Lite | $0.08 (소리 포함) | 4K 없음. OpenRouter는 무음 $0.05로 표기 [주장] | [보도] |
+| Veo 3.1 Fast | $0.12 | 8초 1080p 약 $0.96 | [주장] |
+| Veo 3.1 표준 | $0.40 | 무료 등급 없음 | [주장] |
+| Runway Gen-4.5 | 약 $0.29 (Standard $15 ÷ 625크레딧 × 12크레딧, 계산) | 무료는 워터마크. 상업 이용 조건 미확인 | [주장] |
+
+(근거: research/image-gen-tech.md §4, 검증 메모 #7~#9)
+
+**릴스 1편에 AI 영상 2컷 × 2번 시도 (가정)**: Kling 3.0 API 무음 5초 컷 $2.24 (약 3,100원) · Veo 3.1 Lite 8초 컷 $2.56 (약 3,600원) · Veo 3.1 Fast 8초 컷 $3.84 (약 5,400원). (근거: research/image-gen-tech.md §7-2)
+
+**쓰게 되면**
+
+- 4~5초, 동작 1개(돌아서기, 두 걸음, 재킷 여미기), **승인된 확정 사진 1장을 첫 프레임**으로 쓴다. 클립이 길고 움직임이 클수록 얼굴이 바뀔 위험이 커진다 (해석).
+- 음원은 앱에서 넣으므로 **무음 요금**으로 충분하다 (해석).
+- 사실적인 영상은 AI 라벨 공개가 의무다 [확인]. (근거: research/ig-platform.md §3-1)
+- 프레임마다 §3 기준으로 본다. 영상에서 흔한 결함: 프레임 사이 얼굴 변화, 옷 색 변화, 발 미끄러짐, 손가락 녹아내림 (해석) (근거: research/image-gen-tech.md §5-3). 시도 3회 규칙도 같다.
+- 워터마크가 붙거나 상업 이용이 안 되는 무료 등급 결과물은 게시하지 않는다 (해석).
+- 비용은 `tracking/costs.csv`에 손으로 적는다 (`provider`에 도구 이름, `description`에 초 수·해상도).
+- 아직 모르는 것: Veo 영상의 SynthID·C2PA 포함 여부, 기준 이미지 입력 장수, 세로 9:16 단가, 패션(원단 움직임·걷기)에 어느 도구가 나은지 [미확인].
 
 ---
 
@@ -253,9 +368,11 @@ post.yaml  images.sNN (outfit · prompt · framing)
 
 ### 8-1. 메타데이터·워터마크
 
+- ChatGPT·Codex·OpenAI API로 만든 이미지에는 **C2PA 메타데이터와 SynthID 워터마크**가 함께 들어간다 (2026-05-19~20 발표) [확인]. Gemini 이미지에도 SynthID와 C2PA가 들어간다 [확인]. (근거: research/image-gen-tech.md §1-6, §3-1)
+- 편집·변환·공유 과정에서 메타데이터는 지워질 수 있다. SynthID는 이미지 자체에 들어가 일부 변형 뒤에도 남을 수 있다 [확인]. (근거: research/image-gen-tech.md §1-6)
 - Meta는 C2PA·IPTC 같은 업계 AI 신호를 감지하거나 게시자가 밝히면 'AI 정보' 라벨을 붙인다 [확인]. 생성 도구가 넣은 메타데이터로 자동 라벨이 붙는 것은 정상이다. (근거: research/ig-platform.md §3-1, §3-3)
-- **원본은 받은 그대로 둔다.** `images/`의 원본을 다른 앱에서 다시 저장·압축하거나 화면 캡처로 대신하지 않는다. AI 툴이 넣은 워터마크·메타데이터를 지우지 않는다 (해석). 정부가 이용자의 AI 표시 제거·변조 금지를 정보통신망법 개정으로 추진 중이지만 아직 법이 아니고 시행일도 없다 [보도]. (근거: research/kr-compliance.md §2, §3)
-- 키트의 렌더 결과(`out/slides`, `reel.mp4`)는 브라우저·ffmpeg로 새로 만든 파일이다. 원본 메타데이터가 이어진다고 보지 않는다 (확인 필요). 자동 라벨에 기대지 말고 **앱에서 직접 'AI 정보' 라벨을 켠다.** (근거: research/ig-platform.md §3-1 "자동 라벨이 없다고 공개 의무가 사라지지 않음", 운영 결론)
+- **원본은 받은 그대로 둔다.** `images/`의 생성 원본(C2PA·SynthID 포함)을 다른 앱에서 다시 저장·압축하거나 화면 캡처로 대신하지 않는다. AI 툴이 넣은 워터마크·메타데이터를 지우지 않는다 (해석). 정부가 이용자의 AI 표시 제거·변조 금지를 정보통신망법 개정으로 추진 중이지만 아직 법이 아니고 시행일도 없다 [보도]. (근거: research/kr-compliance.md §2, §3)
+- 키트의 렌더 결과(`out/slides`, `reel.mp4`)는 사진 위에 글자를 얹어 브라우저·ffmpeg로 새로 만든 파일이다. C2PA는 최종 슬라이드에 남지 않을 가능성이 크고, 그러면 자동 'AI 정보' 라벨이 안 붙을 수 있다 (해석) (근거: research/image-gen-tech.md §1-6). 실제 파일로 확인하기 전까지 자동 라벨에 기대지 말고 **게시할 때마다 앱에서 직접 'AI 정보' 라벨을 켠다.** (근거: research/ig-platform.md §3-1 "자동 라벨이 없다고 공개 의무가 사라지지 않음", 운영 결론)
 
 ### 8-2. 게시할 때 표시 (모든 게시물)
 
@@ -263,7 +380,7 @@ post.yaml  images.sNN (outfit · prompt · framing)
 |---|---|---|
 | 프로필 | 'AI 생성 프로필' 라벨, 소개 첫 줄 `bio_line` | research/ig-platform.md §3-2 [보도], 운영 결론 |
 | 게시물 | 'AI 정보' 라벨. 릴스는 반드시 [확인], 카드뉴스도 기본값 | research/ig-platform.md §3-1, 운영 결론 |
-| 이미지 안 | 'AI 가상인물' 배지를 도하 가까이 (렌더러 자동). 협찬 게시물은 의무 [확인], 일반 게시물은 기본값 (해석) | research/kr-compliance.md §1-5 |
+| 이미지 안 | 'AI 가상인물' 배지를 도하 가까이 (렌더러 자동). 협찬 게시물은 '가상인물' 표시가 의무 [확인]. 사진·카드뉴스의 위치 기준은 [미확인]이라 영상 기준(인물 가까이)을 따른다 (해석). 일반 게시물은 기본값 (해석) | research/kr-compliance.md §1-5, research/ig-platform.md 검증 메모 #4 |
 | 캡션 | `caption_footer` (`preview` 자동) | brand/doha.yaml `disclosure` |
 | 대체 텍스트 | "AI로 만든 가상 스타일리스트 도하가 …" | `check` 주의 항목 |
 | 협찬·제휴 | 3중 표시 + 가상인물 고지 + AI 합성 제품 안내(`product_image_note`) | 04-compliance-checklist.md §3~5 |
@@ -274,20 +391,31 @@ post.yaml  images.sNN (outfit · prompt · framing)
 
 - **얼굴**: §2-1 규칙. 생성 과정 기록(프롬프트, 편집 이력, 대화 링크)은 분쟁 때 독자적으로 만들었다는 증거가 된다 (해석). (근거: research/kr-compliance.md §5-1)
 - **저작권**: AI가 기계적으로 만든 결과물은 저작물로 등록할 수 없다. 사람의 창작적 기여가 있어야 하고, 작업 기록이 심사에 중요하다 [보도]. 기획·문구·편집·배열은 사람이 하고 `post.yaml`·`review.notes`·대화 링크로 남긴다. (근거: research/kr-compliance.md §5-2)
-- **툴 약관**: 상업적 이용 조건과 산출물 권리 귀속은 툴마다 다르다 [미확인]. 추가 조사 예정: docs/research/image-gen-tech.md
+- **툴 약관** (근거: research/image-gen-tech.md §2, §6, 운영 결론, 검증 메모 #10)
+  - OpenAI 이용 정책(2025-10-29 개정): 기만·사기·스팸·사칭 금지. 동의 없이 실존 인물의 실사 이미지를 진위를 혼동시키는 방식으로 쓰는 것도 금지한다 [확인].
+  - **ChatGPT(개인 사용)**: 이용약관(Terms of Use, 2026-01-01 시행)은 사람이 만들지 않은 출력물을 사람이 만든 것처럼 표시하는 것을 금지한다 [확인]. 이 약관에서도 출력물 권리가 이용자에게 넘어온다는 설명은 제3자 요약뿐이다 [주장].
+  - **API**: 이용약관이 아니라 별도의 서비스 계약(Services Agreement, 2026-01-01 시행)이 적용된다. 법이 허용하는 범위에서 고객이 출력물을 소유하고 OpenAI가 권리를 고객에게 넘긴다 [확인]. 이 계약에 '사람이 만든 것처럼 표시 금지' 조항이 같은 문구로 있는지는 확인하지 못했다 [미확인]. 기만·사칭 금지 이용 정책은 양쪽에 적용된다.
+  - 그래서 **도하를 사람처럼 소개하지 않는다.** 프로필·캡션·이미지에 AI 가상인물임을 밝히는 현재 원칙이 약관과도 맞는다 (해석).
+  - ChatGPT 구독 경로라서 상업 이용이 따로 막힌다는 근거는 찾지 못했다 [미확인].
+  - Gemini API: 업무·사업 목적의 개발자용이다. Google은 생성물 소유권을 주장하지 않고, 같거나 비슷한 결과를 다른 사람에게도 만들 수 있으며, 사용 책임은 이용자에게 있다 [확인]. 기준 사진은 유료 등급에서만 넣는다 (§2-4).
+  - Kling 무료 등급은 상업 이용 불가 [주장]. Midjourney·Higgsfield·FLUX의 상업 이용 조건은 쓰기로 할 때 공식 약관을 확인한다 [미확인].
 - **실존 브랜드·인물**: 프롬프트에 브랜드명·실존 인물 이름을 쓰지 않는다. 협찬 제품도 이름 대신 색·소재·실루엣으로 묘사한다. (근거: brand/prompt-guide.md §3)
-- **협찬 결과물 권리**: 원본 파일과 캐릭터(도하) 권리는 운영자에게 두고, 브랜드에는 이용 허락만 준다 (해석). (근거: research/sponsorship-kr.md §5-2)
+- **협찬 결과물 권리**: 원본 파일과 캐릭터(도하) 권리는 운영자에게 두고, 브랜드에는 이용 허락만 준다 (해석). (근거: research/sponsorship-kr.md §5-2) 순수 AI 생성 이미지는 저작권 보호를 받지 못할 수 있으므로, 사용권은 저작권 양도가 아니라 **계약상 이용 허락**(기간·매체·지역)으로 문서화한다 (해석, 법률 확인 필요). (근거: research/image-gen-tech.md §6-3)
 
 ---
 
 ## 확인 필요
 
-1. 이미지 모델의 실제 단가(low·medium·high, 입력 토큰)와 `est_cost_usd` 값. 추가 조사 예정: docs/research/image-gen-tech.md
-2. ChatGPT 플랜별 이미지 생성 한도. 추가 조사 예정: docs/research/image-gen-tech.md
-3. ChatGPT 앱·API로 만든 이미지에 C2PA 메타데이터가 들어가는지, 내려받은 뒤에도 남는지.
-4. 키트 렌더 결과(`out/slides/*.png`, `reel.mp4`)에 원본 메타데이터가 남는지. 실제 파일로 확인.
-5. 이미지·영상 생성 툴의 상업 이용 약관과 산출물 권리. 추가 조사 예정: docs/research/image-gen-tech.md
-6. 이미지→영상 도구 후보와 가격. 추가 조사 예정: docs/research/image-gen-tech.md
-7. 앱 게시 화면에서 'AI 정보' 라벨 토글 위치 (04-compliance-checklist.md와 같은 항목).
-8. 역이미지 검색에 쓸 도구.
-9. 얼굴은 안 보이고 몸·손만 크게 나오는 `detail` 컷에도 '가상인물' 표시가 필요한지 (공정위 지침 원문의 '인물과 가까운 위치' 해석, research/kr-compliance.md 남은 확인 사항).
+1. **OpenAI 가격 페이지**: gpt-image-2와 gpt-image-2.5의 토큰 단가가 같은지(2배라는 설명이 있음), 크기·품질별 공식 단가. 확인한 값으로 `token_prices_usd_per_1m`을 맞춘다. (research/image-gen-tech.md 남은 확인 사항)
+2. **실제 응답의 `usage`**: 기준 사진 1장당 `image` 토큰 수. 이 값으로 §6-7의 기준 사진 입력 비용 가정($0.01~0.04)을 고친다.
+3. **API 파라미터 실측**: `size: 1152x1536` 허용 여부, `n` 상한, `images.edit`에 넣을 수 있는 기준 사진 최대 장수.
+4. **OpenAI Platform 대시보드**: GPT Image 모델 호출에 조직 인증이 필요한지, 현재 등급의 분당 이미지 한도.
+5. **선불 크레딧 만료·환불 조건** (1년 만료·환불 불가라는 도움말은 검증 검색에서 다시 확인하지 못함). 충전 화면에서 확인.
+6. **ChatGPT 앱**: 현재 플랜의 이미지 한도 안내, 결제 화면의 원화 구독료(블로그 기준 Go 13,000원·Plus 29,000원), 크레딧 추가 구매 여부, 앱 이미지 기능이 'ChatGPT Images 2.5'로 바뀌었는지.
+7. 키트 렌더 결과(`out/slides/*.png`, `reel.mp4`)에 C2PA가 남는지, 렌더된 슬라이드에 'AI 정보' 라벨이 자동으로 붙는지. 실제 파일과 테스트 게시(비공개 등)로 확인.
+8. **OpenAI 약관 원문**(openai.com/policies): 2026-01-01 시행 이용약관의 출력물(Output) 소유권 조항, API용 서비스 계약에 '사람이 만든 것처럼 표시 금지' 조항이 있는지.
+9. **영상 도구 공식 페이지**: Kling(API 1080p 무음 단가, 유료 플랜의 상업 이용·워터마크), Veo 3.1(무음 단가, 세로 9:16 단가, 기준 이미지 입력, SynthID 포함 여부), Runway(상업 이용 조건). AI 영상을 쓰기로 할 때.
+10. **Google AI Studio** (Gemini를 쓸 때만): 현재 이미지 모델 ID와 공식 가격, 한국에서 유료 등급 사용 가능 여부.
+11. 앱 게시 화면에서 'AI 정보' 라벨 토글 위치 (04-compliance-checklist.md와 같은 항목).
+12. 역이미지 검색에 쓸 도구.
+13. 얼굴은 안 보이고 몸·손만 크게 나오는 `detail` 컷에도 '가상인물' 표시가 필요한지 (공정위 지침 원문의 '인물과 가까운 위치' 해석, research/kr-compliance.md 남은 확인 사항).
