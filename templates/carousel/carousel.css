@@ -80,6 +80,8 @@ b { font-weight: inherit; }
 .badge-right .ai-badge--corner { left: auto; right: var(--m); }
 .badge-center .ai-badge--corner { left: 50%; transform: translateX(-50%); }
 .ai-badge--mini { position: absolute; left: 18px; bottom: 18px; height: 40px; padding: 0 16px 0 14px; font-size: 21px; gap: 8px; }
+.ai-badge--mini.at-right { left: auto; right: 18px; }
+.ai-badge--mini.at-center { left: 50%; transform: translateX(-50%); }
 
 /* ───────── 사진 / 자리표시 ───────── */
 .photo { position: absolute; inset: 0; margin: 0; overflow: hidden; background: #DCD2C5; z-index: 0; }
@@ -371,9 +373,10 @@ b { font-weight: inherit; }
   font-family: var(--sans); font-weight: 400; font-size: calc(27px * var(--k, 1)); line-height: 1.45; letter-spacing: -0.01em;
 }
 .pd-facts .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; position: relative; top: -0.24em; }
-.pd-notes { margin-top: auto; padding-top: calc(22px * var(--k, 1)); display: flex; flex-direction: column; gap: 6px; }
-.pd-source, .pd-ai-note { font-family: var(--sans); font-weight: 400; font-size: calc(21px * var(--k, 1)); line-height: 1.5; color: var(--muted); letter-spacing: -0.005em; }
-.pd-source { font-weight: 500; color: var(--ink-soft); }
+/* 출처·AI 합성 안내는 법적 고지라 글자 맞춤(--k)으로 줄이지 않는다: 1080px 기준 26px ≈ 휴대폰 9pt, 대비 8:1 이상 */
+.pd-notes { margin-top: auto; padding-top: 22px; display: flex; flex-direction: column; gap: 6px; }
+.pd-source, .pd-ai-note { font-family: var(--sans); font-weight: 500; font-size: 26px; line-height: 1.45; color: var(--ink-soft); letter-spacing: -0.01em; }
+.pd-source { font-weight: 600; }
 
 /* ───────── cta ───────── */
 .cta { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--ink); color: var(--paper); overflow: hidden; }

@@ -3,6 +3,6 @@ playwright>=1.47
 jinja2>=3.1
 pyyaml>=6.0
 # 이미지 생성 (선택: OpenAI API 키가 있을 때만 사용)
-openai>=1.60
+openai>=1.97          # images.edit 의 input_fidelity (1.97.0부터)
 # 이미지 후처리
-pillow>=10.0
+pillow>=10.1          # ImageFont.load_default(size)

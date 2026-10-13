@@ -16,16 +16,17 @@ API로 받을 수 없는 값(평균 시청 시간 등)은 비워 두고 앱 인�
 """
 from __future__ import annotations
 
+import functools
 import json
 import os
-import re
+import ssl
 import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from doha.core import ROOT, append_csv, list_posts, load_config, read_csv
+from doha.core import ROOT, append_csv, list_posts, load_config, read_csv, shortcode
 
 API_HOST = "https://graph.instagram.com"
 KST = timezone(timedelta(hours=9))
@@ -52,7 +53,6 @@ CHECKPOINTS = [  # (이름, 최소 경과, 최대 경과)
     ("7d", timedelta(days=6), timedelta(days=14)),
     ("30d", timedelta(days=28), timedelta(days=60)),
 ]
-SHORTCODE_RE = re.compile(r"/(?:p|reel|reels|tv)/([A-Za-z0-9_-]+)")
 
 
 def add_arguments(parser) -> None:
@@ -61,13 +61,6 @@ def add_arguments(parser) -> None:
     parser.add_argument("--checkpoint", choices=["24h", "7d", "30d"], help="경과 시간과 상관없이 이 시점 이름으로 기록")
     parser.add_argument("--followers", action="store_true", help="팔로워 수도 tracking/followers.csv 에 기록")
     parser.add_argument("--mock-file", help="(테스트용) API 대신 읽을 JSON 파일")
-
-
-def shortcode(url: str | None) -> str | None:
-    if not url:
-        return None
-    m = SHORTCODE_RE.search(url)
-    return m.group(1) if m else None
 
 
 def post_index() -> dict[str, tuple[str, str]]:
@@ -82,6 +75,26 @@ def post_index() -> dict[str, tuple[str, str]]:
         if sc := shortcode(posted.get("reel_url")):
             index[sc] = (post.id, "reel")
     return index
+
+
+@functools.cache
+def _ssl_context() -> ssl.SSLContext:
+    """HTTPS 인증서 확인용. python.org 설치판 macOS Python 은 'Install Certificates.command' 전에는 CA 목록이 비어 있다.
+
+    운영체제 인증서 저장소(truststore, openai SDK 의존성) → 기본값 + certifi 순으로 쓴다. 둘 다 없으면 기본값.
+    """
+    try:
+        import truststore
+        return truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    except ImportError:
+        pass
+    ctx = ssl.create_default_context()
+    try:
+        import certifi
+        ctx.load_verify_locations(certifi.where())
+    except ImportError:
+        pass
+    return ctx
 
 
 class Api:
@@ -103,7 +116,7 @@ class Api:
         query = urllib.parse.urlencode({**params, "access_token": self.token})
         req = urllib.request.Request(f"{base}/{path.lstrip('/')}?{query}")
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=30, context=_ssl_context()) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             try:
@@ -164,11 +177,22 @@ def run(args) -> int:
                           limit=str(args.limit))
     except ApiError as e:
         print(f"Instagram API 요청 실패: {e}")
-        print("토큰 만료(60일), 권한(instagram_business_basic, instagram_business_manage_insights), 프로페셔널 계정 여부를 확인하세요.")
+        if "CERTIFICATE_VERIFY_FAILED" in str(e):
+            print("인증서 확인 실패예요. macOS python.org 설치판이면 '/Applications/Python 3.x/Install Certificates.command' 를 "
+                  "한 번 실행하세요. 회사·학교 네트워크라면 보안 프록시 인증서 때문일 수 있어요.")
+        else:
+            print("토큰 만료(60일), 권한(instagram_business_basic, instagram_business_manage_insights), 프로페셔널 계정 여부를 확인하세요.")
         return 1
 
     index = post_index()
-    existing = {(r["post_id"], r["checkpoint"], r["format"]) for r in read_csv(tracking / "metrics.csv")}
+    existing = set()
+    for r in read_csv(tracking / "metrics.csv"):
+        pid = (r.get("post_id") or "").strip()
+        fmt = (r.get("format") or "").strip().lower()
+        # 손으로 'ig:숏코드' 로 적은 줄도 post.yaml 에 그 주소가 있으면 같은 게시물 (metrics 와 같은 규칙)
+        if pid.startswith("ig:") and pid[3:] in index:
+            pid, fmt = index[pid[3:]][0], fmt or index[pid[3:]][1]
+        existing.add((pid, (r.get("checkpoint") or "").strip().lower(), fmt))
     written = 0
     for media in listing.get("data", []):
         sc = shortcode(media.get("permalink"))

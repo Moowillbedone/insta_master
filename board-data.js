@@ -1,7 +1,7 @@
 /* 자동 생성 파일: python doha.py board — 직접 고치지 마세요. 원본은 content/, tracking/, outreach/ */
 window.DOHA_DATA = {
  "version": 1,
- "generated_at": "2026-10-13T12:08:45+09:00",
+ "generated_at": "2026-10-13T13:04:00+09:00",
  "account": {
   "handle": "doha.dailyfit",
   "display_name": "도하 | AI 스타일리스트",
@@ -957,7 +957,7 @@ window.DOHA_DATA = {
    "pillar": "아이템가이드",
    "format": "carousel",
    "goal": "save",
-   "hook": "세일 전에 옷장부터 확인해요",
+   "hook": "세일 전에 옷장부터, 출근 기본템 8가지",
    "disclosure": {
     "ai_persona": true,
     "paid": false,
@@ -1028,7 +1028,7 @@ window.DOHA_DATA = {
    "pillar": "상황별",
    "format": "reel",
    "goal": "reach",
-   "hook": "퇴근 후 약속룩 30초 변신",
+   "hook": "퇴근 후 약속, 옷 안 갈아입어도 돼요",
    "disclosure": {
     "ai_persona": true,
     "paid": false,

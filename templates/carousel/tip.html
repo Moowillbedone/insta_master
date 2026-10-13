@@ -2,7 +2,7 @@
 {% import "_partials/carousel_ui.html" as ui %}
 {% block content %}
 <div class="tip{{ ' tip--photo' if photo }}">
-  {{ ui.topbar(c, 'light') }}
+  {{ ui.topbar(c, 'light', pill) }}
   <section class="tip-body" data-fit="TIP 본문">
     <div class="sp-top"></div>
     <div class="tip-head">
@@ -10,7 +10,7 @@
       {% if photo %}
       <div class="tip-photo">
         {{ ui.photo(photo, '', '50%', true) }}
-        {% if photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--mini') }}{% endif %}
+        {% if photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--mini at-' ~ badge_pos) }}{% endif %}
       </div>
       {% endif %}
     </div>

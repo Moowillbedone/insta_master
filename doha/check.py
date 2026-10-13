@@ -20,11 +20,13 @@ from doha.core import (
     ROOT,
     Post,
     disclosure_label,
+    has_person,
     load_config,
     load_persona,
     posts_root,
     resolve_post,
 )
+from doha.reel import planned_seconds
 
 # 레이아웃별 필수 항목 (렌더러가 빈칸으로 그리면 안 되는 것)
 SLIDE_REQUIRED: dict[str, list[str]] = {
@@ -36,6 +38,7 @@ SLIDE_REQUIRED: dict[str, list[str]] = {
     "product": ["product"],
     "cta": ["title"],
 }
+TEXT_LISTS = ("items", "checks", "bullets")   # 슬라이드의 글자 목록 칸 (look · checklist · tip)
 SCENE_REQUIRED: dict[str, list[str]] = {
     "reel-hook": ["text"],
     "reel-look": ["image", "text"],
@@ -49,10 +52,13 @@ PILLARS = {"돌려입기", "컬러공식", "비율", "상황별", "아이템가�
 GOALS = {"save", "share", "follow", "click", "reach"}
 FRAMINGS = {"full-body", "three-quarter", "waist-up", "detail", "flatlay"}
 IMAGE_STATUSES = {"todo", "generated", "approved", "rejected"}
+BADGE_POSITIONS = {"left", "center", "right"}
 
 REEL_SECONDS = (5.0, 90.0)
 CAPTION_LIMIT = 2200
-FEED_LINE_UNITS = 30            # 피드 캡션 한 줄 폭 (text_width 기준, 390pt 화면 근사)
+# 피드 캡션 한 줄 폭 (text_width 기준). preview.html 휴대폰(390pt 화면, 14px)에서 실측하면 한 줄이 약 29,
+# 휴대폰 틀이 꽉 찬 366px 일 때 약 31. 화면이 작은 기기도 생각해 조금 좁게 잡는다.
+FEED_LINE_UNITS = 27
 SLIDES_RANGE = (3, 20)          # 앱 업로드 캐러셀 최대 20장
 PRODUCT_STALE_DAYS = (14, 30)   # (주의, 오류)
 POST_TIME_RANGE = ("05:00", "23:59")
@@ -64,12 +70,19 @@ FABRICATED = [
     "직접 착용", "직접 사용", "직접 입어", "직접 써", "직접 신어", "직접 발라",
     "실착 후기", "실착해", "솔직 후기", "착용 후기", "사용 후기", "리얼 후기", "찐후기",
     "한 달 사용", "써본 결과", "입어본 결과",
+    "샀어요", "샀습니다", "구매했어요", "구매했습니다", "구입했어요", "구입했습니다",
+]
+# 위 목록의 활용형 (공백을 지운 문장에 적용). 독자에게 권하는 '입어 보고 고르세요' 는 잡지 않는다
+FABRICATED_RE = [
+    re.compile(r"(?:입어|써|신어|발라|먹어|걸쳐|사용해|착용해)(?:보니|봤|본결과|본느낌|본후기|보고반|보고느[끼낀꼈])"),
+    re.compile(r"제가(?:입었|입어|입은|신었|신어|신은|썼|써본|발랐|발라|착용|사용해|사용했)"),
 ]
 # 의학·효능 주장 → 오류 (옷·잡화 계정이 근거 없이 쓰면 표시광고법·의료 광고 문제)
 MEDICAL = [
     "치료", "개선 효과", "다이어트 효과", "피부 재생", "의학적", "의약", "질병", "완치", "효능",
-    "체지방", "지방 분해", "셀룰라이트", "디톡스", "독소 배출", "살이 빠", "붓기 제거", "부기 제거",
-    "혈액순환", "통증 완화", "탈모", "주름 개선", "미백 효과", "항균 효과", "면역",
+    "체지방", "지방 분해", "셀룰라이트", "디톡스", "독소 배출", "살이 빠", "붓기", "부기",
+    "혈액순환", "통증", "탈모", "주름 개선", "미백 효과", "항균", "살균", "면역",
+    "피부 진정", "진정 효과", "진정에 도움",
 ]
 # 과장 표현 → 상품·협찬 맥락에서 주의
 EXAGGERATION = [
@@ -80,6 +93,8 @@ EXAGGERATION = [
 BODY_SHAMING = ["뚱뚱", "하체비만", "팔뚝살", "뱃살", "살쪄 보", "코끼리 다리", "통통", "다이어트", "군살"]
 # 표시 플래그가 꺼져 있는데 대가를 암시하는 말
 SPONSOR_WORDS = ["광고", "협찬", "유료 파트너십", "제공받", "지원받", "체험단"]
+# 문서 예시를 그대로 옮긴 브랜드명 (docs/04 의 "{브랜드명}" 등) → 표시 라벨에 그대로 찍히면 안 됨
+PLACEHOLDER_NAMES = {"브랜드", "브랜드명", "브랜드a", "상품명", "brand", "xxx", "ㅇㅇ", "○○"}
 
 # 텍스트 검사에서 건너뛰는 키 (파일·식별자·숫자)
 _TEXT_SKIP_KEYS = {"layout", "image", "product", "motion", "seconds", "file", "id",
@@ -104,10 +119,23 @@ def _norm(s: str) -> str:
     return re.sub(r"\s+", "", unicodedata.normalize("NFC", s))
 
 
-def find_phrases(text: str, phrases: list[str]) -> list[str]:
-    """공백을 무시하고 포함된 표현 목록 ('입어 보니'도 '입어보니'로 잡음)."""
+def find_phrases(text: str, phrases: list[str], patterns: list[re.Pattern] | None = None) -> list[str]:
+    """공백을 무시하고 포함된 표현 목록 ('입어 보니'도 '입어보니'로 잡음). patterns 는 공백을 지운 문장에 적용."""
     n = _norm(text)
-    return [p for p in phrases if _norm(p) in n]
+    found = [p for p in phrases if _norm(p) in n]
+    taken = [(m.start(), m.end()) for p in found for m in re.finditer(re.escape(_norm(p)), n)]
+    for pat in patterns or []:
+        for m in pat.finditer(n):
+            if not any(m.start() < e and s < m.end() for s, e in taken):   # 이미 잡은 표현과 겹치면 한 번만
+                found.append(m.group(0))
+                taken.append(m.span())
+    return found
+
+
+def is_placeholder(text: str) -> bool:
+    """'TODO', '{브랜드명}', '브랜드' 처럼 아직 채우지 않은 값."""
+    t = str(text or "").strip()
+    return bool(t) and ("TODO" in t.upper() or any(ch in t for ch in "{}<>") or t.lower() in PLACEHOLDER_NAMES)
 
 
 def text_width(s: str) -> float:
@@ -159,13 +187,15 @@ def post_format(data: dict) -> tuple[bool, bool]:
     return fmt in ("carousel", "both"), fmt in ("reel", "both")
 
 
-def reel_seconds(data: dict) -> float:
-    total = 0.0
+def reel_seconds(data: dict, config: dict | None = None) -> float:
+    """릴스 예상 길이(초). 장면 seconds 합계에서 크로스페이드로 겹치는 만큼 뺀다 (reel.py 와 같은 프레임 계산)."""
+    secs = []
     for sc in _list(_dict(data.get("reel")).get("scenes")):
         s = _dict(sc).get("seconds")
         if isinstance(s, (int, float)) and not isinstance(s, bool) and s > 0:
-            total += float(s)
-    return total
+            secs.append(float(s))
+    fps = int(_dict(_dict((config or load_config()).get("canvas")).get("reel")).get("fps") or 30)
+    return planned_seconds(secs, fps)
 
 
 class _Ctx:
@@ -246,6 +276,19 @@ def _disclosure(c: _Ctx) -> None:
         kind = "광고" if c.flags["paid"] else "협찬"
         c.error("disclosure.brand_missing", "disclosure.brand",
                 f"{kind} 표시에는 대가를 준 브랜드명이 필요해요 (예: '{kind} · 브랜드명').")
+    elif is_placeholder(brand):
+        c.error("disclosure.brand_placeholder", "disclosure.brand",
+                f"브랜드명이 아직 자리표시예요: '{brand}'. 커버·캡션 표시에 그대로 찍히니 실제 브랜드명을 적어주세요.")
+    if not any(c.flags.values()):
+        # brand 는 '대가를 준 브랜드' 칸이라 플래그 없이 적혀 있으면 표시가 빠진 광고일 가능성이 크다
+        if brand:
+            c.error("disclosure.brand_flag", "disclosure.brand",
+                    f"brand '{brand}' 가 적혀 있는데 paid/gifted/affiliate 가 모두 false 예요. "
+                    "대가(원고료·무상 제품·제휴 수수료)를 받았으면 해당 플래그를 켜고, 아니면 brand 를 비워주세요.")
+        if c.products:
+            c.warn("disclosure.products_flag", "products",
+                   "상품(products)이 있는데 paid/gifted/affiliate 가 모두 false 라 커버·상품 슬라이드·캡션에 광고 표시가 안 들어가요. "
+                   "원고료·무상 제품·제휴 수수료 중 하나라도 있으면 켜고, 대가 없이 고른 상품이면 그대로 두세요.")
     if any(c.flags.values()) and not disclosure_label(c.d, c.persona):
         c.error("disclosure.label_empty", "brand/doha.yaml disclosure.labels",
                 "표시 플래그가 켜져 있는데 표시 문구가 비어 있어요. 페르소나 파일의 labels 를 확인하세요.")
@@ -277,20 +320,28 @@ def _caption(c: _Ctx) -> None:
         expected = f"[{label}]" if label else ""
         # 소비자가 알아볼 단어가 첫 줄에 있어야 한다 (라벨 설정이 비어 '[ · 브랜드]'가 되는 경우도 잡음)
         keywords = ["광고"] if c.flags["paid"] else ["협찬", "광고"] if c.flags["gifted"] else ["광고", "제휴", "수수료"]
-        fold = caption_fold(caption)
+        # '더 보기' 전에 보이는 부분은 줄바꿈 수가 아니라 화면 폭으로 계산한다 (첫 줄 앞에 아이디가 붙음)
+        fold = caption_fold(caption, str(c.persona.get("handle") or ""))
         if (not label or not first_line.startswith(expected) or expected not in fold
                 or not any(k in first_line for k in keywords)):
             c.error("disclosure.caption_first_line", "caption",
                     f"캡션 첫 줄(더 보기 전)에 '{'/'.join(keywords)}' 표시가 보이지 않아요. 지금 첫 줄: {first_line[:40]!r}")
         # 공정위 지침(2026-06-01): 광고에 AI 가상인물이 나오면 글의 첫 부분에 '가상인물' 표시
         if "가상인물" not in fold.replace(" ", ""):
-            c.error("disclosure.virtual_notice", "caption",
-                    "광고·협찬·제휴 게시물은 캡션 첫 부분에 '가상인물' 고지가 있어야 해요 "
-                    "(brand/doha.yaml disclosure.ad_virtual_notice 또는 캡션 첫 줄).")
-        # 피드 첫 줄은 '아이디 + 표시 줄'. 두 줄을 넘기면 고지 끝부분이 '더 보기' 뒤로 밀린다
-        if text_width(f"{c.persona.get('handle', '')} {first_line}") > FEED_LINE_UNITS * 2:
+            if "가상인물" in first_line.replace(" ", ""):
+                c.error("disclosure.virtual_notice", "caption",
+                        f"첫 줄의 '가상인물' 고지가 휴대폰 화면에서 '더 보기' 뒤로 밀려요 (보이는 끝: '…{fold[-20:]}'). "
+                        "표시 라벨(브랜드명 등)을 짧게 줄여주세요.")
+            else:
+                c.error("disclosure.virtual_notice", "caption",
+                        "광고·협찬·제휴 게시물은 캡션 첫 부분에 '가상인물' 고지가 있어야 해요 "
+                        "(brand/doha.yaml disclosure.ad_virtual_notice 또는 캡션 첫 줄).")
+        elif first_line.strip() not in fold:
             c.warn("caption.fold", "caption",
-                   "표시·고지 줄이 길어 휴대폰에서 끝부분이 '더 보기' 뒤로 밀릴 수 있어요. preview 로 확인하세요.")
+                   "표시·고지 줄 끝부분이 휴대폰에서 '더 보기' 뒤로 밀릴 수 있어요 ('가상인물'까지는 보여요). preview 로 확인하세요.")
+        if c.flags["affiliate"] and "수수료" not in caption:
+            c.error("disclosure.affiliate_notice", "brand/doha.yaml disclosure.affiliate_notice",
+                    "제휴 링크 게시물인데 캡션에 '링크로 구매하시면 수수료를 받습니다' 같은 수수료 문장이 없어요.")
     pdisc = _dict(c.persona.get("disclosure"))
     footer = str(pdisc.get("caption_footer") or "").strip()
     if not footer or footer not in caption:
@@ -321,6 +372,13 @@ def _caption(c: _Ctx) -> None:
 
     raw = d.get("hashtags")
     raw_list = raw if isinstance(raw, list) else ([] if raw is None else [raw])
+    # YAML 블록 목록의 '- #출근룩' 은 # 뒤가 주석이 되어 빈 값(None), '- yes' 는 True 가 된다 (캡션에 '#None' 으로 찍힘)
+    odd = [t for t in raw_list if t is None or isinstance(t, bool)]
+    if odd:
+        c.error("hashtags.invalid", "hashtags",
+                f"해시태그 목록에 빈 값·yes/no 가 있어요 ({', '.join(map(repr, odd))}). '- #출근룩' 처럼 #로 시작하면 "
+                "주석으로 읽혀 사라져요 — # 를 빼거나 따옴표로 감싸주세요 (예: - 출근룩, - \"#출근룩\").")
+        raw_list = [t for t in raw_list if not (t is None or isinstance(t, bool))]
     tags = normalize_hashtags(raw_list)
     max_tags = int(_dict(c.config.get("publishing")).get("max_hashtags") or 5)
     if len(tags) > max_tags:
@@ -368,8 +426,23 @@ def _slides(c: _Ctx) -> None:
                 sd = s.get(side)
                 if isinstance(sd, dict) and _empty(sd.get("image")) and _empty(sd.get("caption")):
                     missing.append(f"{side}.image/caption")
+                elif not _empty(sd) and not isinstance(sd, dict):
+                    c.error("layout.required", f"{where}.{side}",
+                            f"{side} 는 {{image, label, caption}} 형식이어야 해요 "
+                            f"(예: {side}: {{ image: s03, label: \"A\", caption: \"…\" }}). 지금: {sd!r}")
         if missing:
             c.error("layout.required", where, f"{layout} 레이아웃에 필요한 항목이 비어 있어요: {', '.join(missing)}")
+        # 목록 칸에 글자를 그대로 쓰면 렌더러가 한 글자씩 항목으로 찍는다
+        for key in TEXT_LISTS:
+            v = s.get(key)
+            if v is None:
+                continue
+            if not isinstance(v, list):
+                c.error("layout.list", f"{where}.{key}",
+                        f"{key} 는 목록이어야 해요 (예: {key}: [\"…\", \"…\"]). 지금: {str(v)[:30]!r}")
+            elif bad := [str(j) for j, x in enumerate(v, 1) if not isinstance(x, str) or not x.strip()]:
+                c.error("layout.list", f"{where}.{key}",
+                        f"{', '.join(bad)}번째 항목이 비었거나 글자가 아니에요 (숫자·yes/no 는 따옴표로 감싸주세요).")
         if layout == "product" and s.get("product") and str(s.get("product")) not in product_ids:
             c.error("product.unknown", f"{where}.product", f"products 에 id '{s.get('product')}' 상품이 없어요.")
         _slide_text_length(c, where, layout, s)
@@ -419,7 +492,7 @@ def _reel(c: _Ctx) -> None:
         motion = sc.get("motion")
         if motion is not None and motion not in MOTIONS:
             c.error("layout.unknown", f"{where}.motion", f"알 수 없는 motion {motion!r} ({' | '.join(sorted(MOTIONS))})")
-    total = reel_seconds(c.d)
+    total = reel_seconds(c.d, c.config)   # 크로스페이드 겹침을 뺀 실제 길이
     lo, hi = REEL_SECONDS
     if not (lo <= total <= hi):
         c.error("reel.duration", "reel.scenes", f"릴스 총 길이 {total:.1f}초 — {lo:.0f}–{hi:.0f}초 안으로 맞춰주세요.")
@@ -472,6 +545,8 @@ def _images(c: _Ctx) -> None:
             not_ok.append(k)
         if spec.get("framing") and spec.get("framing") not in FRAMINGS:
             c.warn("image.framing", f"images.{k}.framing", f"알 수 없는 framing {spec.get('framing')!r}")
+        if "person" in spec and not isinstance(spec.get("person"), bool):
+            c.warn("image.person", f"images.{k}.person", f"person 은 따옴표 없이 true/false 로 적어주세요: {spec.get('person')!r}")
         if any("TODO" in str(spec.get(f) or "") for f in ("prompt", "outfit")):
             todo_prompts.append(k)
     if rejected:
@@ -480,6 +555,40 @@ def _images(c: _Ctx) -> None:
         c.warn("image.not_approved", "images", f"게시물은 approved 인데 승인되지 않은 사진이 있어요: {', '.join(not_ok)}")
     if todo_prompts:
         c.warn("image.todo", "images", f"사진 프롬프트·의상 묘사에 TODO 가 남아 있어요: {', '.join(todo_prompts)}")
+
+
+def _badges(c: _Ctx) -> None:
+    """'AI 가상인물' 배지 위치. 광고·협찬·제휴 게시물은 사진·영상에서 인물 가까이 표시가 의무라 사람이 정하게 한다."""
+    images = _dict(c.d.get("images"))
+    unset: list[str] = []
+
+    def see(where: str, holder: dict, key, fallback=None) -> None:
+        pos = holder.get("badge_position", fallback)
+        if pos is not None and pos not in BADGE_POSITIONS:
+            c.warn("layout.badge_position", f"{where}.badge_position",
+                   f"badge_position 은 {' | '.join(sorted(BADGE_POSITIONS))} 중 하나예요: {pos!r}")
+        elif pos is None and key and has_person(_dict(images.get(str(key)))):
+            unset.append(where)
+
+    if c.has_carousel:
+        for i, s in enumerate(c.slides(), 1):
+            where = f"slides[{i:02d}]"
+            if s.get("layout") == "compare":   # 비교 슬라이드는 칸마다 (없으면 슬라이드 값)
+                see(where, s, None)
+                fallback = s.get("badge_position") if s.get("badge_position") in BADGE_POSITIONS else None
+                for side in ("left", "right"):
+                    sd = _dict(s.get(side))
+                    see(f"{where}.{side}", sd, sd.get("image"), fallback)
+            else:
+                see(where, s, s.get("image"))
+    if c.has_reel:
+        for i, sc in enumerate(c.scenes(), 1):
+            see(f"reel.scenes[{i}]", sc, sc.get("image") if sc.get("layout") != "reel-text" else None)
+    if unset and any(c.flags.values()):
+        shown = ", ".join(unset[:6]) + (f" 외 {len(unset) - 6}곳" if len(unset) > 6 else "")
+        c.warn("disclosure.badge_position", shown,
+               "광고·협찬·제휴 게시물은 'AI 가상인물' 배지를 사진 속 도하 가까이 둬야 해요. "
+               "사진을 보고 인물 쪽으로 badge_position(left | center | right)을 정해 주세요 (안 정하면 왼쪽).")
 
 
 def _products(c: _Ctx) -> None:
@@ -498,6 +607,11 @@ def _products(c: _Ctx) -> None:
         missing = [f for f in ("brand", "name") if _empty(p.get(f))]
         if missing:
             c.error("product.fields", where, f"상품 정보가 비어 있어요: {', '.join(missing)}")
+        # TODO 는 text.todo 가 잡는다. 여기서는 문서 예시('{브랜드명}' 등)를 그대로 둔 경우
+        holders = [f"{f}: {p.get(f)}" for f in ("brand", "name")
+                   if is_placeholder(p.get(f)) and "TODO" not in str(p.get(f)).upper()]
+        if holders:
+            c.error("product.fields", where, f"상품 정보가 아직 자리표시예요 ({', '.join(holders)}). 실제 값으로 바꿔주세요.")
         url = str(p.get("source_url") or "").strip()
         if not url:
             c.error("product.source", f"{where}.source_url", "상품 사실 정보의 출처(공식 페이지 source_url)가 없어요.")
@@ -543,6 +657,8 @@ def _texts(c: _Ctx) -> None:
 
     walk("hook", c.d.get("hook"), c.sponsored)
     walk("caption", c.d.get("caption"), c.sponsored)
+    walk("hashtags", c.d.get("hashtags"), c.sponsored)   # 캡션 마지막 줄로 게시됨
+    walk("series", c.d.get("series"), c.sponsored)       # 커버 kicker·릴스 첫 장면에 찍힘
     walk("alt_text", c.d.get("alt_text"), False)
     if c.has_carousel:
         for i, s in enumerate(c.slides(), 1):
@@ -555,7 +671,7 @@ def _texts(c: _Ctx) -> None:
 
     todos: list[str] = []
     for where, text, product_ctx in items:
-        if found := find_phrases(text, FABRICATED):
+        if found := find_phrases(text, FABRICATED, FABRICATED_RE):
             c.error("text.experience", where,
                     f"체험을 지어낸 표현 '{', '.join(found)}' — 도하는 가상 인물이라 실제로 입거나 쓸 수 없어요. "
                     "스타일링 제안 문장으로 바꿔주세요 (예: '~하면 ~해 보여요').")
@@ -590,7 +706,7 @@ def _misc(c: _Ctx) -> None:
             c.warn("review.unsigned", "review.approved_by", "status 가 approved 인데 검수자(review.approved_by)가 비어 있어요.")
 
 
-SECTIONS = (_meta, _disclosure, _caption, _slides, _reel, _images, _products, _texts, _misc)
+SECTIONS = (_meta, _disclosure, _caption, _slides, _reel, _images, _badges, _products, _texts, _misc)
 
 
 def check_post(post: Post | str | Path, persona: dict | None = None, config: dict | None = None) -> list[Issue]:

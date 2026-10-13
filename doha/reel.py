@@ -8,6 +8,8 @@
 """
 from __future__ import annotations
 
+import os
+import re
 import shlex
 import shutil
 import subprocess
@@ -16,11 +18,11 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-from doha.core import Post, load_config, load_persona, resolve_post, short_disclosure_label, skip_if_legacy
+from doha.core import Post, has_person, load_config, load_persona, resolve_post, short_disclosure_label, skip_if_legacy
 
 LAYOUTS = ("reel-hook", "reel-look", "reel-text", "reel-end")
 MOTIONS = ("zoom-in", "zoom-out", "pan-left", "pan-right", "still")
-NO_PERSON_FRAMINGS = {"flatlay", "detail"}
+BADGE_POSITIONS = ("left", "center", "right")   # 장면의 badge_position: 'AI 가상인물' 배지를 인물 쪽으로
 
 MARGIN = 72                 # 왼쪽 여백 (안전 영역 60보다 안쪽)
 TOP_Y = 268                 # 상단 표시 줄: 릴스 상단 UI(220) 아래이면서 그리드 3:4 크롭(위 240) 안쪽
@@ -63,6 +65,23 @@ class Scene:
 
 # ---------- 장면 계획 ----------
 
+def scene_frames(seconds: float, fps: int) -> int:
+    return max(2, round(seconds * fps))
+
+
+def crossfade_frames(frames: list[int], fps: int) -> int:
+    """장면 사이 크로스페이드 길이(프레임). 가장 짧은 장면의 1/3 을 넘지 않는다."""
+    return min(round(XFADE_SEC * fps), min(frames) // 3) if len(frames) > 1 else 0
+
+
+def planned_seconds(seconds: list[float], fps: int) -> float:
+    """장면 길이(초) 목록 → 실제 영상 길이(초). 크로스페이드로 겹치는 만큼 합계보다 짧다 (check·preview 가 씀)."""
+    frames = [scene_frames(s, fps) for s in seconds]
+    if not frames:
+        return 0.0
+    return (sum(frames) - crossfade_frames(frames, fps) * (len(frames) - 1)) / fps
+
+
 def plan_scenes(post: Post, fps: int) -> list[Scene]:
     scenes_raw = ((post.data.get("reel") or {}).get("scenes")) or []
     if not scenes_raw:
@@ -93,11 +112,11 @@ def plan_scenes(post: Post, fps: int) -> list[Scene]:
             mode = "window"
         else:
             mode = "bleed"
-        # 프레이밍을 모르면 인물로 본다 (표시를 빠뜨리는 쪽보다 붙이는 쪽이 안전)
-        person = mode != "paper" and spec.get("framing") not in NO_PERSON_FRAMINGS
+        # flatlay 가 아니면 인물로 본다 (detail 도 도하의 손·허리). 표시를 빠뜨리는 쪽보다 붙이는 쪽이 안전
+        person = mode != "paper" and has_person(spec)
         scenes.append(Scene(
             i=i, data=d, layout=layout, motion=motion if mode != "paper" else "still",
-            frames=max(2, round(sec * fps)), key=key, photo=post.image_path(key) if key else None,
+            frames=scene_frames(sec, fps), key=key, photo=post.image_path(key) if key else None,
             spec=spec, mode=mode, person=person,
         ))
     return scenes
@@ -245,6 +264,7 @@ def render_overlays(post: Post, scenes: list[Scene], work: Path, cfg: dict, pers
             text_html=_text_html(s.data.get("text") or (post.data.get("hook") if s.i == 0 else "")),
             label=s.data.get("label") or "",
             ai_badge=persona["disclosure"]["slide_badge"] if s.person else "",
+            badge_pos=s.data.get("badge_position") if s.data.get("badge_position") in BADGE_POSITIONS else "left",
             # 광고 표시는 끌 수 없다: 첫 장면은 크게, 나머지는 작게 계속
             disc_big=disc if s.i == 0 else "", disc_small=disc if s.i > 0 else "",
             hook_top=HOOK_TOP, hook_max_h=440,   # 헤드라인이 y≈920 안에서 끝나도록 (인물 얼굴·자리표시 라벨 위)
@@ -331,7 +351,7 @@ def build_ffmpeg_cmd(scenes: list[Scene], out: Path, fps: int, W: int, H: int, p
             )
 
     # 크로스페이드: 장면 k 는 (앞 장면 프레임 합 - k*겹침) 에서 시작. 정수 프레임으로 계산해 누적 오차 없음
-    xf = min(round(XFADE_SEC * fps), min(s.frames for s in scenes) // 3) if len(scenes) > 1 else 0
+    xf = crossfade_frames([s.frames for s in scenes], fps)
     cur, total = "v0", scenes[0].frames
     for s in scenes[1:]:
         offset = (total - xf) / fps
@@ -364,6 +384,17 @@ def build_ffmpeg_cmd(scenes: list[Scene], out: Path, fps: int, W: int, H: int, p
     return cmd, total
 
 
+def cmd_text(cmd: list[str]) -> str:
+    """frames/ffmpeg-cmd.txt 에 남기는 한 줄 명령 (붙여넣어 다시 실행하며 디버그용).
+
+    macOS·Linux 는 셸 따옴표(shlex). Windows 는 cmd·PowerShell 어디에 붙여넣어도 되게 특수문자가 있는 인자만
+    큰따옴표로 감싼다 (필터 그래프의 ; ' , 를 두 셸 모두 글자 그대로 넘긴다. shlex 의 '"'"' 는 POSIX 셸 전용).
+    """
+    if os.name != "nt":
+        return shlex.join(cmd)
+    return " ".join(a if re.fullmatch(r"[\w.:=+/\\-]+", a) else f'"{a}"' for a in cmd)
+
+
 def _resolve_audio(post: Post) -> Path | None:
     ref = (post.data.get("reel") or {}).get("audio")
     if not ref:
@@ -384,7 +415,8 @@ def make_reel(post: Post | str, keep_frames: bool = False) -> Path:
     if not isinstance(post, Post):
         post = resolve_post(post)
     if not shutil.which("ffmpeg"):
-        raise SystemExit("ffmpeg 가 필요해요. (macOS: brew install ffmpeg / Ubuntu: sudo apt install ffmpeg)")
+        raise SystemExit("ffmpeg 가 필요해요. (macOS: brew install ffmpeg / Windows: winget install ffmpeg → 새 터미널에서 "
+                         "다시 실행 / Ubuntu: sudo apt install ffmpeg)")
     started = time.monotonic()
     cfg = load_config()
     persona = load_persona(cfg)
@@ -420,12 +452,12 @@ def make_reel(post: Post | str, keep_frames: bool = False) -> Path:
     tmp = out_dir / "reel.tmp.mp4"
     cmd, total = build_ffmpeg_cmd(scenes, tmp, fps, W, H, paper, _resolve_audio(post))
     if keep_frames:
-        (work / "ffmpeg-cmd.txt").write_text(shlex.join(cmd), encoding="utf-8")
+        (work / "ffmpeg-cmd.txt").write_text(cmd_text(cmd), encoding="utf-8")
     print(f"ffmpeg 합성 중… ({total / fps:.2f}초, {total}프레임)")
     proc = subprocess.run(cmd)
     if proc.returncode != 0:
         tmp.unlink(missing_ok=True)
-        (work / "ffmpeg-cmd.txt").write_text(shlex.join(cmd), encoding="utf-8")
+        (work / "ffmpeg-cmd.txt").write_text(cmd_text(cmd), encoding="utf-8")
         raise SystemExit(f"ffmpeg 실패 (코드 {proc.returncode}). 중간 파일과 명령: {work}")
     tmp.replace(out)
     if not keep_frames:

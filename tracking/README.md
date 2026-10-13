@@ -36,7 +36,7 @@
 
 | 열 | 뜻 | 앱에서 찾는 곳 (대략) |
 |---|---|---|
-| `post_id` | `post.yaml` 의 `id` (= 폴더 이름). post.yaml 이 없는 옛 게시물은 `ig:숏코드` | 게시물 주소 `instagram.com/p/<숏코드>/` 의 숏코드. 예: 10/12 첫 묶음 릴스 `ig:DeYxr6HCn-c`, 카드뉴스 `ig:DeYxcWMEUx8` |
+| `post_id` | `post.yaml` 의 `id` (= 폴더 이름). 10/12 첫 묶음도 post.yaml 이 있어서 카드뉴스·릴스 모두 `2026-10-12-first-drop-vector` (format 으로 구분). post.yaml 이 **없는** 게시물만 `ig:숏코드` | 게시물 주소 `instagram.com/p/<숏코드>/` 의 숏코드. `ig:숏코드` 로 적어도 그 주소가 어떤 post.yaml 의 `posted.url`·`reel_url` 에 있으면 리포트가 그 게시물로 묶어요 |
 | `checkpoint` | `24h` · `7d` · `30d` 중 하나 | — |
 | `recorded_at` | 기록한 시각 (`2026-10-16T08:00+09:00` 또는 `2026-10-16`) | — |
 | `format` | `carousel`(카드뉴스) 또는 `reel`(릴스) | — |

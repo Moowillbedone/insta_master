@@ -20,11 +20,27 @@ AI 가상 스타일리스트 **도하** 계정을 키우고 브랜드 협찬·�
 
 ## 2. 처음 한 번 설치
 
+먼저 이 폴더에 가상환경을 만들고 켭니다. 새 터미널을 열 때마다 켜는 줄만 다시 실행하세요.
+
+```bash
+# macOS (터미널) — 기본으로는 python 명령이 없고 python3 만 있어요
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Windows (PowerShell 또는 cmd)
+py -m venv .venv
+.venv\Scripts\activate
+#   PowerShell 에서 '스크립트를 실행할 수 없으므로' 가 나오면 한 번만:
+#   Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+가상환경을 켠 뒤에는 macOS·Windows 모두 `python` 으로 실행합니다.
+
 ```bash
 python -m pip install -r requirements.txt
 python -m playwright install chromium     # 카드뉴스·미디어킷 렌더링용 브라우저
-# ffmpeg 필요 (릴스): macOS `brew install ffmpeg` / Windows `winget install ffmpeg`
-cp .env.example .env                      # API를 쓸 때만. 키는 .env에만 두고 채팅에 붙여넣지 않기
+# ffmpeg 필요 (릴스): macOS `brew install ffmpeg` / Windows `winget install ffmpeg` (설치 뒤 새 터미널을 열어야 인식)
+cp .env.example .env                      # API를 쓸 때만 (Windows cmd 는 copy .env.example .env). 키는 .env에만 두고 채팅에 붙여넣지 않기
 ```
 
 ## 3. 게시물 하나 만들기

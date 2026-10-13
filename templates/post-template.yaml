@@ -16,13 +16,13 @@ disclosure:
   ai_persona: true     # 항상 true (끄면 check 실패)
   paid: false          # 금전 대가 → 캡션 첫 줄 '[광고 · 브랜드]'
   gifted: false        # 무상 제품 → '[협찬 · 브랜드]'
-  affiliate: false     # 제휴 링크·코드 수수료 → '제휴 링크 포함' (products 에 link 가 있으면 true)
-  brand: ""            # paid/gifted 면 필수
+  affiliate: false     # 제휴 링크·코드 수수료 → '[광고 · 제휴 링크]' + 수수료 문장 (products 에 link 가 있으면 true)
+  brand: ""            # paid/gifted 면 필수. 대가가 없으면 비워 두기 (적혀 있는데 플래그가 다 false 면 check 실패)
 
 images:                # 장면 묘사만 영어로. 얼굴·촬영 스타일은 brand/doha.yaml 에서 자동으로 붙어요
   s01:
     file: images/s01.png
-    framing: full-body   # full-body | three-quarter | waist-up | detail | flatlay
+    framing: full-body   # full-body | three-quarter | waist-up | detail | flatlay (flatlay 만 인물 없음. 제품만 찍은 detail 은 person: false)
     status: todo         # todo | generated | approved | rejected
     outfit: >-
       TODO: 커버 의상 (색·소재·핏을 구체적으로)

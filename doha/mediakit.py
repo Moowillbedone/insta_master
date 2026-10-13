@@ -26,7 +26,8 @@ import re
 import statistics
 from datetime import date, datetime
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import urlparse
+from urllib.request import url2pathname
 
 from doha.core import (
     ROOT,
@@ -39,6 +40,7 @@ from doha.core import (
     read_csv,
     short_disclosure_label,
 )
+from doha.metrics import load_metrics
 
 CHECKPOINT = "7d"
 MIN_POSTS = 3          # 이보다 적으면 비율·중앙값이 우연에 크게 흔들려서 싣지 않는다
@@ -254,7 +256,8 @@ def collect_performance(data_dir: Path, posts: list[Post], today: date | None = 
     by_id = {p.id: p for p in posts}
 
     units: dict[tuple[str, str], dict] = {}
-    for r in read_csv(data_dir / "metrics.csv"):
+    # metrics 리포트와 같은 읽기 규칙 (BOM·CP949, 숫자 쉼표, 'ig:숏코드' → 게시물 id)
+    for r in load_metrics(data_dir):
         if (r.get("checkpoint") or "").strip() != CHECKPOINT:
             continue
         reach = _num(r.get("reach"))
@@ -541,7 +544,8 @@ def _embed_fonts(html: str) -> str:
     def repl(m: re.Match) -> str:
         if (m.group(1), int(m.group(2))) not in EMBED_FACES:
             return ""
-        path = Path(unquote(urlparse(m.group(3)).path))
+        # url2pathname: Windows 의 '/C:/Users/…' 를 'C:\Users\…' 로 (그냥 unquote 하면 없는 경로가 돼 글꼴이 빠진다)
+        path = Path(url2pathname(urlparse(m.group(3)).path))
         if not path.exists():
             return m.group(0)
         uri = "data:font/woff2;base64," + base64.b64encode(path.read_bytes()).decode()

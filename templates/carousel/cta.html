@@ -5,7 +5,7 @@
   {% if photo %}
   <div class="cta-photo">
     {{ ui.photo(photo, '', '56%') }}
-    <div class="scrim scrim--bar on-{{ tone_top }}"></div>
+    <div class="scrim scrim--bar{{ ' scrim--pill' if pill }} on-{{ tone_top }}"></div>
     {% if photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--corner') }}{% endif %}
   </div>
   {% endif %}
@@ -23,6 +23,6 @@
     </div>
     {% if ai_footer %}<p class="cta-ai">{{ ai_footer }}</p>{% endif %}
   </section>
-  {{ ui.topbar(c, tone_top if photo else 'dark') }}
+  {{ ui.topbar(c, tone_top if photo else 'dark', pill) }}
 </div>
 {% endblock %}

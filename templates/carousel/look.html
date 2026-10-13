@@ -4,7 +4,7 @@
 <div class="look" data-fit="LOOK 패널">
   <div class="look-photo">
     {{ ui.photo(photo, '', '54%') }}
-    <div class="scrim scrim--bar on-{{ tone_top }}"></div>
+    <div class="scrim scrim--bar{{ ' scrim--pill' if pill }} on-{{ tone_top }}"></div>
     {% if photo and photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--corner') }}{% endif %}
   </div>
   <section class="look-panel">
@@ -21,6 +21,6 @@
     {% endif %}
     {% if tip %}<p class="look-tip"><span class="tip-mark"></span><span>{{ tip|rich }}</span></p>{% endif %}
   </section>
-  {{ ui.topbar(c, tone_top) }}
+  {{ ui.topbar(c, tone_top, pill) }}
 </div>
 {% endblock %}

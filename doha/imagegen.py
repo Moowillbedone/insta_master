@@ -21,7 +21,7 @@ from pathlib import Path
 
 import yaml
 
-from doha.core import ROOT, Post, append_csv, load_config, load_persona, resolve_post, skip_if_legacy
+from doha.core import ROOT, Post, append_csv, has_person, load_config, load_persona, resolve_post, skip_if_legacy
 
 COST_FIELDS = ["date", "category", "provider", "description", "post_id",
                "amount_usd", "amount_krw", "quantity", "notes"]
@@ -58,12 +58,6 @@ PERSON_ONLY_NEGATIVE = re.compile(r"finger|hand|skin|makeup", re.I)
 
 def _clean(text: object) -> str:
     return " ".join(str(text or "").split()).strip().rstrip(".")
-
-
-def has_person(spec: dict) -> bool:
-    if "person" in spec:
-        return bool(spec["person"])
-    return spec.get("framing") != "flatlay"
 
 
 def face_references(persona: dict) -> tuple[list[Path], list[str]]:

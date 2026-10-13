@@ -5,7 +5,7 @@
   {% if photo %}
   <div class="strip">
     {{ ui.photo(photo, '', '58%', true) }}
-    <div class="scrim scrim--bar on-{{ tone_top }}"></div>
+    <div class="scrim scrim--bar{{ ' scrim--pill' if pill }} on-{{ tone_top }}"></div>
     {% if photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--corner') }}{% endif %}
   </div>
   {% endif %}
@@ -19,6 +19,6 @@
     <p class="cl-note">{{ ui.bookmark() }}{{ note }}</p>
     {% endif %}
   </section>
-  {{ ui.topbar(c, tone_top) }}
+  {{ ui.topbar(c, tone_top, pill) }}
 </div>
 {% endblock %}

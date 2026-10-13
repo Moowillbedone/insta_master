@@ -12,7 +12,7 @@
   content/posts/*/post.yaml  series·pillar·format·goal·hook 을 post_id 로 붙임
 
 다른 모듈용 함수 (모두 data_dir=None 이면 실제 tracking/ 을 읽음):
-  load_metrics(data_dir)          metrics.csv 행 목록 (숫자 열은 int/float, 빈 칸은 None)
+  load_metrics(data_dir)          metrics.csv 행 목록 (숫자 열은 int/float, 빈 칸은 None, 'ig:숏코드' → 게시물 id)
   post_rates(metrics, meta, ...)  게시물(카드뉴스·릴스 각각)별 대표 기록 1줄 + 비율 + 상위/하위 표시
   summarize(month, data_dir)      리포트에 들어가는 값 전체 (JSON 직렬화 가능한 dict)
 """
@@ -30,7 +30,7 @@ from pathlib import Path
 
 import yaml
 
-from doha.core import ROOT, load_config, load_yaml
+from doha.core import ROOT, load_config, load_yaml, shortcode
 
 KST = timezone(timedelta(hours=9))
 MONTH_RE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
@@ -212,19 +212,24 @@ def _load_post_meta(data_dir=None) -> tuple[dict[str, dict], list[str]]:
         if not isinstance(data, dict):
             continue
         disc = data.get("disclosure") or {}
+        posted = data.get("posted") if isinstance(data.get("posted"), dict) else {}
         pid = str(data.get("id") or d.name)
+        fmt = str(data.get("format") or "").strip().lower()
         meta[pid] = {
             "post_id": pid,
             "date": str(data.get("date") or ""),
             "series": str(data.get("series") or "").strip(),
             "pillar": str(data.get("pillar") or "").strip(),
-            "format": str(data.get("format") or "").strip().lower(),
+            "format": fmt,
             "goal": str(data.get("goal") or "").strip().lower(),
             "hook": " ".join(str(data.get("hook") or "").split()),
             "paid": bool(disc.get("paid")),
             "gifted": bool(disc.get("gifted")),
             "affiliate": bool(disc.get("affiliate")),
             "brand": str(disc.get("brand") or ""),
+            # posted.url · reel_url 의 숏코드 → 형식 (insights.post_index 와 같은 규칙)
+            "shortcodes": {sc: f for sc, f in ((shortcode(posted.get("url")), "reel" if fmt == "reel" else "carousel"),
+                                               (shortcode(posted.get("reel_url")), "reel")) if sc},
         }
         if d.name != pid:  # 폴더 이름으로 적어도 찾게
             meta.setdefault(d.name, meta[pid])
@@ -236,14 +241,22 @@ def load_post_meta(data_dir=None) -> dict[str, dict]:
     return _load_post_meta(data_dir)[0]
 
 
-def load_metrics(data_dir=None) -> list[dict]:
+def load_metrics(data_dir=None, meta: dict | None = None) -> list[dict]:
     """tracking/metrics.csv → 행 목록.
 
     숫자 열(reach, views, … completion_rate)은 int/float, 빈 칸은 None.
     checkpoint·format 은 소문자. `_line` 은 CSV 줄 번호, `_invalid` 는 숫자로 못 읽은 열 이름.
+    post_id 'ig:숏코드' 는 그 주소가 post.yaml(posted.url·reel_url)에 있으면 그 게시물 id 로 바꾼다
+    (같은 게시물이 두 번 세어지지 않게. 원래 값은 `_ig`). meta 를 안 주면 게시물 폴더에서 읽는다.
     """
+    meta = load_post_meta(data_dir) if meta is None else meta
+    aliases = {f"ig:{sc}": (m["post_id"], f) for m in meta.values() for sc, f in (m.get("shortcodes") or {}).items()}
     rows = []
     for row in _read_rows(tracking_dir(data_dir) / "metrics.csv"):
+        if row.get("post_id") in aliases:
+            row["_ig"] = row["post_id"]
+            row["post_id"], fmt = aliases[row["_ig"]]
+            row["format"] = row.get("format") or fmt
         invalid = []
         for col in COUNT_COLS + FLOAT_COLS:
             text = row.get(col, "")
@@ -316,8 +329,8 @@ def post_rates(metrics: list[dict] | None = None, meta: dict | None = None, *, d
       중앙값은 같은 형식 게시물이 3개 이상이면 그 형식끼리 (릴스는 저장률이 원래 낮아서),
       도달(goal=reach)은 같은 형식·같은 시점끼리 3개 이상일 때만 비교한다.
     """
-    metrics = load_metrics(data_dir) if metrics is None else metrics
     meta = load_post_meta(data_dir) if meta is None else meta
+    metrics = load_metrics(data_dir, meta) if metrics is None else metrics
     grouped: dict[tuple[str, str], dict[str, dict]] = defaultdict(dict)
     for row in metrics:
         if row.get("checkpoint") not in prefer or not row.get("post_id"):
@@ -407,17 +420,24 @@ def recommend(groups: list[dict], overall: dict, dim_ko: str, metric: str = "sav
     where = f"{scope} " if scope else ""
     if not named:
         return f"{dim_ko} 정보가 있는 {where}기록이 아직 없어요."
-    if len(eligible) >= 2 and overall.get(metric):
+    if len(eligible) >= 2 and overall.get(metric) is not None:
         best = max(eligible, key=lambda g: g[metric])
         if best[metric] > overall[metric]:
             return (f"다음 2주는 {best['name']} 비중을 늘리세요 ({where}{label} 중앙값 {_pct(best[metric])} vs 전체 "
                     f"{_pct(overall[metric])}, 게시물 {best['n_rated']}개 — 표본이 작으니 2주 뒤 다시 확인).")
+        if not best[metric]:   # 기준이 0%: 모든 그룹이 0이라 '뚜렷이 높은' 비교가 의미 없다
+            return (f"{where}게시물이 2개 이상인 {dim_ko} 모두 {_j(label, '이가')} 0%예요. 아직 비교할 차이가 없으니 "
+                    "지금 비중을 유지하고 기록을 더 모으세요.")
         return (f"{where}전체보다 {_j(label, '이가')} 뚜렷이 높은 {_j(dim_ko, '이가')} 아직 없어요. "
                 "지금 비중을 유지하고 기록을 더 모으세요.")
     if len(named) == 1:
         return (f"{where}{_j(dim_ko, '이가')} '{named[0]['name']}' 하나뿐이라 비교할 수 없어요. "
                 f"실험: 다음 2주에 새 {dim_ko} 하나를 {where}2편 이상 올려 {_j(label, '을를')} 비교하세요.")
     thin = [g["name"] for g in named if g["n_rated"] < MIN_GROUP]
+    if not thin:   # 게시물 수는 충분한데 비율의 분자 열이 비어 있음
+        col = RATES[metric][0] if metric in RATES else metric
+        return (f"{where}{_j(label, '을를')} 계산할 값이 비어 있어 {dim_ko}끼리 비교할 수 없어요. "
+                f"metrics.csv 의 {col} 열을 채우세요.")
     return (f"{dim_ko}마다 {where}게시물이 2개 이상 있어야 비교할 수 있어요. 실험: 다음 2주에 "
             f"{_j(', '.join(thin[:3]), '을를')} 각각 {where}2편 이상 올려 {_j(label, '을를')} 비교하세요.")
 
@@ -675,7 +695,7 @@ def summarize(month: str | None = None, data_dir=None, today: date | None = None
     config = load_config()
     folder = tracking_dir(data_dir)
     meta, meta_errors = _load_post_meta(data_dir)
-    metrics = load_metrics(data_dir)
+    metrics = load_metrics(data_dir, meta)
     revenue = load_revenue(data_dir)
     costs = load_costs(data_dir, config)
     rates = post_rates(metrics, meta)

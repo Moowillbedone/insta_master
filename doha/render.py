@@ -9,16 +9,21 @@
   tone: light | dark          사진 위 글자 색 강제 (기본은 사진 밝기로 자동)
   text_position: top | bottom cover 제목 위치 (기본 top — 사진 위쪽 1/3을 비워 두는 촬영 규칙)
   badge_position: left | center | right   'AI 가상인물' 배지 위치 — 인물이 한쪽에 치우친 사진이면 인물 쪽으로
+                                          (compare 는 left/right 칸마다 따로 적을 수 있음)
   title (compare), note (checklist)
+
+광고·협찬·제휴 게시물은 1번 슬라이드가 cover 가 아니어도 상단 바에 표시(예: '광고 · 브랜드')를 붙인다.
 """
 from __future__ import annotations
 
 import re
 import sys
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from doha.core import (
     Post,
+    has_person,
     launch_browser,
     load_config,
     load_persona,
@@ -27,12 +32,15 @@ from doha.core import (
     skip_if_legacy,
 )
 
+if TYPE_CHECKING:
+    from markupsafe import Markup
+
 LAYOUTS = ("cover", "look", "tip", "compare", "checklist", "product", "cta")
 SIZES = {"3x4": "carousel", "4x5": "carousel_fallback"}
 
 # 사진 영역이 캔버스 높이에서 차지하는 비율. 템플릿 CSS와 밝기 계산이 같은 값을 쓴다.
 PHOTO_FRAC = {"look": 0.68, "checklist": 0.40, "product": 0.54, "cta": 0.46}
-NON_PERSON_FRAMINGS = {"flatlay", "detail"}
+BADGE_POSITIONS = ("left", "center", "right")
 # 프레이밍별 기본 자르기 기준점: 세로 2:3 원본을 가로로 넓은 칸에 넣을 때 얼굴·상체가 남도록
 DEFAULT_FOCUS = {"full-body": "50% 38%", "three-quarter": "50% 22%", "waist-up": "50% 25%"}
 
@@ -140,8 +148,8 @@ def _photo(post: Post, key: str | None, focus=None) -> dict | None:
         "path": path,
         "src": file_uri(path) if path else None,
         "framing": framing or "photo",
-        # 프레이밍을 모르면 인물로 간주 (AI 표시를 빠뜨리지 않는 쪽으로)
-        "person": framing not in NON_PERSON_FRAMINGS,
+        # flatlay 가 아니면 인물로 간주 (detail 도 도하의 손·허리). 제품만 찍었으면 images.<키>.person: false
+        "person": has_person(spec),
         "excerpt": _excerpt(spec.get("prompt")),
         "pos": pos,
     }
@@ -190,13 +198,28 @@ def _label_parts(label: str) -> tuple[str, str]:
 
 
 def _split_label(body: str) -> tuple[str, str]:
-    """'다음 편: 베이지 트렌치…' → ('다음 편', '베이지 트렌치…')."""
-    m = re.match(r"^\s*([^:：]{1,8})\s*[:：]\s*(.+)$", str(body or ""), re.S)
+    """'다음 편: 베이지 트렌치…' → ('다음 편', '베이지 트렌치…'). 시각('금요일 07:40')의 쌍점에서는 나누지 않는다."""
+    m = re.match(r"^\s*([^:：]{1,8}?)\s*(?:(?<!\d)[:：]|[:：](?!\d))\s*(.+)$", str(body or ""), re.S)
     return (m.group(1), m.group(2).strip()) if m else ("", str(body or ""))
+
+
+def _text_list(slide: dict, key: str) -> list[str]:
+    """items · checks · bullets → 글자 목록. 목록이 아니면 멈춘다 (글자를 그대로 돌면 한 글자씩 항목이 된다)."""
+    value = slide.get(key)
+    if not value:
+        return []
+    if not isinstance(value, list):
+        raise SystemExit(f"{slide.get('layout')} 슬라이드의 {key} 는 목록이어야 해요 (예: {key}: [\"…\", \"…\"]). "
+                         f"지금: {str(value)[:30]!r} — python doha.py check 로 확인하세요")
+    return [str(x) for x in value if x is not None]
 
 
 def _is_latin(text: str) -> bool:
     return bool(text) and all(ord(ch) < 0x2000 for ch in str(text))
+
+
+def _badge_pos(value) -> str:
+    return value if value in BADGE_POSITIONS else "left"
 
 
 def _short_footer(text: str, n: int = 44) -> str:
@@ -240,7 +263,7 @@ def _ctx_look(post, slide, canvas, persona):
         "label_en": en,
         "label_ko": ko,
         "title": slide.get("title") or "",
-        "items": [str(x) for x in slide.get("items") or []],
+        "items": _text_list(slide, "items"),
         "tip": slide.get("tip") or "",
     }
 
@@ -253,7 +276,7 @@ def _ctx_tip(post, slide, canvas, persona):
         "number_latin": _is_latin(number),
         "title": slide.get("title") or "",
         "body": slide.get("body") or "",
-        "bullets": [str(x) for x in slide.get("bullets") or []],
+        "bullets": _text_list(slide, "bullets"),
     }
 
 
@@ -261,10 +284,15 @@ def _ctx_compare(post, slide, canvas, persona):
     sides = []
     for name in ("left", "right"):
         side = slide.get(name) or {}
+        if not isinstance(side, dict):
+            raise SystemExit(f"compare 슬라이드의 {name} 는 {{image, label, caption}} 형식이어야 해요 "
+                             f"(예: {name}: {{ image: s03, label: \"A\", caption: \"…\" }}). 지금: {side!r}")
         sides.append({
             "photo": _photo(post, side.get("image"), side.get("focus")),
             "label": side.get("label") or ("A" if name == "left" else "B"),
             "caption": side.get("caption") or "",
+            # 칸마다 배지 위치 (없으면 슬라이드의 badge_position)
+            "badge_pos": _badge_pos(side.get("badge_position") or slide.get("badge_position")),
         })
     return {"sides": sides, "title": slide.get("title") or "", "verdict": slide.get("verdict") or ""}
 
@@ -276,7 +304,7 @@ def _ctx_checklist(post, slide, canvas, persona):
         "photo": photo,
         "tone_top": _tone(photo, box, _bar_regions(canvas), slide.get("tone")) if photo else "light",
         "title": slide.get("title") or "",
-        "checks": [str(x) for x in slide.get("checks") or []],
+        "checks": _text_list(slide, "checks"),
         "note": slide.get("note") or "저장해두고 출근 전에 하나씩 확인하세요",
     }
 
@@ -358,9 +386,13 @@ def slide_html(post: Post, index: int, canvas=None, config: dict | None = None,
         "ai_badge": disclosure.get("slide_badge") or "AI 가상 인물",
         "ai_footer": _short_footer(disclosure.get("caption_footer") or ""),
         "slide": slide,
-        "badge_pos": slide.get("badge_position") if slide.get("badge_position") in ("left", "center", "right") else "left",
+        "badge_pos": _badge_pos(slide.get("badge_position")),
+        "pill": "",
     }
     ctx.update(globals()[f"_ctx_{layout}"](post, slide, canvas, persona))
+    if index == 1 and not ctx["pill"]:
+        # 이미지 안 광고 표시는 첫 장에 반드시 (cover 가 아닌 레이아웃으로 시작해도)
+        ctx["pill"] = short_disclosure_label(post.data, persona)
     env = jinja_env()
     env.filters["rich"] = rich
     return env.get_template(f"carousel/{layout}.html").render(ctx)

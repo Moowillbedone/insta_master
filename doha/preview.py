@@ -18,7 +18,18 @@ from io import BytesIO
 from pathlib import Path
 from typing import Callable
 
-from doha.check import CAPTION_LIMIT, as_date, as_time, check_post, counts, post_format, reel_seconds
+from doha.check import (
+    CAPTION_LIMIT,
+    FEED_LINE_UNITS,
+    as_date,
+    as_time,
+    check_post,
+    counts,
+    format_report,
+    post_format,
+    reel_seconds,
+    text_width,
+)
 from doha.core import (
     ROOT,
     Post,
@@ -30,17 +41,22 @@ from doha.core import (
     skip_if_legacy,
 )
 
-FOLD_LINES = 2          # 피드에서 '더 보기' 전에 보이는 줄 수
-FOLD_CHARS = 125        # 줄이 길면 대략 이 글자 수에서 잘림
+FOLD_LINES = 2          # 피드에서 '더 보기' 전에 보이는 화면 줄 수
+MORE_LABEL = "… 더 보기"
 WEEKDAYS = "월화수목금토일"
 
 
 # ---------------------------------------------------------------- caption
 
 def normalize_hashtags(raw) -> list[str]:
-    """'#출근룩', ' 출근룩 ' → '출근룩'. 빈 값·중복 제거, 순서 유지."""
+    """'#출근룩', ' 출근룩 ' → '출근룩'. 빈 값·중복 제거, 순서 유지.
+
+    None(YAML 의 '- #태그' 가 주석으로 읽힌 것)·true/false 는 버린다 — '#None' 이 게시되지 않게 (check 가 오류로 알림).
+    """
     out: list[str] = []
     for t in raw or []:
+        if t is None or isinstance(t, bool):
+            continue
         t = str(t).strip().lstrip("#").strip()
         if t and t not in out:
             out.append(t)
@@ -56,6 +72,7 @@ def build_caption(post: Post | dict, persona: dict | None = None, config: dict |
     """앱에 붙여넣을 최종 캡션.
 
     [광고 · 브랜드] 가상인물 고지   ← 표시 대상일 때만, 반드시 첫 줄 (더 보기 전에 보여야 함)
+    수수료 문장                     ← affiliate 일 때만 (persona.disclosure.affiliate_notice)
     캡션 본문
     (빈 줄) 제품 이미지 안내       ← products 가 있을 때 (AI 합성 이미지는 실물과 다를 수 있음)
     (빈 줄) AI 가상인물 안내
@@ -73,6 +90,8 @@ def build_caption(post: Post | dict, persona: dict | None = None, config: dict |
     pdisc = persona.get("disclosure") or {}
     footer = str(pdisc.get("caption_footer") or "").strip()
     notice = str(pdisc.get("ad_virtual_notice") or "").strip()
+    affiliate = (data.get("disclosure") or {}).get("affiliate") is True
+    affiliate_notice = str(pdisc.get("affiliate_notice") or "").strip() if affiliate else ""
     products = data.get("products")
     has_products = isinstance(products, list) and any(isinstance(p, dict) for p in products)
     product_note = str(pdisc.get("product_image_note") or "").strip() if has_products else ""
@@ -84,7 +103,7 @@ def build_caption(post: Post | dict, persona: dict | None = None, config: dict |
         tags = tags[:max_tags]
 
     first = (f"[{label}] {notice}" if notice else f"[{label}]") if label else ""
-    head = "\n".join(x for x in (first, body) if x)
+    head = "\n".join(x for x in (first, affiliate_notice, body) if x)
     parts = [p for p in (head, product_note, footer, " ".join("#" + t for t in tags)) if p]
     caption = "\n\n".join(parts)
     if len(caption) > CAPTION_LIMIT:
@@ -92,10 +111,53 @@ def build_caption(post: Post | dict, persona: dict | None = None, config: dict |
     return caption
 
 
-def caption_fold(caption: str, max_lines: int = FOLD_LINES, max_chars: int = FOLD_CHARS) -> str:
-    """피드에서 '… 더 보기' 전에 보이는 부분 (근사치: 앞 2줄, 최대 125자)."""
-    visible = "\n".join(caption.split("\n")[:max_lines])
-    return visible[:max_chars]
+def caption_fold(caption: str, handle: str = "", line_units: float = FEED_LINE_UNITS,
+                 max_lines: int = FOLD_LINES) -> str:
+    """피드에서 '… 더 보기' 전에 보이는 캡션 앞부분 (근사치). 캡션 문자열의 앞부분을 그대로 돌려준다.
+
+    줄바꿈 수가 아니라 화면 폭으로 센다: 첫 줄은 굵은 아이디 뒤에서 시작하고, 한 줄 폭(text_width 기준
+    line_units)을 넘으면 단어 단위로 줄을 바꾼다. 다 보이지 않으면 마지막 줄 끝에서 '… 더 보기' 자리를 뺀다.
+    """
+    lines: list[tuple[int, int, float]] = []          # 화면 줄마다 (시작, 끝, 앞에 붙는 아이디 폭)
+    lead = text_width(handle) + 0.5 if handle else 0.0
+    start, width, space, i = 0, lead, None, 0         # space: 지금 줄에서 마지막 공백 위치 (단어 단위 줄바꿈)
+
+    def wrap(end: int, nxt: int) -> None:
+        nonlocal start, width, space, lead
+        lines.append((start, end, lead))
+        start, space, lead = nxt, None, 0.0
+        width = text_width(caption[nxt:i])
+
+    while i < len(caption) and len(lines) < max_lines:
+        ch = caption[i]
+        if ch == "\n":
+            wrap(i, i + 1)
+            i += 1
+            continue
+        w = text_width(ch)
+        if width + w > line_units and i > start:
+            if ch == " ":                             # 줄 끝 공백에서 바로 줄바꿈
+                wrap(i, i + 1)
+                i += 1
+            elif space is not None:                   # 마지막 단어를 다음 줄로
+                wrap(space, space + 1)
+            else:                                     # 한 단어가 한 줄보다 길면 글자 단위로
+                wrap(i, i)
+            continue
+        if ch == " ":
+            space = i
+        width += w
+        i += 1
+    if len(lines) < max_lines:
+        lines.append((start, len(caption), lead))
+        start = len(caption)
+    if start >= len(caption.rstrip()):
+        return caption                                # 전부 보임 ('더 보기' 없음)
+    s, e, lead = lines[max_lines - 1]
+    room = line_units - lead - text_width(" " + MORE_LABEL)
+    while e > s and text_width(caption[s:e]) > room:
+        e -= 1
+    return caption[:e].rstrip()
 
 
 # ---------------------------------------------------------------- checklist
@@ -184,16 +246,18 @@ def make_contact_sheet(post: Post, slides: list[Path], cover: Path | None, out: 
     ]
     if cover:
         items.append((cover, "REEL", "릴스 커버"))
-    with Image.open(items[0][0]) as im0:
-        aspect = im0.height / im0.width if slides else 4 / 3
+    aspect = 4 / 3
+    if slides:
+        with Image.open(slides[0]) as im0:
+            aspect = im0.height / im0.width
 
-    cols = min(4, len(items))
+    cols = max(1, min(4, len(items)))   # 릴스 전용인데 커버가 없으면 그림 없이 머리말만
     rows = -(-len(items) // cols)
     thumb_w, gap, margin, header_h, label_h = 300, 28, 56, 176, 50
     thumb_h = round(thumb_w * aspect)
     # 장수가 적어도 제목·정보 줄이 잘리지 않게 최소 폭을 둔다
     width = max(980, margin * 2 + cols * thumb_w + (cols - 1) * gap)
-    height = header_h + rows * (thumb_h + label_h) + (rows - 1) * gap + margin
+    height = header_h + rows * (thumb_h + label_h) + max(rows - 1, 0) * gap + margin
     sheet = Image.new("RGB", (width, height), paper)
     draw = ImageDraw.Draw(sheet)
 
@@ -211,8 +275,9 @@ def make_contact_sheet(post: Post, slides: list[Path], cover: Path | None, out: 
     meta = [post.id, f"{d.get('date', '')} {as_time(d.get('time')) or ''}".strip()]
     if slides:
         meta.append(f"카드뉴스 {len(slides)}장")
-    if post_format(d)[1] and (reel_secs or reel_seconds(d)):
-        meta.append(f"릴스 {reel_secs:.1f}초" if reel_secs else f"릴스 {reel_seconds(d):.1f}초 예정")
+    planned = reel_seconds(d, config)
+    if post_format(d)[1] and (reel_secs or planned):
+        meta.append(f"릴스 {reel_secs:.1f}초" if reel_secs else f"릴스 {planned:.1f}초 예정")
     draw.text((margin, 128), _fit_text(draw, "  ·  ".join(meta), f_meta, width - margin * 2), font=f_meta, fill=muted)
 
     label = short_disclosure_label(d, persona)
@@ -331,6 +396,8 @@ def build_preview(post: Post, persona: dict | None = None, config: dict | None =
         return result
     if has_r and not reel_path:
         notes.append(f"릴스 영상이 아직 없어요 (python doha.py reel {post.id}).")
+    elif has_r and not cover_path:
+        notes.append(f"릴스 커버(cover.png)가 없어요. 다시 만드세요: python doha.py reel {post.id}")
 
     yaml_mtime = (post.dir / "post.yaml").stat().st_mtime
     rendered = slides + [p for p in (reel_path, cover_path) if p]
@@ -360,7 +427,8 @@ def build_preview(post: Post, persona: dict | None = None, config: dict | None =
     reel_canvas = canvas.get("reel") or {"width": 1080, "height": 1920}
     safe = canvas.get("reel_safe") or {}
     label = disclosure_label(d, persona)
-    fold = caption_fold(caption)
+    handle = persona.get("handle") or (config.get("account") or {}).get("handle", "")
+    fold = caption_fold(caption, handle)
     disc = d.get("disclosure") or {}
     brand = str(disc.get("brand") or "").strip()
     font_dir = ROOT / config["paths"]["fonts"]
@@ -373,7 +441,7 @@ def build_preview(post: Post, persona: dict | None = None, config: dict | None =
         "title": str(d.get("hook") or post.id),
         "date_label": _date_label(d),
         "status": d.get("status") or "",
-        "handle": persona.get("handle") or (config.get("account") or {}).get("handle", ""),
+        "handle": handle,
         "display_name": (config.get("account") or {}).get("display_name", ""),
         "has_carousel": has_c,
         "has_reel": has_r,
@@ -383,7 +451,7 @@ def build_preview(post: Post, persona: dict | None = None, config: dict | None =
         "reel": {
             "src": rel(reel_path) if reel_path else None,
             "poster": _jpeg_data_uri(cover_path, width=780) if cover_path else None,
-            "seconds": reel_secs or reel_seconds(d),
+            "seconds": reel_secs or reel_seconds(d, config),
             "audio": bool((d.get("reel") or {}).get("audio")),
         },
         "safe": {k: round(100 * float(safe.get(k, 0)) / float(reel_canvas[dim]), 2)
@@ -447,9 +515,19 @@ def run(args) -> int:
     post = resolve_post(args.post)
     if skip_if_legacy(post):
         return 0
-    result = build_preview(post)
+    config = load_config()
+    persona = load_persona(config)
+    issues = check_post(post, persona, config)
+    result = build_preview(post, persona, config, issues=issues)
     print_result(result)
     if not result["ok"]:
         print(result["message"])
+        return 1
+    n_err, _ = counts(issues)
+    if n_err:
+        # render → preview 로 따로 만든 경우에도 터미널에서 멈추게 (build 는 검수 단계에서 이미 멈춤)
+        print()
+        print(format_report(post.id, issues))
+        print(f"\n!! 검수 오류 {n_err}개 — 이 caption.txt·이미지는 게시하지 마세요. post.yaml 을 고친 뒤 다시 만드세요.")
         return 1
     return 0

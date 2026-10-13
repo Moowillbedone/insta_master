@@ -2,7 +2,7 @@
 {% import "_partials/carousel_ui.html" as ui %}
 {% block content %}
 <div class="compare">
-  {{ ui.topbar(c, 'light') }}
+  {{ ui.topbar(c, 'light', pill) }}
   <section class="compare-body" data-fit="비교">
     {% if title %}<h2 class="compare-title" data-max-lines="2">{{ title|rich }}</h2>{% endif %}
     <div class="pair">
@@ -11,7 +11,7 @@
         <div class="side-photo">
           {{ ui.photo(side.photo, '', '50%', true) }}
           <span class="ab">{{ side.label|rich }}</span>
-          {% if not side.photo or side.photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--mini') }}{% endif %}
+          {% if not side.photo or side.photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--mini at-' ~ side.badge_pos) }}{% endif %}
         </div>
         {% if side.caption %}<p class="side-caption">{{ side.caption|rich }}</p>{% endif %}
       </div>

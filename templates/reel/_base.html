@@ -48,6 +48,9 @@ body.layer-chrome .t, body.layer-text .c { visibility: hidden; }
   background: var(--badge-bg); color: var(--badge-fg);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
 }
+/* 장면의 badge_position: 인물이 오른쪽·가운데에 있으면 배지도 그쪽으로 (공정위: 인물 가까이 표시) */
+.ai.at-right { margin-left: auto; }
+.ai.at-center { margin-left: auto; margin-right: auto; }
 
 /* 종이 배경 (글자형 장면·사진 창 장면) */
 .paper {
@@ -72,7 +75,7 @@ body.layer-chrome .t, body.layer-text .c { visibility: hidden; }
 <div class="c top">
   {% if disc_big %}<span class="disc disc-big">{{ disc_big }}</span>{% endif %}
   {% if disc_small %}<span class="disc disc-small">{{ disc_small }}</span>{% endif %}
-  {% if ai_badge %}<span class="ai">{{ ai_badge }}</span>{% endif %}
+  {% if ai_badge %}<span class="ai at-{{ badge_pos or 'left' }}">{{ ai_badge }}</span>{% endif %}
 </div>
 {% endif %}
 <script>

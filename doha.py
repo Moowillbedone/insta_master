@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import importlib
 import inspect
+import os
 import sys
 
 from doha.core import load_env
@@ -51,7 +52,25 @@ def _load(module_name: str):
         raise SystemExit(f"'{module_name}' 을(를) 불러오지 못했어요: {e}. `pip install -r requirements.txt` 를 확인하세요.")
 
 
+def _utf8_output() -> None:
+    """Windows 에서 출력이 파이프·파일(Git Bash, `> log.txt`)이면 ANSI 코드 페이지(cp949)로 쓰여 '—'·'✓' 에서 멈춘다.
+
+    UTF-8 로 바꾼다 (콘솔·macOS·Linux 는 이미 UTF-8 이라 그대로). PYTHONIOENCODING 을 직접 정했으면 그 인코딩은 두고
+    못 쓰는 글자만 '?' 로 바꾼다.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if not hasattr(stream, "reconfigure"):
+            continue
+        if (stream.encoding or "").lower().replace("-", "").replace("_", "") == "utf8":
+            continue
+        if os.environ.get("PYTHONIOENCODING"):
+            stream.reconfigure(errors="replace")
+        else:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 def main(argv: list[str] | None = None) -> int:
+    _utf8_output()
     load_env()
     argv = sys.argv[1:] if argv is None else argv
     parser = argparse.ArgumentParser(prog="doha", description="도하 콘텐츠·수익화 운영 키트")

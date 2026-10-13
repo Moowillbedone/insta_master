@@ -32,9 +32,9 @@ disclosure:
   ai_persona: true     # 항상 true. 렌더러가 인물 슬라이드에 'AI 가상 인물' 배지를 붙임
   paid: false          # 금전 대가를 받음 → '광고'
   gifted: false        # 제품을 무상으로 받음 → '협찬'
-  affiliate: false     # 제휴 링크/코드 수수료 → '제휴 링크 포함'
-  brand: ""            # 대가를 준 브랜드명 (해당 시)
-  # 하나라도 true면 렌더러가 커버 상단과 캡션 첫 줄에 표시를 자동으로 넣음
+  affiliate: false     # 제휴 링크/코드 수수료 → '[광고 · 제휴 링크]' + 둘째 줄 '링크로 구매하시면 수수료를 받습니다.'
+  brand: ""            # 대가를 준 브랜드명 (해당 시). 적었는데 플래그가 모두 false 면 check 오류
+  # 하나라도 true면 렌더러가 1번 슬라이드(보통 커버) 상단과 캡션 첫 줄에 표시를 자동으로 넣음
 
 images:                 # 사진 목록. 키는 슬라이드·장면에서 참조
   s01:
@@ -44,6 +44,8 @@ images:                 # 사진 목록. 키는 슬라이드·장면에서 참�
     outfit: >-          # 의상을 따로 적어 두면 코디 일관성 검수에 씀
       black wide-leg wool slacks, ivory crew-neck knit, camel loafers
     framing: full-body  # full-body | three-quarter | waist-up | detail | flatlay
+    # person: false     # 선택. 기본은 flatlay 만 인물 없음 (detail 도 도하의 손·허리라 'AI 가상인물' 배지가 붙음).
+    #                   제품만 찍은 클로즈업이면 false
     status: todo        # todo | generated | approved | rejected
 
 slides:                 # 카드뉴스 순서대로
@@ -128,7 +130,7 @@ posted:                  # 게시 후 기록 (insights 명령이 이 주소로 �
 | `focus` | `"50% 30%"` | 사진을 자르는 기준점 (CSS object-position). 숫자 하나면 세로 위치 |
 | `tone` | `light` / `dark` | 사진 위 글자 색을 강제. 기본은 사진 밝기로 자동 |
 | `text_position` | `top` / `bottom` | cover 제목 위치. 기본 `top` (사진 위쪽 1/3을 비워 두는 촬영 규칙) |
-| `badge_position` | `left` / `center` / `right` | 'AI 가상인물' 배지 위치. 인물이 한쪽에 치우친 사진이면 인물 쪽으로 (공정위 지침: 인물 가까이 표시) |
+| `badge_position` | `left` / `center` / `right` | 'AI 가상인물' 배지 위치. 인물이 한쪽에 치우친 사진이면 인물 쪽으로 (공정위 지침: 인물 가까이 표시). 릴스 장면(`reel.scenes[]`)과 compare 의 `left`/`right` 칸에도 쓸 수 있음. 광고·협찬·제휴 게시물은 인물 사진마다 정하지 않으면 `check` 주의 |
 | `title` | 문자열 | compare 레이아웃의 상단 제목 |
 | `note` | 문자열 | checklist 하단 안내 문구 |
 | `cta` | 문자열 | 릴스 `reel-end` 장면의 저장·공유 유도 문구. 없으면 "저장하고 출근 전에 보기" |
@@ -145,4 +147,4 @@ posted:                  # 게시 후 기록 (insights 명령이 이 주소로 �
 - 인물 사진이 들어간 슬라이드에는 렌더러가 `AI 가상 인물` 배지를 자동으로 붙입니다.
 - `disclosure`의 `paid`/`gifted`/`affiliate` 중 하나라도 true면 커버와 캡션 첫 줄에 한국어 표시가 자동으로 들어갑니다. 끌 수 없습니다.
 - `products`의 가격·소재·효능은 `source_url`과 `checked_at`이 없으면 검수(`check`)에서 실패합니다.
-- 캡션·슬라이드에 "입어보니", "써보니", "제가 샀는데" 같은 체험 표현이 있으면 검수에서 실패합니다.
+- 캡션·슬라이드·릴스·해시태그·시리즈명에 "입어보니", "착용해 봤는데", "샀어요" 같은 체험 표현이 있으면 검수에서 실패합니다.
