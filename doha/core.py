@@ -103,6 +103,14 @@ def resolve_post(ref: str | os.PathLike) -> Post:
     return Post(dir=p.resolve(), data=load_yaml(yaml_path) or {})
 
 
+def skip_if_legacy(post: Post) -> bool:
+    """키트 이전 게시물(legacy: true)이면 안내를 출력하고 True. 제작 명령은 이 게시물을 건너뛴다."""
+    if (post.data or {}).get("legacy"):
+        print(f"{post.id}: 키트 이전 게시물(legacy)이라 건너뜀 — 성과 기록 연결용입니다.")
+        return True
+    return False
+
+
 def list_posts() -> list[Post]:
     root = posts_root()
     return [resolve_post(d) for d in sorted(root.iterdir()) if (d / "post.yaml").exists()]
@@ -111,7 +119,7 @@ def list_posts() -> list[Post]:
 def disclosure_label(post_data: dict, persona: dict | None = None) -> str:
     """경제적 이해관계 표시 문구. 해당 없으면 빈 문자열.
 
-    예: '광고 · 브랜드A' / '협찬 · 브랜드A' / '광고 · 브랜드A | 제휴 링크 포함 · 구매 시 수수료를 받을 수 있어요'
+    예: '광고 · 브랜드A' / '협찬 · 브랜드A' / '광고 · 브랜드A | 제휴 링크 포함 · 링크로 구매하시면 수수료를 받습니다'
     """
     persona = persona or load_persona()
     labels = persona["disclosure"]["labels"]

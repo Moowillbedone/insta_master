@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+{% import "media-kit/_macros.html" as m %}
+<style>
+{{ fonts_css()|safe }}
+:root {
+  --ink: {{ colors.ink or '#1F1F1F' }};
+  --paper: {{ colors.paper or '#F4EFE8' }};
+  --accent: {{ colors.accent or '#B08A61' }};
+  --muted: {{ colors.muted or '#7A746C' }};
+  --charcoal: {{ palette[1] if palette|length > 1 else '#2B2B2B' }};
+  --badge-bg: {{ colors.badge_bg or 'rgba(20,20,20,0.55)' }};
+  --badge-fg: {{ colors.badge_fg or '#FFFFFF' }};
+}
+{% include "media-kit/onepager.css" %}
+</style>
+</head>
+<body>
+<main class="one">
+  <header class="top">
+    <span class="wm">{{ wordmark_main }} {{ wordmark_sub }}</span>
+    <span class="kit">Media Kit<i></i>{{ year_month }}</span>
+  </header>
+
+  <div class="id"><span class="rule"></span>{{ display_name }}</div>
+  <h1 class="line">{{ one_liner }}</h1>
+  <div class="disc">
+    <span class="disc-pill">{{ compliance.badge }}</span>
+    <span>{{ name_topic }} AI로 생성된 가상인물입니다 · 실존 인물이 아니에요</span>
+  </div>
+
+  {% if perf.ready %}
+  <div class="stats">
+    <div class="st"><span class="st-num">{{ perf.followers.value if perf.followers else '—' }}</span><span class="st-label">팔로워{% if perf.followers %} · {{ perf.followers.date_short }}{% endif %}</span></div>
+    <div class="st"><span class="st-num">{{ perf.reach_median }}</span><span class="st-label">7일 도달 중앙값</span></div>
+    <div class="st"><span class="st-num">{{ perf.save.text }}</span><span class="st-label">저장률</span></div>
+    <div class="st"><span class="st-num">{{ perf.share.text }}</span><span class="st-label">공유율</span></div>
+  </div>
+  <p class="stats-note">게시 {{ perf.range_from }} – {{ perf.range_to }} · {{ perf.n }}건 · 게시 후 7일 인사이트 기준</p>
+  {% else %}
+  <div class="stats stats--collect{% if not perf.followers %} n2{% endif %}">
+    <div class="st st--wide">
+      <span class="st-tag">데이터 수집 중</span>
+      <span class="st-text">게시 후 7일 지표가 {{ perf.min_posts }}건 이상 모이면 실제 수치로 공유해요</span>
+    </div>
+    <div class="st"><span class="st-num">{{ perf.n }}<i>/</i>{{ perf.min_posts }}</span><span class="st-label">7일 지표 확보</span></div>
+    {% if perf.followers %}
+    <div class="st"><span class="st-num">{{ perf.followers.value }}</span><span class="st-label">팔로워 · {{ perf.followers.date_short }}</span></div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% set tiles = perf.best if perf.ready and perf.best|length >= 3 else samples[:3] %}
+  {% if tiles %}
+  <div class="tiles">
+    {% for t in tiles %}
+    <div class="tile">
+      {{ m.thumb(t) }}
+      {% if t.save_rate %}<span class="tile-cap"><b>NO. {{ t.rank }}</b>저장률 {{ t.save_rate }}</span>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="menu">
+    <div class="menu-label">협업 메뉴</div>
+    <ol>
+      {% for d in deliverables %}<li><span class="n">{{ '%02d' % loop.index }}</span>{{ d.short or d.ko }}</li>{% endfor %}
+    </ol>
+  </div>
+
+  <footer class="foot">
+    <b>@{{ handle }}</b>
+    <span>{{ contact.line }}</span>
+  </footer>
+</main>
+</body>
+</html>

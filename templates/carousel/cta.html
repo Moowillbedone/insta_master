@@ -1,0 +1,28 @@
+{% extends "carousel/base.html" %}
+{% import "_partials/carousel_ui.html" as ui %}
+{% block content %}
+<div class="cta{{ ' cta--photo' if photo }}" data-fit="마무리">
+  {% if photo %}
+  <div class="cta-photo">
+    {{ ui.photo(photo, '', '56%') }}
+    <div class="scrim scrim--bar on-{{ tone_top }}"></div>
+    {% if photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--corner') }}{% endif %}
+  </div>
+  {% endif %}
+  <section class="cta-body">
+    <span class="cta-rule"></span>
+    <h2 class="cta-title" data-max-lines="3">{{ title|rich }}</h2>
+    {% if next_text %}
+    <div class="cta-next">
+      {% if next_label %}<span class="next-label">{{ next_label }}</span>{% endif %}
+      <p class="next-text">{{ next_text|rich }}</p>
+    </div>
+    {% endif %}
+    <div class="cta-actions">
+      <p class="follow">{% if follow %}{{ follow }}{% else %}<span class="follow-handle">{{ c.handle }}</span> 팔로우하고 다음 편 받기{% endif %}</p>
+    </div>
+    {% if ai_footer %}<p class="cta-ai">{{ ai_footer }}</p>{% endif %}
+  </section>
+  {{ ui.topbar(c, tone_top if photo else 'dark') }}
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "reel/_base.html" %}
+{% block style %}
+{% if window %}
+/* 종이에 사진 창을 뚫는다 (evenodd). 창 안에서만 배경 사진이 천천히 움직임 */
+.paper {
+  clip-path: polygon(evenodd,
+    0 0, {{ W }}px 0, {{ W }}px {{ H }}px, 0 {{ H }}px, 0 0,
+    {{ window.x }}px {{ window.y }}px, {{ window.x + window.w }}px {{ window.y }}px,
+    {{ window.x + window.w }}px {{ window.y + window.h }}px, {{ window.x }}px {{ window.y + window.h }}px,
+    {{ window.x }}px {{ window.y }}px);
+}
+.end { position: absolute; left: var(--m); right: var(--right); top: {{ window.y + window.h + 62 }}px; }
+.closing { font-size: 64px; line-height: 1.3; }
+.caption {
+  position: absolute; left: {{ window.x }}px; width: {{ window.w }}px; top: {{ window.y + window.h + 18 }}px;
+  display: flex; justify-content: space-between; color: var(--muted);
+  font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 22px; letter-spacing: .26em;
+}
+{% else %}
+.end {
+  position: absolute; left: var(--m); right: var(--right);
+  top: {{ top_y + 90 }}px; bottom: calc(var(--bottom) + 40px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.closing { font-size: 84px; line-height: 1.3; }
+{% endif %}
+.mark { position: absolute; left: var(--m); top: {{ top_y + 12 }}px; color: var(--muted); }
+.closing { color: var(--ink); }
+.rule { width: 72px; height: 2px; background: var(--accent); margin: 34px 0 30px; }
+.cta { display: flex; align-items: center; gap: 16px; font-family: 'Pretendard'; font-weight: 700; font-size: 36px; letter-spacing: -0.01em; color: var(--ink); }
+.cta svg { width: 34px; height: 40px; flex: none; }
+.end .handle { margin-top: 14px; }
+{% endblock %}
+{% block body %}
+<div class="c paper"></div>
+{% if window %}
+<div class="c caption"><span>{{ wordmark }}</span><span>{{ caption_right }}</span></div>
+{% elif not (disc_big or disc_small or ai_badge) %}
+<div class="c mark wordmark">{{ wordmark }}</div>
+{% endif %}
+<section class="t end">
+  <h2 class="serif closing fit" data-max-h="{{ 180 if window else 600 }}" data-min="44" data-keep="{{ 52 if window else 64 }}">{{ text_html }}</h2>
+  <div class="rule"></div>
+  <div class="cta">
+    <svg viewBox="0 0 34 40" aria-hidden="true"><path d="M5 3.5h24v33l-12-8.6-12 8.6z" fill="none" stroke="{{ c.accent }}" stroke-width="3" stroke-linejoin="round"/></svg>
+    <span>{{ cta }}</span>
+  </div>
+  <div class="handle">{{ handle }}</div>
+</section>
+{% endblock %}

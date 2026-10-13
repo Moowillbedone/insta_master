@@ -1,0 +1,157 @@
+# 새 게시물 뼈대 — `python doha.py new` 가 {{ID}} 같은 칸을 채워 만들었어요.
+# 형식 설명: content/SCHEMA.md · 완성 예시: content/posts/2026-10-15-black-slacks-3ways/post.yaml
+# 'TODO' 가 남아 있으면 check 에서 오류로 막혀요. 다 채운 뒤: python doha.py check {{ID}}
+# 원칙: 체험 표현 금지("입어보니/써보니/제가 샀는데"), 상품 사실은 공식 출처+확인일, 사진 안에 글자 넣지 않기.
+id: {{ID}}
+date: {{DATE}}
+time: "{{TIME}}"
+status: idea     # idea → draft → images → rendered → reviewed → approved → posted
+series: {{SERIES}}
+format: {{FORMAT}}     # carousel | reel | both
+pillar: 돌려입기  # 돌려입기 | 컬러공식 | 비율 | 상황별 | 아이템가이드 | 협찬 | 제휴
+goal: save       # save | share | follow | click | reach
+hook: {{HOOK}}
+
+disclosure:
+  ai_persona: true     # 항상 true (끄면 check 실패)
+  paid: false          # 금전 대가 → 캡션 첫 줄 '[광고 · 브랜드]'
+  gifted: false        # 무상 제품 → '[협찬 · 브랜드]'
+  affiliate: false     # 제휴 링크·코드 수수료 → '제휴 링크 포함' (products 에 link 가 있으면 true)
+  brand: ""            # paid/gifted 면 필수
+
+images:                # 장면 묘사만 영어로. 얼굴·촬영 스타일은 brand/doha.yaml 에서 자동으로 붙어요
+  s01:
+    file: images/s01.png
+    framing: full-body   # full-body | three-quarter | waist-up | detail | flatlay
+    status: todo         # todo | generated | approved | rejected
+    outfit: >-
+      TODO: 커버 의상 (색·소재·핏을 구체적으로)
+    prompt: >-
+      TODO: 커버 장면 (장소·빛·동작), empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      TODO: LOOK 01 의상
+    prompt: >-
+      TODO: LOOK 01 장면
+  s03:
+    file: images/s03.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      TODO: LOOK 02 의상
+    prompt: >-
+      TODO: LOOK 02 장면
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      TODO: LOOK 03 의상
+    prompt: >-
+      TODO: LOOK 03 장면
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      TODO: 준비물 플랫레이 구성
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, neat spacing,
+      realistic fabric wrinkles and textures, no people, no hands
+
+# [carousel]
+slides:                # 장마다 한 가지 요점. 제목 줄바꿈은 \n (커버 한 줄 14자 이하 권장)
+  - layout: cover
+    image: s01
+    kicker: "TODO: 시리즈 · 번호"
+    title: {{HOOK}}
+    subtitle: "TODO: 한 줄 요약"
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 월요일"
+    title: "TODO: 룩 제목 (18자 이하)"
+    items: ["TODO: 아이템", "TODO: 아이템", "TODO: 아이템"]
+    tip: "TODO: 이유를 붙인 팁 (예: ~하면 ~해 보여요)"
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 수요일"
+    title: "TODO: 룩 제목"
+    items: ["TODO: 아이템", "TODO: 아이템", "TODO: 아이템"]
+    tip: "TODO: 팁"
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 금요일"
+    title: "TODO: 룩 제목"
+    items: ["TODO: 아이템", "TODO: 아이템", "TODO: 아이템"]
+    tip: "TODO: 팁"
+  - layout: tip
+    number: "공식"
+    title: "TODO: 기억하기 쉬운 공식"
+    body: "TODO: 공식 설명 한두 문장"
+    bullets: ["TODO: 28자 이하", "TODO", "TODO"]
+  - layout: checklist
+    image: s05
+    title: "TODO: 준비물 체크"
+    checks: ["TODO", "TODO", "TODO"]
+  - layout: cta
+    title: "저장해두고\n출근 전에 꺼내보세요"
+    body: "다음 편: TODO"
+# [/carousel]
+
+products: []           # 협찬·제휴 상품이 있을 때만. 예시는 content/SCHEMA.md (source_url·checked_at 필수)
+
+# [reel]
+reel:
+  audio: null          # 사용권 확인된 음원 파일 경로. null 이면 무음 (앱에서 음원 추가)
+  scenes:              # 총 5–90초. motion: zoom-in | zoom-out | pan-left | pan-right | still
+    - image: s01
+      layout: reel-hook
+      text: {{HOOK}}
+      seconds: 2.2
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "MON"
+      text: "TODO: 룩 한 줄"
+      seconds: 2.4
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "WED"
+      text: "TODO: 룩 한 줄"
+      seconds: 2.4
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "FRI"
+      text: "TODO: 룩 한 줄"
+      seconds: 2.4
+      motion: zoom-out
+    - image: s05
+      layout: reel-end
+      text: "TODO: 마무리 한 줄"
+      seconds: 2.6
+      motion: still
+# [/reel]
+
+caption: |
+  {{HOOK_LINE}}
+
+  TODO: 본문 (짧은 문장, 이유를 붙이기)
+
+  저장해두고 출근 전에 꺼내보세요.
+
+hashtags: [출근룩, 직장인코디, 오피스룩, 데일리룩]   # 최대 5개 (config.publishing.max_hashtags)
+alt_text: "TODO: AI로 만든 가상 스타일리스트 도하가 … 를 입은 출근룩"
+
+review:                # 사람 검수 기록 (check 가 채우지 않음)
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:                # 게시 후 기록
+  url: ""
+  posted_at: ""

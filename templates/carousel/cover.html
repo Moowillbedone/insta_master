@@ -1,0 +1,21 @@
+{% extends "carousel/base.html" %}
+{% import "_partials/carousel_ui.html" as ui %}
+{% block content %}
+<div class="cover cover--{{ position }}">
+  {{ ui.photo(photo, 'photo--bleed', '66%' if position == 'top' else '36%') }}
+  <div class="scrim scrim--top {{ 'scrim--text' if position == 'top' }} on-{{ tone_top }}"></div>
+  <div class="scrim scrim--bottom {{ 'scrim--text' if position == 'bottom' }} on-{{ tone_bottom }}"></div>
+  {{ ui.topbar(c, tone_top, pill) }}
+  <div class="cover-layer">
+    <section class="cover-text on-{{ tone_text }}" data-fit="커버 제목">
+      {% if kicker %}<p class="kicker"><span class="kicker-rule"></span>{{ kicker|rich }}</p>{% endif %}
+      <h1 class="cover-title" data-max-lines="3">{{ title|rich }}</h1>
+      {% if subtitle %}<p class="cover-sub">{{ subtitle|rich }}</p>{% endif %}
+    </section>
+  </div>
+  <footer class="cover-foot on-{{ tone_bottom }}">
+    {% if photo and photo.person %}{{ ui.ai_badge(ai_badge) }}{% else %}<span class="handle">{{ c.handle }}</span>{% endif %}
+    <span class="swipe">넘겨보기 {{ ui.arrow() }}</span>
+  </footer>
+</div>
+{% endblock %}

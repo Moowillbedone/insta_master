@@ -1,0 +1,28 @@
+{% extends "carousel/base.html" %}
+{% import "_partials/carousel_ui.html" as ui %}
+{% block content %}
+<div class="tip{{ ' tip--photo' if photo }}">
+  {{ ui.topbar(c, 'light') }}
+  <section class="tip-body" data-fit="TIP 본문">
+    <div class="sp-top"></div>
+    <div class="tip-head">
+      <p class="tip-num {{ 'tip-num--latin' if number_latin else 'tip-num--ko' }}">{{ number }}</p>
+      {% if photo %}
+      <div class="tip-photo">
+        {{ ui.photo(photo, '', '50%', true) }}
+        {% if photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--mini') }}{% endif %}
+      </div>
+      {% endif %}
+    </div>
+    <h2 class="tip-title" data-max-lines="3">{{ title|rich }}</h2>
+    {% if body %}<p class="tip-text">{{ body|rich }}</p>{% endif %}
+    {% if bullets %}
+    <ol class="tip-list">
+      {% for b in bullets %}<li><span class="n">{{ '%02d'|format(loop.index) }}</span><span class="t">{{ b|rich }}</span></li>{% endfor %}
+    </ol>
+    {% endif %}
+    <div class="sp-bottom"></div>
+  </section>
+  <footer class="paper-foot"><span class="handle">{{ c.handle }}</span><span class="save-cue">{{ ui.bookmark() }}저장해두면 다시 보기 쉬워요</span></footer>
+</div>
+{% endblock %}

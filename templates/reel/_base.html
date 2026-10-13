@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<style>
+{{ fonts_css() | safe }}
+:root {
+  --ink: {{ c.ink }};
+  --paper: {{ c.paper }};
+  --accent: {{ c.accent }};
+  --accent-deep: #8C6A45;
+  --muted: {{ c.muted }};
+  --badge-bg: {{ c.badge_bg }};
+  --badge-fg: {{ c.badge_fg }};
+  --m: {{ m }}px;
+  --right: {{ safe.right }}px;
+  --bottom: {{ safe.bottom }}px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: {{ W }}px; height: {{ H }}px; overflow: hidden; background: transparent; }
+body {
+  position: relative;
+  font-family: 'Pretendard', sans-serif;
+  color: var(--ink);
+  word-break: keep-all;
+  line-break: strict;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  font-variant-numeric: lining-nums;   /* Cormorant 기본 숫자는 올드스타일(01이 'oı'처럼 보임) */
+}
+/* 한 장면을 두 겹으로 찍는다: c=고정(배지·스크림·종이), t=등장 애니메이션 글자. 레이아웃은 같게 유지 */
+body.layer-chrome .t, body.layer-text .c { visibility: hidden; }
+
+/* 상단 표시 줄: 광고 표시 → AI 배지 순서. 릴스 상단 UI 아래, 그리드 3:4 크롭 안쪽 */
+.top {
+  position: absolute; left: var(--m); right: var(--right); top: {{ top_y }}px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+}
+.disc { font-family: 'Pretendard'; font-weight: 700; line-height: 1; border-radius: 999px; white-space: nowrap; }
+.disc-big { font-size: 34px; padding: 15px 28px 16px; letter-spacing: -0.01em; }
+.disc-small { font-size: 26px; padding: 10px 18px 11px; }
+.tone-top-light .disc { background: var(--ink); color: #FFFFFF; }
+.tone-top-dark .disc { background: #FFFFFF; color: var(--ink); box-shadow: 0 6px 24px rgba(0,0,0,.18); }
+.ai {
+  font-family: 'Pretendard'; font-weight: 600; font-size: 26px; line-height: 1;
+  padding: 10px 18px 11px; border-radius: 999px; white-space: nowrap;
+  background: var(--badge-bg); color: var(--badge-fg);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+/* 종이 배경 (글자형 장면·사진 창 장면) */
+.paper {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(110% 70% at 28% 30%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, #F6F2EC 0%, var(--paper) 45%, #EEE7DD 100%);
+}
+.wordmark {
+  font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 28px;
+  letter-spacing: .3em; text-transform: uppercase; white-space: nowrap;
+}
+.handle { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 38px; letter-spacing: .03em; color: var(--muted); }
+.serif { font-family: 'Noto Serif KR'; font-weight: 700; letter-spacing: -0.035em; text-wrap: balance; }
+.plus { font-family: 'Pretendard'; font-weight: 400; color: var(--accent); padding: 0 .08em; }
+{% block style %}{% endblock %}
+</style>
+</head>
+<body class="layer-{{ layer }} tone-top-{{ tone_top }} tone-text-{{ tone_text }}">
+{% block body %}{% endblock %}
+{% if disc_big or disc_small or ai_badge %}
+<div class="c top">
+  {% if disc_big %}<span class="disc disc-big">{{ disc_big }}</span>{% endif %}
+  {% if disc_small %}<span class="disc disc-small">{{ disc_small }}</span>{% endif %}
+  {% if ai_badge %}<span class="ai">{{ ai_badge }}</span>{% endif %}
+</div>
+{% endif %}
+<script>
+// 긴 문구 대비. data-keep: 이 크기까지는 줄여서라도 작성자가 \n 으로 나눈 줄을 지킨다.
+// 그래도 안 되면 원래 크기로 자연 줄바꿈 후, data-max-h 높이를 넘으면 data-min 까지 줄인다.
+function fit(el) {
+  const maxH = parseFloat(el.dataset.maxH || '100000');
+  const min = parseFloat(el.dataset.min || '36');
+  const keep = parseFloat(el.dataset.keep || '0');
+  const start = parseFloat(getComputedStyle(el).fontSize);
+  const set = v => { el.style.fontSize = v + 'px'; };
+  const wide = () => el.scrollWidth > el.clientWidth + 1;
+  const tall = () => el.getBoundingClientRect().height > maxH + 1;
+  let size = start;
+  if (keep) {
+    el.style.whiteSpace = 'nowrap';
+    while (wide() && size > keep) { size -= 2; set(size); }
+    if (wide()) { el.style.whiteSpace = ''; size = start; set(size); }
+  }
+  while ((wide() || tall()) && size > min) { size -= 2; set(size); }
+}
+['700 80px "Noto Serif KR"', '500 80px "Noto Serif KR"', '600 40px "Cormorant Garamond"',
+ '500 40px "Cormorant Garamond"', '600 30px "Pretendard"', '700 30px "Pretendard"']
+  .forEach(f => document.fonts.load(f, '가A'));
+document.fonts.ready.then(() => document.querySelectorAll('.fit').forEach(fit));
+</script>
+</body>
+</html>

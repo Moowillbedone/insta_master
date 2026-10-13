@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<style>
+{{ fonts_css()|safe }}
+:root {
+  --W: {{ canvas.width }}px;
+  --H: {{ canvas.height }}px;
+  --ink: {{ colors.ink or '#1F1F1F' }};
+  --paper: {{ colors.paper or '#F4EFE8' }};
+  --accent: {{ colors.accent or '#B08A61' }};
+  --muted: {{ colors.muted or '#7A746C' }};
+  --badge-bg: {{ colors.badge_bg or 'rgba(20,20,20,0.55)' }};
+  --badge-fg: {{ colors.badge_fg or '#FFFFFF' }};
+  --charcoal: {{ palette[1] if palette|length > 1 else '#2B2B2B' }};
+  --navy: {{ palette[3] if palette|length > 3 else '#3E4A5C' }};
+  --sage: {{ palette[4] if palette|length > 4 else '#9AA58C' }};
+  --look-photo: {{ (photo_frac.look * 100)|round(2) }}%;
+  --checklist-photo: {{ (photo_frac.checklist * 100)|round(2) }}%;
+  --product-photo: {{ (photo_frac.product * 100)|round(2) }}%;
+  --cta-photo: {{ (photo_frac.cta * 100)|round(2) }}%;
+}
+{% include "carousel/carousel.css" %}
+</style>
+</head>
+<body>
+<main class="slide slide--{{ layout }} badge-{{ badge_pos }}">
+{% block content %}{% endblock %}
+</main>
+<script>
+// 폰트·사진을 다 읽은 뒤 글자 맞춤: 제목은 줄 수 제한까지 제목만 줄이고(--fs),
+// 그래도 상자를 넘치면 상자 안 글자를 함께 줄인다(--k). 남은 문제는 렌더러가 경고로 출력.
+(async () => {
+  try { await Promise.all([...document.fonts].map(f => f.load().catch(() => null))); } catch (e) {}
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => (i.decode ? i.decode() : Promise.resolve()).catch(() => null)));
+  const issues = [];
+  const lineHeight = (el) => {
+    const cs = getComputedStyle(el);
+    const lh = parseFloat(cs.lineHeight);
+    return Number.isFinite(lh) ? lh : parseFloat(cs.fontSize) * 1.25;
+  };
+  const lines = (el) => Math.round(el.getBoundingClientRect().height / lineHeight(el));
+  const overflows = (box) => box.scrollHeight > box.clientHeight + 1 || box.scrollWidth > box.clientWidth + 1;
+  for (const box of document.querySelectorAll('[data-fit]')) {
+    for (const el of box.querySelectorAll('[data-max-lines]')) {
+      const max = +el.dataset.maxLines, min = +(el.dataset.minScale || 0.66);
+      let s = 1;
+      while (lines(el) > max && s > min) { s = +(s - 0.02).toFixed(2); el.style.setProperty('--fs', s); }
+      if (lines(el) > max) issues.push(`'${el.textContent.trim().slice(0, 18)}…' 이(가) ${max}줄을 넘어요 — 문구를 줄이세요`);
+    }
+    let k = 1;
+    const kmin = +(box.dataset.fitMin || 0.78);
+    while (overflows(box) && k > kmin) { k = +(k - 0.02).toFixed(2); box.style.setProperty('--k', k); }
+    if (overflows(box)) issues.push(`${box.dataset.fit} 영역 글자가 넘쳐요 — 문구나 항목 수를 줄이세요`);
+    else if (k < 1) box.dataset.scaled = k;
+  }
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  window.__fit = { done: true, issues };
+})();
+</script>
+</body>
+</html>

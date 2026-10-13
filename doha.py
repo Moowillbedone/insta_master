@@ -10,6 +10,7 @@
   python doha.py reel black-slacks             # 릴스 MP4
   python doha.py preview black-slacks          # 연락시트 + 휴대폰 미리보기 + caption.txt
   python doha.py build black-slacks            # check → render → reel → preview 한 번에
+  python doha.py insights --followers          # Instagram API로 지표 자동 기록 (선택)
   python doha.py metrics                       # 성과 분석 리포트
   python doha.py media-kit                     # 브랜드 제안용 미디어킷 PDF
   python doha.py board                         # 운영 보드 데이터 갱신
@@ -20,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import inspect
 import sys
 
 from doha.core import load_env
@@ -34,25 +36,40 @@ COMMANDS: dict[str, tuple[str, str]] = {
     "reel": ("doha.reel", "릴스 MP4 만들기"),
     "preview": ("doha.preview", "연락시트·휴대폰 미리보기·붙여넣기용 캡션 만들기"),
     "build": ("doha.build", "check → render → reel → preview 한 번에"),
+    "insights": ("doha.insights", "Instagram API로 게시물 지표 가져와 metrics.csv에 기록 (토큰 필요)"),
     "metrics": ("doha.metrics", "성과·수익·비용 분석 리포트"),
     "media-kit": ("doha.mediakit", "브랜드 제안용 미디어킷 HTML/PDF"),
     "board": ("doha.board", "운영 보드(index.html) 데이터 파일 갱신"),
 }
 
 
+def _load(module_name: str):
+    try:
+        return importlib.import_module(module_name)
+    except ModuleNotFoundError as e:
+        # 선택 의존성(playwright, openai 등)이 없을 때 원인을 바로 보여준다
+        raise SystemExit(f"'{module_name}' 을(를) 불러오지 못했어요: {e}. `pip install -r requirements.txt` 를 확인하세요.")
+
+
 def main(argv: list[str] | None = None) -> int:
     load_env()
+    argv = sys.argv[1:] if argv is None else argv
     parser = argparse.ArgumentParser(prog="doha", description="도하 콘텐츠·수익화 운영 키트")
     sub = parser.add_subparsers(dest="command", required=True)
+    # 고른 명령의 모듈만 불러온다: 한 모듈의 의존성 문제가 다른 명령을 막지 않게
+    chosen = next((a for a in argv if not a.startswith("-")), None)
     for name, (module_name, help_text) in COMMANDS.items():
         sp = sub.add_parser(name, help=help_text, description=help_text)
         sp.set_defaults(_module=module_name)
-        module = importlib.import_module(module_name)
-        # 같은 모듈이 여러 명령을 맡을 때 명령 이름을 넘겨 인자를 구분한다
-        module.add_arguments(sp, name) if module.add_arguments.__code__.co_argcount == 2 else module.add_arguments(sp)
+        if name == chosen:
+            module = _load(module_name)
+            # 같은 모듈이 여러 명령을 맡을 때 명령 이름을 넘겨 인자를 구분한다
+            if len(inspect.signature(module.add_arguments).parameters) >= 2:
+                module.add_arguments(sp, name)
+            else:
+                module.add_arguments(sp)
     args = parser.parse_args(argv)
-    module = importlib.import_module(args._module)
-    return int(module.run(args) or 0)
+    return int(_load(args._module).run(args) or 0)
 
 
 if __name__ == "__main__":

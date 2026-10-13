@@ -1,0 +1,1323 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>도하 운영 보드</title>
+<style>
+@font-face{font-family:'Pretendard';font-weight:400;font-display:swap;src:local('Pretendard Regular'),local('Pretendard-Regular'),url('assets/fonts/Pretendard-Regular.woff2') format('woff2')}
+@font-face{font-family:'Pretendard';font-weight:500;font-display:swap;src:local('Pretendard Medium'),local('Pretendard-Medium'),url('assets/fonts/Pretendard-Medium.woff2') format('woff2')}
+@font-face{font-family:'Pretendard';font-weight:600;font-display:swap;src:local('Pretendard SemiBold'),local('Pretendard-SemiBold'),url('assets/fonts/Pretendard-SemiBold.woff2') format('woff2')}
+@font-face{font-family:'Pretendard';font-weight:700;font-display:swap;src:local('Pretendard Bold'),local('Pretendard-Bold'),url('assets/fonts/Pretendard-Bold.woff2') format('woff2')}
+@font-face{font-family:'Noto Serif KR';font-weight:500;font-display:swap;src:local('Noto Serif KR Medium'),local('NotoSerifKR-Medium'),url('assets/fonts/NotoSerifKR-500.woff2') format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-weight:600;font-display:swap;src:local('Cormorant Garamond SemiBold'),url('assets/fonts/CormorantGaramond-SemiBold.woff2') format('woff2')}
+
+:root{
+  --paper:#F4EFE8; --surface:#FBF9F5; --surface-2:#EFE8DE; --surface-3:#E7DED1;
+  --ink:#1F1F1F; --ink-2:#4A4642; --muted:#7A746C; --line:#E3DACD; --line-2:#CFC3B3;
+  --accent:#B08A61; --accent-ink:#86663F; --accent-soft:#E8DCCB; --accent-wash:rgba(176,138,97,.12);
+  --navy:#3E4A5C; --sage:#8E9B7F; --ok:#5C7A52; --warn:#A8722A; --bad:#A4493D;
+  --shadow:0 1px 2px rgba(43,40,36,.04),0 6px 20px rgba(43,40,36,.05);
+  --r:14px; --r-sm:9px;
+  --sans:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif;
+  --serif:'Noto Serif KR','Nanum Myeongjo','AppleMyungjo',serif;
+  --display:'Cormorant Garamond','Times New Roman',serif;
+  /* 게시물 상태 점 색 */
+  --st-idea:#B9B1A6; --st-draft:#D2B48C; --st-images:#9AA58C; --st-rendered:#7C8DA6;
+  --st-reviewed:#B08A61; --st-approved:#5C7A52; --st-posted:#2B2B2B;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#161514; --surface:#1F1E1C; --surface-2:#282623; --surface-3:#33302C;
+  --ink:#EEE8DF; --ink-2:#CDC5B9; --muted:#9C9489; --line:#34312D; --line-2:#4A453F;
+  --accent:#C9A27A; --accent-ink:#D9B793; --accent-soft:#3B3229; --accent-wash:rgba(201,162,122,.14);
+  --navy:#9DB0CC; --ok:#8DB07F; --warn:#D7A257; --bad:#D98275;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  --st-idea:#6E675F; --st-draft:#BFA07A; --st-images:#9AA58C; --st-rendered:#8FA0BA;
+  --st-reviewed:#C9A27A; --st-approved:#8DB07F; --st-posted:#EEE8DF;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 var(--sans);letter-spacing:-.005em;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+.muted{color:var(--muted)} .small{font-size:13px} .nowrap{white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+.hidden{display:none!important}
+
+/* 머리글 */
+.top{padding:26px 0 14px;display:flex;align-items:flex-end;gap:16px 24px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;gap:2px;margin-right:auto}
+.wordmark{font:600 26px/1 var(--display);letter-spacing:.22em;color:var(--ink)}
+.brand .sub{font-size:13px;color:var(--muted)}
+.brand .sub a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line-2)}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.note{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--ink-2)}
+.note b{color:var(--ink);font-weight:600}
+.note .pill{margin-left:auto}
+.note.warn{border-left-color:var(--warn)}
+
+/* 버튼·입력 */
+.btn{appearance:none;border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;cursor:pointer;line-height:1.3;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink)}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn.primary:hover{opacity:.88}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.ghost:hover{background:var(--surface-2)}
+.btn.danger{color:var(--bad)}
+.btn.sm{padding:4px 10px;font-size:12px}
+.btn[disabled]{opacity:.45;cursor:default}
+label.field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);min-width:0}
+label.field.wide{grid-column:1/-1}
+label.field .req{color:var(--accent-ink)}
+input[type=text],input[type=number],input[type=date],input[type=search],input[type=url],select{height:38px}
+input[type=text],input[type=number],input[type=date],input[type=search],input[type=url],select,textarea{width:100%;min-width:0;background:var(--paper);border:1px solid var(--line-2);border-radius:8px;padding:8px 10px;font-size:14px;color:var(--ink)}
+textarea{resize:vertical;min-height:70px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+
+/* 탭 */
+.tabs{position:sticky;top:0;z-index:5;background:var(--paper);background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-top:14px}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;padding:13px 12px 11px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+main.wrap{padding-top:30px;padding-bottom:48px}
+.sec-head{display:flex;align-items:flex-end;gap:12px 16px;flex-wrap:wrap;margin-bottom:18px}
+.sec-head h2{font:500 24px/1.3 var(--serif);margin:0;letter-spacing:-.02em}
+.kicker{display:block;font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:8px}
+.sec-head .desc{margin:4px 0 0;color:var(--muted);font-size:13px}
+.sec-head .tools{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* 카드 */
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);min-width:0}
+.card h3{font:600 14px/1.4 var(--sans);margin:0 0 14px;display:flex;align-items:center;gap:8px}
+.card h3 .muted{font-weight:400;font-size:12px;margin-left:auto}
+.c-8{grid-column:span 8}.c-4{grid-column:span 4}.c-7{grid-column:span 7}.c-5{grid-column:span 5}.c-12{grid-column:1/-1}.c-6{grid-column:span 6}
+.empty{color:var(--muted);font-size:13px;padding:16px;text-align:center;border:1px dashed var(--line-2);border-radius:var(--r-sm);background:var(--paper)}
+
+/* 대시보드: 목표 */
+.hero{font:600 52px/1.05 var(--sans);letter-spacing:-.03em;margin:4px 0 6px}
+.hero-sub{color:var(--ink-2);font-size:14px}
+.meter{position:relative;height:14px;border-radius:999px;background:var(--accent-soft);margin:20px 0 8px;display:flex;gap:2px;overflow:hidden}
+.meter span{display:block;height:100%}
+.meter .seg-real{background:var(--accent);border-radius:999px 0 0 999px}
+.meter .seg-pipe{background:repeating-linear-gradient(135deg,var(--accent) 0 2px,transparent 2px 6px);opacity:.75}
+.meter-scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-top:12px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+.legend .k-real{background:var(--accent)} .legend .k-pipe{background:repeating-linear-gradient(135deg,var(--accent) 0 2px,var(--accent-soft) 2px 5px)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.stat .l{font-size:12px;color:var(--muted)} .stat .v{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.goal-note{font-size:12px;color:var(--muted);margin-top:12px}
+
+/* 팔로워 */
+.big{font:600 34px/1.1 var(--sans);letter-spacing:-.02em}
+.delta{font-size:13px;color:var(--ink-2)}
+.spark{position:relative;margin-top:14px}
+.spark svg{display:block;width:100%;height:auto;overflow:visible}
+.spark .tip{position:absolute;top:-6px;transform:translate(-50%,-100%);background:var(--ink);color:var(--paper);font-size:12px;padding:5px 9px;border-radius:7px;white-space:nowrap;pointer-events:none}
+.spark .tip b{font-weight:600}
+.spark-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px}
+
+/* 게시물 */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:2px 9px 2px 8px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap;line-height:1.6}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--dot,var(--muted));flex:none}
+.chip.plain::before{display:none}
+.chip.ad{background:var(--accent-wash);color:var(--accent-ink)}
+.chip.ad::before{display:none}
+.st-idea{--dot:var(--st-idea)}.st-draft{--dot:var(--st-draft)}.st-images{--dot:var(--st-images)}.st-rendered{--dot:var(--st-rendered)}.st-reviewed{--dot:var(--st-reviewed)}.st-approved{--dot:var(--st-approved)}.st-posted{--dot:var(--st-posted)}
+.next-posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pcard{appearance:none;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:var(--r-sm);padding:0;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.pcard:hover{border-color:var(--line-2)}
+.thumb{aspect-ratio:3/4;background:var(--surface-2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;overflow:hidden;position:relative}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .ph{font:600 13px/1.2 var(--display);letter-spacing:.2em}
+.pcard .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.pcard .when{font-size:12px;color:var(--muted)}
+.pcard .hook{font-size:14px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prog{font-size:12px;color:var(--muted)}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .t{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .m{font-size:12px;color:var(--muted)}
+.rates{display:flex;gap:18px;text-align:right}
+.rates .v{font-weight:600;font-size:15px} .rates .l{font-size:11px;color:var(--muted)}
+.due{font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.due.over{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.due.today{background:var(--accent-wash);color:var(--accent-ink)}
+
+/* 캘린더 */
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:2px;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;padding:5px 12px;border-radius:999px;font-size:13px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.cal-nav{display:flex;align-items:center;gap:6px}
+.cal-nav .title{font:500 18px/1 var(--serif);min-width:120px;text-align:center}
+.status-legend{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--line);gap:1px}
+.cal .dow{background:var(--surface-2);font-size:12px;color:var(--muted);text-align:center;padding:8px 0;font-weight:500}
+.cal .dow.sun{color:var(--bad)}
+.day{background:var(--surface);min-height:118px;padding:6px;display:flex;flex-direction:column;gap:4px;cursor:default;text-align:left;border:0;min-width:0}
+.day.out{background:var(--paper)}
+.day.out .dn{opacity:.4}
+.day .dn{font-size:12px;color:var(--muted);font-weight:500;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+.day.today .dn{background:var(--ink);color:var(--paper)}
+.day.sel{box-shadow:inset 0 0 0 2px var(--accent)}
+.pchip{appearance:none;border:0;text-align:left;cursor:pointer;background:var(--surface-2);border-left:3px solid var(--dot);border-radius:5px;padding:3px 6px;font-size:12px;line-height:1.35;color:var(--ink);min-width:0;display:block;width:100%}
+.pchip:hover{background:var(--surface-3)}
+.pchip .tm{color:var(--muted)}
+.pchip .tx{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pchip .tm{display:block;font-size:11px}
+.agenda{margin-top:14px;display:none}
+.plist{display:flex;flex-direction:column;gap:22px}
+.plist h4{font:500 15px var(--serif);margin:0 0 8px}
+.pitem{appearance:none;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;cursor:pointer;margin-bottom:8px;color:var(--ink)}
+.pitem:hover{border-color:var(--line-2)}
+.pitem .thumb{width:44px;border-radius:5px}
+.pitem .thumb .ph{font-size:8px;letter-spacing:.1em}
+.pitem .t{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pitem .m{font-size:12px;color:var(--muted);display:flex;gap:6px 10px;flex-wrap:wrap;align-items:center}
+.pitem .r{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+
+/* 다이얼로그 */
+dialog{border:0;padding:0;border-radius:18px;background:var(--surface);color:var(--ink);width:min(860px,calc(100vw - 32px));max-height:calc(100vh - 48px);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(25,22,19,.45)}
+.dlg{display:flex;flex-direction:column;max-height:calc(100vh - 48px)}
+.dlg-head{display:flex;gap:12px;align-items:flex-start;padding:20px 22px 14px;border-bottom:1px solid var(--line)}
+.dlg-head .kicker{letter-spacing:.02em;font-size:12px;text-transform:none}
+.dlg-head h3{font:500 20px/1.4 var(--serif);margin:4px 0 0;letter-spacing:-.02em}
+.dlg-head .x{margin-left:auto}
+.dlg-body{padding:18px 22px;overflow:auto}
+.dlg-foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;padding:14px 22px;border-top:1px solid var(--line)}
+.dlg-foot .left{margin-right:auto;display:flex;gap:8px}
+.post-detail{display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px}
+.post-detail .thumb{border-radius:var(--r-sm)}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;font-size:13px;margin:0}
+.kv dt{color:var(--muted)} .kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.flags{display:flex;gap:6px;flex-wrap:wrap}
+.imgs{display:flex;gap:6px;flex-wrap:wrap}
+.links{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.sub-h{font:600 13px var(--sans);margin:20px 0 10px;display:flex;align-items:center;gap:10px}
+.sub-h .muted{font-weight:400}
+.check{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--line);align-items:start}
+.check input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent)}
+.check .lb{font-weight:600;font-size:14px}
+.check .dt{font-size:13px;color:var(--ink-2)}
+.check .hint{font-size:12px;color:var(--warn);margin-top:3px}
+.check.na{opacity:.55}
+.check.done .lb{text-decoration:line-through;text-decoration-color:var(--line-2)}
+.progress-line{height:6px;background:var(--accent-soft);border-radius:999px;overflow:hidden;flex:1;max-width:160px}
+.progress-line span{display:block;height:100%;background:var(--accent);border-radius:999px}
+
+/* 칸반 */
+.tools input.board-search{width:220px}
+.kanban{display:grid;grid-template-columns:repeat(6,minmax(160px,1fr));gap:12px;overflow-x:auto;padding-bottom:6px}
+.kanban.closed{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));overflow:visible}
+.kanban.closed .col{min-height:0}
+.closed-h{font:600 13px var(--sans);color:var(--muted);margin:22px 0 10px}
+.col{background:var(--surface-2);border-radius:var(--r);padding:10px;min-height:220px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.col-h{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;padding:2px 4px 4px}
+.col-h .n{font-weight:500;color:var(--muted)}
+.kcard{appearance:none;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 11px;cursor:pointer;display:flex;flex-direction:column;gap:5px;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.kcard:hover{border-color:var(--line-2)}
+.kcard .b{font-weight:600;display:flex;gap:6px;align-items:center;min-width:0}
+.kcard .b span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prio{font:600 11px/1 var(--sans);padding:3px 6px;border-radius:5px;background:var(--surface-2);color:var(--ink-2);flex:none}
+.prio.A{background:var(--ink);color:var(--paper)}
+.kcard .m{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kcard .na{font-size:12px;color:var(--ink-2);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.local{font-size:11px;color:var(--accent-ink);font-weight:600}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.form-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.quick{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px}
+
+/* 성과 기록 */
+.subtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.subtabs button{appearance:none;border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--ink-2)}
+.subtabs button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.form-card{margin-bottom:18px}
+.form-actions{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.form-err{color:var(--bad);font-size:13px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface)}
+table.data{border-collapse:collapse;width:100%;font-size:13px}
+table.data th,table.data td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+table.data th{font-weight:600;font-size:12px;color:var(--muted);background:var(--surface-2);position:sticky;top:0}
+table.data td.n,table.data th.n{text-align:right;font-variant-numeric:tabular-nums}
+table.data td.memo{white-space:normal;min-width:160px;max-width:320px;color:var(--ink-2)}
+table.data tr.loc td{background:var(--accent-wash)}
+table.data tr:last-child td{border-bottom:0}
+.tag{font-size:11px;font-weight:600;padding:1px 6px;border-radius:5px;background:var(--surface-2);color:var(--muted)}
+.tag.loc{background:var(--accent-wash);color:var(--accent-ink)}
+.table-foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--muted)}
+.table-foot .btn{margin-left:auto}
+.calc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.calc-grid .card{padding:16px 18px}
+.mini-table{width:100%;border-collapse:collapse;font-size:13px}
+.mini-table td{padding:6px 0;border-bottom:1px solid var(--line)}
+.mini-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.mini-table tr.total td{font-weight:600;border-bottom:0}
+
+/* 제안 문구 */
+.tpl{display:grid;grid-template-columns:260px minmax(0,1fr);gap:22px;align-items:start}
+.tpl-list{display:flex;flex-direction:column;gap:4px;position:sticky;top:64px}
+.tpl-list button{appearance:none;border:0;background:none;text-align:left;padding:9px 12px;border-radius:9px;cursor:pointer;font-size:14px;color:var(--ink-2)}
+.tpl-list button:hover{background:var(--surface-2)}
+.tpl-list button[aria-pressed=true]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:var(--shadow)}
+.tpl-list .f{display:block;font-size:11px;color:var(--muted);font-weight:400}
+.md{font-size:14px;color:var(--ink-2)}
+.md h4{font:600 14px var(--sans);color:var(--ink);margin:16px 0 6px}
+.md p{margin:6px 0}
+.md ul{margin:6px 0;padding-left:20px}
+.md li{margin:3px 0}
+.md li.sub{margin-left:18px;list-style:circle}
+.md code{font-size:12.5px;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+.md strong{color:var(--ink)}
+.md .table-wrap{margin:8px 0}
+.md table{border-collapse:collapse;font-size:13px;width:100%}
+.md th,.md td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.md th{background:var(--surface-2)}
+details.guide{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:4px 16px;margin-bottom:16px}
+details.guide summary{cursor:pointer;padding:9px 0;font-weight:600;font-size:13px}
+.fills{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:4px 0 14px}
+.codebox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:16px;overflow:hidden}
+.codebox .bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface-2);font-size:12px;color:var(--muted)}
+.codebox .bar .btn{margin-left:auto}
+.codebox pre{margin:0;padding:16px 18px;white-space:pre-wrap;word-break:break-word;font:14px/1.75 var(--sans);color:var(--ink);max-height:560px;overflow:auto}
+.ph{background:var(--accent-wash);color:var(--accent-ink);border-radius:4px;padding:0 2px}
+.ph.filled{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ink)}
+
+footer.wrap{border-top:1px solid var(--line);padding-top:22px;padding-bottom:40px;font-size:12px;color:var(--muted)}
+footer p{margin:4px 0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);padding:11px 16px;border-radius:12px;font-size:13px;max-width:min(560px,calc(100vw - 32px));box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:.25s;z-index:20}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+@media (max-width:1000px){
+  .c-8,.c-4,.c-7,.c-5,.c-6{grid-column:1/-1}
+  .calc-grid{grid-template-columns:1fr}
+  .tpl{grid-template-columns:1fr}
+  .tpl-list{position:static;flex-direction:row;overflow-x:auto;padding-bottom:4px}
+  .tpl-list button{white-space:nowrap}
+  .tpl-list .f{display:none}
+}
+@media (max-width:720px){
+  .wrap{padding:0 16px}
+  .top{padding-top:18px}
+  .wordmark{font-size:22px}
+  main.wrap{padding-top:22px}
+  .sec-head h2{font-size:21px}
+  .sec-head .tools{margin-left:0;width:100%}
+  .card{padding:16px}
+  .hero{font-size:44px}
+  .next-posts{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .pcard .hook{font-size:13px}
+  .day{min-height:58px;padding:4px;cursor:pointer}
+  .day .dn{width:22px;height:22px;font-size:11px}
+  .pchip{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:var(--dot);display:inline-block;margin:0 2px 0 0;pointer-events:none}
+  .pchip .tm,.pchip .tx{display:none}
+  .day .dots{display:flex;flex-wrap:wrap;gap:2px}
+  .agenda{display:block}
+  .post-detail{grid-template-columns:1fr}
+  .post-detail .thumb{max-width:200px}
+  .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .form-grid.two{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .tools input.board-search{width:100%}
+  .kanban,.kanban.closed{display:flex;flex-direction:column;overflow:visible}
+  .col{min-height:0}
+  dialog{width:100vw;max-width:100vw;max-height:100vh;max-height:100dvh;height:100dvh;border-radius:0;margin:0}
+  .dlg{max-height:100dvh;height:100%}
+  .note{flex-wrap:wrap}
+  .note .pill{margin-left:24px}
+}
+@media (max-width:420px){
+  .next-posts{grid-template-columns:1fr 1fr}
+  .next-posts .pcard:nth-child(3){display:none}
+  .rates{gap:10px}
+}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <div class="brand">
+    <span class="wordmark">DOHA DAILYFIT</span>
+    <span class="sub" id="acct">운영 보드</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn" id="btn-backup" type="button">백업(JSON 내보내기)</button>
+    <button class="btn" id="btn-import" type="button">가져오기</button>
+    <input type="file" id="import-file" accept="application/json,.json" hidden>
+  </div>
+</header>
+<div class="wrap"><div class="note" id="storage-note" role="note"></div></div>
+<nav class="tabs" aria-label="보드 메뉴"><div class="wrap" role="tablist" id="tabs"></div></nav>
+<main class="wrap" id="main"></main>
+<footer class="wrap" id="foot"></footer>
+<dialog id="dlg" aria-labelledby="dlg-title"></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="board-data.js"></script>
+<script>
+'use strict';
+(function () {
+  const D = window.DOHA_DATA;
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const PROPS = new Set(['value', 'checked', 'selected', 'disabled', 'hidden', 'open']);
+
+  // ── DOM 도구: 데이터는 항상 textContent/속성으로만 넣는다 (innerHTML 금지) ──
+  function h(tag, props, ...kids) {
+    const el = document.createElement(tag);
+    setProps(el, props);
+    return add(el, kids);
+  }
+  function sv(tag, attrs, ...kids) {
+    const el = document.createElementNS(SVGNS, tag);
+    for (const [k, v] of Object.entries(attrs || {})) if (v != null) el.setAttribute(k, v);
+    return add(el, kids);
+  }
+  function setProps(el, props) {
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v == null || v === false) continue;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+      else if (PROPS.has(k)) el[k] = v;
+      else el.setAttribute(k, v === true ? '' : String(v));
+    }
+  }
+  function add(el, kids) {
+    for (const k of kids.flat(Infinity)) {
+      if (k == null || k === false) continue;
+      el.append(k instanceof Node ? k : String(k));
+    }
+    return el;
+  }
+  const $ = (sel) => document.querySelector(sel);
+
+  // ── 저장소: 이 브라우저 localStorage. 접근이 막혀도 보드는 읽기 전용으로 동작 ──
+  const LS = 'doha.board.v1.';
+  const KEYS = ['checks', 'prospects', 'rows', 'fills', 'ui'];
+  const store = {
+    get(name, fallback) {
+      try { const v = localStorage.getItem(LS + name); return v == null ? fallback : JSON.parse(v); } catch (e) { return fallback; }
+    },
+    set(name, value) {
+      try { localStorage.setItem(LS + name, JSON.stringify(value)); return true; } catch (e) {
+        toast('브라우저 저장소에 쓰지 못했어요 (사생활 보호 모드?). 바로 CSV로 내보내세요.'); return false;
+      }
+    },
+    all() {
+      const out = {};
+      for (const k of KEYS) { const v = store.get(k, undefined); if (v !== undefined) out[k] = v; }
+      return out;
+    },
+  };
+
+  // ── 형식 ──
+  const WD = ['일', '월', '화', '수', '목', '금', '토'];
+  const pad = (n) => String(n).padStart(2, '0');
+  const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const parseDay = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return m ? new Date(+m[1], m[2] - 1, +m[3]) : null; };
+  const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const TODAY = ymd(new Date());
+  const THIS_MONTH = TODAY.slice(0, 7);
+  const dayDiff = (a, b) => Math.round((parseDay(a) - parseDay(b)) / 864e5);
+  const fmtDay = (s) => { const d = parseDay(s); return d ? `${d.getMonth() + 1}월 ${d.getDate()}일 (${WD[d.getDay()]})` : (s || '날짜 없음'); };
+  const fmtShort = (s) => { const d = parseDay(s); return d ? `${d.getMonth() + 1}/${d.getDate()}` : '–'; };
+  const fmtMonth = (m) => `${m.slice(0, 4)}년 ${+m.slice(5, 7)}월`;
+  const krw = (n) => n == null ? '–' : (n < 0 ? '−₩' : '₩') + Math.abs(Math.round(n)).toLocaleString('ko-KR');
+  const int = (n) => n == null ? '–' : Math.round(n).toLocaleString('ko-KR');
+  const pct = (r, digits = 1) => r == null || !isFinite(r) ? '–' : (r * 100).toFixed(digits) + '%';
+  function num(v) {
+    const s = String(v ?? '').replace(/[,\s%₩원$]/g, '');
+    if (!s) return null;
+    const f = Number(s);
+    return Number.isFinite(f) ? f : null;
+  }
+
+  function toast(msg) {
+    const t = $('#toast');
+    t.textContent = msg; t.classList.add('on');
+    clearTimeout(toast.timer); toast.timer = setTimeout(() => t.classList.remove('on'), 4200);
+  }
+  function download(name, text, type) {
+    const url = URL.createObjectURL(new Blob([text], { type }));
+    const a = h('a', { href: url, download: name });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return true; }
+    } catch (e) { /* file:// 등에서 막히면 아래 방식 */ }
+    const ta = h('textarea', { style: 'position:fixed;top:-1000px;opacity:0' });
+    ta.value = text; document.body.append(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    ta.remove(); return ok;
+  }
+
+  if (!D) {
+    $('#main').append(h('div', { class: 'card' },
+      h('h3', { text: '보드 데이터가 없어요' }),
+      h('p', null, '저장소 루트에서 ', h('code', { text: 'python doha.py board' }), ' 를 실행하면 board-data.js 가 만들어져요. 그다음 이 파일을 새로고침하세요.')));
+    $('#storage-note').remove();
+    return;
+  }
+
+  const E = D.enums;
+  const KINDS = ['metrics', 'followers', 'revenue', 'costs'];
+  const FILES = { metrics: 'tracking/metrics.csv', followers: 'tracking/followers.csv', revenue: 'tracking/revenue.csv', costs: 'tracking/costs.csv', prospects: 'outreach/prospects.csv' };
+  const norm = (kind, v) => { const s = String(v ?? '').trim(); return ((E.aliases || {})[kind] || {})[s] || s.toLowerCase(); };
+  const POSTS = D.posts.slice();
+  const POST_BY_ID = new Map(POSTS.map((p) => [p.id, p]));
+
+  // ── 상태 (localStorage 오버레이) ──
+  const S = {
+    checks: obj(store.get('checks', {})),
+    prospects: obj(store.get('prospects', {})),
+    rows: obj(store.get('rows', {})),
+    fills: obj(store.get('fills', {})),
+    ui: Object.assign({ tab: 'dashboard', calView: 'month', calMonth: '', ledger: 'metrics', template: '', calcMonth: '' }, obj(store.get('ui', {}))),
+  };
+  for (const k of KINDS) if (!Array.isArray(S.rows[k])) S.rows[k] = [];
+  function obj(v) { return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; }
+  const saveUI = () => store.set('ui', S.ui);
+
+  // CSV에 이미 반영된(같은 내용이 board-data.js에 들어온) 로컬 변경은 정리한다
+  function reconcile() {
+    let n = 0;
+    for (const kind of KINDS) {
+      const cols = D.schemas[kind];
+      const key = (r) => cols.map((c) => String(r[c] ?? '').trim()).join('\u0001');
+      const seed = new Set(D[kind].map(key));
+      const before = S.rows[kind].length;
+      S.rows[kind] = S.rows[kind].filter((r) => !seed.has(key(r)));
+      n += before - S.rows[kind].length;
+    }
+    for (const [brand, o] of Object.entries(S.prospects)) {
+      const seed = D.prospects.find((r) => r.brand === brand);
+      if (!seed) continue;
+      const diff = prospectDiff(seed, o);
+      if (!Object.keys(diff).length) { delete S.prospects[brand]; n++; } else S.prospects[brand] = diff;
+    }
+    if (n) {
+      store.set('rows', S.rows); store.set('prospects', S.prospects);
+      setTimeout(() => toast(`CSV에 반영된 로컬 변경 ${n}건을 정리했어요.`), 300);
+    }
+  }
+  function prospectDiff(seed, o) {
+    const diff = {};
+    for (const c of D.schemas.prospects) if (c !== 'brand' && c in o && String(o[c] ?? '') !== String(seed[c] ?? '')) diff[c] = o[c];
+    return diff;
+  }
+  function localCount() {
+    return KINDS.reduce((n, k) => n + S.rows[k].length, 0) + Object.keys(S.prospects).length;
+  }
+
+  // ── 데이터 계산 ──
+  function rowsOf(kind) {
+    return [...D[kind].map((r) => ({ ...r })), ...S.rows[kind].map((r) => ({ ...r, _local: true }))];
+  }
+  function netOf(r) {
+    const net = num(r.net_krw), gross = num(r.gross_krw);
+    return net != null ? net : gross != null ? gross - (num(r.withholding_krw) || 0) : null;
+  }
+  function costKrw(c) {
+    const k = num(c.amount_krw); if (k != null) return k;
+    const u = num(c.amount_usd); return u != null && D.fx_usd_krw ? Math.round(u * D.fx_usd_krw) : null;
+  }
+  function monthEnd(m) { const d = new Date(+m.slice(0, 4), +m.slice(5, 7), 0); return ymd(d); }
+  function money(month) {
+    const end = monthEnd(month);
+    const rev = rowsOf('revenue').map((r) => ({ ...r, t: norm('type', r.type), st: norm('status', r.status), d: String(r.date || '').slice(0, 10), net: netOf(r), gross: num(r.gross_krw) }));
+    const realized = rev.filter((r) => r.d.slice(0, 7) === month && r.st === 'paid' && r.t !== 'gifted');
+    const byType = {};
+    for (const r of realized) { const k = r.t || 'other'; byType[k] = (byType[k] || 0) + (r.net || 0); }
+    const pipeline = rev.filter((r) => (r.st === 'contracted' || r.st === 'invoiced') && r.t !== 'gifted' && r.d && r.d <= end);
+    const gifted = rev.filter((r) => r.d.slice(0, 7) === month && r.t === 'gifted' && r.st !== 'cancelled');
+    const costs = rowsOf('costs').filter((c) => String(c.date || '').slice(0, 7) === month);
+    const byCat = {}; let fxRows = 0;
+    for (const c of costs) {
+      const k = costKrw(c); if (k == null) continue;
+      const cat = norm('category', c.category) || 'other';
+      byCat[cat] = (byCat[cat] || 0) + k;
+      if (num(c.amount_krw) == null) fxRows++;
+    }
+    const realizedNet = Object.values(byType).reduce((a, b) => a + b, 0);
+    const costsTotal = Object.values(byCat).reduce((a, b) => a + b, 0);
+    const pipelineNet = pipeline.reduce((a, r) => a + (r.net || 0), 0);
+    const goal = D.goal.monthly_net_krw || 0;
+    const net = realizedNet - costsTotal;
+    return { month, realized, byType, realizedNet, pipeline, pipelineNet, gifted, byCat, costsTotal, fxRows, net, goal, progress: goal ? net / goal : null };
+  }
+  function followerSeries() {
+    const pts = new Map();
+    for (const r of rowsOf('followers').sort((a, b) => String(a.date).localeCompare(String(b.date)))) {
+      const n = num(r.followers); const d = parseDay(r.date);
+      if (n != null && d) pts.set(ymd(d), n);
+    }
+    return [...pts.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([date, n]) => ({ date, n }));
+  }
+  const FMT_KO = E.formats;
+  function rateRow(r) {
+    const reach = num(r.reach);
+    const ratio = (c) => { const v = num(r[c]); return v != null && reach ? v / reach : null; };
+    const eng = ['likes', 'comments', 'saves', 'shares'].map((c) => num(r[c])).filter((v) => v != null);
+    return { reach, save: ratio('saves'), share: ratio('shares'), follow: ratio('follows'), eng: eng.length && reach ? eng.reduce((a, b) => a + b, 0) / reach : null };
+  }
+  // 게시물(카드뉴스·릴스 따로)별 대표 기록: 7d → 24h → 30d 중 도달이 있는 첫 시점 (metrics 리포트와 같은 규칙)
+  function postRates() {
+    const groups = new Map();
+    for (const r of rowsOf('metrics')) {
+      if (!r.post_id) continue;
+      const p = POST_BY_ID.get(r.post_id);
+      let f = String(r.format || '').toLowerCase();
+      if (!FMT_KO[f]) f = p && FMT_KO[p.format] ? p.format : '';
+      const key = r.post_id + '|' + f;
+      if (!groups.has(key)) groups.set(key, { post_id: r.post_id, format: f, by: {} });
+      groups.get(key).by[String(r.checkpoint || '').toLowerCase()] = r;
+    }
+    const out = [];
+    for (const g of groups.values()) {
+      const pref = ['7d', '24h', '30d'].filter((c) => g.by[c]);
+      if (!pref.length) continue;
+      const cp = pref.find((c) => num(g.by[c].reach)) || pref[0];
+      const p = POST_BY_ID.get(g.post_id);
+      out.push({ ...g, cp, row: g.by[cp], rates: rateRow(g.by[cp]), date: p ? p.date : String(g.by[cp].recorded_at || '').slice(0, 10), hook: p ? p.hook : g.post_id });
+    }
+    return out.sort((a, b) => b.date.localeCompare(a.date));
+  }
+  function prospects() {
+    const seedBrands = new Set(D.prospects.map((r) => r.brand));
+    const out = D.prospects.map((r) => S.prospects[r.brand] ? { ...r, ...S.prospects[r.brand], brand: r.brand, _edited: true } : { ...r });
+    for (const [brand, o] of Object.entries(S.prospects)) {
+      if (!seedBrands.has(brand) && o._new) out.push({ ...Object.fromEntries(D.schemas.prospects.map((c) => [c, ''])), ...o, brand, _new: true, _edited: true });
+    }
+    return out;
+  }
+  function dueOf(p) { const m = /^\s*(\d{4}-\d{2}-\d{2})/.exec(p.next_action || ''); return m ? m[1] : ''; }
+  function dueChip(date) {
+    const d = dayDiff(date, TODAY);
+    const text = d < 0 ? `${-d}일 지남` : d === 0 ? '오늘' : `${d}일 뒤`;
+    return h('span', { class: 'due' + (d < 0 ? ' over' : d === 0 ? ' today' : ''), text });
+  }
+
+  // 체크리스트
+  function applicable(item, p) {
+    if (item.applies === 'products') return p.products > 0;
+    if (item.applies === 'reel') return p.format === 'reel' || p.format === 'both';
+    return true;
+  }
+  function checkProgress(p) {
+    const items = D.checklist.filter((i) => applicable(i, p));
+    const st = S.checks[p.id] || {};
+    return { done: items.filter((i) => st[i.id]).length, total: items.length };
+  }
+  const fill = (s, p) => String(s || '').replace(/\{(label|date|time)\}/g, (_, k) => (k === 'label' ? p.disclosure_label || '표시' : k === 'date' ? fmtDay(p.date) : p.time || ''));
+
+  // ── 공통 조각 ──
+  const statusChip = (s) => h('span', { class: 'chip st-' + s, text: E.post_status[s] || s || '상태 없음' });
+  function thumb(p) {
+    const box = h('div', { class: 'thumb' });
+    const ph = () => box.replaceChildren(h('span', { class: 'ph', text: 'DOHA' }));
+    if (p && p.thumb) {
+      const img = h('img', { src: p.thumb, alt: '', loading: 'lazy' });
+      img.addEventListener('error', ph);
+      box.append(img);
+    } else ph();
+    return box;
+  }
+  function flagChips(p) {
+    const d = p.disclosure || {};
+    return [
+      d.paid && h('span', { class: 'chip ad', text: '광고' + (d.brand ? ' · ' + d.brand : '') }),
+      !d.paid && d.gifted && h('span', { class: 'chip ad', text: '협찬' + (d.brand ? ' · ' + d.brand : '') }),
+      d.affiliate && h('span', { class: 'chip ad', text: '제휴 링크' }),
+    ];
+  }
+  function secHead(kicker, title, desc, tools) {
+    return h('div', { class: 'sec-head' },
+      h('div', null, h('span', { class: 'kicker', text: kicker }), h('h2', { text: title }), desc && h('p', { class: 'desc', text: desc })),
+      tools && h('div', { class: 'tools' }, tools));
+  }
+  const empty = (text) => h('div', { class: 'empty', text });
+  function exportCsv(kind, rows) {
+    const cols = D.schemas[kind];
+    const q = (v) => { const s = String(v ?? ''); return /[",\r\n]|^\s|\s$/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const text = [cols.join(','), ...rows.map((r) => cols.map((c) => q(r[c])).join(','))].join('\n') + '\n';
+    const file = FILES[kind];
+    download(file.split('/').pop(), text, 'text/csv;charset=utf-8');
+    toast(`${file.split('/').pop()} 를 내려받았어요. 저장소의 ${file} 를 이 파일로 바꾸고 커밋한 뒤 python doha.py board 를 다시 실행하세요.`);
+  }
+
+  // ── 다이얼로그 ──
+  const dlg = $('#dlg');
+  let onDlgClose = null;
+  function openDialog(kicker, title, body, foot) {
+    dlg.replaceChildren(h('div', { class: 'dlg' },
+      h('div', { class: 'dlg-head' },
+        h('div', null, h('span', { class: 'kicker', text: kicker }), h('h3', { id: 'dlg-title', text: title })),
+        h('button', { class: 'btn ghost x', type: 'button', 'aria-label': '닫기', text: '닫기', onclick: () => dlg.close() })),
+      h('div', { class: 'dlg-body' }, body),
+      foot && h('div', { class: 'dlg-foot' }, foot)));
+    if (!dlg.open) dlg.showModal();
+    dlg.querySelector('.dlg-body').scrollTop = 0;
+  }
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', () => { const f = onDlgClose; onDlgClose = null; if (f) f(); });
+
+  // ── 탭 ──
+  const TABS = [
+    ['dashboard', '대시보드', renderDashboard],
+    ['calendar', '콘텐츠 캘린더', renderCalendar],
+    ['pipeline', '브랜드 파이프라인', renderPipeline],
+    ['records', '성과 기록', renderRecords],
+    ['templates', '제안 문구', renderTemplates],
+  ];
+  function current() { const t = location.hash.slice(1); return TABS.some((x) => x[0] === t) ? t : (TABS.some((x) => x[0] === S.ui.tab) ? S.ui.tab : 'dashboard'); }
+  function render() {
+    const tab = current();
+    $('#tabs').replaceChildren(...TABS.map(([id, label]) => h('button', {
+      class: 'tab', role: 'tab', type: 'button', 'aria-selected': String(id === tab), text: label,
+      onclick: () => { if (location.hash !== '#' + id) location.hash = id; else render(); },
+    })));
+    const main = $('#main');
+    main.replaceChildren(TABS.find((x) => x[0] === tab)[2]());
+    S.ui.tab = tab; saveUI();
+    renderNote();
+  }
+  window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+
+  function renderNote() {
+    const n = localCount();
+    $('#storage-note').replaceChildren(
+      h('span', { 'aria-hidden': 'true', text: 'ⓘ' }),
+      h('span', null, h('b', { text: '보드에서 고친 내용은 이 브라우저에만 저장돼요. ' }),
+        '다른 기기로 이어지지 않고 사이트 데이터를 지우면 사라져요. ‘CSV 내보내기’로 저장소 파일을 바꾸고 커밋해야 남아요.'),
+      h('span', { class: 'chip plain pill', text: n ? `CSV 미반영 로컬 변경 ${n}건` : '로컬 변경 없음' }));
+  }
+
+  // ── 1. 대시보드 ──
+  function renderDashboard() {
+    const m = money(THIS_MONTH);
+    const goal = m.goal;
+    const realW = goal ? Math.min(Math.max(m.net, 0) / goal, 1) : 0;
+    const pipeW = goal ? Math.min(Math.max(m.pipelineNet, 0) / goal, 1 - realW) : 0;
+    const goalCard = h('section', { class: 'card c-8' },
+      h('h3', null, `이번 달 순수익 · ${fmtMonth(THIS_MONTH)}`, h('span', { class: 'muted', text: '실현 수익(입금) − 비용' })),
+      h('div', { class: 'hero', text: krw(m.net) }),
+      h('div', { class: 'hero-sub' }, `목표 ${krw(goal)}의 `, h('b', { text: m.progress == null ? '–' : pct(Math.max(m.progress, 0), 1) }),
+        m.net < 0 ? ' · 비용이 수익보다 많아요' : '', m.pipelineNet > 0 ? ` · 파이프라인 ${krw(m.pipelineNet)} 대기` : ''),
+      h('div', { class: 'meter', role: 'img', 'aria-label': `목표 대비 실현 ${pct(realW)}, 파이프라인 ${pct(pipeW)}` },
+        realW > 0 && h('span', { class: 'seg-real', style: `width:${(realW * 100).toFixed(2)}%`, title: `실현 순수익 ${krw(m.net)}` }),
+        pipeW > 0 && h('span', { class: 'seg-pipe', style: `width:${(pipeW * 100).toFixed(2)}%`, title: `파이프라인 ${krw(m.pipelineNet)}` })),
+      h('div', { class: 'meter-scale' }, h('span', { text: '₩0' }), h('span', { text: `목표 ${krw(goal)}` })),
+      h('div', { class: 'legend' }, h('span', null, h('i', { class: 'k-real' }), '실현 순수익'), h('span', null, h('i', { class: 'k-pipe' }), '파이프라인 (계약·청구, 입금 전)')),
+      h('div', { class: 'stats' },
+        stat('실현 수익 (원천징수 후)', krw(m.realizedNet)), stat('비용', krw(m.costsTotal)), stat('파이프라인 (원천징수 후)', krw(m.pipelineNet))),
+      h('p', { class: 'goal-note', text: `${D.goal.note} 파이프라인은 확정 수익이 아니에요.` }));
+
+    const fs = followerSeries();
+    const last = fs[fs.length - 1];
+    const followerCard = h('section', { class: 'card c-4' },
+      h('h3', null, '팔로워', h('span', { class: 'muted', text: last ? `${fmtShort(last.date)} 기록` : '' })),
+      last ? [h('div', { class: 'big', text: int(last.n) }),
+        h('div', { class: 'delta', text: fs.length > 1 ? `첫 기록(${fmtShort(fs[0].date)}) 대비 ${signed(last.n - fs[0].n)}명` : '기록 1개' })] : null,
+      fs.length > 1 ? [sparkline(fs), followerStats(fs)] : empty(fs.length ? '두 번 이상 기록하면 추세선이 보여요. 성과 기록 → 팔로워' : '아직 팔로워 기록이 없어요. 성과 기록 → 팔로워에서 추가하세요.'));
+
+    const upcoming = POSTS.filter((p) => p.status !== 'posted' && p.date >= TODAY).slice(0, 3);
+    const nextCard = h('section', { class: 'card c-7' },
+      h('h3', null, '다음 게시 3개', h('span', { class: 'muted', text: '앱에서 직접 게시' })),
+      upcoming.length ? h('div', { class: 'next-posts' }, upcoming.map((p) => {
+        const pr = checkProgress(p);
+        return h('button', { class: 'pcard', type: 'button', onclick: () => openPost(p.id) },
+          thumb(p),
+          h('div', { class: 'body' },
+            h('span', { class: 'when', text: `${fmtDay(p.date)} ${p.time}` }),
+            h('span', { class: 'hook', text: p.hook || p.id }),
+            h('div', { class: 'flags' }, statusChip(p.status), flagChips(p)),
+            h('span', { class: 'prog', text: `체크 ${pr.done}/${pr.total}` })));
+      })) : empty('예정된 게시물이 없어요. python doha.py new 로 만들어요.'));
+
+    const fu = prospects().filter((p) => p.status !== '거절' && dueOf(p) && dayDiff(dueOf(p), TODAY) <= 7)
+      .sort((a, b) => dueOf(a).localeCompare(dueOf(b)));
+    const fuCard = h('section', { class: 'card c-5' },
+      h('h3', null, '브랜드 팔로업', h('span', { class: 'muted', text: '7일 안 · next_action 기준' })),
+      fu.length ? h('div', { class: 'rows' }, fu.slice(0, 6).map((p) => h('div', { class: 'row' },
+        h('div', { style: 'min-width:0' }, h('div', { class: 't', text: p.brand }), h('div', { class: 'm', text: `${p.status || '후보'} · ${p.next_action}` })),
+        dueChip(dueOf(p))))) : empty(D.prospects.length || Object.keys(S.prospects).length ? '7일 안에 할 팔로업이 없어요.' : '브랜드 후보가 아직 없어요. 브랜드 파이프라인에서 추가하세요.'));
+
+    const recent = recentPosts();
+    const recentCard = h('section', { class: 'card c-12' },
+      h('h3', null, '최근 게시물 5개', h('span', { class: 'muted', text: '대표 시점 7d → 24h → 30d · 비율 = ÷ 도달' })),
+      recent.length ? h('div', { class: 'rows' }, recent.map((r) => h('div', { class: 'row' },
+        h('div', { style: 'min-width:0' },
+          h('div', { class: 't', text: r.hook }),
+          h('div', { class: 'm', text: [fmtDay(r.date), FMT_KO[r.format] || '', r.cp ? `${r.cp} 기록` : '지표 미입력', r.rates && r.rates.reach ? `도달 ${int(r.rates.reach)}` : ''].filter(Boolean).join(' · ') })),
+        h('div', { class: 'rates' },
+          rateCell('저장률', r.rates && r.rates.save), rateCell('공유율', r.rates && r.rates.share), rateCell('참여율', r.rates && r.rates.eng))))) : empty('아직 게시했거나 지표를 기록한 게시물이 없어요. 게시 후 24시간·7일 지표를 성과 기록에 적어요.'));
+
+    const warn = D.warnings && D.warnings.length ? h('details', { class: 'note warn c-12' },
+      h('summary', { text: `데이터 주의 ${D.warnings.length}건 (python doha.py board 출력과 같아요)` }),
+      h('ul', null, D.warnings.map((w) => h('li', { text: w })))) : null;
+    return h('div', null,
+      secHead('Overview', '대시보드', `${fmtDay(TODAY)} 기준 · 목표 월 순수익 ${krw(goal)}`),
+      h('div', { class: 'grid' }, goalCard, followerCard, nextCard, fuCard, recentCard, warn));
+  }
+  function followerStats(fs) {
+    const last = fs[fs.length - 1];
+    const before = fs.filter((p) => p.date.slice(0, 7) < THIS_MONTH).pop();
+    const inMonth = fs.filter((p) => p.date.slice(0, 7) === THIS_MONTH);
+    const start = before || inMonth[0];
+    const days = dayDiff(last.date, fs[0].date);
+    return h('div', { class: 'stats', style: 'grid-template-columns:1fr 1fr' },
+      stat('이번 달 변화', start && inMonth.length && start !== last ? signed(last.n - start.n) + '명' : '–'),
+      stat('주당 평균', days >= 7 ? signed(Math.round((last.n - fs[0].n) / days * 7)) + '명' : '7일 이상 기록 필요'));
+  }
+  const stat = (l, v) => h('div', { class: 'stat' }, h('div', { class: 'l', text: l }), h('div', { class: 'v', text: v }));
+  const signed = (n) => (n > 0 ? '+' : n < 0 ? '−' : '±') + Math.abs(n).toLocaleString('ko-KR');
+  const rateCell = (l, v) => h('div', null, h('div', { class: 'v', text: pct(v) }), h('div', { class: 'l', text: l }));
+  function recentPosts() {
+    const rates = postRates();
+    const seen = new Set(rates.map((r) => r.post_id));
+    const posted = POSTS.filter((p) => (p.status === 'posted' || p.posted.url) && !seen.has(p.id))
+      .map((p) => ({ post_id: p.id, format: p.format, date: p.date, hook: p.hook, cp: '', rates: null }));
+    return [...rates, ...posted].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
+  }
+  function sparkline(pts) {
+    const W = 320, H = 90, P = 6;
+    const t0 = parseDay(pts[0].date).getTime(), t1 = parseDay(pts[pts.length - 1].date).getTime();
+    const vals = pts.map((p) => p.n), lo = Math.min(...vals), hi = Math.max(...vals);
+    const x = (p) => P + (t1 > t0 ? (parseDay(p.date).getTime() - t0) / (t1 - t0) : 0.5) * (W - 2 * P);
+    const y = (p) => H - P - (hi > lo ? (p.n - lo) / (hi - lo) : 0.5) * (H - 2 * P);
+    const line = pts.map((p, i) => `${i ? 'L' : 'M'}${x(p).toFixed(1)},${y(p).toFixed(1)}`).join('');
+    const end = pts[pts.length - 1];
+    const cross = sv('line', { y1: 0, y2: H, stroke: 'var(--line-2)', 'stroke-width': 1, visibility: 'hidden', 'vector-effect': 'non-scaling-stroke' });
+    const dot = sv('circle', { r: 4, fill: 'var(--accent)', stroke: 'var(--surface)', 'stroke-width': 2, cx: x(end), cy: y(end) });
+    const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': `팔로워 추세: ${pts.map((p) => `${fmtShort(p.date)} ${p.n}명`).join(', ')}` },
+      sv('path', { d: `${line}L${x(end).toFixed(1)},${H}L${x(pts[0]).toFixed(1)},${H}Z`, fill: 'var(--accent)', 'fill-opacity': 0.1 }),
+      sv('path', { d: line, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', 'vector-effect': 'non-scaling-stroke' }),
+      cross, dot);
+    const tip = h('div', { class: 'tip', hidden: true });
+    const wrap = h('div', { class: 'spark', tabindex: 0 }, svg, tip,
+      h('div', { class: 'spark-axis' }, h('span', { text: fmtShort(pts[0].date) }), h('span', { text: `최저 ${int(lo)} · 최고 ${int(hi)}` }), h('span', { text: fmtShort(end.date) })));
+    const show = (i) => {
+      const p = pts[i], prev = pts[i - 1];
+      const rect = svg.getBoundingClientRect(); const sx = rect.width / W;
+      cross.setAttribute('x1', x(p)); cross.setAttribute('x2', x(p)); cross.setAttribute('visibility', 'visible');
+      dot.setAttribute('cx', x(p)); dot.setAttribute('cy', y(p));
+      tip.hidden = false;
+      tip.replaceChildren(h('b', { text: `${int(p.n)}명` }), ` · ${fmtShort(p.date)}${prev ? ' · ' + signed(p.n - prev.n) : ''}`);
+      tip.style.left = Math.min(Math.max(x(p) * sx, 50), rect.width - 50) + 'px';
+    };
+    const hide = () => { tip.hidden = true; cross.setAttribute('visibility', 'hidden'); dot.setAttribute('cx', x(end)); dot.setAttribute('cy', y(end)); };
+    const nearest = (cx) => { let best = 0, bd = Infinity; pts.forEach((p, i) => { const d = Math.abs(x(p) - cx); if (d < bd) { bd = d; best = i; } }); return best; };
+    svg.addEventListener('pointermove', (e) => { const r = svg.getBoundingClientRect(); show(nearest((e.clientX - r.left) * W / r.width)); });
+    svg.addEventListener('pointerleave', hide);
+    let ki = pts.length - 1;
+    wrap.addEventListener('focus', () => show(ki));
+    wrap.addEventListener('blur', hide);
+    wrap.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { ki = Math.min(Math.max(ki + (e.key === 'ArrowLeft' ? -1 : 1), 0), pts.length - 1); show(ki); e.preventDefault(); } });
+    return wrap;
+  }
+
+  // ── 2. 콘텐츠 캘린더 ──
+  let selDay = '';
+  function renderCalendar() {
+    const month = S.ui.calMonth || THIS_MONTH;
+    const view = S.ui.calView === 'list' ? 'list' : 'month';
+    const go = (delta) => { const d = new Date(+month.slice(0, 4), +month.slice(5, 7) - 1 + delta, 1); S.ui.calMonth = ymd(d).slice(0, 7); selDay = ''; render(); };
+    const counts = {};
+    for (const p of POSTS) counts[p.status] = (counts[p.status] || 0) + 1;
+    const tools = [
+      h('div', { class: 'seg', role: 'group', 'aria-label': '보기' },
+        h('button', { type: 'button', 'aria-pressed': String(view === 'month'), text: '월간', onclick: () => { S.ui.calView = 'month'; render(); } }),
+        h('button', { type: 'button', 'aria-pressed': String(view === 'list'), text: '목록', onclick: () => { S.ui.calView = 'list'; render(); } })),
+    ];
+    const head = secHead('Content', '콘텐츠 캘린더', '게시물을 누르면 상세와 게시 전 체크리스트가 열려요. 체크 상태는 이 브라우저에 저장돼요.', tools);
+    const legend = h('div', { class: 'status-legend' }, Object.keys(E.post_status).filter((s) => counts[s]).map((s) =>
+      h('span', { class: 'chip st-' + s, text: `${E.post_status[s]} ${counts[s]}` })));
+    if (view === 'list') return h('div', null, head, legend, postList());
+
+    const first = new Date(+month.slice(0, 4), +month.slice(5, 7) - 1, 1);
+    const start = addDays(first, -((first.getDay() + 6) % 7));
+    const last = new Date(first.getFullYear(), first.getMonth() + 1, 0);
+    const end = addDays(last, 6 - ((last.getDay() + 6) % 7));
+    const byDate = {};
+    for (const p of POSTS) (byDate[p.date] = byDate[p.date] || []).push(p);
+    const cells = [];
+    for (let d = start; d <= end; d = addDays(d, 1)) {
+      const key = ymd(d), list = byDate[key] || [];
+      const cls = ['day', d.getMonth() !== first.getMonth() && 'out', key === TODAY && 'today', key === selDay && 'sel'].filter(Boolean).join(' ');
+      cells.push(h('div', { class: cls, onclick: list.length ? () => { selDay = key; render(); } : null, 'aria-label': `${fmtDay(key)} 게시물 ${list.length}개` },
+        h('span', { class: 'dn', text: d.getDate() }),
+        h('div', { class: 'dots' }, list.map((p) => h('button', {
+          class: 'pchip st-' + p.status, type: 'button', title: `${p.time} ${p.hook} (${E.post_status[p.status] || p.status})`,
+          onclick: (e) => { e.stopPropagation(); openPost(p.id); },
+        }, h('span', { class: 'tm', text: p.time }), h('span', { class: 'tx', text: p.hook || p.id }))))));
+    }
+    const nav = h('div', { class: 'cal-nav' },
+      h('button', { class: 'btn sm', type: 'button', 'aria-label': '이전 달', text: '‹', onclick: () => go(-1) }),
+      h('span', { class: 'title', text: fmtMonth(month) }),
+      h('button', { class: 'btn sm', type: 'button', 'aria-label': '다음 달', text: '›', onclick: () => go(1) }),
+      month !== THIS_MONTH && h('button', { class: 'btn sm ghost', type: 'button', text: '이번 달', onclick: () => { S.ui.calMonth = ''; render(); } }));
+    const agendaPosts = selDay ? (byDate[selDay] || []) : POSTS.filter((p) => p.date.slice(0, 7) === month);
+    return h('div', null, head,
+      h('div', { style: 'display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px' }, nav, legend),
+      h('div', { class: 'cal' }, ['월', '화', '수', '목', '금', '토', '일'].map((w) => h('div', { class: 'dow' + (w === '일' ? ' sun' : ''), text: w })), cells),
+      h('div', { class: 'agenda' },
+        h('div', { class: 'sub-h', text: selDay ? fmtDay(selDay) : `${fmtMonth(month)} 게시물 ${agendaPosts.length}개` }),
+        agendaPosts.length ? agendaPosts.map(postItem) : empty('이 달에는 게시물이 없어요.')));
+  }
+  function postList() {
+    if (!POSTS.length) return empty('content/posts 에 게시물이 없어요.');
+    const groups = {};
+    for (const p of POSTS) (groups[p.date.slice(0, 7) || '날짜 없음'] = groups[p.date.slice(0, 7) || '날짜 없음'] || []).push(p);
+    return h('div', { class: 'plist' }, Object.entries(groups).map(([m, list]) =>
+      h('section', null, h('h4', { text: /^\d{4}-\d{2}$/.test(m) ? fmtMonth(m) : m }), list.map(postItem))));
+  }
+  function postItem(p) {
+    const pr = checkProgress(p);
+    return h('button', { class: 'pitem', type: 'button', onclick: () => openPost(p.id) },
+      thumb(p),
+      h('div', { style: 'min-width:0' },
+        h('div', { class: 't', text: p.hook || p.id }),
+        h('div', { class: 'm' }, h('span', { text: `${fmtDay(p.date)} ${p.time}` }), h('span', { text: [FMT_KO[p.format] || (p.format === 'both' ? '카드뉴스+릴스' : p.format), p.series, p.pillar].filter(Boolean).join(' · ') }), flagChips(p))),
+      h('div', { class: 'r' }, statusChip(p.status), h('span', { class: 'prog', text: `체크 ${pr.done}/${pr.total}` })));
+  }
+  const FMT_LONG = { carousel: '카드뉴스', reel: '릴스', both: '카드뉴스 + 릴스' };
+  const GOAL_KO = { save: '저장', share: '공유', follow: '팔로우', click: '링크 클릭', reach: '도달' };
+  const IMG_KO = { todo: '할 일', generated: '생성됨', approved: '승인', rejected: '반려' };
+  function openPost(id) {
+    const p = POST_BY_ID.get(id); if (!p) return;
+    const st = S.checks[id] || {};
+    const progText = h('span', { class: 'muted' });
+    const bar = h('span');
+    const upd = () => { const pr = checkProgress(p); progText.textContent = `${pr.done}/${pr.total}`; bar.style.width = (pr.total ? pr.done / pr.total * 100 : 0) + '%'; };
+    const items = D.checklist.map((it) => {
+      const ok = applicable(it, p);
+      const detail = !ok ? `해당 없음 — ${it.na || ''}` : it.applies === 'ad' && !p.ad ? it.plain : fill(it.detail, p);
+      const hint = ok && p.hints[it.id];
+      const cb = h('input', { type: 'checkbox', id: 'ck-' + it.id, checked: !!(ok && st[it.id]), disabled: !ok });
+      const row = h('label', { class: 'check' + (ok ? '' : ' na') + (cb.checked ? ' done' : ''), for: 'ck-' + it.id }, cb,
+        h('div', null, h('div', { class: 'lb', text: it.label }), h('div', { class: 'dt', text: detail }), hint && h('div', { class: 'hint', text: '주의: ' + hint })));
+      cb.addEventListener('change', () => {
+        const cur = S.checks[id] = S.checks[id] || {};
+        if (cb.checked) cur[it.id] = true; else delete cur[it.id];
+        if (!Object.keys(cur).length) delete S.checks[id];
+        store.set('checks', S.checks); row.classList.toggle('done', cb.checked); upd();
+      });
+      return row;
+    });
+    upd();
+    const links = [
+      p.links.preview && h('a', { class: 'btn sm', href: p.links.preview, target: '_blank', rel: 'noopener', text: '휴대폰 미리보기' }),
+      p.links.contact_sheet && h('a', { class: 'btn sm', href: p.links.contact_sheet, target: '_blank', rel: 'noopener', text: '연락시트' }),
+      p.links.caption && h('a', { class: 'btn sm', href: p.links.caption, target: '_blank', rel: 'noopener', text: '캡션' }),
+      p.links.reel && h('a', { class: 'btn sm', href: p.links.reel, target: '_blank', rel: 'noopener', text: '릴스' }),
+      /^https:\/\//.test(p.posted.url) && h('a', { class: 'btn sm', href: p.posted.url, target: '_blank', rel: 'noopener', text: '게시물 보기' }),
+      h('button', { class: 'btn sm', type: 'button', text: '빌드 명령 복사', onclick: async () => toast(await copyText(`python doha.py build ${p.id}`) ? '복사했어요: python doha.py build …' : '복사하지 못했어요.') }),
+    ];
+    const d = p.disclosure;
+    const body = h('div', { class: 'post-detail' },
+      h('div', null, thumb(p), h('p', { class: 'small muted', text: p.rendered_slides ? `렌더링된 슬라이드 ${p.rendered_slides}장 중 1번` : '아직 렌더링 전이에요.' })),
+      h('div', null,
+        h('div', { class: 'flags', style: 'margin-bottom:12px' }, statusChip(p.status), flagChips(p), d.ai_persona && h('span', { class: 'chip plain', text: 'AI 가상인물 표시' })),
+        h('dl', { class: 'kv' },
+          h('dt', { text: '게시 예정' }), h('dd', { text: `${fmtDay(p.date)} ${p.time} KST` }),
+          h('dt', { text: '시리즈 · 기둥' }), h('dd', { text: [p.series, p.pillar].filter(Boolean).join(' · ') || '–' }),
+          h('dt', { text: '형식' }), h('dd', { text: `${FMT_LONG[p.format] || p.format || '–'} · 카드 ${p.slide_count}장${p.scene_count ? ` · 릴스 장면 ${p.scene_count}개` : ''}` }),
+          h('dt', { text: '1차 목표' }), h('dd', { text: GOAL_KO[p.goal] || p.goal || '–' }),
+          h('dt', { text: '광고 표시' }), h('dd', { text: p.disclosure_label || '해당 없음 (대가 없는 일반 게시물)' }),
+          h('dt', { text: '검수' }), h('dd', { text: p.review.approved_by ? `${p.review.approved_by} · ${p.review.approved_at}` : '아직 승인 기록 없음' }),
+          h('dt', { text: '폴더' }), h('dd', null, h('code', { text: p.dir }))),
+        h('div', { class: 'sub-h', text: '이미지 상태' }),
+        p.images.length ? h('div', { class: 'imgs' }, p.images.map((im) => h('span', {
+          class: 'chip st-' + ({ approved: 'approved', generated: 'rendered', rejected: 'idea' }[im.status] || 'draft'),
+          title: im.framing, text: `${im.key} ${IMG_KO[im.status] || im.status}`,
+        }))) : h('p', { class: 'small muted', text: '이미지 목록이 없어요.' }),
+        h('div', { class: 'links' }, links)));
+    const resetBtn = h('button', { class: 'btn sm ghost', type: 'button', text: '체크 초기화', onclick: () => {
+      delete S.checks[id]; store.set('checks', S.checks);
+      for (const row of items) { const cb = row.querySelector('input'); if (!cb.disabled) cb.checked = false; row.classList.remove('done'); }
+      upd();
+    } });
+    onDlgClose = render;
+    openDialog(`${fmtDay(p.date)} · ${FMT_LONG[p.format] || p.format}`, p.hook || p.id, [body,
+      h('div', { class: 'sub-h' }, '게시 전 체크리스트', h('div', { class: 'progress-line' }, bar), progText, resetBtn),
+      h('div', null, items),
+      h('p', { class: 'small muted', text: '체크는 이 브라우저에만 저장돼요. 최종 승인은 post.yaml 의 review.approved_by · approved_at 에 기록하세요.' })]);
+  }
+
+  // ── 3. 브랜드 파이프라인 ──
+  let pipeQuery = '';
+  function renderPipeline() {
+    const all = prospects();
+    const q = pipeQuery.trim().toLowerCase();
+    const list = q ? all.filter((p) => [p.brand, p.category, p.notes, p.fit_reason].join(' ').toLowerCase().includes(q)) : all;
+    const closed = ['보류', '거절'];
+    const cols = E.prospect_status.filter((s) => !closed.includes(s));
+    if (list.some((p) => p.status && !E.prospect_status.includes(p.status))) closed.push('기타');
+    const pr = { A: 0, B: 1, C: 2 };
+    const search = h('input', { type: 'search', class: 'board-search', placeholder: '브랜드·메모 검색', value: pipeQuery, 'aria-label': '브랜드 검색' });
+    search.addEventListener('input', () => { pipeQuery = search.value; const pos = search.selectionStart; render(); const s = $('.board-search'); s.focus(); s.setSelectionRange(pos, pos); });
+    const tools = [search,
+      h('button', { class: 'btn', type: 'button', text: '브랜드 추가', onclick: () => openProspect(null) }),
+      h('button', { class: 'btn primary', type: 'button', text: 'CSV 내보내기', onclick: () => exportCsv('prospects', all) })];
+    const column = (col) => {
+      const items = list.filter((p) => col === '기타' ? p.status && !E.prospect_status.includes(p.status) : (p.status || '후보') === col)
+        .sort((a, b) => (pr[a.priority] ?? 3) - (pr[b.priority] ?? 3) || (dueOf(a) || '9').localeCompare(dueOf(b) || '9'));
+      return h('section', { class: 'col', 'aria-label': col },
+        h('div', { class: 'col-h' }, h('span', { text: col }), h('span', { class: 'n', text: items.length })),
+        items.map((p) => h('button', { class: 'kcard', type: 'button', onclick: () => openProspect(p.brand) },
+          h('div', { class: 'b' }, h('span', { text: p.brand || '(이름 없음)' }), p.priority && h('span', { class: 'prio ' + p.priority, text: p.priority })),
+          h('div', { class: 'm', text: [p.category, p.contact_channel, p.price_tier].filter(Boolean).join(' · ') || '정보 없음' }),
+          p.next_action && h('div', { class: 'na' }, dueOf(p) && p.status !== '거절' ? dueChip(dueOf(p)) : null, h('span', { text: p.next_action })),
+          p.last_contact && h('div', { class: 'm', text: `마지막 연락 ${p.last_contact}` }),
+          p._edited && h('span', { class: 'local', text: p._new ? '로컬 추가' : '로컬 수정' }))));
+    };
+    return h('div', null,
+      secHead('Pipeline', '브랜드 파이프라인', '상태 값과 기준은 docs/05-brand-outreach.md 7장. 연락은 한 브랜드씩 직접 보내요 (자동·대량 발송 없음).', tools),
+      all.length ? null : h('div', { class: 'note', style: 'margin-bottom:14px' }, h('span', { text: 'ⓘ' }),
+        h('span', { text: '아직 브랜드 후보가 없어요. outreach/prospects.csv 에 적거나 ‘브랜드 추가’로 시작하세요. 추가한 후보는 CSV로 내보내 커밋해야 저장소에 남아요.' })),
+      h('div', { class: 'kanban' }, cols.map(column)),
+      h('div', { class: 'closed-h', text: '보류 · 거절 — 재검토 날짜가 되면 다시 연락으로 옮겨요' }),
+      h('div', { class: 'kanban closed' }, closed.map(column)));
+  }
+  const P_LABEL = { brand: '브랜드', category: '카테고리', instagram: '인스타그램', website: '웹사이트', price_tier: '가격대', fit_reason: '맞는 이유', contact_channel: '연락 채널', priority: '우선순위', status: '상태', last_contact: '마지막 연락', next_action: '다음 할 일', notes: '메모', source: '출처·확인일' };
+  const P_EDIT = ['status', 'last_contact', 'next_action', 'notes'];
+  function openProspect(brand) {
+    const all = prospects();
+    const cur = brand == null ? null : all.find((p) => p.brand === brand);
+    const isNew = !cur || cur._new;
+    const seed = cur && !cur._new ? D.prospects.find((r) => r.brand === brand) : null;
+    const base = cur || Object.fromEntries(D.schemas.prospects.map((c) => [c, ''])); if (!cur) base.status = '후보';
+    const inputs = {};
+    const field = (c) => {
+      const label = P_LABEL[c] || c;
+      let el;
+      if (c === 'status') el = h('select', null, [...E.prospect_status, ...(base.status && !E.prospect_status.includes(base.status) ? [base.status] : [])].map((s) => h('option', { value: s, text: s, selected: (base.status || '후보') === s })));
+      else if (c === 'priority') el = h('select', null, ['', ...E.priorities].map((s) => h('option', { value: s, text: s || '—', selected: base.priority === s })));
+      else if (c === 'contact_channel') { el = h('input', { type: 'text', value: base[c] || '', list: 'dl-channels' }); }
+      else if (c === 'last_contact') el = h('input', { type: 'date', value: /^\d{4}-\d{2}-\d{2}$/.test(base[c]) ? base[c] : '' });
+      else if (c === 'notes' || c === 'fit_reason') { el = h('textarea', { rows: 3 }); el.value = base[c] || ''; }
+      else el = h('input', { type: 'text', value: base[c] || '', placeholder: c === 'next_action' ? 'YYYY-MM-DD 할 일 (예: 2026-10-20 팔로업(03-A))' : c === 'instagram' ? '@계정' : '' });
+      inputs[c] = el;
+      return h('label', { class: 'field' + (['notes', 'fit_reason', 'next_action', 'source'].includes(c) ? ' wide' : '') }, h('span', null, label, c === 'brand' ? h('span', { class: 'req', text: ' *' }) : null), el);
+    };
+    const editable = isNew ? D.schemas.prospects : P_EDIT;
+    const quick = h('div', { class: 'quick' }, h('span', { class: 'small muted', text: '빠른 입력' }),
+      h('button', { class: 'btn sm', type: 'button', text: '오늘 연락함 → 6일 뒤 팔로업(03-A)', onclick: () => {
+        inputs.last_contact.value = TODAY; inputs.next_action.value = `${ymd(addDays(new Date(), 6))} 팔로업(03-A)`;
+        if (['후보', '조사완료'].includes(inputs.status.value)) inputs.status.value = '연락';
+      } }),
+      h('button', { class: 'btn sm', type: 'button', text: '7일 뒤 마무리(03-B)', onclick: () => { inputs.next_action.value = `${ymd(addDays(new Date(), 7))} 마무리(03-B)`; } }));
+    const err = h('span', { class: 'form-err' });
+    const readonly = isNew ? null : h('dl', { class: 'kv', style: 'margin-bottom:18px' }, D.schemas.prospects.filter((c) => !P_EDIT.includes(c) && c !== 'brand').map((c) => [
+      h('dt', { text: P_LABEL[c] || c }), h('dd', null, linkish(c, base[c]))]));
+    const body = [readonly, h('div', { class: 'form-grid two' }, editable.map(field)), quick,
+      h('datalist', { id: 'dl-channels' }, E.contact_channels.map((c) => h('option', { value: c })))];
+    const save = () => {
+      const vals = Object.fromEntries(Object.entries(inputs).map(([c, el]) => [c, el.value.trim()]));
+      if (isNew) {
+        if (!vals.brand) { err.textContent = '브랜드 이름을 적어 주세요.'; return; }
+        if (vals.brand !== (cur && cur.brand) && all.some((p) => p.brand === vals.brand)) { err.textContent = '같은 이름의 브랜드가 이미 있어요.'; return; }
+        if (cur) delete S.prospects[cur.brand];
+        S.prospects[vals.brand] = { ...vals, _new: true };
+      } else {
+        const diff = prospectDiff(seed, { ...S.prospects[brand], ...vals });
+        if (Object.keys(diff).length) S.prospects[brand] = diff; else delete S.prospects[brand];
+      }
+      store.set('prospects', S.prospects); dlg.close(); toast('이 브라우저에 저장했어요. CSV로 내보내 커밋해야 저장소에 반영돼요.');
+    };
+    const foot = [
+      h('div', { class: 'left' },
+        cur && cur._new && h('button', { class: 'btn danger', type: 'button', text: '삭제', onclick: () => { if (confirm(`'${cur.brand}' 를 이 브라우저에서 지울까요?`)) { delete S.prospects[cur.brand]; store.set('prospects', S.prospects); dlg.close(); } } }),
+        cur && !cur._new && cur._edited && h('button', { class: 'btn ghost', type: 'button', text: '로컬 수정 되돌리기', onclick: () => { delete S.prospects[cur.brand]; store.set('prospects', S.prospects); dlg.close(); } })),
+      err,
+      h('button', { class: 'btn', type: 'button', text: '취소', onclick: () => dlg.close() }),
+      h('button', { class: 'btn primary', type: 'button', text: '저장', onclick: save })];
+    onDlgClose = render;
+    openDialog(cur ? (cur.status || '후보') : '새 후보', cur ? cur.brand : '브랜드 추가', body, foot);
+  }
+  function linkish(col, v) {
+    v = String(v || '');
+    if (!v) return '–';
+    if (col === 'website' && /^https?:\/\//.test(v)) return h('a', { href: v, target: '_blank', rel: 'noopener noreferrer', text: v });
+    if (col === 'instagram' && /^@?[A-Za-z0-9._]{1,30}$/.test(v)) return h('a', { href: `https://www.instagram.com/${v.replace(/^@/, '')}/`, target: '_blank', rel: 'noopener noreferrer', text: v });
+    return v;
+  }
+
+  // ── 4. 성과 기록 ──
+  const COL = {
+    post_id: ['게시물', 'post'], checkpoint: ['시점', 'checkpoint'], recorded_at: ['기록일', 'date'], date: ['날짜', 'date'],
+    format: ['형식', 'format'], reach: ['도달', 'int'], views: ['조회', 'int'], likes: ['좋아요', 'int'], comments: ['댓글', 'int'],
+    saves: ['저장', 'int'], shares: ['공유', 'int'], profile_visits: ['프로필 방문', 'int'], follows: ['팔로우', 'int'],
+    link_clicks: ['링크 클릭', 'int'], avg_watch_sec: ['평균 시청(초)', 'dec'], completion_rate: ['완주율(%)', 'dec'],
+    followers: ['팔로워 수', 'int'], type: ['유형', 'revtype'], brand: ['브랜드', 'brand'], gross_krw: ['총액(원)', 'int'],
+    withholding_krw: ['원천징수(원)', 'int'], net_krw: ['실수령(원)', 'int'], status: ['상태', 'revstatus'],
+    category: ['분류', 'costcat'], provider: ['공급자', 'text'], description: ['내용', 'text'], amount_usd: ['금액(USD)', 'dec'],
+    amount_krw: ['금액(원)', 'int'], quantity: ['수량', 'dec'], notes: ['메모', 'note'],
+  };
+  const LEDGER = {
+    metrics: { label: '게시물 지표', req: ['post_id', 'checkpoint', 'recorded_at'], hint: '게시 24시간·7일 뒤 인사이트 숫자를 그대로 적어요. 카드뉴스와 릴스는 따로 한 줄씩.', dateCol: 'recorded_at' },
+    followers: { label: '팔로워', req: ['date', 'followers'], hint: '매주 같은 요일에 앱의 팔로워 수를 적어요.', dateCol: 'date' },
+    revenue: { label: '수익', req: ['date', 'type', 'gross_krw', 'status'], hint: '계약 한 건도 항목별(제작비·사용권·게시비·제휴)로 나눠 적어요. 실현 수익은 상태가 ‘입금’인 행만. 실수령을 비우면 총액 − 원천징수.', dateCol: 'date' },
+    costs: { label: '비용', req: ['date', 'category'], hint: `금액(원)이 비어 있으면 금액(USD) × ${D.fx_usd_krw}원으로 계산해요.`, dateCol: 'date' },
+  };
+  const ENUM_OPTS = { checkpoint: () => E.checkpoints.map((c) => [c, c]), format: () => [['', '—'], ...Object.entries(FMT_KO)], revtype: () => Object.entries(E.revenue_type), revstatus: () => Object.entries(E.revenue_status), costcat: () => Object.entries(E.cost_category) };
+  const DEFAULTS = { checkpoint: '24h', type: 'sponsorship', status: 'contracted', category: 'image_api' };
+  function displayValue(kind, col, v) {
+    const t = (COL[col] || [])[1];
+    if (t === 'revtype') return E.revenue_type[norm('type', v)] || v;
+    if (t === 'revstatus') return E.revenue_status[norm('status', v)] || v;
+    if (t === 'costcat') return E.cost_category[norm('category', v)] || v;
+    if (t === 'format') return FMT_KO[String(v).toLowerCase()] || v;
+    if (t === 'int' && num(v) != null) return int(num(v));
+    return v;
+  }
+  function renderRecords() {
+    const sub = ['metrics', 'followers', 'revenue', 'costs', 'calc'].includes(S.ui.ledger) ? S.ui.ledger : 'metrics';
+    const tabs = h('div', { class: 'subtabs', role: 'group', 'aria-label': '기록 종류' },
+      [...KINDS.map((k) => [k, LEDGER[k].label]), ['calc', '월 순수익']].map(([k, l]) => h('button', {
+        type: 'button', 'aria-pressed': String(k === sub), text: l + (k !== 'calc' && S.rows[k].length ? ` · 로컬 ${S.rows[k].length}` : ''),
+        onclick: () => { S.ui.ledger = k; render(); },
+      })));
+    return h('div', null,
+      secHead('Records', '성과 기록', '여기서 추가한 행은 이 브라우저에만 있어요. CSV로 내보내 tracking/ 파일을 바꾸고 커밋하세요.'),
+      tabs, sub === 'calc' ? renderCalc() : ledger(sub));
+  }
+  function ledger(kind) {
+    const cfg = LEDGER[kind], cols = D.schemas[kind];
+    const inputs = {};
+    const err = h('span', { class: 'form-err' });
+    const brands = [...new Set([...prospects().map((p) => p.brand), ...rowsOf('revenue').map((r) => r.brand)].filter(Boolean))];
+    const field = (c) => {
+      const [label, type] = COL[c] || [c, 'text'];
+      let el;
+      if (ENUM_OPTS[type]) el = h('select', null, ENUM_OPTS[type]().map(([v, l]) => h('option', { value: v, text: l, title: v || null, selected: (DEFAULTS[c] || '') === v })));
+      else if (type === 'post') {
+        el = h('select', null, h('option', { value: '', text: kind === 'metrics' ? '게시물 선택' : '— 없음 —' }),
+          POSTS.slice().reverse().map((p) => h('option', { value: p.id, text: `${p.date} · ${p.hook || p.id}` })), h('option', { value: '__other', text: '직접 입력…' }));
+        const other = h('input', { type: 'text', placeholder: 'post_id', hidden: true });
+        el.addEventListener('change', () => {
+          other.hidden = el.value !== '__other';
+          const p = POST_BY_ID.get(el.value);
+          if (p && inputs.format && FMT_KO[p.format]) inputs.format.value = p.format;
+        });
+        inputs[c] = { get value() { return el.value === '__other' ? other.value : el.value; } };
+        return h('label', { class: 'field' + (kind === 'metrics' ? ' wide' : '') }, h('span', null, label, cfg.req.includes(c) ? h('span', { class: 'req', text: ' *' }) : null), el, other);
+      } else if (type === 'date') el = h('input', { type: 'date', value: TODAY });
+      else if (type === 'int' || type === 'dec') el = h('input', { type: 'number', min: 0, step: type === 'int' ? 1 : 'any', inputmode: type === 'int' ? 'numeric' : 'decimal', placeholder: c === 'net_krw' ? '비우면 자동' : '' });
+      else el = h('input', { type: 'text', list: type === 'brand' ? 'dl-brands' : null });
+      inputs[c] = el;
+      return h('label', { class: 'field' + (type === 'note' ? ' wide' : '') }, h('span', null, label, cfg.req.includes(c) ? h('span', { class: 'req', text: ' *' }) : null), el);
+    };
+    const submit = (e) => {
+      e.preventDefault();
+      const row = Object.fromEntries(cols.map((c) => [c, inputs[c] ? String(inputs[c].value || '').trim() : '']));
+      const miss = cfg.req.filter((c) => !row[c]);
+      if (kind === 'costs' && !row.amount_usd && !row.amount_krw) miss.push('amount_krw');
+      if (miss.length) { err.textContent = '필수 칸을 채워 주세요: ' + miss.map((c) => (COL[c] || [c])[0]).join(', '); return; }
+      S.rows[kind].push({ ...row, _lid: Date.now().toString(36) + Math.random().toString(36).slice(2, 6) });
+      store.set('rows', S.rows);
+      toast('이 브라우저에 추가했어요. CSV로 내보내 커밋해야 저장소에 반영돼요.');
+      render();
+    };
+    const form = h('form', { class: 'card form-card', onsubmit: submit, novalidate: true },
+      h('h3', null, `${cfg.label} 추가`, h('span', { class: 'muted', text: FILES[kind] })),
+      h('p', { class: 'small muted', style: 'margin:-6px 0 14px', text: cfg.hint }),
+      h('div', { class: 'form-grid' }, cols.map(field)),
+      h('datalist', { id: 'dl-brands' }, brands.map((b) => h('option', { value: b }))),
+      h('div', { class: 'form-actions' }, h('button', { class: 'btn primary', type: 'submit', text: '행 추가' }), err));
+
+    const all = rowsOf(kind).sort((a, b) => String(b[cfg.dateCol] || '').localeCompare(String(a[cfg.dateCol] || '')));
+    const extra = kind === 'metrics' ? [['저장률', (r) => pct(rateRow(r).save)], ['공유율', (r) => pct(rateRow(r).share)], ['참여율', (r) => pct(rateRow(r).eng)]]
+      : kind === 'revenue' ? [['실수령 계산', (r) => krw(netOf(r))]] : kind === 'costs' ? [['원화 환산', (r) => krw(costKrw(r))]] : [];
+    const main = cols.filter((c) => c !== 'notes'), tail = cols.filter((c) => c === 'notes');
+    const cell = (r, c) => h('td', { class: c === 'notes' || c === 'description' ? 'memo' : ['int', 'dec'].includes((COL[c] || [])[1]) ? 'n' : null, title: c === 'post_id' ? r[c] : null, text: c === 'post_id' && POST_BY_ID.get(r[c]) ? POST_BY_ID.get(r[c]).hook : displayValue(kind, c, r[c] ?? '') });
+    const th = (c) => h('th', { class: ['int', 'dec'].includes((COL[c] || [])[1]) ? 'n' : null, text: (COL[c] || [c])[0], title: c });
+    const table = all.length ? h('div', { class: 'table-wrap' }, h('table', { class: 'data' },
+      h('thead', null, h('tr', null, h('th', { text: '' }), main.map(th), extra.map(([l]) => h('th', { class: 'n', text: l })), tail.map(th), h('th', { text: '' }))),
+      h('tbody', null, all.map((r) => h('tr', { class: r._local ? 'loc' : null },
+        h('td', null, h('span', { class: 'tag' + (r._local ? ' loc' : ''), text: r._local ? '로컬' : 'CSV' })),
+        main.map((c) => cell(r, c)),
+        extra.map(([, f]) => h('td', { class: 'n', text: f(r) })),
+        tail.map((c) => cell(r, c)),
+        h('td', null, r._local && h('button', { class: 'btn sm ghost danger', type: 'button', text: '삭제', onclick: () => {
+          if (!confirm('이 로컬 행을 지울까요?')) return;
+          S.rows[kind] = S.rows[kind].filter((x) => x._lid !== r._lid); store.set('rows', S.rows); render();
+        } }))))))) : empty(`아직 ${cfg.label} 기록이 없어요.`);
+    return h('div', null, form, table,
+      h('div', { class: 'table-foot' },
+        h('span', { text: `CSV ${D[kind].length}줄 + 로컬 ${S.rows[kind].length}줄` }),
+        h('button', { class: 'btn primary', type: 'button', text: `CSV 내보내기 (${FILES[kind].split('/').pop()})`, onclick: () => exportCsv(kind, rowsOf(kind)) })));
+  }
+  function renderCalc() {
+    const months = new Set([THIS_MONTH]);
+    for (const r of [...rowsOf('revenue'), ...rowsOf('costs')]) if (/^\d{4}-\d{2}/.test(r.date || '')) months.add(r.date.slice(0, 7));
+    const month = months.has(S.ui.calcMonth) ? S.ui.calcMonth : THIS_MONTH;
+    const m = money(month);
+    const sel = h('select', { 'aria-label': '월 선택', style: 'width:auto' }, [...months].sort().reverse().map((x) => h('option', { value: x, text: fmtMonth(x), selected: x === month })));
+    sel.addEventListener('change', () => { S.ui.calcMonth = sel.value; render(); });
+    const per = h('input', { type: 'number', min: 0, step: 10000, placeholder: '예: 800000', value: S.ui.perDeal || '' });
+    const perOut = h('p', { class: 'small' });
+    const remain = Math.max(m.goal - m.net, 0);
+    const updPer = () => {
+      S.ui.perDeal = per.value; saveUI();
+      const v = num(per.value);
+      perOut.textContent = !remain ? '이 달 목표를 채웠어요.' : v ? `건당 ${krw(v)}이면 약 ${Math.ceil(remain / v)}건 더 필요해요 (비용이 그대로일 때).` : '건당 예상 순수익을 넣으면 필요한 건수를 계산해요.';
+    };
+    per.addEventListener('input', updPer); updPer();
+    const realW = m.goal ? Math.min(Math.max(m.net, 0) / m.goal, 1) : 0;
+    const table = (obj, labels, totalLabel, total) => {
+      const ent = Object.entries(obj).sort((a, b) => b[1] - a[1]);
+      return ent.length ? h('table', { class: 'mini-table' }, ent.map(([k, v]) => h('tr', null, h('td', { text: labels[k] || k || '기타' }), h('td', { text: krw(v) }))),
+        h('tr', { class: 'total' }, h('td', { text: totalLabel }), h('td', { text: krw(total) }))) : empty('기록 없음');
+    };
+    return h('div', null,
+      h('div', { class: 'form-actions', style: 'margin:0 0 16px' }, h('span', { class: 'small muted', text: '기준 달' }), sel),
+      h('div', { class: 'calc-grid' },
+        h('section', { class: 'card' }, h('h3', { text: '실현 수익 (입금 완료, 원천징수 후)' }), table(m.byType, E.revenue_type, '합계', m.realizedNet)),
+        h('section', { class: 'card' }, h('h3', null, '비용', m.fxRows ? h('span', { class: 'muted', text: `${m.fxRows}건 환율 환산` }) : null), table(m.byCat, E.cost_category, '합계', m.costsTotal)),
+        h('section', { class: 'card' }, h('h3', { text: '월 순수익' }),
+          h('div', { class: 'big', text: krw(m.net) }),
+          h('div', { class: 'meter', role: 'img', 'aria-label': `목표 대비 ${pct(realW)}` }, realW > 0 && h('span', { class: 'seg-real', style: `width:${(realW * 100).toFixed(2)}%` })),
+          h('div', { class: 'meter-scale' }, h('span', { text: pct(m.progress == null ? null : Math.max(m.progress, 0)) }), h('span', { text: `목표 ${krw(m.goal)}` })),
+          h('p', { class: 'small', text: remain ? `목표까지 ${krw(remain)} 남았어요.` : '목표 달성!' }),
+          h('label', { class: 'field' }, '건당 예상 순수익(원)', per), perOut)),
+      h('section', { class: 'card', style: 'margin-top:14px' },
+        h('h3', null, '파이프라인', h('span', { class: 'muted', text: `계약·청구, ${fmtMonth(month)} 말까지 · 입금 전이라 순수익에 넣지 않아요` })),
+        m.pipeline.length ? h('div', { class: 'rows' }, m.pipeline.map((r) => h('div', { class: 'row' },
+          h('div', { style: 'min-width:0' }, h('div', { class: 't', text: `${r.brand || '브랜드 없음'} · ${E.revenue_type[r.t] || r.type}` }), h('div', { class: 'm', text: `${r.d} · ${E.revenue_status[r.st] || r.status}` })),
+          h('span', { class: 'num', text: krw(r.net) })))) : empty('계약·청구 상태인 수익이 없어요.'),
+        m.gifted.length ? h('p', { class: 'small muted', text: `현물 협찬 ${m.gifted.length}건은 현금이 아니라 순수익에서 뺐어요.` }) : null),
+      h('p', { class: 'goal-note', text: `${D.goal.note} 숫자는 tracking/revenue.csv · costs.csv 와 이 브라우저의 로컬 행으로 계산해요. 세금·부가세 처리는 세무사와 확인하세요.` }));
+  }
+
+  // ── 5. 제안 문구 ──
+  const PH = /\{([^{}\n]{1,40})\}/g;
+  const NARROW = window.matchMedia('(max-width: 720px)').matches;
+  function renderTemplates() {
+    const T = D.templates || [];
+    const head = secHead('Outreach', '제안 문구', 'outreach/templates/*.md 에서 자동으로 불러와요. 한 브랜드씩 직접 입력해서 보내고, 자동·대량 발송은 하지 않아요.');
+    if (!T.length) return h('div', null, head, empty('outreach/templates 에 .md 파일을 넣고 python doha.py board 를 다시 실행하세요.'));
+    const t = T.find((x) => x.id === S.ui.template) || T[0];
+    const nav = h('nav', { class: 'tpl-list', 'aria-label': '템플릿' }, T.map((x) => h('button', {
+      type: 'button', 'aria-pressed': String(x.id === t.id), onclick: () => { S.ui.template = x.id; render(); },
+    }, x.title, h('span', { class: 'f', text: x.file }))));
+    const codes = t.parts.filter((p) => p.type === 'code');
+    const names = [...new Set(codes.flatMap((p) => [...p.text.matchAll(PH)].map((m) => m[1])))];
+    const boxes = [];
+    const paint = () => { for (const b of boxes) b(); };
+    const fills = names.length ? h('details', { class: 'guide', open: names.length <= 14 },
+      h('summary', { text: `자리표시자 채우기 (${names.length}개) — 같은 이름은 모든 문구에 함께 바뀌어요` }),
+      h('div', { class: 'fills' }, names.map((n) => {
+        const el = h('input', { type: 'text', value: S.fills[n] || '', list: /브랜드/.test(n) ? 'dl-tbrands' : null });
+        el.addEventListener('input', () => { if (el.value) S.fills[n] = el.value; else delete S.fills[n]; store.set('fills', S.fills); paint(); });
+        return h('label', { class: 'field' }, n, el);
+      })),
+      h('datalist', { id: 'dl-tbrands' }, prospects().map((p) => h('option', { value: p.brand }))),
+      h('div', { class: 'form-actions', style: 'margin:0 0 12px' }, h('button', { class: 'btn sm ghost', type: 'button', text: '채운 값 모두 지우기', onclick: () => { for (const n of names) delete S.fills[n]; store.set('fills', S.fills); render(); } }))) : null;
+    const body = t.parts.map((p, i) => {
+      // 휴대폰에서는 안내를 접어 두고 문구를 먼저 보이게
+      if (p.type === 'md') return h('details', { class: 'guide', open: i === 0 && !NARROW }, h('summary', { text: i === 0 ? '언제·어떻게 쓰나' : '참고' }), md(p.text));
+      const pre = h('pre');
+      const count = h('span');
+      const filled = () => p.text.replace(PH, (all, n) => S.fills[n] || all);
+      boxes.push(() => {
+        pre.replaceChildren(); let last = 0;
+        for (const m of p.text.matchAll(PH)) {
+          pre.append(p.text.slice(last, m.index));
+          const v = S.fills[m[1]];
+          pre.append(h('span', { class: 'ph' + (v ? ' filled' : ''), text: v || m[0] }));
+          last = m.index + m[0].length;
+        }
+        pre.append(p.text.slice(last));
+        const left = [...p.text.matchAll(PH)].filter((m) => !S.fills[m[1]]).length;
+        count.textContent = `${[...filled()].length}자` + (left ? ` · 빈 자리 ${left}개` : ' · 모두 채움');
+      });
+      return h('div', { class: 'codebox' },
+        h('div', { class: 'bar' }, count, h('button', { class: 'btn sm primary', type: 'button', text: '복사', onclick: async () => toast(await copyText(filled()) ? '복사했어요. 보내기 전에 한 번 더 읽어 보세요.' : '복사하지 못했어요. 글을 직접 선택해 복사하세요.') })),
+        pre);
+    });
+    paint();
+    return h('div', null, head, h('div', { class: 'tpl' }, nav, h('div', { style: 'min-width:0' }, h('h3', { style: 'font:500 20px/1.4 var(--serif);margin:0 0 14px', text: t.title }), fills, body)));
+  }
+  // 아주 작은 마크다운 표시기: 제목·목록·표·굵게·코드만. 모두 textContent 로 넣는다.
+  function md(text) {
+    const root = h('div', { class: 'md' });
+    let list = null, table = null, para = [];
+    const flush = () => { if (para.length) root.append(h('p', null, inline(para.join(' ')))); para = []; };
+    for (const raw of text.replace(/\r/g, '').split('\n')) {
+      const line = raw.trimEnd(); let m;
+      if (!line.trim()) { flush(); list = table = null; continue; }
+      if ((m = /^#{1,6}\s+(.*)$/.exec(line))) { flush(); list = table = null; root.append(h('h4', null, inline(m[1]))); continue; }
+      if (/^\s*\|/.test(line)) {
+        flush(); list = null;
+        if (/^\s*\|(\s*:?-+:?\s*\|)+\s*$/.test(line)) continue;
+        const cells = line.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+        if (!table) { table = h('table'); root.append(h('div', { class: 'table-wrap' }, table)); table.append(h('tr', null, cells.map((c) => h('th', null, inline(c))))); }
+        else table.append(h('tr', null, cells.map((c) => h('td', null, inline(c)))));
+        continue;
+      }
+      if ((m = /^(\s*)(?:[-*]|\d+\.)\s+(?:\[([ xX])\]\s+)?(.*)$/.exec(line))) {
+        flush(); table = null;
+        if (!list) { list = h('ul'); root.append(list); }
+        list.append(h('li', { class: m[1].length >= 2 ? 'sub' : null }, m[2] ? (m[2] === ' ' ? '☐ ' : '☑ ') : null, inline(m[3])));
+        continue;
+      }
+      list = table = null; para.push(line.trim());
+    }
+    flush();
+    return root;
+  }
+  function inline(text) {
+    const out = []; const re = /\*\*(.+?)\*\*|`([^`]+)`|\[([^\]]+)\]\([^)]*\)/g; let last = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > last) out.push(text.slice(last, m.index));
+      out.push(m[1] != null ? h('strong', null, m[1]) : m[2] != null ? h('code', { text: m[2] }) : m[3]);
+      last = re.lastIndex;
+    }
+    if (last < text.length) out.push(text.slice(last));
+    return out;
+  }
+
+  // ── 백업·가져오기 ──
+  $('#btn-backup').addEventListener('click', () => {
+    const payload = { app: 'doha-board', version: 1, exported_at: new Date().toISOString(), account: D.account.handle, data: store.all() };
+    download(`doha-board-backup-${TODAY}.json`, JSON.stringify(payload, null, 1), 'application/json');
+    toast('백업 파일을 내려받았어요. 체크·브랜드 수정·로컬 행·자리표시자 값이 들어 있어요.');
+  });
+  $('#btn-import').addEventListener('click', () => $('#import-file').click());
+  $('#import-file').addEventListener('change', (e) => {
+    const file = e.target.files[0]; e.target.value = '';
+    if (!file) return;
+    file.text().then((text) => {
+      let p; try { p = JSON.parse(text); } catch (err) { toast('JSON 파일을 읽지 못했어요.'); return; }
+      if (!p || p.app !== 'doha-board' || !p.data || typeof p.data !== 'object') { toast('도하 운영 보드 백업 파일이 아니에요.'); return; }
+      const keys = KEYS.filter((k) => p.data[k] && typeof p.data[k] === 'object');
+      if (!confirm(`${String(p.exported_at || '').slice(0, 10)} 백업으로 이 브라우저의 보드 데이터(${keys.join(', ')})를 바꿀까요? 지금 값은 사라져요.`)) return;
+      for (const k of KEYS) { try { localStorage.removeItem(LS + k); } catch (err) { /* 무시 */ } }
+      for (const k of keys) store.set(k, p.data[k]);
+      location.reload();
+    });
+  });
+
+  // ── 시작 ──
+  // 생성 시각은 board.py 가 KST 로 적은 문자열 그대로 보여준다 (브라우저 시간대와 무관)
+  const gm = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})/.exec(D.generated_at || '');
+  const age = gm ? dayDiff(TODAY, gm[1]) : 0;
+  $('#acct').replaceChildren('운영 보드 · ', h('a', { href: D.account.url, target: '_blank', rel: 'noopener noreferrer', text: '@' + D.account.handle }),
+    gm ? ` · 데이터 ${fmtShort(gm[1])} ${gm[2]} 기준` : '', age >= 3 ? ` (${age}일 전 — python doha.py board 로 갱신)` : '');
+  $('#foot').replaceChildren(
+    h('p', null, '데이터 원본: content/posts/*/post.yaml · tracking/*.csv · outreach/prospects.csv · outreach/templates/*.md → ', h('code', { text: 'python doha.py board' }), ' 가 board-data.js 를 다시 만들어요.'),
+    h('p', { text: '이 보드는 Instagram 계정·API에 연결되지 않아요. 게시와 DM은 사람이 앱에서 직접 해요. 도하는 AI로 만든 가상인물이에요.' }));
+  reconcile();
+  render();
+})();
+</script>
+</body>
+</html>

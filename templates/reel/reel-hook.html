@@ -1,0 +1,48 @@
+{% extends "reel/_base.html" %}
+{% block style %}
+/* 사진 위 스크림: 글자 영역 밝기에 맞춰 밝은/어두운 쪽을 고른다 */
+.scrim { position: absolute; left: 0; right: 0; top: 0; height: 1180px; }
+.tone-text-light .scrim {
+  background: linear-gradient(180deg, rgba(244,239,232,.72) 0%, rgba(244,239,232,.5) 38%, rgba(244,239,232,0) 100%);
+}
+.tone-text-dark .scrim {
+  background: linear-gradient(180deg, rgba(16,13,10,.58) 0%, rgba(16,13,10,.34) 42%, rgba(16,13,10,0) 100%);
+}
+.paper-mode .scrim { display: none; }
+/* 사진 없는 훅은 안전 영역 가운데로 (아래가 비어 보이지 않게) */
+.paper-mode .hook { top: {{ top_y + 90 }}px; bottom: calc(var(--bottom) + 40px); display: flex; flex-direction: column; justify-content: center; }
+
+.hook { position: absolute; left: var(--m); right: var(--right); top: {{ hook_top }}px; }
+.tone-text-light .hook { color: var(--ink); }
+.tone-text-dark .hook { color: #FFFFFF; text-shadow: 0 2px 28px rgba(0,0,0,.22); }
+.kicker { display: flex; align-items: center; gap: 20px; }
+.kicker .wordmark { flex: none; }
+.kicker .rule { width: 64px; height: 2px; background: var(--accent); flex: none; }
+.tone-text-dark .kicker .rule { background: #E9D9C4; }
+.kicker .series { font-family: 'Pretendard'; font-weight: 600; font-size: 28px; letter-spacing: .04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.headline { font-size: 104px; line-height: 1.22; margin-top: 40px; }
+.sub {
+  margin-top: 44px; display: flex; align-items: center; gap: 18px;
+  font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 38px; letter-spacing: .2em;
+}
+.sub .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.tone-text-dark .sub .dot { background: #E9D9C4; }
+{% endblock %}
+{% block body %}
+<div class="{{ 'paper-mode' if mode == 'paper' else '' }}">
+  {% if mode == 'paper' %}<div class="c paper"></div>{% endif %}
+  <div class="c scrim"></div>
+  <section class="t hook">
+    <div class="kicker">
+      <span class="wordmark">{{ wordmark }}</span>
+      {% if series %}<span class="rule"></span><span class="series">{{ series }}</span>{% endif %}
+    </div>
+    <h1 class="serif headline fit" data-max-h="{{ hook_max_h }}" data-min="60" data-keep="80">{{ text_html }}</h1>
+    {% if sub_items %}
+    <div class="sub">
+      {% for s in sub_items %}{% if not loop.first %}<span class="dot"></span>{% endif %}<span>{{ s }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

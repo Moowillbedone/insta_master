@@ -113,10 +113,30 @@ review:                  # 사람 검수 기록 (check 스크립트가 채우지
   approved_at: ""
   notes: ""
 
-posted:                  # 게시 후 기록
-  url: ""
+posted:                  # 게시 후 기록 (insights 명령이 이 주소로 지표를 매칭)
+  url: ""                # 카드뉴스(또는 단일) 게시물 주소
+  reel_url: ""           # format: both 일 때 릴스 주소
   posted_at: ""
 ```
+
+## 슬라이드 선택 필드
+
+사진 구도에 맞춰 배치를 조정할 때만 씁니다.
+
+| 필드 | 값 | 설명 |
+|---|---|---|
+| `focus` | `"50% 30%"` | 사진을 자르는 기준점 (CSS object-position). 숫자 하나면 세로 위치 |
+| `tone` | `light` / `dark` | 사진 위 글자 색을 강제. 기본은 사진 밝기로 자동 |
+| `text_position` | `top` / `bottom` | cover 제목 위치. 기본 `top` (사진 위쪽 1/3을 비워 두는 촬영 규칙) |
+| `badge_position` | `left` / `center` / `right` | 'AI 가상인물' 배지 위치. 인물이 한쪽에 치우친 사진이면 인물 쪽으로 (공정위 지침: 인물 가까이 표시) |
+| `title` | 문자열 | compare 레이아웃의 상단 제목 |
+| `note` | 문자열 | checklist 하단 안내 문구 |
+
+## 키트 이전 게시물 (`legacy: true`)
+
+키트 없이 앱에서 직접 만든 게시물은 `legacy: true` 와 `posted.url` / `posted.reel_url` 만 적어 둡니다.
+`insights` 가 이 주소로 성과를 연결하고, `check`·`render`·`reel` 은 건너뜁니다.
+예: `content/posts/2026-10-12-first-drop-vector/post.yaml`
 
 ## 규칙
 

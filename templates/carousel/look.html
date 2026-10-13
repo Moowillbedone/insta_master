@@ -1,0 +1,26 @@
+{% extends "carousel/base.html" %}
+{% import "_partials/carousel_ui.html" as ui %}
+{% block content %}
+<div class="look" data-fit="LOOK 패널">
+  <div class="look-photo">
+    {{ ui.photo(photo, '', '54%') }}
+    <div class="scrim scrim--bar on-{{ tone_top }}"></div>
+    {% if photo and photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--corner') }}{% endif %}
+  </div>
+  <section class="look-panel">
+    <p class="label">
+      {% if label_en %}<span class="label-en">{{ label_en }}</span>{% endif %}
+      {% if label_ko %}<span class="label-ko">{{ label_ko }}</span>{% endif %}
+      <span class="label-rule"></span>
+    </p>
+    <h2 class="look-title" data-max-lines="2">{{ title|rich }}</h2>
+    {% if items %}
+    <ul class="items{{ ' items--single' if items|length < 3 }}">
+      {% for it in items %}<li><span class="dot"></span><span>{{ it|rich }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% if tip %}<p class="look-tip"><span class="tip-mark"></span><span>{{ tip|rich }}</span></p>{% endif %}
+  </section>
+  {{ ui.topbar(c, tone_top) }}
+</div>
+{% endblock %}

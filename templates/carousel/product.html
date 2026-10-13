@@ -1,0 +1,28 @@
+{% extends "carousel/base.html" %}
+{% import "_partials/carousel_ui.html" as ui %}
+{% block content %}
+<div class="product" data-fit="상품 정보">
+  <div class="pd-photo">
+    {{ ui.photo(photo, '', '56%') }}
+    <div class="scrim scrim--bar{{ ' scrim--pill' if pill }} on-{{ tone_top }}"></div>
+    {% if photo and photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--corner') }}{% endif %}
+  </div>
+  <section class="pd-body">
+    {% if brand %}<p class="pd-brand">{{ brand }}</p>{% endif %}
+    <div class="pd-head">
+      <h2 class="pd-name" data-max-lines="2">{{ name|rich }}</h2>
+      {% if price %}<p class="pd-price"><span class="num">{{ price }}</span><span class="won">원</span></p>{% endif %}
+    </div>
+    {% if facts %}
+    <ul class="pd-facts">
+      {% for f in facts %}<li><span class="dot"></span><span>{{ f|rich }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+    <div class="pd-notes">
+      <p class="pd-source">{{ source }}</p>
+      {% if image_note %}<p class="pd-ai-note">{{ image_note }}</p>{% endif %}
+    </div>
+  </section>
+  {{ ui.topbar(c, tone_top, pill) }}
+</div>
+{% endblock %}

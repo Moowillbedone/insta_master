@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ doha_name }} 미디어킷 · @{{ handle }}</title>
+{% import "media-kit/_macros.html" as m %}
+<style>
+{{ fonts_css()|safe }}
+:root {
+  --ink: {{ colors.ink or '#1F1F1F' }};
+  --paper: {{ colors.paper or '#F4EFE8' }};
+  --accent: {{ colors.accent or '#B08A61' }};
+  --muted: {{ colors.muted or '#7A746C' }};
+  --badge-bg: {{ colors.badge_bg or 'rgba(20,20,20,0.55)' }};
+  --badge-fg: {{ colors.badge_fg or '#FFFFFF' }};
+  --charcoal: {{ palette[1] if palette|length > 1 else '#2B2B2B' }};
+  --navy: {{ palette[3] if palette|length > 3 else '#3E4A5C' }};
+  --sage: {{ palette[4] if palette|length > 4 else '#9AA58C' }};
+}
+{% include "media-kit/media-kit.css" %}
+</style>
+</head>
+<body>
+<main class="doc">
+
+{# ─────────────────────────── 01 표지 ─────────────────────────── #}
+<section class="page cover">
+  <header class="run">
+    <span class="run-mark">Media Kit</span>
+    <span class="run-sec">{{ year_month }}</span>
+  </header>
+  <div class="mast">
+    <div class="mast-main">{{ wordmark_main }}</div>
+    {% if wordmark_sub %}<div class="mast-sub">{{ wordmark_sub }}</div>{% endif %}
+  </div>
+  <div class="cover-id"><span class="cover-rule"></span>{{ display_name }}</div>
+  <p class="cover-line">{{ one_liner }}</p>
+
+  {% if hero %}
+  <figure class="cover-hero">
+    <img src="{{ hero }}" alt="">
+    <span class="ai-badge">{{ compliance.badge }}</span>
+  </figure>
+  {% elif cover_tiles %}
+  <div class="cover-tiles n{{ cover_tiles|length }}">
+    {% for t in cover_tiles %}{{ m.thumb(t, draft=false) }}{% endfor %}
+  </div>
+  {% else %}
+  <div class="cover-space"></div>
+  {% endif %}
+
+  <div class="cover-disc">
+    <span class="disc-tag">{{ compliance.badge }}</span>
+    <p><b>{{ name_topic }} AI로 생성된 가상인물입니다.</b> 실존 인물이 아니며 얼굴과 사진은 모두 AI로 만듭니다. 제품을 직접 써 본 것처럼 표현하지 않습니다.</p>
+  </div>
+  <footer class="cover-foot">
+    <div class="cf-left"><b>@{{ handle }}</b>{% if url %}<span>{{ url }}</span>{% endif %}</div>
+    <div class="cf-right"><b>{{ contact.line }}</b>{% if contact.note %}<span>{{ contact.note }}</span>{% endif %}</div>
+  </footer>
+</section>
+
+{# ─────────────────────────── 02 소개 ─────────────────────────── #}
+<section class="page about">
+  {{ m.run('Who & Why') }}
+  {{ m.opener('02', 'Who & Why', role ~ ', ' ~ doha_name) }}
+
+  <div class="cols about-top">
+    <div class="col">
+      <div class="label">Persona<span class="ko">페르소나</span></div>
+      <dl class="facts">
+        <div><dt>이름</dt><dd>{{ doha_name }} <span class="roman">{{ name_en }}</span></dd></div>
+        <div><dt>역할</dt><dd>{{ role }} · 실존 인물 아님</dd></div>
+        <div><dt>계정</dt><dd>@{{ handle }}</dd></div>
+        <div><dt>형식</dt><dd>카드뉴스 · 릴스 · 스토리</dd></div>
+      </dl>
+      <div class="label mt">Promise<span class="ko">약속</span></div>
+      <ol class="nlist">
+        {% for p in promise[:3] %}<li><span class="n">{{ '%02d' % loop.index }}</span><span class="t">{{ p }}</span></li>{% endfor %}
+      </ol>
+    </div>
+    <div class="col">
+      <div class="label">Audience<span class="ko">독자</span></div>
+      <p class="audience">{{ audience }}</p>
+      <div class="label mt">Voice<span class="ko">말투</span></div>
+      <p class="register">{{ voice_register }}</p>
+      <ul class="dlist">
+        {% for r in voice_rules[:3] %}<li>{{ r }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="label">Content Pillars<span class="ko">콘텐츠 기둥</span></div>
+    <table class="pillars">
+      {% for p in pillars %}
+      <tr>
+        <th>{{ p.name }}</th>
+        <td class="desc">{{ p.desc }}</td>
+        <td class="series">{% for s in p.series[:2] %}<span class="chip">{{ s }}</span>{% endfor %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div class="block trans">
+    <div class="label">Transparency<span class="ko">투명성 원칙</span></div>
+    <div class="trans-grid">
+      {% for title, body in transparency %}
+      <div class="trans-item">
+        <span class="n">{{ '%02d' % loop.index }}</span>
+        <b>{{ title }}</b>
+        <p>{{ body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {{ m.foot(2, handle) }}
+</section>
+
+{# ─────────────────────────── 03 성과 ─────────────────────────── #}
+<section class="page perf{% if not perf.ready %} perf--empty{% endif %}">
+  {{ m.run('Performance') }}
+  <div class="opener">
+    <div class="eyebrow"><span class="eyebrow-n">03</span>Performance</div>
+    <h1 class="h1">게시 후 7일 성과</h1>
+    {% if perf.ready %}
+    <p class="meta-line">
+      <span>분석 {{ perf.n }}건</span><i></i>
+      <span>게시 {{ perf.range_from }} – {{ perf.range_to }}</span><i></i>
+      <span>최종 기록 {{ perf.recorded_to }}</span>
+    </p>
+    {% else %}
+    <p class="meta-line"><span class="collecting">데이터 수집 중</span><i></i><span>기준일 {{ perf.as_of }}</span></p>
+    {% endif %}
+  </div>
+
+  {% if perf.ready %}
+  <div class="kpis">
+    <div class="kpi">
+      <span class="k-label">팔로워</span>
+      <span class="k-num">{{ perf.followers.value if perf.followers else '—' }}</span>
+      <span class="k-sub">{% if perf.followers %}{{ perf.followers.date }} 기준{% if perf.followers.delta %}<br>{{ perf.followers.delta_since }} 이후 {{ perf.followers.delta }}{% endif %}{% else %}기록 없음{% endif %}</span>
+    </div>
+    <div class="kpi">
+      <span class="k-label">분석 게시물</span>
+      <span class="k-num">{{ perf.n }}</span>
+      <span class="k-sub">게시 후 7일 지표가 있는 게시물</span>
+    </div>
+    <div class="kpi">
+      <span class="k-label">도달 중앙값</span>
+      <span class="k-num">{{ perf.reach_median }}</span>
+      <span class="k-sub">게시물 1건당 · 7일</span>
+    </div>
+    <div class="kpi">
+      <span class="k-label">도달 평균</span>
+      <span class="k-num">{{ perf.reach_mean }}</span>
+      <span class="k-sub">게시물 1건당 · 7일</span>
+    </div>
+  </div>
+  <div class="rates">
+    {% for key, label, defn in [('save', '저장률', '저장 ÷ 도달'), ('share', '공유율', '공유 ÷ 도달'), ('follow', '팔로우 전환율', '팔로우 ÷ 도달')] %}
+    {% set r = perf[key] %}
+    <div class="rate">
+      <span class="k-label">{{ label }}</span>
+      <span class="r-num">{{ r.text }}</span>
+      <span class="k-sub">{{ defn }}{% if r.n and r.n < perf.n %} · {{ r.n }}건 기준{% elif not r.n %} · 기록 없음{% endif %}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if perf.chart %}
+  <div class="block chart-block">
+    <div class="label">7-Day Reach<span class="ko">게시물별 7일 도달 · {% if perf.chart.truncated %}최근 {{ perf.chart.bars|length }}건{% else %}게시 순{% endif %}</span></div>
+    <div class="chart">
+      <div class="plot">
+        {% for t in perf.chart.ticks %}
+        <div class="grid" style="bottom: {{ t.pct }}%"><span>{{ t.label }}</span></div>
+        {% endfor %}
+        <div class="median" style="bottom: {{ perf.chart.median_pct }}%"><span>중앙값 {{ perf.chart.median_label }}</span></div>
+        <div class="bars">
+          {% for b in perf.chart.bars %}
+          <div class="bar-slot">
+            <div class="bar" style="height: {{ b.pct }}%">{% if b.label %}<span class="bar-val">{{ b.label }}</span>{% endif %}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="xaxis">
+        {% for b in perf.chart.bars %}<span><b>{{ b.date }}</b>{{ b.fmt }}</span>{% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if perf.best %}
+  <div class="block">
+    <div class="label">Top Saves<span class="ko">저장률 상위 3 · 저장 ÷ 도달</span></div>
+    <div class="best">
+      {% for b in perf.best %}
+      <div class="best-item">
+        {{ m.thumb(b, 'best-thumb', draft=false) }}
+        <div class="best-text">
+          <span class="best-rank">{{ loop.index }}</span>
+          <span class="best-rate">{{ b.save_rate }}</span>
+          <span class="best-title">{{ b.title }}</span>
+          <span class="best-meta">{{ b.format_ko }} · {{ b.date }}<br>도달 {{ b.reach }} · 저장 {{ b.saves }}{% if b.draft %}<br>레이아웃 시안{% endif %}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <p class="source">출처: Instagram 인사이트 기록 (게시 후 7일 시점). 비율은 해당 게시물들의 합계로 계산했고, 추정치는 넣지 않았습니다.</p>
+
+  {% else %}
+  {# 데이터 부족: 숫자 대신 무엇이 채워질지만 보여준다 #}
+  <div class="collect">
+    <div class="collect-head">
+      <span class="collect-tag">Collecting</span>
+      <h2>데이터 수집 중</h2>
+      <p>게시 후 7일 지표가 {{ perf.min_posts }}건 이상 모이면 이 페이지를 실제 수치로 채웁니다. 예상치나 추정치는 싣지 않습니다. 최신 인사이트 화면은 요청하시면 바로 공유합니다.</p>
+    </div>
+    <div class="collect-status">
+      <div class="progress">
+        <span class="k-label">7일 지표 확보</span>
+        <span class="p-num">{{ perf.n }}<i>/</i>{{ perf.min_posts }}<small>건</small></span>
+        <div class="p-track">{% for i in range(perf.min_posts) %}<span class="{% if i < perf.n %}on{% endif %}"></span>{% endfor %}</div>
+      </div>
+      <div class="progress">
+        <span class="k-label">팔로워</span>
+        {% if perf.followers %}
+        <span class="p-num">{{ perf.followers.value }}</span>
+        <span class="k-sub">{{ perf.followers.date }} 기준{% if perf.followers.delta %} · {{ perf.followers.delta_since }} 이후 {{ perf.followers.delta }}{% endif %}</span>
+        {% else %}
+        <span class="p-num muted">—</span>
+        <span class="k-sub">집계 후 공유</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="block fill">
+    <div class="label">What You'll See<span class="ko">데이터가 모이면 채워질 항목</span></div>
+    <div class="ghost-kpis">
+      {% for label, defn in [('도달 중앙값 · 평균', '게시물 1건당 7일 도달'), ('저장률', '저장 ÷ 도달'), ('공유율', '공유 ÷ 도달'), ('팔로우 전환율', '팔로우 ÷ 도달')] %}
+      <div class="ghost">
+        <span class="k-label">{{ label }}</span>
+        <span class="g-num">—</span>
+        <span class="k-sub">{{ defn }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="ghost-wide">
+      <div class="ghost ghost--chart">
+        <span class="k-label">게시물별 7일 도달</span>
+        <span class="k-sub">게시 순서대로 막대 그래프</span>
+      </div>
+      <div class="ghost ghost--best">
+        <span class="k-label">저장률 상위 3</span>
+        <div class="ghost-frames">{% for i in range(3) %}<span><i>{{ i + 1 }}</i></span>{% endfor %}</div>
+      </div>
+    </div>
+  </div>
+  <p class="source">수치는 Instagram 인사이트에서 게시 후 7일 시점에 기록한 값만 씁니다.</p>
+  {% endif %}
+  {{ m.foot(3, handle) }}
+</section>
+
+{# ─────────────────────────── 04 샘플 ─────────────────────────── #}
+<section class="page samples">
+  {{ m.run('Content') }}
+  {{ m.opener('04', 'Content', '콘텐츠 샘플',
+     '실사형 AI 화보에 매거진 타이포그래피를 얹어요. 카드뉴스 ' ~ (canvas.carousel.width if canvas.carousel else 1080) ~ '×' ~ (canvas.carousel.height if canvas.carousel else 1440) ~ ' · 릴스 ' ~ (canvas.reel.width if canvas.reel else 1080) ~ '×' ~ (canvas.reel.height if canvas.reel else 1920)) }}
+  {% if samples %}
+  <div class="sample-grid n{{ samples|length }}">
+    {% for s in samples %}
+    <article class="sample">
+      {{ m.thumb(s) }}
+      <div class="s-meta"><span>{{ s.pillar }}{% if s.pillar %} · {% endif %}{{ s.format_ko }}</span><span class="s-status">{{ s.status }}</span></div>
+      <h3 class="s-title">{{ s.title }}</h3>
+    </article>
+    {% endfor %}
+  </div>
+  {% if samples|selectattr('draft')|list %}
+  <p class="source">레이아웃 시안: 사진을 넣기 전 배치를 확인하는 화면입니다. 실제 게시물에는 AI 화보 사진이 들어갑니다.</p>
+  {% endif %}
+  {% else %}
+  <div class="empty-note">렌더된 게시물이 아직 없어요.</div>
+  {% endif %}
+  {{ m.foot(4, handle) }}
+</section>
+
+{# ─────────────────────────── 05 협업 ─────────────────────────── #}
+<section class="page collab{% if rates %} has-rates{% endif %}">
+  {{ m.run('Partnership') }}
+  {{ m.opener('05', 'Partnership', '협업 메뉴') }}
+  <div class="menu">
+    {% for d in deliverables %}
+    <article class="card">
+      <div class="card-head"><span class="card-n">{{ '%02d' % loop.index }}</span><span class="card-en">{{ d.en }}</span></div>
+      <h3>{{ d.ko }}</h3>
+      <ul>{% for it in d['items'] %}<li>{{ it }}</li>{% endfor %}</ul>
+      {% if d.rate %}
+      <div class="card-rate"><b>{{ d.rate.text }}</b>{% if d.rate.unit %}<span>{{ d.rate.unit }}</span>{% endif %}{% if d.rate.note %}<span>{{ d.rate.note }}</span>{% endif %}</div>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+
+  <div class="block quote">
+    <div class="label">Quote<span class="ko">견적 구성</span></div>
+    <div class="quote-grid">
+      {% for name_, what, unit in quote_parts %}
+      <div class="q">
+        <span class="q-n">{{ loop.index }}</span>
+        <b>{{ name_ }}</b>
+        <p>{{ what }}</p>
+        <span class="q-unit">{{ unit }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="quote-band">
+    <div class="qb-title">지표 공유 후 견적 제안</div>
+    <p>최신 인사이트를 먼저 공유하고, 목표·범위·사용 기간에 맞춰 위 항목으로 견적을 드립니다.
+      {% if rates %} 카드의 금액은 시작가{% if rates.valid_until %}이며 {{ rates.valid_until }}까지 유효{% endif %}합니다.{% endif %}
+      {{ rates.note if rates and rates.note else '부가세 별도.' }}</p>
+  </div>
+  {{ m.foot(5, handle) }}
+</section>
+
+{# ─────────────────────────── 06 진행 ─────────────────────────── #}
+<section class="page process">
+  {{ m.run('Process & Policy') }}
+  {{ m.opener('06', 'Process & Policy', '진행 방식과 원칙') }}
+
+  <ol class="timeline">
+    {% for en, ko, desc in process %}
+    <li>
+      <span class="tl-n">{{ '%02d' % loop.index }}</span>
+      <span class="tl-en">{{ en }}</span>
+      <b>{{ ko }}</b>
+      <p>{{ desc }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+
+  <div class="policies">
+    <div class="policy">
+      <div class="label">Disclosure<span class="ko">광고 표시</span></div>
+      <div class="pill-demo"><span class="pill">{{ compliance.pill }}</span><span class="pill-cap">이미지 상단 · 커버와 첫 장면</span></div>
+      <ul class="dlist">
+        <li>캡션 첫 줄에 <b>[{{ compliance.pill }}]</b> 처럼 표기 ({{ compliance.gifted }}도 같은 방식)</li>
+        <li>인스타그램 <b>유료 파트너십 라벨</b> 사용</li>
+        <li>인물이 나오는 장면마다 <b>{{ compliance.badge }}</b> 표시</li>
+        <li>제휴 링크가 있으면 수수료 사실을 함께 표시</li>
+      </ul>
+    </div>
+    <div class="policy">
+      <div class="label">AI Image QA<span class="ko">이미지 검수</span></div>
+      <ul class="dlist">
+        <li>제품은 실물 사진·실측을 기준으로 생성하고 브랜드 승인 후 사용</li>
+        <li>손·봉제선·로고·패턴 왜곡을 장마다 확인</li>
+        <li>실존 인물·연예인을 닮지 않게 같은 얼굴 기준 유지</li>
+        {% if compliance.product_note %}<li>제품 컷에 안내 문구: “{{ compliance.product_note }}”</li>{% endif %}
+      </ul>
+    </div>
+    <div class="policy">
+      <div class="label">Report<span class="ko">리포트</span></div>
+      <div class="report-cp"><span><b>24</b>시간</span><span><b>7</b>일</span></div>
+      <ul class="dlist">
+        {% for r in report_metrics %}<li>{{ r }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="terms">
+    <div class="label">Rights<span class="ko">권리와 사용 원칙</span></div>
+    <ul class="terms-list">
+      <li><span class="n">01</span>원본 파일과 캐릭터({{ doha_name }}) 권리는 운영자가 갖고, 브랜드에는 이용을 허락해요</li>
+      <li><span class="n">02</span>사용권 기간이 끝나면 브랜드 채널에서 내려요. 연장은 별도 협의</li>
+      <li><span class="n">03</span>자사몰·상세페이지에 쓸 때도 AI 생성 이미지라는 안내를 함께 둬요</li>
+    </ul>
+  </div>
+
+  <div class="closing">
+    <div class="cl-left">
+      <span class="cl-en">Let's work together</span>
+      <b>{{ contact.line }}</b>
+      {% if contact.note %}<span class="cl-note">{{ contact.note }}</span>{% endif %}
+    </div>
+    <div class="cl-right">
+      <span class="cl-label">진행하지 않는 협업</span>
+      <ul>
+        {% for x in declines %}<li>{{ x }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+  {{ m.foot(6, handle) }}
+</section>
+
+</main>
+<script>
+// 화면에서 볼 때만: 좁은 창이면 A4 페이지를 비율대로 줄인다 (인쇄·PDF에는 영향 없음)
+(function () {
+  var fit = function () {
+    var w = document.documentElement.clientWidth;
+    document.documentElement.style.setProperty('--z', Math.min(1, (w - 32) / 794).toFixed(4));
+  };
+  fit();
+  window.addEventListener('resize', fit);
+})();
+</script>
+</body>
+</html>

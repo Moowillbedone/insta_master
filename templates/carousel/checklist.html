@@ -1,0 +1,24 @@
+{% extends "carousel/base.html" %}
+{% import "_partials/carousel_ui.html" as ui %}
+{% block content %}
+<div class="checklist{{ ' checklist--photo' if photo }}" data-fit="체크리스트">
+  {% if photo %}
+  <div class="strip">
+    {{ ui.photo(photo, '', '58%', true) }}
+    <div class="scrim scrim--bar on-{{ tone_top }}"></div>
+    {% if photo.person %}{{ ui.ai_badge(ai_badge, 'ai-badge--corner') }}{% endif %}
+  </div>
+  {% endif %}
+  <section class="cl-body">
+    <p class="eyebrow"><span class="eyebrow-en">CHECKLIST</span><span class="eyebrow-count">{{ checks|length }}</span></p>
+    <h2 class="cl-title" data-max-lines="2">{{ title|rich }}</h2>
+    <ul class="checks">
+      {% for item in checks %}<li><span class="box"></span><span class="t">{{ item|rich }}</span></li>{% endfor %}
+    </ul>
+    {% if note %}
+    <p class="cl-note">{{ ui.bookmark() }}{{ note }}</p>
+    {% endif %}
+  </section>
+  {{ ui.topbar(c, tone_top) }}
+</div>
+{% endblock %}

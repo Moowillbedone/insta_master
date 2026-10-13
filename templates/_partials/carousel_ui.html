@@ -1,0 +1,42 @@
+{# 카드뉴스 공통 조각: 상단 바, 사진/자리표시, AI 배지, 광고 표시 #}
+
+{% macro topbar(c, tone='light', pill='') %}
+<header class="topbar on-{{ tone }}{{ ' has-pill' if pill }}">
+  {% if pill %}
+  <span class="pill pill--{{ tone }}">{{ pill }}</span>
+  <span class="topbar-right">
+    <span class="wordmark">{{ c.wordmark }}</span>
+    <span class="vr"></span>
+    <span class="counter">{{ c.num }}<span class="slash">/</span>{{ c.total }}</span>
+  </span>
+  {% else %}
+  <span class="wordmark">{{ c.wordmark }}</span>
+  <span class="counter">{{ c.num }}<span class="slash">/</span>{{ c.total }}</span>
+  {% endif %}
+</header>
+{% endmacro %}
+
+{% macro photo(ph, cls='', ph_y='50%', compact=false) %}
+<figure class="photo {{ cls }}">
+  {% if ph and ph.src %}
+  <img src="{{ ph.src }}" alt="" style="object-position: {{ ph.pos }}">
+  {% else %}
+  <div class="ph{{ ' ph--compact' if compact }}" style="--ph-y: {{ ph_y }}">
+    <div class="ph-grain"></div>
+    <div class="ph-frame"></div>
+    <div class="ph-label">
+      <span class="ph-tag">PHOTO{% if ph %} <b>{{ ph.key }}</b> · {{ ph.framing }}{% endif %}</span>
+      {% if ph and ph.excerpt and not compact %}<span class="ph-prompt">“{{ ph.excerpt }}”</span>{% endif %}
+    </div>
+  </div>
+  {% endif %}
+</figure>
+{% endmacro %}
+
+{% macro ai_badge(text, cls='') %}
+<span class="ai-badge {{ cls }}">{{ text }}</span>
+{% endmacro %}
+
+{% macro arrow() %}<svg class="arrow" width="46" height="14" viewBox="0 0 46 14" aria-hidden="true"><path d="M0 7H44M38 1.5L44 7L38 12.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>{% endmacro %}
+
+{% macro bookmark() %}<svg class="bookmark" width="18" height="24" viewBox="0 0 18 24" aria-hidden="true"><path d="M1.5 1.5h15v21L9 16.8 1.5 22.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>{% endmacro %}

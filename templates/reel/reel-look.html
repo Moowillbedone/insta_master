@@ -1,0 +1,39 @@
+{% extends "reel/_base.html" %}
+{% block style %}
+/* 하단 UI(캡션·버튼) 위, 오른쪽 아이콘 열을 피한 종이 카드 */
+.look { position: absolute; left: var(--m); bottom: calc(var(--bottom) + 28px); right: var(--right); }
+.card {
+  display: inline-block; min-width: 600px; max-width: 100%;
+  background: rgba(244,239,232,.94);
+  padding: 40px 52px 48px;
+  box-shadow: 0 24px 60px rgba(24,18,12,.20);
+}
+.card-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+.label {
+  font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 92px; line-height: .82;
+  letter-spacing: .06em; color: var(--accent-deep); white-space: nowrap;
+}
+.count {
+  font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 28px; letter-spacing: .26em;
+  color: var(--muted); white-space: nowrap; padding-bottom: 4px;
+}
+.hair { height: 1px; background: rgba(31,31,31,.2); margin: 30px 0 28px; }
+.item { font-family: 'Noto Serif KR'; font-weight: 500; font-size: 58px; line-height: 1.3; letter-spacing: -0.035em; color: var(--ink); }
+.paper-mode .look { top: {{ top_y + 90 }}px; display: flex; flex-direction: column; justify-content: center; }
+.paper-mode .card { box-shadow: none; background: transparent; padding-left: 0; padding-right: 0; }
+{% endblock %}
+{% block body %}
+<div class="{{ 'paper-mode' if mode == 'paper' else '' }}">
+  {% if mode == 'paper' %}<div class="c paper"></div>{% endif %}
+  <section class="t look">
+    <div class="card">
+      <div class="card-head">
+        <span class="label">{{ label or wordmark }}</span>
+        {% if look_total > 1 %}<span class="count">LOOK {{ '%02d' % look_no }} / {{ '%02d' % look_total }}</span>{% endif %}
+      </div>
+      <div class="hair"></div>
+      <p class="item fit" data-max-h="230" data-min="40" data-keep="46">{{ text_html }}</p>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{# 미디어킷 공용 조각 #}
+{% macro thumb(t, cls='', draft=true) %}
+<figure class="thumb {{ cls }}{% if t.kind == 'reel' %} thumb--reel{% endif %}">
+  {% if t.uri %}
+  <img src="{{ t.uri }}" alt="">
+  {% else %}
+  {# 렌더 전 게시물: 의도된 글자 표지처럼 보이게 #}
+  <div class="ph">
+    <div class="ph-frame"></div>
+    <div class="ph-in">
+      <span class="ph-tag">{{ t.series or 'DOHA DAILYFIT' }}</span>
+      <span class="ph-title">{{ t.title }}</span>
+    </div>
+  </div>
+  {% endif %}
+  {% if draft and t.draft %}<span class="draft-tag">레이아웃 시안</span>{% endif %}
+</figure>
+{% endmacro %}
+
+{% macro run(section) %}
+<header class="run">
+  <span class="run-mark">DOHA DAILYFIT</span>
+  <span class="run-sec">{{ section }}</span>
+</header>
+{% endmacro %}
+
+{% macro foot(n, handle) %}
+<footer class="foot">
+  <span>@{{ handle }} · Media Kit</span>
+  <span class="folio">{{ '%02d' % n }}<i>/</i>06</span>
+</footer>
+{% endmacro %}
+
+{% macro opener(num, en, title, lead='') %}
+<div class="opener">
+  <div class="eyebrow"><span class="eyebrow-n">{{ num }}</span>{{ en }}</div>
+  <h1 class="h1">{{ title }}</h1>
+  {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
+</div>
+{% endmacro %}
