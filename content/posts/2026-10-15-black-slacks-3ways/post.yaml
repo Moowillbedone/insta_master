@@ -1,0 +1,169 @@
+# 첫 묶음(2026-10-12 게시, 벡터 일러스트) 리메이크 — 실사 화보 방향
+# 기존 게시물은 새 시안을 확인하기 전까지 삭제·교체하지 않습니다.
+id: 2026-10-15-black-slacks-3ways
+date: 2026-10-15
+time: "07:40"
+status: draft
+series: 한 벌 3가지
+format: both
+pillar: 돌려입기
+goal: save
+hook: "검은 슬랙스 하나로 3일 출근룩"
+
+disclosure:
+  ai_persona: true
+  paid: false
+  gifted: false
+  affiliate: false
+  brand: ""
+
+images:
+  s01:
+    file: images/s01.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      black high-waisted wide-leg wool slacks, ivory fine-gauge crew-neck knit tucked in at the front,
+      camel suede penny loafers, small black leather shoulder bag
+    prompt: >-
+      full-body shot of her walking out through the glass door of a minimal office lobby in the morning,
+      light stone floor, soft daylight from the left, slight motion in the trouser hem,
+      looking ahead with a calm half-smile, empty space in the upper third for a headline
+  s02:
+    file: images/s02.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same black wide-leg wool slacks, ivory fine-gauge crew-neck knit fully tucked in,
+      thin black leather belt, camel suede penny loafers
+    prompt: >-
+      three-quarter shot standing by a large window in a bright office lounge, one hand lightly holding a coffee cup,
+      natural window light, warm neutral color grade, background softly blurred
+  s03:
+    file: images/s03.png
+    framing: three-quarter
+    status: todo
+    outfit: >-
+      the same black wide-leg wool slacks, light blue cotton oxford shirt with sleeves rolled twice,
+      navy cardigan draped over the shoulders, white leather sneakers
+    prompt: >-
+      three-quarter shot on a quiet Seongsu-dong street at 8am, red-brick wall behind her,
+      soft overcast light, she adjusts the cardigan on her shoulder, relaxed weekday mood
+  s04:
+    file: images/s04.png
+    framing: full-body
+    status: todo
+    outfit: >-
+      the same black wide-leg wool slacks, charcoal single-breasted wool blazer over a black fine knit top,
+      black leather ankle boots with a low block heel, slim silver watch
+    prompt: >-
+      full-body shot in a bright apartment entryway in front of a full-length mirror (the mirror shows only a soft blur),
+      she fastens the blazer button, morning light from a side window, polished but understated mood
+  s05:
+    file: images/s05.png
+    framing: flatlay
+    status: todo
+    outfit: >-
+      flat lay of black wide-leg slacks in the center with three tops arranged around it:
+      ivory crew-neck knit, light blue oxford shirt, charcoal wool blazer; camel loafers, white sneakers, black ankle boots
+    prompt: >-
+      top-down flat lay on a warm off-white linen surface, even soft daylight, neat spacing,
+      realistic fabric wrinkles and textures, no people, no hands
+
+slides:
+  - layout: cover
+    image: s01
+    kicker: "한 벌 3가지 · 01"
+    title: "검은 슬랙스 한 벌로\n출근룩 3가지"
+    subtitle: "하의는 그대로, 상의만 바꿔요"
+  - layout: look
+    image: s02
+    label: "LOOK 01 · 월요일"
+    title: "아이보리 니트로 단정하게"
+    items: ["아이보리 라운드 니트", "검은 와이드 슬랙스", "얇은 검정 벨트", "카멜 로퍼"]
+    tip: "밝은 상의를 넣어 입으면 허리선이 올라가 다리가 길어 보여요."
+  - layout: look
+    image: s03
+    label: "LOOK 02 · 수요일"
+    title: "옥스퍼드 셔츠로 가볍게"
+    items: ["하늘색 옥스퍼드 셔츠", "네이비 카디건(어깨에 걸치기)", "검은 와이드 슬랙스", "흰 스니커즈"]
+    tip: "소매를 두 번 접으면 같은 셔츠도 덜 딱딱해 보여요."
+  - layout: look
+    image: s04
+    label: "LOOK 03 · 금요일"
+    title: "차콜 블레이저로 힘 주기"
+    items: ["차콜 울 블레이저", "검정 니트 톱", "검은 와이드 슬랙스", "검정 앵클부츠"]
+    tip: "상·하의를 어두운 톤으로 이으면 한 줄로 길어 보여요. 시계 하나로 포인트."
+  - layout: tip
+    number: "공식"
+    title: "검은 슬랙스는 '상의 밝기'로 요일을 나눠요"
+    body: "하의가 고정이면 상의 밝기만 바꿔도 다른 날처럼 보여요."
+    bullets: ["밝은 상의 → 부드러운 인상 (월)", "중간 톤 상의 → 가벼운 인상 (수)", "어두운 상의 → 단단한 인상 (금)"]
+  - layout: checklist
+    image: s05
+    title: "이번 주 준비물 체크"
+    checks: ["검은 와이드 슬랙스 1벌", "밝은 니트 1장", "셔츠 1장 + 카디건", "블레이저 1벌", "신발 3켤레 중 2켤레면 충분"]
+  - layout: cta
+    title: "저장해두고\n출근 전에 꺼내보세요"
+    body: "다음 편: 베이지 트렌치 하나로 날씨별 3가지"
+
+products: []
+
+reel:
+  audio: null
+  scenes:
+    - image: s01
+      layout: reel-hook
+      text: "검은 슬랙스 하나로\n3일 출근룩"
+      seconds: 2.2
+      motion: zoom-in
+    - image: s02
+      layout: reel-look
+      label: "MON"
+      text: "아이보리 니트 + 로퍼"
+      seconds: 2.4
+      motion: pan-right
+    - image: s03
+      layout: reel-look
+      label: "WED"
+      text: "옥스퍼드 셔츠 + 카디건"
+      seconds: 2.4
+      motion: pan-left
+    - image: s04
+      layout: reel-look
+      label: "FRI"
+      text: "차콜 블레이저 + 앵클부츠"
+      seconds: 2.4
+      motion: zoom-out
+    - image: s05
+      layout: reel-end
+      text: "상의 밝기만 바꾸면\n다른 날이 돼요"
+      seconds: 2.6
+      motion: still
+
+caption: |
+  검은 슬랙스 하나로 3일 출근룩 🖤
+
+  하의는 그대로 두고 상의 밝기만 바꿔봤어요.
+  월요일은 아이보리 니트로 부드럽게,
+  수요일은 옥스퍼드 셔츠로 가볍게,
+  금요일은 차콜 블레이저로 단단하게.
+
+  ✔ 밝은 상의는 넣어 입어서 허리선을 올려요
+  ✔ 셔츠 소매는 두 번 접으면 덜 딱딱해 보여요
+  ✔ 어두운 톤을 위아래로 이으면 길어 보여요
+
+  저장해두고 이번 주 출근 전에 꺼내보세요.
+  다음 편은 '베이지 트렌치 하나로 날씨별 3가지'예요.
+
+hashtags: [출근룩, 직장인코디, 슬랙스코디, 오피스룩, 데일리룩]
+alt_text: "AI로 만든 가상 스타일리스트 도하가 검은 와이드 슬랙스에 아이보리 니트, 옥스퍼드 셔츠, 차콜 블레이저를 각각 매치한 출근룩 3가지와 준비물 체크리스트"
+
+review:
+  approved_by: ""
+  approved_at: ""
+  notes: ""
+
+posted:
+  url: ""
+  posted_at: ""

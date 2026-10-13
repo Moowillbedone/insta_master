@@ -1,0 +1,49 @@
+# 도하 운영 키트 전역 설정
+# 경로는 저장소 루트 기준입니다.
+
+account:
+  handle: doha.dailyfit
+  display_name: "도하 | AI 스타일리스트"
+  url: https://www.instagram.com/doha.dailyfit/
+  goal_monthly_net_krw: 5000000   # 목표치이지 예상 수익이 아님
+
+paths:
+  posts: content/posts
+  persona: brand/doha.yaml
+  reference_images: brand/reference
+  fonts: assets/fonts
+  templates: templates
+  tracking: tracking
+  outreach: outreach
+
+canvas:
+  # 피드 카드뉴스. 2025년 프로필 그리드가 3:4로 바뀐 뒤 1080x1440 업로드가 잘리지 않음.
+  # 앱에서 잘림이 보이면 4:5(1080x1350)로 바꾸세요.
+  carousel: { width: 1080, height: 1440 }
+  carousel_fallback: { width: 1080, height: 1350 }
+  # 릴스 9:16
+  reel: { width: 1080, height: 1920, fps: 30 }
+  # 릴스 화면 UI(상단 바, 하단 캡션·버튼, 오른쪽 아이콘)에 가리지 않는 안전 영역 (px)
+  reel_safe: { top: 220, bottom: 420, left: 60, right: 140 }
+
+image_generation:
+  provider: openai
+  model: gpt-image-2
+  size: 1024x1536          # 세로
+  quality: medium          # low | medium | high — 시안은 medium, 확정컷만 high
+  # 장당 예상 비용 (USD, 1024x1536 기준 출력 비용). 실제 청구는 입력 토큰에 따라 조금 더 나올 수 있음.
+  # 2026-10 공개 자료 기준: low ≈ 0.005? / medium ≈ 0.041 / high ≈ 0.165 — docs/research/image-gen-tech.md 참고
+  est_cost_usd:
+    low: 0.02
+    medium: 0.05
+    high: 0.17
+  max_cost_per_run_usd: 1.00
+  require_confirmation: true   # 비용 발생 전 터미널에서 y 입력 필요
+
+fx:
+  usd_krw: 1400   # 비용 환산용 환율. 실제 결제 환율로 가끔 갱신
+
+publishing:
+  default_time: "07:40"      # 출근길 확인 시간대 (가설 — 성과 데이터로 조정)
+  timezone: Asia/Seoul
+  max_hashtags: 5

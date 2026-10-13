@@ -1,0 +1,15 @@
+# 로컬 비밀값 — 절대 커밋하지 않음
+.env
+.env.*
+!.env.example
+
+# 생성물 (다시 만들 수 있음)
+out/
+content/posts/*/out/
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+.DS_Store
+*.log
