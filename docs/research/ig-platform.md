@@ -17,20 +17,21 @@
 ## 핵심 요약
 
 1. **이 계정에 가장 큰 변수는 'AI 생성 프로필' 라벨이다.**
-   - 2026-08-31 인스타그램은 기존 'AI creator' 라벨 이름을 'AI-generated profile(AI 생성 프로필)'로 바꿨다 ([출처](https://techcrunch.com/2026/08/31/instagram-puts-new-limits-on-undisclosed-ai-profiles/)) [보도].
-   - AI로 만든 인물을 내세우면서 이 라벨을 달지 않은 계정은 추천 노출이 제한된다 ([출처](https://www.mediapost.com/publications/article/417580/instagram-limits-reach-for-creator-profiles-withou.html)) [보도].
+   - 2026-08-31 인스타그램은 기존 'AI creator' 라벨 이름을 'AI-generated profile(AI 생성 프로필)'로 바꿨다 ([출처](https://www.unite.ai/instagram-renames-ai-creator-label-and-restricts-unlabeled-ai-generated-profiles/)) [보도].
+   - AI로 만든 인물을 내세우면서 이 라벨을 달지 않은 계정은 추천 노출이 제한된다 ([출처](https://www.digitaltrends.com/social-media/instagram-will-limit-reach-for-ai-influencers-who-skip-ai-generated-label-on-their-profile/)) [보도]. Meta·인스타그램 공식 공지 원문은 검증 과정에서도 찾지 못했다.
    - 도하는 정확히 이 대상이다. 처음부터 라벨을 켜야 한다.
 2. **한국 법 기준으로도 가상인물 표시가 필요하다.**
-   - 2026-06-01부터 공정위 「추천·보증 등에 관한 표시·광고 심사지침」이 개정 시행됐다. AI 가상인물이 추천·보증 주체에 추가됐고, 광고에서는 '가상인물' 표시를 해야 한다 ([출처](https://www.law.go.kr/LSW/admRulInfoR.do?admRulSeq=2100000280130), [출처](https://www.korea.kr/briefing/pressReleaseView.do?newsId=156753425)) [확인].
+   - 2026-06-01부터 공정위 「추천·보증 등에 관한 표시·광고 심사지침」이 개정 시행됐다. AI 가상인물이 추천·보증 주체에 추가됐고, 광고에서는 '가상인물' 표시를 해야 한다 ([출처](https://www.law.go.kr/LSW/admRulInfoR.do?admRulSeq=2100000280130), [출처](https://www.ftc.go.kr/www/selectBbsNttView.do?pageUnit=10&pageIndex=1&searchCnd=all&key=12&bordCd=3&searchCtgry=01%2C02&nttSn=47547)) [확인].
 3. **인스타그램 자체 수익화 기능은 초기 수익원이 되기 어렵다.**
    - 기프트는 팔로워 500명 이상이 필요하다 ([출처](https://help.instagram.com/738469380549477?helpref=faq_content)) [확인].
    - 구독은 팔로워 약 1만 명 이상이 필요하다 [주장].
    - 보너스는 초대받은 계정만 쓸 수 있다.
-   - 2026년 3월 재출시된 릴스 제휴 상품 태그는 미국·브라질·인도·인도네시아·태국에서만 시작됐다. 한국은 출시국에 없다 ([출처](https://metricool.com/instagram-reels-affiliate-links/)) [보도].
+   - 2026년 3월 말 재출시가 발표된 릴스 제휴 상품 태그는 미국·브라질·인도·인도네시아·태국에서 시작됐다. 한국은 초기 출시국에 없다 ([출처](https://metricool.com/instagram-reels-affiliate-links/)) [보도].
+   - 다만 "22개 커머스 시장 전체로 확대 확정"이라는 보도도 있어, 현재 한국 계정에서 열렸는지는 [미확인]이다. 릴스 공유 화면에서 'Add Products'가 보이는지 확인해야 한다.
    - 따라서 ₩5M/월 목표는 브랜드 협찬, 제작비, 사용권, 파트너십 광고 권한 판매로 채워야 한다.
 4. **브랜드 연결 도구는 한국에서 쓸 수 있다.**
    - 크리에이터 마켓플레이스는 2024년 5월 한국에 열렸다 ([출처](https://www.socialmediatoday.com/news/instagram-expands-geographic-creator-marketplace/715865/)) [보도].
-   - 2026년에 'Meta Creator Marketing Hub'로 통합되고 있다 ([출처](https://www.mediapost.com/publications/article/418022/meta-launches-creator-marketing-hub-ig-live-video.html)) [보도].
+   - Meta는 2026-06-23 이를 'Meta Creator Marketing Hub'로 통합한다고 발표했다 ([출처](https://www.buzzincontent.com/news/meta-builds-single-creator-marketing-hub-to-move-creator-content-into-paid-ads-12065075)) [보도]. 실제 출시 시점은 [미확인]이다.
 5. **독창성 규칙이 사진과 캐러셀까지 넓어졌다.**
    - 2026-04-30부터 남의 콘텐츠를 주로 재게시하는 계정은 사진·캐러셀도 추천에서 빠진다 ([출처](https://techcrunch.com/2026/04/30/instagram-restricts-reach-of-content-aggregators-in-new-crackdown/)) [보도].
    - 브랜드 룩북 사진을 그대로 올리면 안 된다.
@@ -96,7 +97,7 @@
 | 구독 | 2023-12 한국 도입 발표 [확인] | 팔로워 약 1만 명 이상, 만 18세 이상 [주장] | 중장기 |
 | 기프트 (릴스) | 2023-12 한국 도입 [확인] | 팔로워 500명 이상, 만 18세 이상, 정산 계정 등록 [확인] | 팔로워 500명 달성 후 켜기 |
 | 보너스 | 초대제. 한국은 시범 대상 [확인] | 초대받아야 함 | 통제 불가. 기대하지 않기 |
-| 제휴 상품 태그 (릴스) | 미출시. 출시 5개국에 한국 없음 [보도] | 미확인 | 외부 링크 방식으로 대체 |
+| 제휴 상품 태그 (릴스) | 초기 출시 5개국에 한국 없음 [보도]. 22개 시장 확대 여부 [미확인] | 팔로워 1,000명 이상, 만 18세 이상 [주장] | 앱에서 확인 전까지 외부 링크 방식으로 대체 |
 | 인스타그램 쇼핑 (상품 태그) | 공식 목록에 한국 포함 [확인] | 판매 사업자 승인 필요 | 브랜드가 태그 권한을 줄 때만 활용 |
 
 ### 2-1. 크리에이터 마켓플레이스와 Creator Marketing Hub
@@ -104,7 +105,7 @@
 - **한국 오픈**
   - 2024년 5월 한국을 포함한 10개국으로 확대됐다. 나머지 9개국은 독일, 네덜란드, 프랑스, 스페인, 이스라엘, 튀르키예, 멕시코, 아르헨티나, 인도네시아다 ([출처](https://www.socialmediatoday.com/news/instagram-expands-geographic-creator-marketplace/715865/), [출처](https://www.mediapost.com/publications/article/395993/instagram-expands-creator-marketplace-to-10-new-re.html)) [보도].
 - **현재 범위**
-  - 2026년 9월 도움말을 인용한 블로그는 "Meta 광고가 운영되는 모든 국가"(일부 제재국 제외)로 넓어졌다고 쓴다 ([출처](https://www.inro.social/blog/instagram-creator-marketplace)) [주장]. 한국은 어느 쪽 설명에서든 포함된다.
+  - 2026년 9월 도움말을 인용한 블로그는 "Meta 광고가 운영되는 모든 국가"(일부 제재국 제외)로 넓어졌다고 쓴다 ([출처](https://www.inro.social/blog/instagram-creator-marketplace)) [주장]. 국가 허용 목록이 2026년 1월 말 없어졌다는 가이드도 있다 ([출처](https://www.storika.ai/guides/instagram-creator-marketplace)) [주장]. 한국은 어느 쪽 설명에서든 포함된다.
 - **계정 유형**
   - 비즈니스와 크리에이터 계정만 대상이다. 자격이 있으면 프로페셔널 대시보드에서 가입한다 ([출처](https://help.instagram.com/ipad-app/337707278243327)) [확인].
 - **팔로워 기준**
@@ -112,7 +113,8 @@
   - 반면 공식 최소 기준이 없다는 글도 있다 [주장]. 판단할 수 없으므로 [미확인]으로 둔다.
 - **2026년 변화**
   - Meta는 2026-06-23 칸 라이언즈에서 크리에이터 마켓플레이스와 파트너십 광고 허브를 'Meta Creator Marketing Hub'로 합친다고 발표했다 ([출처](https://www.buzzincontent.com/news/meta-builds-single-creator-marketing-hub-to-move-creator-content-into-paid-ads-12065075)) [보도].
-  - 2026-09-16 출시 보도가 나왔다. 브랜드가 크리에이터의 인스타그램 라이브를 파트너십 광고로 후원하는 기능도 함께 소개됐다 ([출처](https://www.mediapost.com/publications/article/418022/meta-launches-creator-marketing-hub-ig-live-video.html)) [보도].
+  - Facebook 크리에이터도 마켓플레이스에 추가된다. 기존 인스타그램 크리에이터는 500만 명 이상이라고 한다 ([출처](https://www.netinfluencer.com/meta-to-unify-creator-marketplace-and-partnership-ads-hub-adds-facebook-creators-to-roster/)) [보도].
+  - 2026-09-16 출시와 인스타그램 라이브 후원 기능 보도가 있다는 기존 기술은 검증 검색에서 확인되지 않았다. 발표 당시 보도는 "연내 출시 예정"이었다 [미확인]. 프로페셔널 대시보드나 Meta 비즈니스 도구에서 Hub 메뉴가 실제로 보이는지 확인해야 한다.
   - "모든 브랜드-크리에이터 거래에 파트너십 광고가 의무"라는 주장도 있다 ([출처](https://gromerce.com/en/blog/meta-creator-marketing-hub-partnership-ads-2026)) [주장]. 다른 출처로 확인되지 않아 [미확인]이다.
 
 ### 2-2. 구독
@@ -138,6 +140,7 @@
   - 2023-09 확대 국가에 한국이 포함됐다는 보도가 있다 ([출처](https://www.malaymail.com/news/tech-gadgets/2023/09/19/instagram-rolls-out-its-gifts-option-in-more-countries/91632)) [보도].
   - 국내 도입은 2023-12였다 ([출처](https://zdnet.co.kr/view/?no=20231220145124)) [보도].
 - **정산 단가**: 스타 1개당 0.01달러라는 설명이 있다 ([출처](https://www.kudozz.in/blog/instagram-gifts)) [주장].
+- **켜는 방법**: 기프트는 기본으로 꺼져 있고 프로페셔널 대시보드에서 켠다는 설명이 있다 ([출처](https://www.theleap.co/blog/instagram-gifts/)) [주장].
 
 ### 2-4. 보너스 (Bonuses, 구 Reels Play Bonus)
 
@@ -150,10 +153,11 @@
 
 ### 2-5. 제휴 상품 태그와 인스타그램 쇼핑
 
-- **릴스 제휴 링크와 상품 태그 (2026년 3월 재출시)**
+- **릴스 제휴 링크와 상품 태그 (2026년 3월 말 발표, 일부 보도는 4월)**
   - 공유 화면의 'Add Products'에서 제휴 링크 URL을 붙여넣거나 브랜드 카탈로그에서 상품을 태그한다.
-  - 출시국은 미국, 브라질, 인도, 인도네시아, 태국이다. 이후 22개 커머스 시장으로 넓힐 계획이라고 한다 ([출처](https://metricool.com/instagram-reels-affiliate-links/), [출처](https://www.buzzincontent.com/news/instagram-introduces-affiliate-links-for-reels-heres-how-it-works-11473825)) [보도].
-  - 한국은 출시국에 없다. 확대 일정은 [미확인]이다.
+  - 초기 출시국은 미국, 브라질, 인도, 인도네시아, 태국이다. 이후 22개 커머스 시장으로 넓힐 계획이라고 한다 ([출처](https://metricool.com/instagram-reels-affiliate-links/), [출처](https://www.netinfluencer.com/instagram-re-enters-creator-affiliate-commerce-years-after-rivals-built-lead/)) [보도].
+  - "2026년 봄까지 22개 시장 전체로 확대 확정"이라는 업체 글도 있다 ([출처](https://joinbrands.com/blog/instagram-shop-2026/)) [주장]. 한국이 22개 시장에 들어가는지, 이미 열렸는지는 [미확인]이다. 앱에서 확인한다.
+  - 자격은 팔로워 1,000명 이상, 만 18세 이상이라는 설명이 많다 [주장].
   - 릴스당 최대 30개 상품, Meta 수수료 0%라는 설명이 있다 ([출처](https://www.affiversemedia.com/instagram-relaunches-creator-affiliate-commerce-the-shop-the-look-mess-is-the-harder-problem/)) [주장].
 - **인스타그램 쇼핑 (상품 태그)**
   - 공식 도움말의 APAC 이용 가능 시장 목록에 한국이 있다 ([출처](https://help.instagram.com/337910740093030)) [확인].
@@ -192,12 +196,13 @@
   - 이 단계에서는 도달에 영향이 없다고 안내됐다 ([출처](https://www.engadget.com/2162426/instagram-is-testing-optional-ai-creator-labels/)) [보도].
 - **2026-08-31: 'AI-generated profile'로 이름 변경과 미표시 계정 노출 제한**
   - 대상: AI로 만들었거나 상당 부분 AI로 만든 인물이 계정에 꾸준히 나오는 프로필
-  - 비대상: 실제 사람이 보정이나 캡션에만 AI를 쓰는 경우 ([출처](https://techcrunch.com/2026/08/31/instagram-puts-new-limits-on-undisclosed-ai-profiles/)) [보도]
-  - 라벨을 달지 않은 해당 계정은 비팔로워 추천(릴스, 탐색 등)에서 빠질 수 있다 ([출처](https://www.mediapost.com/publications/article/417580/instagram-limits-reach-for-creator-profiles-withou.html), [출처](https://www.unite.ai/instagram-renames-ai-creator-label-and-restricts-unlabeled-ai-generated-profiles/)) [보도]
+  - 비대상: 실제 사람이 보정이나 캡션에만 AI를 쓰는 경우 ([출처](https://www.unite.ai/instagram-renames-ai-creator-label-and-restricts-unlabeled-ai-generated-profiles/), [출처](https://workos.com/blog/instagram-ai-generated-profile-label)) [보도]
+  - 라벨을 달지 않은 해당 계정은 비팔로워 추천(릴스, 탐색 등)에서 빠질 수 있다 ([출처](https://www.digitaltrends.com/social-media/instagram-will-limit-reach-for-ai-influencers-who-skip-ai-generated-label-on-their-profile/), [출처](https://www.unite.ai/instagram-renames-ai-creator-label-and-restricts-unlabeled-ai-generated-profiles/)) [보도]. 제한 범위는 보도마다 다르다("탐색·추천 노출 제한" vs "비팔로워 릴스·탐색 추천 제외"). 라벨을 스스로 단 계정은 도달에 변화가 없다고 한다.
+  - 미표시 AI 계정으로 판정되면 먼저 알림을 받고 라벨을 직접 달 기회가 주어진다고 보도됐다 ([출처](https://betanews.com/article/meta-will-limit-the-reach-of-ai-profiles-on-instagram-that-are-not-transparent/)) [보도]
   - 라벨은 프로필 화면뿐 아니라 피드 게시물, 릴스, 스토리에도 보인다 ([출처](https://www.mediapia.co.kr/news/articleView.html?idxno=200096)) [보도]
   - 잘못 분류됐다면 '계정 상태(Account Status)'에서 재검토를 요청할 수 있다 ([출처](https://www.solnews.co.kr/news/articleView.html?idxno=84713)) [보도]
   - 게시물이 'AI info' 라벨과 계정 라벨 모두에 해당하면 게시물에는 'AI info'가 우선 표시된다 ([출처](https://www.engadget.com/2162426/instagram-is-testing-optional-ai-creator-labels/)) [보도]
-  - 설정 경로는 '프로필 편집'의 토글이라는 설명이 있다 [주장]. 앱에서 확인해야 한다.
+  - 설정 경로는 '프로필 편집'에서 'AI-generated profile'을 켜는 토글이라고 여러 매체가 보도했다 [보도]. 게시물 단위 'AI info' 라벨과는 별개다. 한국어 메뉴명은 앱에서 확인해야 한다.
   - 한국에 적용되는 시점은 기사에 명시되지 않았다 [미확인]. 국내 매체도 같은 내용을 보도했으므로 이미 적용됐다고 보고 대응하는 편이 안전하다.
 - **방향성**
   - Adam Mosseri는 2026년 신년 메모에서 AI 콘텐츠를 명확히 라벨링하고, 누가 올렸는지에 대한 신뢰 신호를 보여줘야 한다고 했다 ([출처](https://betanews.com/2026/01/01/adam-mosseri-suggests-highlighting-real-media-rather-than-ai-content-on-social-media/)) [보도].
@@ -211,14 +216,15 @@
   - 대가를 받은 오가닉 브랜디드 콘텐츠라면 계정 성격과 관계없이 유료 파트너십 라벨이 필요하다 ([출처](https://help.instagram.com/android-app/1109894795810258)) [확인].
   - Meta는 2025년부터 다른 회사 AI 도구로 만든 광고 이미지에도 AI 라벨을 넓혀 붙인다. 실사형 인물이 들어간 광고는 라벨이 더 눈에 띄게 표시된다고 보도됐다 ([출처](https://www.digitaltoday.co.kr/news/articleView.html?idxno=551931)) [보도].
 - **공정위 추천·보증 심사지침 (2026-06-01 시행)**
-  - 개정안은 2026-04-08 행정예고됐다 ([출처](https://www.korea.kr/briefing/pressReleaseView.do?newsId=156753425)) [확인].
-  - 2026-06-01 공정위 예규 제499호로 시행됐다 ([출처](https://www.law.go.kr/LSW/admRulInfoR.do?admRulSeq=2100000280130)) [확인].
-  - 핵심 내용 ([출처](https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&idx=34968), [출처](https://m.news.nate.com/view/20260531n06742), [출처](https://www.shinkim.com/kor/media/newsletter/3230)) [보도]
+  - 개정안이 2026-04-08 행정예고됐다는 기존 기술은 검증 검색에서 확인되지 않았다 [미확인]. 시행일 판단에는 영향이 없다.
+  - 2026-06-01 공정위 예규 제499호(일부개정)로 시행됐다. 부칙상 시행일도 2026-06-01이다 ([출처](https://www.law.go.kr/LSW/admRulInfoR.do?admRulSeq=2100000280130)) [확인].
+  - 핵심 내용 ([출처](https://www.ftc.go.kr/www/selectBbsNttView.do?pageUnit=10&pageIndex=1&searchCnd=all&key=12&bordCd=3&searchCtgry=01%2C02&nttSn=47547), [출처](https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&idx=34968), [출처](https://www.seoul.co.kr/news/economy/2026/05/31/20260531500033)) [확인] (공정위 보도자료 검색 발췌 기준)
     - AI로 만든 가상인물을 추천·보증 주체로 추가했다.
-    - 사진과 영상에서는 가상인물 가까이에, 문자 매체에서는 제목이나 첫 부분에 표시해야 한다.
-    - 문구 예시: "AI를 기반으로 생성된 가상인물이 포함된 게시물입니다", "가상인물 포함"
+    - 영상 매체에서는 가상인물이 나오는 동안 그 인물 가까이에, 글 매체(블로그·카페 등)에서는 제목이나 첫 부분에 표시해야 한다. 사진·카드뉴스에 대한 별도 기준은 발췌에서 보이지 않았다 [미확인]. 원문을 확인하기 전까지는 영상 기준(인물 가까이)을 준용하는 편이 안전하다.
+    - 문구 예시: "가상인물 포함" [확인]. "AI를 기반으로 생성된 가상인물이 포함된 게시물입니다"라는 긴 문구는 검증 검색에서 확인되지 않았다 [미확인].
     - 가상인물임을 밝혔더라도 실제로 써본 것처럼 꾸민 후기는 부당광고가 될 수 있다.
-    - 법적 책임은 광고주(브랜드)에게 있다는 해설이 있다.
+    - 공정위는 지침 위반이 곧바로 법 위반은 아니며, 소비자 오인과 구매 선택 왜곡이 있어야 부당광고로 제재된다고 설명했다. 표시 없는 가상인물 광고는 모니터링하겠다고 밝혔다 [보도].
+    - 법적 책임은 광고주(브랜드)에게 있다는 해설이 있다 [보도].
   - **실무 의미**
     - 협찬 카드뉴스에서 도하가 나오는 장마다 도하 근처에 '가상인물' 문구를 넣는다.
     - "도하가 직접 입어봤어요" 같은 사용 경험 표현은 쓰지 않는다.
@@ -228,8 +234,8 @@
     - 이 내용은 검색 발췌 기준이다. 글자 크기, 색 같은 세부 요건은 원문으로 확인해야 한다.
     - 인스타그램 유료 파트너십 라벨만으로 공정위 기준을 충족하는지는 공식 해석을 찾지 못했다 [미확인]. 라벨과 캡션 첫 줄 '광고' 또는 '협찬' 표기를 함께 쓰는 편이 안전하다.
 - **AI 기본법 (2026-01-22 시행)**
-  - 생성형 AI 결과물 표시(워터마크) 의무는 AI 서비스 제공 사업자에게 있다. AI로 만든 결과물을 게시만 하는 이용자는 원칙적으로 대상이 아니라고 보도됐다 ([출처](https://www.newsis.com/view/NISX20260121_0003484769), [출처](https://www.kmib.co.kr/article/view.asp?arcid=1768984300)) [보도].
-  - 과태료 부과는 최소 1년 유예된다고 보도됐다 [보도].
+  - 생성형 AI 결과물 표시(워터마크) 의무는 AI 서비스 제공 사업자에게 있다. AI로 만든 결과물을 게시만 하는 이용자는 원칙적으로 대상이 아니라고 보도됐다 ([출처](https://www.kmib.co.kr/article/view.asp?arcid=1768984300), [출처](https://www.imaeil.com/page/view/2026092412193369072)) [보도].
+  - 정부는 과태료에 최소 1년 이상의 계도기간을 두기로 했다. 과태료(최대 3,000만 원)는 표시 누락 즉시가 아니라 시정명령을 이행하지 않을 때 부과되며, 개인 창작자에게는 적용되지 않는다고 보도됐다 ([출처](https://www.imaeil.com/page/view/2026092412193369072)) [보도]. 계도기간 종료일은 과학기술정보통신부 자료로 확인해야 한다 [미확인].
   - 생성 도구가 C2PA 메타데이터를 넣어 인스타그램에서 자동 라벨이 붙는 것은 정상 동작이다.
 
 ---
@@ -290,7 +296,8 @@
   - 작은 크리에이터에게 더 많이 노출되도록 랭킹에 새 입력값을 넣는다.
   - 남의 콘텐츠를 30일 동안 10회 이상 재게시한 애그리게이터 계정은 추천에서 뺀다. 이의는 계정 상태에서 제기한다.
 - **사진과 캐러셀로 확대 (2026-04-30)**
-  - 남의 사진과 캐러셀을 주로 공유하는 계정도 추천 대상에서 빠진다 ([출처](https://techcrunch.com/2026/04/30/instagram-restricts-reach-of-content-aggregators-in-new-crackdown/), [출처](https://www.tubefilter.com/2026/04/30/instagram-removes-algorithm-recommendations-repost-content-aggregator/)) [보도].
+  - 남의 사진과 캐러셀을 주로 공유하는 계정도 추천 대상에서 빠진다 ([출처](https://techcrunch.com/2026/04/30/instagram-restricts-reach-of-content-aggregators-in-new-crackdown/), [출처](https://www.socialmediatoday.com/news/instagram-updates-algorithm-to-benefit-original-creators/819016/)) [보도].
+  - 계정은 월 단위로 평가되며, 30일 동안 게시물 대부분이 재게시면 애그리게이터로 분류된다고 한다 [보도]. 2026년 확대분에 대해 블로그들이 쓰는 "30일 10회", "도달 60~80% 감소" 수치는 근거가 약하다 [미확인].
   - 속도 변경, 원작자 이름이 보이는 캡처 추가 정도로는 원본으로 인정받지 못한다. 해설, 유머, 새로운 관점 같은 의미 있는 편집이 필요하다 ([출처](https://techcrunch.com/2026/04/30/instagram-restricts-reach-of-content-aggregators-in-new-crackdown/), [출처](https://www.socialmediatoday.com/news/instagram-updates-algorithm-to-benefit-original-creators/819016/)) [보도].
   - 도하에게 주는 의미: 브랜드 공식 룩북이나 남의 코디 사진을 그대로 쓰면 안 된다. 도하가 직접 입은 이미지로 다시 만들고 스타일링 해설을 붙여야 한다.
 - **2026-09 Mosseri 랭킹 설명 영상 시리즈**
@@ -329,7 +336,8 @@
 - **지원 형식**: 단일 이미지, 영상, 릴스, 캐러셀 ([출처](https://developers.facebook.com/docs/instagram-platform/content-publishing)) [확인]
 - **24시간 게시 한도**
   - 콘텐츠 게시 가이드에는 "24시간 이동 창 기준 API 게시 100건, 캐러셀은 1건으로 계산"이라고 돼 있다 ([출처](https://developers.facebook.com/docs/instagram-platform/content-publishing)) [확인].
-  - 그런데 content_publishing_limit 레퍼런스에는 "현재 50건"으로 남아 있다. 2026-09-11 실제 조회값도 50이었다는 보고가 있다 ([출처](https://social-api.ai/blog/instagram-accounts-are-limited-to-100-api-published-posts)) [주장].
+  - 그런데 content_publishing_limit 레퍼런스 설명과 응답 예시에는 quota_total이 "현재 50"으로 남아 있다는 지적이 일부 가이드에 있다 [주장]. 2026-09-11 실제 조회값이 50이었다는 보고는 검증 검색에서 확인되지 않았다 [미확인].
+  - "캐러셀은 24시간에 50건까지"라는 업체 문서도 있지만 Meta 문서로 뒷받침되지 않는다 ([출처](https://docs.emplifi.io/platform/latest/home/instagram-publishing)) [주장].
   - 숫자를 코드에 박아두지 말고 GET /{ig-user-id}/content_publishing_limit로 조회한다.
   - 하루 1~3건을 올리는 도하 운영에는 어느 쪽이든 충분하다.
 - **게시 흐름**
@@ -447,7 +455,7 @@
   - [ ] 기프트 정산 계정 등록에 필요한 결제·은행·세금 정보. 한국 거주자로 등록할 수 있는지.
   - [ ] 트라이얼 릴스 토글이 있는지. 릴스 최대 업로드 길이가 3분인지 그보다 긴지.
   - [ ] 3:4(1080×1440) 캐러셀을 앱에서 올렸을 때 피드와 그리드에서 잘리지 않는지 직접 테스트.
-  - [ ] 릴스 공유 화면에 'Add Products'(제휴 태그)가 보이는지. 현재는 한국 미출시로 판단한다.
+  - [ ] 릴스 공유 화면에 'Add Products'(제휴 태그)가 보이는지. 초기 출시국에는 한국이 없었지만 22개 시장 확대 보도가 엇갈리므로 직접 확인한다.
   - [ ] 협찬 게시물에서 쓸 수 있는 음원 범위. 상업용 음원으로 제한되는지.
 - **개발에서 확인할 것**
   - [ ] content_publishing_limit 실제 quota_total 값 (50인지 100인지).
@@ -458,4 +466,25 @@
 - **법률과 정책 원문**
   - [ ] 공정위 추천·보증 심사지침(예규 제499호) 원문의 가상인물 표시 문구, 위치, 크기 요건. 협찬 계약서에 반영할 수 있도록 법률 자문을 받는다.
   - [ ] Meta 브랜디드 콘텐츠 정책 원문에 AI 페르소나 관련 조항이 있는지.
-  - [ ] Creator Marketing Hub 크리에이터 가입 요건(팔로워 기준)과 한국 롤아웃 상태.
+  - [ ] Creator Marketing Hub 크리에이터 가입 요건(팔로워 기준)과 한국 롤아웃 상태. 2026-09 출시 여부 자체도 아직 확인되지 않았다.
+  - [ ] 공정위 지침 원문에서 사진·카드뉴스(정지 이미지)의 가상인물 표시 위치 기준.
+  - [ ] AI 기본법 과태료 계도기간 종료일(과기정통부 공식 자료).
+  - [ ] 인스타그램 'AI-generated profile' 정책의 Meta 공식 공지 원문.
+
+## 검증 메모 (2026-10-13)
+
+반증 시도용 WebSearch 10회(한국어·영어, extended)로 핵심 주장 10건을 다시 확인했다. 검색 결과에 나타나지 않은 URL은 해당 주장에서 빼거나 검색 결과에 나온 출처로 바꿨다. 확인하지 않은 나머지 주장과 URL은 원래 태그를 그대로 두었다.
+
+| # | 확인한 주장 | 판정 | 이유 |
+|---|---|---|---|
+| 1 | 2026-08-31 'AI creator'를 'AI-generated profile'로 이름 변경, 미표시 AI 계정 도달 제한 | 유지 [보도] | Unite.AI, Digital Trends, BetaNews 등 여러 매체가 같은 날짜와 내용을 보도했다. Meta 원문은 못 찾았다. 검색에 나오지 않은 TechCrunch·MediaPost URL은 교체했다. |
+| 2 | 설정 경로가 '프로필 편집' 토글 | 상향 [주장]→[보도] | 복수 보도가 프로필 편집 토글로 설명했다. 미표시 판정 시 사전 알림 내용을 추가했다. |
+| 3 | 2026-05 선택형 'AI creator' 라벨 테스트(Engadget) | 유지 [보도] | Engadget 기사와 라벨 문구가 검색으로 확인됐다. |
+| 4 | 공정위 추천·보증 심사지침 2026-06-01 시행, 예규 제499호, AI 가상인물 표시 | 유지 [확인], 세부 수정 | 법제처·공정위 보도자료로 확인됐다. 표시 위치를 "영상은 등장하는 동안 인물 가까이, 글은 제목·첫 부분"으로 고쳤다. 사진 기준과 긴 예시 문구는 [미확인]으로 내렸다. 2026-04-08 행정예고는 확인하지 못해 [미확인]으로 내리고 URL을 뺐다. 네이트·신김 URL은 공정위·서울신문 URL로 바꿨다. |
+| 5 | 기프트 팔로워 500명 이상 등 자격 | 유지 [확인] | 인스타그램 도움말 발췌가 그대로 확인됐다. |
+| 6 | 릴스 제휴 태그 5개국 출시, 한국 미출시 | 하향 | 초기 5개국은 맞다. 다만 "22개 시장 전체 확대 확정" 보도가 있어 한국 이용 여부를 [미확인]으로 내렸다. 자격(팔로워 1,000명·18세, [주장])을 추가하고 발표 시점을 "3월 말(일부 4월)"로 고쳤다. 검색에 나오지 않은 buzzincontent URL은 교체했다. |
+| 7 | 크리에이터 마켓플레이스 2024-05 한국 포함 10개국 확대 | 유지 [보도] | MediaPost, Social Media Today, TechCrunch Threads에서 국가 목록이 일치했다. |
+| 8 | Creator Marketing Hub 2026-06-23 발표, 2026-09-16 출시 | 일부 하향 | 발표는 확인됐다. 9-16 출시와 라이브 후원 기능은 검색에서 나오지 않아 [미확인]으로 내리고 MediaPost 418022 URL을 뺐다. |
+| 9 | 2026-04-30 독창성 규칙의 사진·캐러셀 확대 | 유지 [보도] | TechCrunch와 Social Media Today로 확인됐다. 검색에 나오지 않은 Tubefilter URL은 뺐다. "30일 10회", "도달 60~80% 감소" 같은 블로그 수치는 [미확인]으로 표시했다. |
+| 10 | API 게시 한도 100건/24시간, 레퍼런스에는 50건 | 유지, 일부 하향 | 100건과 캐러셀 1건 계산은 공식 가이드로 확인됐다. "2026-09-11 실조회 50" 보고는 확인하지 못해 [미확인]으로 내리고 social-api.ai URL을 뺐다. |
+| 11 | AI 기본법 2026-01-22 시행, 이용자는 표시 의무 대상 아님, 과태료 1년 유예 | 유지 [보도], 보강 | 계도기간이 "최소 1년 이상"이고 시정명령 불이행 시 최대 3,000만 원이며 개인 창작자에게는 적용되지 않는다는 보도를 추가했다. Newsis URL은 매일신문 URL로 바꿨다. |

@@ -31,12 +31,21 @@ image_generation:
   model: gpt-image-2
   size: 1024x1536          # 세로
   quality: medium          # low | medium | high — 시안은 medium, 확정컷만 high
-  # 장당 예상 비용 (USD, 1024x1536 기준 출력 비용). 실제 청구는 입력 토큰에 따라 조금 더 나올 수 있음.
-  # 2026-10 공개 자료 기준: low ≈ 0.005? / medium ≈ 0.041 / high ≈ 0.165 — docs/research/image-gen-tech.md 참고
+  # 장당 예상 비용 (USD). 실행 전 상한 계산용이라 실제보다 약간 높게 잡음.
+  # 공개 자료 기준 gpt-image-2 1024x1536 출력 비용: low ≈ 0.005 / medium ≈ 0.041 / high ≈ 0.165 [보도]
+  # 참조 이미지(얼굴 기준) 입력 토큰은 별도 — research/image-gen-tech.md §1
   est_cost_usd:
     low: 0.02
     medium: 0.05
     high: 0.17
+  # 응답의 토큰 사용량으로 실제 금액을 계산해 tracking/costs.csv 에 기록 (100만 토큰당 USD).
+  # 2026-10 공개 자료 기준 값 [보도]. 결제 전에 OpenAI 가격 페이지에서 한 번 확인하세요.
+  token_prices_usd_per_1m:
+    text_input: 5
+    image_input: 8
+    image_output: 30
+  # 3:4 원본이 필요하면 size: 1152x1536 을 1장만 먼저 시험 (gpt-image-2 는 16의 배수 자유 크기 지원 [보도]).
+  # 비교 후보 모델: gpt-image-2.5-sunburst (정밀 편집, 2026-09 출시 [보도]) — 같은 프롬프트 10장으로 비교 후 결정
   max_cost_per_run_usd: 1.00
   require_confirmation: true   # 비용 발생 전 터미널에서 y 입력 필요
 

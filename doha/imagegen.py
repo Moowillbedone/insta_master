@@ -556,6 +556,10 @@ def _call_api(client, mode: str, model: str, prompt: str, size: str, quality: st
             for f in files:
                 f.close()
 
+    # gpt-image-2 계열은 참조 이미지를 항상 고충실도로 처리하고 input_fidelity 를 보내면 거부한다
+    # (research/image-gen-tech.md 검증 메모 #4). 1.x 모델에만 보낸다.
+    if not model.startswith("gpt-image-1"):
+        return edit(), False
     try:
         return edit(input_fidelity="high"), True
     except openai.BadRequestError as e:
