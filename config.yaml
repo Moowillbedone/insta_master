@@ -56,3 +56,18 @@ publishing:
   default_time: "07:40"      # 출근길 확인 시간대 (가설 — 성과 데이터로 조정)
   timezone: Asia/Seoul
   max_hashtags: 5
+
+x:
+  # X(구 트위터) 운영 — docs/09-x-playbook.md, docs/10-autopilot.md
+  handle: ""                 # 계정을 만든 뒤 입력 (@ 없이)
+  # api: 승인된 글을 X API로 자동 게시 ('Automated' 라벨 대상일 수 있음, research/x-automation-api.md §1-4)
+  # manual: 게시 시각에 앱에서 바로 열리는 링크(intent)를 보내 주고 사람이 '게시'만 누름 (보상 자격에 가장 안전)
+  publish_mode: api          # 사용자 선택(하루 1번 승인 → 자동 게시). 보상 자격이 걱정되면 manual
+  slots: ["08:10", "12:10", "19:10", "22:10"]   # KST 게시 시각 후보. 하루 posts_per_day 개만 채움
+  posts_per_day: 3
+  max_weighted_length: 280   # X 가중 글자 수 (한글·한자 2, 링크 23). Premium 장문도 피드에는 앞부분만 보임
+  max_hashtags: 1
+  allow_links: false         # 본문 링크는 API 비용(약 $0.20/건)과 도달 모두 불리 → 프로필 링크 사용
+  reply_targets: []          # 댓글 초안용으로 지켜볼 계정 (@ 없이). 사람이 직접 고르고 갱신
+  reply_drafts_per_day: 5
+  ai_image_note: "AI 이미지"  # AI 이미지가 붙은 글 끝에 붙는 표기 (앱의 'Made with AI' 토글도 켬)

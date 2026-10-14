@@ -1,0 +1,75 @@
+# X 게시 대기열 2026-10-22 — Claude 초안 → x-check → x-digest(휴대폰 확인) → x-approve(하루 1번) → x-publish
+# 형식·규칙: doha/xqueue.py 맨 위 설명. status·x_id·posted_at·error 는 도구가 씁니다.
+date: 2026-10-22
+status: draft             # draft | approved | done
+approved_at: ""           # x-approve 가 기록
+posts:
+  - id: "2026-10-22-a"    # 날짜 + 글자
+    slot: "08:10"         # KST 게시 시각 (config.x.slots)
+    kind: single          # single | thread
+    text: |-              # 첫 글
+      목요일 미팅 있는 날이라면 어느 쪽이에요?
+      A. 네이비 셋업 + 카멜 니트 → 단정하게
+      B. 카멜 코트 + 네이비 니트 → 부드럽게
+      같은 두 색인데 많이 쓰는 쪽에 따라 인상이 달라져요.
+      저는 처음 만나는 자리면 A부터 권해요.
+    thread: []            # kind: thread 일 때 이어지는 글 (각각 한 개의 글)
+    media: []             # 저장소 기준 이미지 경로 (최대 4장)
+    alt: []               # 이미지마다 대체 텍스트
+    ai_image: false       # AI 이미지면 true → 게시할 때 AI 표기 자동 추가
+    source_post: "2026-10-19-navy-camel-formula"  # 옮겨 온 Instagram 게시물 id (X 에 맞게 새로 쓰기)
+    status: draft         # draft | approved | posted | failed | skipped
+    x_id: ""
+    posted_at: ""
+    error: ""
+  - id: "2026-10-22-b"
+    slot: "12:10"
+    kind: single
+    text: |-
+      출근룩이 어수선해 보이면 색 개수부터 세 보세요.
+      신발과 가방까지 합쳐 3색 이하면 정리돼 보여요.
+      4색이 되면 가방을 신발 색에 맞추는 게 가장 쉬워요.
+      소품 두 개가 한 색으로 묶여 보이거든요.
+    thread: []
+    media: []
+    alt: []
+    ai_image: false
+    source_post: ""
+    status: draft
+    x_id: ""
+    posted_at: ""
+    error: ""
+  - id: "2026-10-22-c"
+    slot: "19:10"
+    kind: thread
+    text: |-
+      트렌치 한 벌로 날씨 따라 출근하는 법.
+      바꾸는 건 안에 입는 옷이에요.
+      체크할 건 아침 기온, 그리고 비 소식 🧵
+    thread:
+      - |-
+        맑고 16°C 이상
+        셔츠 한 장에 트렌치 앞을 열어요.
+        밝은 셔츠와 슬랙스가 위아래로 이어져 다리가 길어 보여요.
+      - |-
+        10~15°C 쌀쌀한 아침
+        얇은 하이넥 니트로 목까지 덮고 벨트는 옆 매듭.
+        낮에 더워지면 벨트를 풀고 앞을 열면 돼요.
+      - |-
+        비 예보가 있는 날
+        하의는 짙은 색, 길이는 발목 위로.
+        밑단이 덜 젖고 빗물 자국도 덜 보여요.
+      - |-
+        아침 기온이 10°C 아래면
+        트렌치보다 코트를 꺼낼 때예요.
+        내일 아침엔 옷장보다 날씨 앱을 먼저 열어 보세요.
+    media: []
+    alt: []
+    ai_image: false
+    source_post: "2026-10-23-beige-trench-weather-3ways"
+    status: draft
+    x_id: ""
+    posted_at: ""
+    error: ""
+replies: []               # 댓글 초안 — 사람이 digest 의 링크로 X 앱에서 직접 게시
+notes: "샘플 대기열 (Instagram 10/23 '한 벌 3가지 02 · 베이지 트렌치 날씨별' 전날, X용으로 새로 씀). A vs B 질문은 대가·참여 요청 없이 의견만 묻는다. 기온 숫자는 게시 전날 예보와 맞는지 확인."  # 메모

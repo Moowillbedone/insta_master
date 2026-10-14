@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X 승인 미리보기 · {{ date }}</title>
+<style>
+/* 파일 하나로 열리게: 글꼴은 기기 기본(Pretendard 가 깔려 있으면 사용), 이미지는 data URI */
+:root{
+  --paper:#F4EFE8; --card:#FFFDF9; --ink:#1F1F1F; --muted:#7A746C; --line:#E4DCD0; --accent:#B08A61;
+  --err:#B3261E; --err-bg:#FBEAE8; --warn:#8A5A00; --warn-bg:#FBF1DC; --ok:#2E6B47; --ok-bg:#E6F2EA;
+  --x-ink:#0F1419; --x-muted:#536471; --x-line:#EFF3F4; --x-blue:#1D9BF0; --x-blue-ink:#1A8CD8;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);
+  font:15px/1.5 "Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR","Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.page{max-width:1240px;margin:0 auto;padding:22px 16px 48px}
+.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:700;text-transform:uppercase}
+h1{font-size:22px;line-height:1.3;margin:4px 0 4px;font-weight:700;letter-spacing:-.01em}
+h2{font-size:17px;margin:34px 0 4px;letter-spacing:-.01em}
+h2 .sub{display:block;font-weight:400;margin-top:2px}
+.sub{color:var(--muted);font-size:13px}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 20px}
+.verdict{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font-weight:700;font-size:13px}
+.verdict.bad{background:var(--err-bg);color:var(--err)}
+.verdict.mid{background:var(--warn-bg);color:var(--warn)}
+.verdict.good{background:var(--ok-bg);color:var(--ok)}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:16px}
+.panel .row{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+.panel .row b{color:var(--ink);font-weight:600}
+.cmd{display:flex;align-items:center;gap:8px;margin-top:10px;background:#1F1F1F;color:#F4EFE8;border-radius:12px;padding:10px 12px;
+  font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.cmd code{flex:1;min-width:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.cmd small{display:block;color:#bdb5aa;font-family:inherit;font-size:11px;margin-bottom:2px}
+button.copy{flex:none;border:0;border-radius:999px;background:#F4EFE8;color:#1F1F1F;font:600 12px/1 inherit;padding:7px 11px;cursor:pointer}
+button.copy.light{background:#EFF3F4;color:#0F1419}
+.issues{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.issues li{font-size:13px;line-height:1.45;padding:7px 10px;border-radius:10px}
+.issues li.error{background:var(--err-bg);color:var(--err)}
+.issues li.warn{background:var(--warn-bg);color:var(--warn)}
+.issues li code{font-size:11px;opacity:.75}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,370px),1fr));gap:26px 22px;margin-top:14px;align-items:start}
+.slot-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 2px 8px}
+.time{font-size:20px;font-weight:800;letter-spacing:-.02em;margin-right:4px}
+.chip{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:600;background:#EAE3D9;color:#5B544B}
+.st-approved{background:var(--ok-bg);color:var(--ok)}
+.st-posted{background:#E3EEF9;color:#1A5FA3}
+.st-failed{background:var(--err-bg);color:var(--err)}
+.st-skipped{background:#EEE;color:#888}
+.st-stale{background:var(--err-bg);color:var(--err)}
+
+/* ---------- X 휴대폰 카드 ---------- */
+.phone{background:#fff;color:var(--x-ink);border-radius:22px;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.04),0 10px 30px rgba(40,30,20,.12);
+  font-size:15px;line-height:20px;border:1px solid #E7E2DA}
+.tweet{display:grid;grid-template-columns:40px 1fr;gap:0 10px;padding:12px 14px 10px;position:relative}
+.tweet + .tweet{padding-top:2px}
+.tweet.has-next .rail{position:absolute;left:33px;top:56px;bottom:-4px;width:2px;background:#CFD9DE}
+.av{width:40px;height:40px;border-radius:50%;background:#2B2B2B;color:#F4EFE8;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;
+  box-shadow:0 0 0 2px #fff,0 0 0 3px #B08A61}
+.who{display:flex;gap:4px;align-items:baseline;min-width:0;white-space:nowrap;overflow:hidden}
+.who b{font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.who .h{color:var(--x-muted);overflow:hidden;text-overflow:ellipsis}
+.txt{white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;margin-top:2px}
+.txt .ent{color:var(--x-blue)}
+.media{display:grid;gap:2px;margin-top:10px;border-radius:16px;overflow:hidden;border:1px solid var(--x-line)}
+.media.n1{grid-template-columns:1fr}
+.media.n2{grid-template-columns:1fr 1fr}
+.media.n3{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.media.n3 figure:first-child{grid-row:span 2}
+.media.n4{grid-template-columns:1fr 1fr}
+.media figure{margin:0;position:relative;background:#F2F2F2;min-height:120px}
+.media.n1 figure{aspect-ratio:3/4;max-height:520px}
+.media.n2 figure,.media.n4 figure{aspect-ratio:3/4}
+.media img{width:100%;height:100%;object-fit:cover;display:block}
+.media .missing{display:flex;height:100%;min-height:140px;align-items:center;justify-content:center;text-align:center;font-size:12px;color:var(--err);background:var(--err-bg);padding:8px}
+.altb{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.75);color:#fff;font-size:11px;font-weight:700;border-radius:4px;padding:1px 5px;letter-spacing:.02em}
+.acts{display:flex;justify-content:space-between;max-width:330px;margin-top:10px;color:var(--x-muted)}
+.acts svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.meter{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:12px;color:var(--x-muted)}
+.meter .bar{flex:1;height:5px;border-radius:3px;background:var(--x-line);overflow:hidden}
+.meter .bar i{display:block;height:100%;background:var(--x-blue);border-radius:3px}
+.meter.warmish .bar i{background:#FFAD1F}
+.meter.over .bar i{background:#F4212E}
+.meter.over{color:#F4212E;font-weight:700}
+.note{margin-top:6px;font-size:12px;color:var(--x-muted)}
+.below{margin:10px 2px 0;font-size:13px;color:var(--muted)}
+.below a{color:var(--x-blue-ink)}
+.alts{margin:8px 2px 0;padding:0;list-style:none;font-size:12px;color:var(--muted)}
+.alts li{margin-top:3px}
+.alts b{color:var(--ink);font-weight:600}
+a.btn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;background:var(--x-ink);color:#fff;text-decoration:none;
+  border-radius:999px;padding:11px 14px;font-weight:700;font-size:14px}
+a.btn.light{background:#fff;color:var(--x-ink);border:1px solid #CFD9DE}
+a.dl{font-size:12px;color:var(--x-blue-ink);margin-right:10px}
+
+/* ---------- 댓글 초안 ---------- */
+.reply{background:#fff;border:1px solid #E7E2DA;border-radius:18px;padding:12px 14px;color:var(--x-ink)}
+.reply .tgt{border:1px solid var(--x-line);border-radius:12px;padding:9px 11px;font-size:14px;color:var(--x-ink);background:#FAFAFA}
+.reply .tgt .h{color:var(--x-muted);font-size:13px}
+.reply .tgt p{margin:3px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:7.5em;overflow:hidden}
+.reply .to{font-size:13px;color:var(--x-muted);margin:10px 0 2px}
+.reply .to b{color:var(--x-blue)}
+.empty{color:var(--muted);font-style:italic}
+.notes{white-space:pre-wrap;font-size:13px;color:var(--muted)}
+footer{margin-top:36px}
+@media (min-width:700px){ .page{padding:32px 28px 64px} h1{font-size:26px} }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div>
+      <div class="eyebrow">X 승인 미리보기</div>
+      <h1>{{ date }} ({{ weekday }}) · {{ status_ko }}</h1>
+      <div class="sub">
+        {% if manual %}게시 방식 manual — 시각이 되면 X 앱 링크를 받고 직접 ‘게시’를 눌러요
+        {% else %}게시 방식 api — 승인한 글만 시각에 자동으로 올라가요{% endif %}
+        · 만든 시각 {{ generated_at[11:16] }}
+      </div>
+    </div>
+    <div class="verdict {{ 'bad' if errors else ('mid' if warns else 'good') }}">
+      {% if errors %}오류 {{ errors }} · 주의 {{ warns }} — 승인 불가{% elif warns %}주의 {{ warns }} — 확인 후 승인{% else %}검수 통과{% endif %}
+    </div>
+  </div>
+
+  <section class="panel" id="summary">
+    <div class="row">
+      <span>글 <b>{{ posts|length }}</b>개</span>
+      <span>승인 대기 <b>{{ pending }}</b></span>
+      <span>댓글 초안 <b>{{ replies|length }}</b></span>
+      {% if not manual %}<span>예상 API 비용 <b>${{ '%.3f'|format(est_cost) }}</b></span>{% endif %}
+      {% if approved_at %}<span>승인 <b>{{ approved_at[5:16]|replace('T', ' ') }}</b></span>{% endif %}
+    </div>
+    {% if handle_missing %}<ul class="issues"><li class="warn">config.yaml 의 x.handle 이 비어 있어요 — 계정을 만든 뒤 @ 없이 넣으세요.</li></ul>{% endif %}
+    {% if file_issues %}<ul class="issues">{% for i in file_issues %}<li class="{{ i.level }}">{{ i.message }}</li>{% endfor %}</ul>{% endif %}
+    {% if pending %}
+    <div class="cmd"><code><small>승인하려면 (터미널)</small>{{ approve_cmd }}</code><button class="copy" data-copy="{{ approve_cmd }}">복사</button></div>
+    {% if approve_some_cmd and pending > 1 %}
+    <div class="cmd"><code><small>일부만 승인</small>{{ approve_some_cmd }}</code><button class="copy" data-copy="{{ approve_some_cmd }}">복사</button></div>
+    {% endif %}
+    {% endif %}
+  </section>
+
+  <h2>게시할 글</h2>
+  <div class="sub">휴대폰 X 화면과 비슷하게 보여 줘요. 막대는 X 가중 글자 수(한글 2, 링크 23) / {{ limit }}.</div>
+  <div class="grid">
+  {% for p in posts %}
+    <article id="{{ p.id }}">
+      <div class="slot-head">
+        <span class="time">{{ p.slot }}</span>
+        <span class="chip st-{{ p.status }}">{{ p.status_ko }}</span>
+        {% if p.approved_stale %}<span class="chip st-stale">승인 뒤 바뀜 — 다시 승인</span>{% endif %}
+        <span class="chip">{{ '스레드 ' ~ p.cards|length ~ '개' if p.kind == 'thread' else '단일' }}</span>
+        <span class="chip">{{ p.letter }}</span>
+      </div>
+      <div class="phone">
+        {% for c in p.cards %}
+        <div class="tweet{% if not loop.last %} has-next{% endif %}">
+          <div><div class="av">도</div></div>
+          {% if not loop.last %}<span class="rail"></span>{% endif %}
+          <div>
+            <div class="who"><b>{{ display_name }}</b><span class="h">@{{ handle }} · {{ p.slot }}</span></div>
+            <div class="txt">{{ c.html }}</div>
+            {% if c.images %}
+            <div class="media n{{ c.images|length if c.images|length <= 4 else 4 }}">
+              {% for im in c.images[:4] %}
+              <figure>
+                {% if im.src %}<img src="{{ im.src }}" alt="{{ im.alt }}">{% else %}<div class="missing">이미지 없음<br>{{ im.path }}</div>{% endif %}
+                {% if im.alt %}<span class="altb">ALT</span>{% endif %}
+              </figure>
+              {% endfor %}
+            </div>
+            {% endif %}
+            <div class="acts" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 12a8 7 0 1 1 4 6l-4 2 1-4a7 7 0 0 1-1-4z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M7 7h11l-3-3M17 17H6l3 3M18 7v5M6 17v-5"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M5 20V11M10 20V5M15 20v-7M20 20V8"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M7 4h10v16l-5-4-5 4z"/></svg>
+            </div>
+            <div class="meter{% if c.over %} over{% elif c.pct >= 85 %} warmish{% endif %}">
+              <span class="bar"><i style="width:{{ c.pct }}%"></i></span><span>{{ c.len }}/{{ limit }}</span>
+            </div>
+            {% if c.note_added %}<div class="note">마지막 줄 ‘{{ ai_note }}’ 는 게시할 때 자동으로 붙어요.</div>{% endif %}
+            {% if p.intent and not loop.first %}<div class="note"><button class="copy light" data-copy="{{ c.text }}">이어지는 글 {{ loop.index0 }} 복사</button></div>{% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% if p.issues %}
+      <ul class="issues">{% for i in p.issues %}<li class="{{ i.level }}">{{ i.message }} <code>{{ i.code }}</code></li>{% endfor %}</ul>
+      {% endif %}
+      {% if p.cards and p.cards[0].images %}
+      <ul class="alts">{% for im in p.cards[0].images %}<li><b>{{ im.name }}</b> — {{ im.alt or '대체 텍스트 없음' }}</li>{% endfor %}</ul>
+      {% endif %}
+      {% if p.x_ids %}<div class="below">게시됨 {{ p.posted_at[5:16]|replace('T', ' ') }} · <a href="https://x.com/i/status/{{ p.x_ids[0] }}">X 에서 보기</a>{% if p.x_ids|length > 1 %} ({{ p.x_ids|length }}/{{ p.cards|length }}개 올라감){% endif %}</div>{% endif %}
+      {% if p.error %}<ul class="issues"><li class="error">게시 오류: {{ p.error }}</li></ul>{% endif %}
+      {% if p.source_post %}<div class="below">인스타 원본: {{ p.source_post }}</div>{% endif %}
+      {% if p.intent %}
+      <a class="btn" href="{{ p.intent }}">X 앱에서 이 글 열기{% if p.kind == 'thread' %} (첫 글){% endif %}</a>
+      {% if p.cards[0].images %}<div class="below">이미지는 X 앱에서 직접 첨부: {% for im in p.cards[0].images %}{% if im.src %}<a class="dl" href="{{ im.src }}" download="{{ im.name }}">{{ im.name }} 저장</a>{% endif %}{% endfor %}</div>{% endif %}
+      {% if p.kind == 'thread' %}<div class="below">이어지는 글은 첫 글을 올린 뒤 그 글에 답글로 붙여 주세요 (위 카드 순서대로).</div>{% endif %}
+      {% endif %}
+    </article>
+  {% endfor %}
+  </div>
+
+  <h2>댓글 초안 <span class="sub">자동으로 달지 않아요. 버튼을 누르면 X 앱에 답글이 채워져 열리고, 직접 ‘답글’을 눌러요.</span></h2>
+  {% if replies %}
+  <div class="grid">
+    {% for r in replies %}
+    <article class="reply" id="reply-{{ r.i }}">
+      <div class="slot-head"><span class="chip st-{{ 'approved' if r.status == 'done' else ('skipped' if r.status == 'skipped' else '') }}">{{ r.status_ko }}</span><span class="chip">#{{ r.i + 1 }}</span></div>
+      <div class="tgt">
+        <div class="h">@{{ r.author or '?' }}{% if r.url %} · <a href="{{ r.url }}">원글</a>{% endif %}</div>
+        {% if r.target_text %}<p>{{ r.target_text }}</p>{% endif %}
+      </div>
+      <div class="to">답글 대상 <b>@{{ r.author }}</b></div>
+      {% if r.draft %}
+      <div class="txt">{{ r.draft_html }}</div>
+      <div class="meter{% if r.len > limit %} over{% endif %}"><span class="bar"><i style="width:{{ [100, (r.len * 100 / limit)|round|int]|min }}%"></i></span><span>{{ r.len }}/{{ limit }}</span></div>
+      {% else %}
+      <div class="txt empty">초안이 아직 없어요</div>
+      {% endif %}
+      {% if r.issues %}<ul class="issues">{% for i in r.issues %}<li class="{{ i.level }}">{{ i.message }}</li>{% endfor %}</ul>{% endif %}
+      {% if r.intent %}<a class="btn" href="{{ r.intent }}">X 앱에서 답글 열기</a>
+      <div class="below"><button class="copy" data-copy="{{ r.draft }}">초안 복사</button></div>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="panel sub">댓글 초안이 없어요. config.x.reply_targets 를 채우고 <code>python doha.py x-targets</code> 로 후보를 모을 수 있어요.</div>
+  {% endif %}
+
+  {% if notes %}<h2>메모</h2><div class="panel notes">{{ notes }}</div>{% endif %}
+
+  <footer class="panel">
+    {% if pending %}
+    <div class="row"><span>내용이 괜찮으면 승인하세요. 승인 뒤 글·이미지를 고치면 게시하지 않아요(다시 승인 필요).</span></div>
+    <div class="cmd"><code><small>승인하려면</small>{{ approve_cmd }}</code><button class="copy" data-copy="{{ approve_cmd }}">복사</button></div>
+    {% else %}
+    <div class="row"><span>승인할 초안이 없어요.</span></div>
+    {% endif %}
+  </footer>
+</main>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var t = b.getAttribute("data-copy") || "";
+    var done = function () { var o = b.textContent; b.textContent = "복사됨"; setTimeout(function () { b.textContent = o; }, 1200); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done, function () {}); }
+    else { var a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand("copy"); done(); } catch (e) {} a.remove(); }
+  });
+});
+</script>
+</body>
+</html>

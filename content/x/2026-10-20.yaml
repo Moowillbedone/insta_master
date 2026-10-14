@@ -1,0 +1,79 @@
+# X 게시 대기열 2026-10-20 — Claude 초안 → x-check → x-digest(휴대폰 확인) → x-approve(하루 1번) → x-publish
+# 형식·규칙: doha/xqueue.py 맨 위 설명. status·x_id·posted_at·error 는 도구가 씁니다.
+date: 2026-10-20
+status: draft             # draft | approved | done
+approved_at: ""           # x-approve 가 기록
+posts:
+  - id: "2026-10-20-a"    # 날짜 + 글자
+    slot: "08:10"         # KST 게시 시각 (config.x.slots)
+    kind: single          # single | thread
+    text: |-              # 첫 글
+      출근룩 기본색을 검정에서 네이비로 바꿔 보세요.
+      네이비는 검정만큼 단정한데 인상이 한결 부드러워요.
+      카멜·아이보리·회색, 어느 색을 옆에 둬도 잘 받아 줘서
+      가진 옷과 섞기도 쉬워요.
+    thread: []            # kind: thread 일 때 이어지는 글 (각각 한 개의 글)
+    media: []             # 저장소 기준 이미지 경로 (최대 4장)
+    alt: []               # 이미지마다 대체 텍스트
+    ai_image: false       # AI 이미지면 true → 게시할 때 AI 표기 자동 추가
+    source_post: "2026-10-19-navy-camel-formula"  # 옮겨 온 Instagram 게시물 id (X 에 맞게 새로 쓰기)
+    status: draft         # draft | approved | posted | failed | skipped
+    x_id: ""
+    posted_at: ""
+    error: ""
+  - id: "2026-10-20-b"
+    slot: "12:10"
+    kind: thread
+    text: |-
+      네이비+카멜 출근룩은 비율만 정하면 쉬워져요.
+      7:3은 회의 날, 5:5는 평소, 3:7은 힘 빼는 금요일.
+      비율별로 입는 법을 정리했어요 🧵
+    thread:
+      - |-
+        ① 네이비 7 : 카멜 3
+        네이비 셋업 안에 카멜 니트 한 장.
+        얼굴 옆에 따뜻한 색이 오면 네이비가 덜 무거워 보여요.
+        회의 있는 날에 맞아요.
+      - |-
+        ② 반반 5 : 5
+        카멜 니트에 네이비 스커트.
+        반반은 몸이 위아래로 나뉘어 보이기 쉬워요.
+        니트 앞자락만 살짝 넣어 허리선을 올려 주세요.
+      - |-
+        ③ 네이비 3 : 카멜 7
+        카멜 코트를 열고 안은 네이비로.
+        코트 사이로 보이는 네이비가 세로선이 돼서 길어 보여요.
+        힘을 빼고 싶은 금요일에 좋아요.
+      - |-
+        피하면 좋은 것도 있어요.
+        · 검정 가방·구두: 네이비가 바래 보여요
+        · 톤이 다른 카멜끼리: 탁해 보여요
+        · 빨강·초록 같은 강한 색: 시선이 흩어져요
+        소품은 브라운, 세 번째 색은 아이보리까지만.
+    media: []
+    alt: []
+    ai_image: false
+    source_post: "2026-10-19-navy-camel-formula"
+    status: draft
+    x_id: ""
+    posted_at: ""
+    error: ""
+  - id: "2026-10-20-c"
+    slot: "19:10"
+    kind: single
+    text: |-
+      내일 출근룩은 하의부터 정해 보세요.
+      하의는 바꿀 수 있는 폭이 좁아서 먼저 고르면
+      상의는 '이 하의에 어울리는 것'만 보면 돼요.
+      아침에 고민하는 시간이 줄어들어요.
+    thread: []
+    media: []
+    alt: []
+    ai_image: false
+    source_post: ""
+    status: draft
+    x_id: ""
+    posted_at: ""
+    error: ""
+replies: []               # 댓글 초안 — 사람이 digest 의 링크로 X 앱에서 직접 게시
+notes: "샘플 대기열 (Instagram 10/19 '컬러 공식 01 · 네이비+카멜'을 X용으로 새로 씀. 아침 글은 '검정 대신 네이비', 점심 스레드에서 비율 공식 — 같은 주제를 두 번 반복하지 않게 각도를 나눔). 이미지가 생기면 media·alt 를 채우고 ai_image: true. 댓글 초안은 x-targets 로 대상을 고른 뒤 채움."  # 메모

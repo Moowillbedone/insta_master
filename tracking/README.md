@@ -129,7 +129,7 @@
 | 열 | 뜻 |
 |---|---|
 | `date` | 결제일 |
-| `category` | `image_api`(이미지 생성 API) · `subscription`(구독·툴·폰트) · `ads`(Meta 광고비) · `outsourcing`(외주) · `props`(소품·샘플·택배) · `other` |
+| `category` | `image_api`(이미지 생성 API) · `x_api`(X API 게시·읽기, `x-publish`·`x-targets`가 자동 기록) · `subscription`(구독·툴·폰트, X Premium 포함) · `ads`(Meta 광고비) · `outsourcing`(외주) · `props`(소품·샘플·택배) · `other` |
 | `provider` | 결제처 (openai, meta …) |
 | `description` | 무엇에 썼나 |
 | `post_id` | 특정 게시물에만 쓴 비용이면 그 id (게시물당 비용 계산에 써요). 구독료 같은 공통비는 비워요 |
@@ -159,3 +159,15 @@ python doha.py metrics --month 2026-10  # 특정 달의 수익·비용
 - **월 목표**(`config.yaml`의 `account.goal_monthly_net_krw`, 현재 500만 원)는 목표치예요. 예측이나 보장된 수익이 아니에요.
 - 마지막 '데이터 점검'에는 post.yaml에 없는 post_id, 비어 있는 도달, 중복 기록, 잘못된 status·날짜, 엑셀 인코딩 문제가 나와요.
   리포트를 볼 때마다 이 목록을 먼저 고치세요.
+
+
+## X 기록 (`x-metrics.csv`, `x-followers.csv`)
+
+`python doha.py x-metrics`가 API로 읽어 자동으로 추가합니다. 손으로 고칠 일은 `verified_followers`뿐이에요.
+
+| 파일 | 열 | 뜻 |
+|---|---|---|
+| `x-metrics.csv` | `recorded_at,date,post_id,x_id,impressions,likes,reposts,replies,quotes,bookmarks` | 기록 시각, 대기열 날짜, 대기열 글 id(`2026-10-20-a`), X 글 id, 노출·좋아요·재게시·답글·인용·북마크 |
+| `x-followers.csv` | `date,followers,verified_followers,notes` | 팔로워 수. **인증 팔로워 수는 API로 받을 수 없어** 앱의 수익화 화면에서 보고 직접 적습니다 |
+
+- 노출 합계는 Original Content Rewards 기준(인증 사용자의 홈 타임라인 노출)보다 넓은 값이라 **상한선**으로만 봅니다. 자세한 기준은 `docs/09-x-playbook.md`.

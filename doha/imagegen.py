@@ -546,11 +546,13 @@ def log_cost(config: dict, post: Post, key: str, model: str, size: str, quality:
 
 # ── OpenAI 호출 ──────────────────────────────────────────────
 
-def _make_client():
+def _make_client(quality: str = "medium"):
     from openai import OpenAI
 
-    # 고화질은 1~2분 걸릴 수 있다. 재시도는 1번만 (한도 초과 시 같은 요청 반복을 줄이려고)
-    return OpenAI(timeout=300, max_retries=1)
+    # high 품질 1024x1536 은 장당 2~5분(p95 약 280초)이라 300초면 시간 초과가 난다 → high 는 600초.
+    # SDK 자동 재시도는 끈다(max_retries=0): 시간 초과여도 서버에서 생성이 끝나 과금될 수 있는데, 재시도하면
+    # 같은 이미지를 한 번 더 결제한다 (research/ig-auto-publish.md §4-3). 실패하면 사람이 확인 후 다시 실행.
+    return OpenAI(timeout=600 if quality == "high" else 300, max_retries=0)
 
 
 def _call_api(client, mode: str, model: str, prompt: str, size: str, quality: str, n: int, refs: list[Path]):
@@ -739,7 +741,7 @@ def run_generate(args, config: dict | None = None, persona: dict | None = None) 
             return 1
 
     try:
-        client = _make_client()
+        client = _make_client(quality)
     except ImportError:
         print("openai 패키지가 없어요: pip install -r requirements.txt")
         return 1
