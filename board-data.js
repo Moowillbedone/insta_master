@@ -1,7 +1,7 @@
 /* 자동 생성 파일: python doha.py board — 직접 고치지 마세요. 원본은 content/, tracking/, outreach/ */
 window.DOHA_DATA = {
  "version": 1,
- "generated_at": "2026-10-13T14:23:12+09:00",
+ "generated_at": "2026-10-20T11:07:22+09:00",
  "account": {
   "handle": "doha.dailyfit",
   "display_name": "도하 | AI 스타일리스트",
@@ -326,6 +326,74 @@ window.DOHA_DATA = {
     "image_qa": "승인된 이미지 0/5",
     "audio": "무음 릴스예요. 앱에서 음원을 넣으면 사용권을 확인하세요."
    },
+   "review": {
+    "approved_by": "",
+    "approved_at": ""
+   },
+   "posted": {
+    "url": "",
+    "reel_url": "",
+    "posted_at": ""
+   }
+  },
+  {
+   "id": "2026-10-24-seoul-christmas-spots",
+   "dir": "content/posts/2026-10-24-seoul-christmas-spots",
+   "date": "2026-10-24",
+   "time": "11:00",
+   "status": "draft",
+   "series": "시즌 정보",
+   "pillar": "상황별",
+   "format": "carousel",
+   "goal": "save",
+   "hook": "올겨울 서울 크리스마스 명소, 미리 저장해요",
+   "disclosure": {
+    "ai_persona": true,
+    "paid": false,
+    "gifted": false,
+    "affiliate": false,
+    "brand": ""
+   },
+   "disclosure_label": "",
+   "ad": false,
+   "slide_count": 9,
+   "scene_count": 0,
+   "rendered_slides": 9,
+   "thumb": "content/posts/2026-10-24-seoul-christmas-spots/out/slides/01.png",
+   "links": {
+    "preview": "content/posts/2026-10-24-seoul-christmas-spots/out/preview.html",
+    "contact_sheet": "content/posts/2026-10-24-seoul-christmas-spots/out/contact-sheet.png",
+    "caption": "content/posts/2026-10-24-seoul-christmas-spots/out/caption.txt"
+   },
+   "images": [
+    {
+     "key": "s01",
+     "status": "approved",
+     "framing": "detail"
+    },
+    {
+     "key": "s02",
+     "status": "approved",
+     "framing": "detail"
+    },
+    {
+     "key": "s03",
+     "status": "approved",
+     "framing": "detail"
+    },
+    {
+     "key": "s04",
+     "status": "approved",
+     "framing": "detail"
+    },
+    {
+     "key": "s05",
+     "status": "approved",
+     "framing": "detail"
+    }
+   ],
+   "products": 0,
+   "hints": {},
    "review": {
     "approved_by": "",
     "approved_at": ""
