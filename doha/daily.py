@@ -26,6 +26,8 @@ FACT_STATUS = {"confirmed", "planned", "last_year", "unverified"}
 HEDGE_WORDS = ("예정", "작년", "미정", "발표 전", "추후", "변경", "기준")
 BANNED = ("무조건", "100%", "역대급", "최저가 보장", "완벽", "필수템", "인생템")
 EXPERIENCE = ("다녀왔", "먹어보니", "가보니", "써보니", "입어보니", "내돈내산", "직접 가")
+# Meta가 노출을 줄이는 참여 유도(engagement bait) 문구 — 공유는 "보내기"로 유도한다
+BAIT = ("태그", "댓글 달", "댓글로", "좋아요 누르", "팔로우하면", "리그램", "공유하면", "추첨")
 NUM_RE = re.compile(r"\d{1,2}\.\d{1,2}|\d{1,3}(?:,\d{3})+원?|\d+원|\d{1,2}:\d{2}|\d+%")
 
 
@@ -174,6 +176,9 @@ def check_package(pkg: dict) -> tuple[list[str], list[str]]:
             for w in EXPERIENCE:
                 if w in text:
                     errors.append(f"{where}.{kind}: 체험을 꾸며낸 표현 '{w}'")
+            for w in BAIT:
+                if w in text:
+                    errors.append(f"{where}.{kind}: 참여 유도 문구 '{w}' — Meta가 노출을 줄여요. '저장'·'보내기'로 바꾸세요")
             for num in NUM_RE.findall(text):
                 if num.replace("원", "") not in fact_values:
                     warns.append(f"{where}.{kind}: 숫자 '{num}' 이 facts 에서 안 보여요 — 출처 있는 값인지 확인")
@@ -194,7 +199,7 @@ def check_package(pkg: dict) -> tuple[list[str], list[str]]:
             errors.append("캡션에 'AI 생성 이미지' 표기가 없어요")
         if len(caption) > 2200:
             errors.append(f"캡션 {len(caption)}자 > 2,200자")
-        for w in BANNED + EXPERIENCE:
+        for w in BANNED + EXPERIENCE + BAIT:
             if w in caption:
                 errors.append(f"캡션에 '{w}'")
     tags = pkg.get("hashtags") or []

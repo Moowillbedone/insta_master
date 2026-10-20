@@ -78,6 +78,7 @@ python doha.py build black-slacks         # ② 검수 → 카드뉴스 → 릴�
 | `x-new <날짜>` · `x-check <날짜>\|--all` | X 하루 대기열(`content/x/<날짜>.yaml`) 만들기·검수 (가중 글자 수, 링크·해시태그·멘션·참여 유도·체험 표현·중복·AI 이미지 표시) |
 | `x-digest <날짜>` · `x-approve <날짜>` | 승인용 미리보기(휴대폰 카드, 댓글 초안 앱 링크) → 승인 |
 | `x-publish --due` | 게시 시각이 된 승인 글만 API로 게시 (`publish_mode: manual`이면 앱 링크만 출력). 중복 게시 방지 |
+| `daily-new` · `daily-check` · `daily-md <날짜>` | 매일 정보형 카드뉴스 패키지 뼈대·검수(출처·글자 길이·꼬리표·참여 유도·AI 표기)·ChatGPT용 package.md |
 | `x-metrics` · `x-targets` | X 지표·팔로워 기록과 보상(OCR) 기준까지 남은 거리 / 지켜보는 계정의 최근 글을 댓글 초안 후보로 추가 (댓글은 사람이 직접) |
 
 모든 명령은 `python doha.py <명령>` 형식으로 실행합니다.
@@ -107,6 +108,7 @@ python doha.py build black-slacks         # ② 검수 → 카드뉴스 → 릴�
 | [08 제휴 가이드](docs/08-affiliate-guide.md) | 제휴 프로그램 비교, 시작 순서, AI 가상인물 허용 문의 템플릿, 프로그램별 표시 문구, 링크 경로, 수수료 기록 |
 | [09 X 플레이북](docs/09-x-playbook.md) | X 보상 프로그램(2026-09 Original Content Rewards)의 실제 조건과 기대 수익, 도하 페르소나로 운영하는 이유, 글 형식·게시 리듬·금지 사항, API/수동 게시와 'Automated' 라벨 선택 |
 | [10 자동 운영 런북](docs/10-autopilot.md) | 하루 흐름(20:40 준비 → 승인 → 시각별 게시), 처음 한 번 설정(계정·환경 변수·허용 도메인), 루틴 프롬프트, 월 비용, 문제 해결 |
+| [11 매일 카드뉴스](docs/11-daily-cardnews.md) | 정보형 계정용 매일 패키지: 트렌드 수집 → 선정 점수표 → 사실 확인 → ChatGPT 프롬프트·캡션. 매일 06:40 루틴이 `content/daily/<날짜>/package.md`를 만들어 보냄 |
 | [research/](docs/research/) | 조사 원문 13개(출처·신뢰도 표시): 플랫폼, 법규, 협찬, 제휴, 브랜드 후보(의류·잡화), 수익 사례, 이미지 기술·비용, 콘텐츠 트렌드(10-13) + X 보상·자동화 규칙·고수익 계정 패턴, 인스타 자동 게시(10-14). 각 문서의 '검증 메모'가 본문보다 우선 |
 
 영업 템플릿: `outreach/templates/` (첫 DM, 이메일, 팔로업, 제안서, 견적서, 계약 체크리스트, 캠페인 리포트, 브리프 요청)
