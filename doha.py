@@ -22,6 +22,9 @@
   python doha.py x-publish --due               # cron: 게시 시각이 된 승인 글만 게시 (--dry-run 으로 미리 보기)
   python doha.py x-metrics                     # X 지표·팔로워 기록, 수익화 기준까지 남은 거리
   python doha.py x-targets                     # 댓글 초안 후보 모으기 (댓글은 사람이 앱에서 직접)
+  python doha.py daily-new 2026-10-20          # 매일 정보형 카드뉴스 패키지 뼈대
+  python doha.py daily-check 2026-10-20        # 출처·글자 길이·꼬리표·AI 표기 검수
+  python doha.py daily-md 2026-10-20           # ChatGPT 프롬프트가 든 package.md 만들기
 
 각 하위 명령은 doha/<모듈>.py 의 add_arguments(parser), run(args) 로 구현됩니다.
 """
@@ -57,6 +60,9 @@ COMMANDS: dict[str, tuple[str, str]] = {
     "x-publish": ("doha.xpublish", "승인된 X 글을 게시 시각에 API로 게시 (--due·--dry-run, manual 모드는 앱 링크만)"),
     "x-metrics": ("doha.xpublish", "X 글 지표·팔로워 기록 + 수익화(OCR) 기준까지 남은 거리 (API 키 필요)"),
     "x-targets": ("doha.xpublish", "지켜보는 계정의 최근 글을 댓글 초안 후보로 추가 (댓글은 사람이 직접)"),
+    "daily-new": ("doha.daily", "매일 정보형 카드뉴스 패키지 뼈대 (content/daily/<날짜>/package.yaml)"),
+    "daily-check": ("doha.daily", "매일 패키지 검수: 출처·확인일, 이미지 글자 길이, 꼬리표, AI 표기, 해시태그"),
+    "daily-md": ("doha.daily", "매일 패키지 → package.md (ChatGPT 공통 스타일·장별 프롬프트·캡션·체크리스트)"),
 }
 
 
