@@ -48,6 +48,8 @@ NO_TEXT_CUES = ("글씨", "로고", "간판")
 # 게시 후 스토리로 공유해 모으는 프로필 하이라이트 5개 (분야 → 하이라이트)
 HIGHLIGHTS = {"축제": "축제", "전시": "축제", "팝업": "팝업", "핫플": "팝업", "신상": "팝업",
               "맛집": "맛집", "혜택": "혜택", "생활꿀팁": "혜택", "시즌": "시즌", "이슈": "시즌"}
+# 계절 풍경이 주인공인 나들이는 분야가 '축제'여도 '시즌'에 모은다 (10/21 억새·한강 게시물을 사용자가 '시즌'에 넣음)
+SEASON_WORDS = ("단풍", "억새", "벚꽃", "봄꽃", "첫눈", "눈꽃", "크리스마스", "연말", "가을", "겨울", "여름")
 NUM_RE = re.compile(r"\d{1,2}\.\d{1,2}|\d{1,3}(?:,\d{3})+원?|\d+원|\d{1,2}:\d{2}|\d+%")
 
 
@@ -257,7 +259,10 @@ def highlight_for(pkg: dict) -> str:
     """이 게시물을 모을 하이라이트. highlight 값이 없으면 분야(첫 번째로 맞는 것)로 정한다."""
     if pkg.get("highlight"):
         return str(pkg["highlight"])
-    cat = str((pkg.get("topic") or {}).get("category") or "")
+    topic = pkg.get("topic") or {}
+    if any(w in str(topic.get("title") or "") for w in SEASON_WORDS):
+        return "시즌"
+    cat = str(topic.get("category") or "")
     for part in re.split(r"[/·,|\s]+", cat):
         if part in HIGHLIGHTS:
             return HIGHLIGHTS[part]
