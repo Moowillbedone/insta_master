@@ -284,8 +284,12 @@ def slide_prompt(s: dict, total: int) -> str:
     lines.append(f"- 역할: {'표지' if role == 'cover' else '마지막 장' if role == 'cta' else '본문'}")
     lines.append(f"- 그림: {str(s.get('visual') or '').strip()}")
     lines.append("- 들어갈 글자 (이 문구만, 정확히):")
-    headline = str(s.get("headline") or "").replace("\n", " / ")
-    lines.append(f"  · 큰 제목: \"{headline}\" (' / ' 는 줄바꿈)")
+    # 날짜의 '/'(10/23)와 헷갈리지 않게 줄마다 따로 적는다
+    hl = [x.strip() for x in str(s.get("headline") or "").split("\n") if x.strip()]
+    if len(hl) == 1:
+        lines.append(f"  · 큰 제목 (한 줄): \"{hl[0]}\"")
+    else:
+        lines += [f"  · 큰 제목 {n}번째 줄: \"{x}\"" for n, x in enumerate(hl, 1)]
     if s.get("sub"):
         lines.append(f"  · 작은 글씨: \"{s['sub']}\"")
     for x in s.get("info") or []:
