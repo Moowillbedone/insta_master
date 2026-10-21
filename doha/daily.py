@@ -40,6 +40,11 @@ BANNED = ("무조건", "100%", "역대급", "최저가 보장", "완벽", "필�
 EXPERIENCE = ("다녀왔", "먹어보니", "가보니", "써보니", "입어보니", "내돈내산", "직접 가", "직접 찍")
 # Meta가 노출을 줄이는 참여 유도(engagement bait) 문구 — 공유는 "보내기"로 유도한다
 BAIT = ("태그", "댓글 달", "댓글로", "좋아요 누르", "팔로우하면", "리그램", "공유하면", "추첨")
+# 사진 묘사 공식 (docs/11 §6): '실사'라는 말만으로는 평면 그림이 나와서(10/20),
+# 실사 표현 + 구체적인 빛·질감 표현 + 글씨 차단 문구를 함께 요구한다
+PHOTO_CUES = ("실사", "사진", "카메라로 찍은")
+LIGHT_CUES = ("자연광", "햇살", "질감", "카메라", "CG", "보정")
+NO_TEXT_CUES = ("글씨", "로고", "간판")
 # 게시 후 스토리로 공유해 모으는 프로필 하이라이트 5개 (분야 → 하이라이트)
 HIGHLIGHTS = {"축제": "축제", "전시": "축제", "팝업": "팝업", "핫플": "팝업", "신상": "팝업",
               "맛집": "맛집", "혜택": "혜택", "생활꿀팁": "혜택", "시즌": "시즌", "이슈": "시즌"}
@@ -188,6 +193,13 @@ def check_package(pkg: dict) -> tuple[list[str], list[str]]:
             warns.append(f"{where}: visual(그림 묘사)이 비어 있어요")
         for w in _no_words(str(s.get("visual") or "")):
             errors.append(f"{where}.visual: '{w}' 는 그림 묘사에 넣지 않아요")
+        visual = str(s.get("visual") or "")
+        if visual and pkg.get("style") != "info-clean":
+            if not (any(c in visual for c in PHOTO_CUES) and any(c in visual for c in LIGHT_CUES)):
+                warns.append(f"{where}.visual: 실사 신호가 약해요 ('실사풍 사진 타일' + '실제 카메라로 찍은 듯한 자연광과 ○○의 질감, "
+                             f"과한 보정·CG 느낌 없음' 같은 말)")
+            if not any(c in visual for c in NO_TEXT_CUES):
+                warns.append(f"{where}.visual: '간판·로고·글씨 없음'을 적어 주세요")
         for kind, text in _slide_texts(s):
             limit = LIMITS[kind]
             longest = max(len(line) for line in text.split("\n"))
