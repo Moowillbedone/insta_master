@@ -1,11 +1,558 @@
-# 기록용 요약 (전체 패키지 아님)
-# 10/21 06:40 루틴이 패키지를 만들어 채팅으로 전달했지만, 루틴 세션에 저장소 쓰기 권한이 없어 푸시가 실패했다.
-# 다음 루틴이 같은 주제를 다시 고르지 않도록(최근 14일 중복 확인) 주제만 남긴다. daily-check/daily-md 대상이 아니다.
-date: 2026-10-21
-status: delivered       # 채팅으로만 전달됨 (원본 package.yaml 은 저장되지 않음)
+# 매일 정보형 카드뉴스 패키지 — 형식은 docs/11-daily-cardnews.md
+date: '2026-10-21'
+status: draft
 style: info-warm
 highlight: 축제
-
 topic:
-  title: "이번 주 끝나는 서울 무료 나들이 3곳: 억새축제·한강페스티벌·서울디자인위크"
-  category: 축제/시즌
+  title: 이번 주 끝나는 서울 무료 나들이 3곳
+  category: 축제
+  why_now: 서울억새축제가 10/23(금), 한강페스티벌 가을과 서울디자인위크가 10/25(일)에 끝납니다. 수요일 저녁에 올리면 독자가 금~일 계획에 바로 씁니다. 특히 억새축제는 주말 독자 기준으로 금요일 하루(라이팅쇼·밤 9시 개방)만 남아, 마감 순서대로 정리한 목록의 저장 가치가 큽니다. 오늘 아침 루틴 초안(옛 규칙)에서 틀린 부분('이번 주말이 마지막', 가을숲 공작소 예약 장, 디자인위크 10:00 시작)을 고쳐 다시 만든 패키지입니다.
+  trend_evidence:
+  - source: news
+    url: https://go.seoul.co.kr/news/newsView.php?id=20261016500096
+    note: 서울신문 Go 10/16 '가을 은빛 물결…서울시, 제25회 서울억새축제 개최' (개막 직전 보도)
+    seen_at: '2026-10-21'
+  - source: other
+    url: https://feed.viewus.co.kr/ai/article/342113/
+    note: '''10월 23일 금요일 마감! 올해 절대 놓치면 안 될 하늘공원 억새축제'' — 마감 임박 각도의 콘텐츠가 이미 돌고 있음(집계형 피드 기사, 사실 근거로는 쓰지 않음)'
+    seen_at: '2026-10-21'
+  - source: news
+    url: https://www.news-wa.com/article/travel/tour-korea/2026/10/20/20261020500031
+    note: 뉴스와 10/20 '배달 음식만 먹던 한강이 달라졌다…셰프들의 메뉴 맛보는 주말' — 이번 주말 뚝섬 더 로드셰프를 다룬 최신 기사
+    seen_at: '2026-10-21'
+  - source: news
+    url: https://www.segye.com/newsView/20261014526076
+    note: 세계일보 10/14 서울디자인위크 개막 보도 '세계 디자인 현재·미래, DDP서 만난다'
+    seen_at: '2026-10-21'
+  score:
+    timeliness: 5
+    save_share: 5
+    breadth: 5
+    visual: 5
+    verifiability: 4
+    risk: 1
+    total: 23
+backups:
+- title: 2026 서울미식주간
+  category: 맛집
+  why_now: (미확인 아이디어, 미채점) 아침 초안 메모 기준 10/23~29 일정이라 다음 주까지 쓸 수 있는 맛집 주제. 날짜·장소·가격은 아직 공식 출처로 확인하지 않았어요.
+  score_total: 0
+- title: K-세일페스타·코리아 그랜드 페스티벌
+  category: 혜택
+  why_now: (미확인 아이디어, 미채점) 아침 초안 메모 기준 10/29~11/15 행사라 다음 주 혜택 주제로 맞음. 기간·참여 브랜드·할인 조건은 공식 발표로 다시 확인해야 해요.
+  score_total: 0
+recent_topics_checked:
+- 2026-10-20 단풍 절정 달력 (시즌) — 분야·장소 겹침 없음
+facts:
+- id: f1
+  claim: 제25회 서울억새축제는 2026년 10월 17일(토)부터 10월 23일(금)까지 7일간 열린다. 이번 주말 독자(금~일) 기준으로 축제일은 금요일 10/23 하루뿐이다.
+  value: 10/17(토)~10/23(금)
+  source_url: https://parks.seoul.go.kr/story/news/detailView.do?key=2604070028&bIdx=3838
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 서울의 공원 '새소식' 목록의 행사기간 항목만 10/17~10/24로 적혀 있음. 본문·서울시 보도·문체부·언론 기준 10/23 종료를 따르고 카드에 '변경될 수 있어요'를 함께 씀.
+- id: f2
+  claim: 축제 기간 운영시간은 매일 10:00~21:00이다. 하늘공원은 축제 기간에만 밤 9시까지 연다.
+  value: 매일 10:00~21:00
+  source_url: https://parks.seoul.go.kr/story/news/detailView.do?key=2604070028&bIdx=3838
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 블로그·가이드의 09:00~22:00, '밤 10시까지'는 공식과 달라 버림. 21시 개방은 축제 기간 한정(토·일 10/24~25 미적용).
+- id: f3
+  claim: 야간 라이팅쇼는 축제 기간 매일 19:00, 19:30, 20:00에 시작한다(예정). 20:30 회차는 17~18일에만 추가됐다. 따라서 마지막 날 10/23(금)의 마지막 회차는 20:00 시작이다.
+  value: 10/23(금) 19:00·19:30·20:00 시작 (예정)
+  source_url: https://parks.seoul.go.kr/story/news/detailView.do?key=2604070028&bIdx=3838
+  source_type: official
+  checked_at: '2026-10-21'
+  status: planned
+  note: 언론의 '19시~20시30분 30분 간격'은 운영 구간 표현으로 공식과 맞음. 우천·강풍 때 바뀔 수 있어 카드에는 '19시부터 30분 간격 (예정)'으로 씀.
+- id: f4
+  claim: 축제 입장료는 무료다. 맹꽁이 전기차와 일부 체험 재료비는 따로 든다.
+  value: 입장 무료
+  source_url: https://www.ftimes.kr/news/articleView.html?idxno=40244
+  source_type: press
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f5
+  claim: 축제 장소는 마포구 월드컵공원 하늘공원 일대다.
+  value: 마포 월드컵공원 하늘공원 일대
+  source_url: https://parks.seoul.go.kr/story/news/detailView.do?key=2604070028&bIdx=3838
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 도로명주소 '하늘공원로 95'는 재검색에서 확인 안 됨. 카드에는 '마포 하늘공원'까지만.
+- id: f6
+  claim: '찾아가는 길: 지하철 6호선 월드컵경기장역이나 마포구청역에서 걸어서 약 40분 걸린다. 또는 난지천공원 주차장 쪽에서 맹꽁이 전기차를 탄다. 서울시는 대중교통 이용을 권장한다.'
+  value: 6호선 월드컵경기장역·마포구청역 도보 약 40분 / 대중교통 권장
+  source_url: https://news.seoul.go.kr/env/archives/570795
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f7
+  claim: 맹꽁이 전기차 1노선(난지천공원↔하늘공원 정상)은 10~11월에 09:00~19:00 운행하고 배차는 수시 또는 10~20분 간격이다. 상행 막차는 운행 종료 30분 전에 출발한다(18:30). 축제 기간 연장 운행 공지는 찾지 못했다.
+  value: 10~11월 09:00~19:00, 상행 막차 18:30
+  source_url: https://parks.seoul.go.kr/parks/detailView.do?pIdx=6
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 공식 상설 안내(게시 연도 미상). 라이팅쇼(19:00~)를 본 뒤에는 걸어서 내려와야 함.
+- id: f8
+  claim: 맹꽁이 전기차 요금은 성인 편도 2,000원·왕복 3,000원, 어린이(만 4~12세)와 경로·장애인은 편도 1,500원·왕복 2,200원이라고 안내된다.
+  value: 성인 편도 2,000원 / 왕복 3,000원 (현장 확인)
+  source_url: https://stronghealthboy.com/2026-%EC%84%9C%EC%9A%B8%EC%96%B5%EC%83%88%EC%B6%95%EC%A0%9C-%ED%95%98%EB%8A%98%EA%B3%B5%EC%9B%90-%EC%9D%BC%EC%A0%95-%EB%A7%B9%EA%BD%81%EC%9D%B4%EC%97%B4%EC%B0%A8-%EC%9A%94%EA%B8%88/
+  source_type: blog
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 공식 요금표 검색 요약이 '일반 1,500원'으로 다르게 읽혀 확정 못 함. 카드에 금액 안 씀.
+- id: f9
+  claim: 하늘계단은 하늘공원 정상까지 가장 빠른 길로 소개된다. 계단 수(291개 또는 331개)와 걸리는 시간(10분 남짓, 20분, 20~30분)은 출처마다 다르다.
+  value: '하늘계단: 계단 수·소요시간 출처별 상이'
+  source_url: https://www.telltrip.com/domestic-travel/seoul-silver-grass-festival-sky-park-2026/
+  source_type: blog
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 카드에 계단 수·분 단위 안 씀.
+- id: f10
+  claim: 축제 기간에는 주차장이 혼잡하고, 서울시는 대중교통 이용을 권장한다. 주차요금은 블로그마다 달라(4시간 5,000원, 5분당 150원 등) 확정할 수 없다.
+  value: 주차 혼잡, 대중교통 권장 (요금 숫자 미기재)
+  source_url: https://news.seoul.go.kr/env/archives/570795
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 주차요금 숫자는 블로그끼리 충돌, 공식 자료 없음. 카드에 요금 숫자 안 씀.
+- id: f11
+  claim: 현장 체험으로 억새 꽃다발 만들기, 씨드밤 만들기, 밀랍랩 만들기, 사진인화소, 기념 편지쓰기 등이 열린다. 사전예약 특별 워크숍(억새 초지·존치정원 해설)은 10/20(화)에 이미 끝났다.
+  value: 현장접수 체험 위주 / 예약 워크숍 10/20 종료
+  source_url: https://parks.seoul.go.kr/story/news/detailView.do?key=2604070028&bIdx=3838
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: '''체험 12종 매일 13:30~17:30'' 안내는 공식 문구로 특정 못 해 시간 미기재.'
+- id: f12
+  claim: 중앙무대 버스킹은 매일 14:00~17:30에 열린다(개막일 17일만 13:00~16:30).
+  value: 버스킹 14:00~17:30
+  source_url: https://parks.seoul.go.kr/story/news/detailView.do?key=2604070028&bIdx=3838
+  source_type: official
+  checked_at: '2026-10-21'
+  status: planned
+- id: f13
+  claim: 자원순환 마켓 '리본(Re-born)마켓@서울억새축제'는 축제 기간(10/17~10/23) 매일 14:30~18:30에 하늘공원에서 열린다.
+  value: 리본마켓 14:30~18:30
+  source_url: https://news.seoul.go.kr/env/archives/570753
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f14
+  claim: 서울시는 2026년부터 하늘공원 억새를 축제 뒤 11월에 베지 않고 이듬해 봄(3~5월)에 베기로 했다. 2002년 공원 조성 이후 처음이다.
+  value: 억새 예초 11월 → 이듬해 3~5월
+  source_url: https://mediahub.seoul.go.kr/archives/2016809
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 그래서 토·일에도 억새는 남아 있을 가능성이 높지만 추론이고, 축제 후 개방시간 공지는 아님.
+- id: f15
+  claim: 2026년 축제가 끝난 뒤의 연장 개방(야간 포함)은 공식 공지에서 확인되지 않았다. 작년(2025, 제24회)에는 축제가 끝난 뒤 10/25~11/2에 하늘공원을 오후 8시까지 연장 개방했다.
+  value: (작년) 축제 후 11/2까지 20시 연장 개방 / 올해 미발표
+  source_url: https://x.com/seoulmania/status/1980552134446969080
+  source_type: official
+  checked_at: '2026-10-21'
+  status: last_year
+  note: 토·일(10/24~25)은 라이팅쇼·21시 개방·체험이 없음. 작년 날짜를 올해 것처럼 쓰지 않음.
+- id: f16
+  claim: 기상청 10/21 예보 기준 10/23(금) 서울은 비 소식 없이 가끔 구름이 많다. 아침 최저 3~8℃, 낮 최고 19~22℃다. 찬 공기가 내려와 바람이 강하다는 보도도 있다.
+  value: 10/23 비 예보 없음, 아침 3~8℃ / 낮 19~22℃
+  source_url: https://www.weather.go.kr/w/forecast/overall/short-term.do
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: '10/21 시점 예보라 바뀔 수 있음. 강풍 보도: 포인트데일리 https://www.pointdaily.co.kr/news/articleView.html?idxno=323071'
+- id: f17
+  claim: 문의처는 서울시 서부공원여가센터 02-300-5574(5579)다. 공원 이용시간 문의는 02-300-5501이다.
+  value: ☎ 02-300-5574
+  source_url: https://news.seoul.go.kr/env/archives/570795
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 02-300-5581은 2024년 옛 번호.
+- id: f18
+  claim: 2026 한강페스티벌_가을은 10월 17일(토)부터 10월 25일(일)까지 열린다. 이번 주말(10/24~25)이 마지막 주말이다.
+  value: 10/17(토)~10/25(일)
+  source_url: https://news.seoul.go.kr/env/archives/571090
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: '''10/9~25'' 표기는 끝난 피크닉 콘서트·종이비행기 축제까지 묶은 전체 기간.'
+- id: f19
+  claim: 장소는 한강 수상과 7개 한강공원(잠원·강서·뚝섬·반포·여의도·난지·광나루) 일대다. 다만 이번 주말(10/23~25) 프로그램이 확인된 곳은 강서·뚝섬·반포 3곳뿐이다.
+  value: '수상 + 한강공원 7곳 (주말 확인: 강서·뚝섬·반포)'
+  source_url: https://news.seoul.go.kr/env/archives/571090
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f20
+  claim: 축제 주제는 '몸과 마음을 모두 챙기는, 핫둘핫둘 한강'이고 운동·식문화·휴식이 중심이다.
+  value: '''핫둘핫둘 한강'''
+  source_url: https://news.seoul.go.kr/env/archives/571090
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f21
+  claim: 공연·체험·쉼터는 무료이고 일부 프로그램은 유료다. 참여 방식은 현장참여, 그리고 프로그램별 사전 예약이다.
+  value: 공연·체험·쉼터 무료, 일부 유료
+  source_url: https://mediahub.seoul.go.kr/archives/2019582
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 짚라인 등 개별 체험 무료 여부는 확인 안 됨 → '무료 짚라인'이라고 단정하지 않음.
+- id: f22
+  claim: 강서한강공원 '한강 포레스트 어드벤처'는 10/24(토)~25(일) 13:00~17:00에 어린이 놀이터 옆에서 열린다. 짚라인, 몽키·트리 클라이밍, 회전그네, 타잔·버마다리 같은 밧줄놀이가 있고 어른 쉼터도 마련된다.
+  value: 강서 · 10/24(토)~25(일) 13:00~17:00
+  source_url: https://mediahub.seoul.go.kr/archives/2019582
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 어린이 대상 프로그램. 참가비·현장 운영 방식(선착순 여부) 미확인 → 카드에 '현장 운영 방식은 공식 누리집 확인'.
+- id: f23
+  claim: 포레스트 어드벤처에서 사전예약을 받은 것은 '가을숲 공작소'뿐이다. 예약 기간은 10/6(화) 17시부터 10/21(수) 17시까지였고 서울시공공서비스예약에서 접수했다. 오늘 저녁 게시 시점에는 이미 마감됐다.
+  value: 가을숲 공작소 예약 10/21(수) 17시 마감 → 게시 시점 마감
+  source_url: https://www.seoul.go.kr/festa/hangang/y2026/reservation
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 아침 초안 4장(예약 오늘 17시 마감)은 뺌.
+- id: f24
+  claim: 뚝섬한강공원 수영장 일원에서 10/23(금)~25(일) 청년 셰프 K-스트리트푸드 경연형 마켓 '더 로드셰프 한강'이 열린다. 푸드트럭에서 국내산 식재료와 한식 조리법으로 만든 음식을 선보이고, 10/24 '한식의 날' 및 한식주간에 맞춘 민간협력사업이다.
+  value: 뚝섬 수영장 · 10/23(금)~25(일) · 청년 셰프 푸드트럭
+  source_url: https://news.seoul.go.kr/env/archives/571090
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 운영 시간·메뉴 가격 미확인. 음식은 판매 → '무료 시식'이라고 쓰지 않음.
+- id: f25
+  claim: 더 로드셰프 참가 팀 수는 보도마다 다르다. 서울시 보도와 해양레저신문 등 다수 기사는 '전국 공모로 선발된 20팀'이라고 썼고, 라이브뉴스는 '예선을 통과한 13팀이 결선에 올라 5팀을 시상한다'고 썼다.
+  value: 20팀 vs 13팀 (불일치)
+  source_url: https://www.livesnews.com/news/article.html?no=65131
+  source_type: press
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 카드에는 숫자 없이 '청년 셰프 푸드트럭'으로만.
+- id: f26
+  claim: 더 로드셰프 최종 심사 결과는 10/25(일) 오후 6시 행사장 무대에서 발표되고, 대상 팀에는 한식진흥원 이사장상을 준다. 개막일에는 '흑백요리사' 출연자 김호윤 셰프 등이 함께한다고 보도됐다.
+  value: 10/25(일) 18:00 결과 발표
+  source_url: https://www.livesnews.com/news/article.html?no=65131
+  source_type: press
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 단일 보도. 카드 핵심 정보로 쓰지 않음.
+- id: f27
+  claim: 한강무소음요가는 10/25(일) 15:30~18:00 반포한강공원에서 열린다(잠원 회차는 10/17에 끝났다). 예약은 사일런트디스코코리아 홈페이지에서 받는다.
+  value: 반포 · 10/25(일) 15:30~18:00 · 사전예약(유료)
+  source_url: https://www.seoul.go.kr/festa/hangang/y2026/reservation
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 운영사 티켓 페이지(https://silentdisco.kr/ticket) 검색 요약 기준 9,000원. 유료라 '무료 나들이' 카드 핵심에서 뺌.
+- id: f28
+  claim: 반포 수상레저는 10/17~25에 운영된다. 세빛섬 '튜브스터 한강 힐링'은 주말·공휴일 13:00~23:00(마지막 운항 22:30)이고 네이버로 예약한다. '골든블루마리나 요트&카약 페스티벌'은 요트 14:00~22:00, 카약 14:00~17:30이다. '선율 속의 낭만 요팅'은 월요일에 쉬고 현대요트 홈페이지에서 예약한다.
+  value: 반포 수상레저 · ~10/25(일) · 운영사별 예약
+  source_url: https://www.seoul.go.kr/festa/hangang/y2026/reservation
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 민간 운영, 요금 미기재(유료 가능성 높음).
+- id: f29
+  claim: '잠원 ''ON 스테이지: 한강에 별이 뜨면''(뮤지컬 무료 공연), ''#오.운.한'', ''한강한끼''(참가비 5,000원)는 10/17~18 프로그램으로 이미 끝났다.'
+  value: ON 스테이지·오.운.한·한강한끼 = 10/17~18 종료
+  source_url: https://mediahub.seoul.go.kr/archives/2019582
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f30
+  claim: 10월 한강 가을 축제로 함께 묶인 반포 서래섬 '피크닉 콘서트 가을낭만'(10/9~11)과 여의도 '한강 종이비행기 축제'(10/10)는 이미 끝났다.
+  value: 피크닉 콘서트·종이비행기 축제 = 종료
+  source_url: https://www.newspim.com/news/view/20261006000939
+  source_type: press
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f31
+  claim: 공식 안내·예약 페이지는 서울시 '2026 한강페스티벌' 누리집이다. 공원별 행사 위치는 미래한강본부의 '2026년 한강공원별 축제·행사 배치도'에서 볼 수 있다.
+  value: seoul.go.kr/festa/hangang/y2026
+  source_url: https://www.seoul.go.kr/festa/hangang/y2026/reservation
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 배치도 https://hangang.seoul.go.kr/www/bbsPost/17/644/detail.do?mid=604 · 문의 다산콜센터 02-120. festival.seoul.go.kr 가을 페이지·미래한강본부 2025 가을 페이지는 쓰지 않음.
+- id: f32
+  claim: 기상청 10/21 06시 중기예보에서 서울·경기는 24일(토)과 25일(일) 모두 구름많음, 강수확률 20~30%다. 25일~26일 오전 비는 충청·남부·제주 중심으로 예보됐다.
+  value: 토·일 구름많음 · 서울 강수 20~30%
+  source_url: https://www.weather.go.kr/w/forecast/overall/mid-term.do?stnId1=109
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 디자인위크 조사에서는 같은 예보를 '24일 맑음(10%)'으로 읽어 토요일 표기가 엇갈림 → 카드에 토·일 날씨 숫자를 쓰지 않음.
+- id: f33
+  claim: 10/24~25 강서한강공원에서 13~19시에 어쿠스틱·재즈·클래식·국악 크로스오버 음악을 즐길 수 있다는 기사 문구가 있다.
+  value: 강서 음악 13~19시 (미확인)
+  source_url: https://www.fnnews.com/news/202610061133192399
+  source_type: press
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 카드에 쓰지 않음.
+- id: f34
+  claim: '서울시가 ''가을 한강 봉사데이: 한강탐험대''를 10/24(토)에 연다고 공지했다는 검색 제목이 있다.'
+  value: 한강탐험대 10/24 (미확인)
+  source_url: https://news.seoul.go.kr/env/archives/571214
+  source_type: official
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 카드에 쓰지 않음.
+- id: f35
+  claim: 2026 서울디자인위크는 10월 14일(수)부터 25일(일)까지 12일간 DDP를 중심으로 열린다. 동대문·성수·연희·서촌·압구정 5개 권역의 디자인 공간 150곳을 '서울 디자인로드'로 잇는다. 이번 일요일(10/25)에 끝난다.
+  value: 10/14(수)~10/25(일)
+  source_url: https://mediahub.seoul.go.kr/archives/2019559
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f36
+  claim: 주최는 서울시와 서울디자인재단이고, 올해 주제는 '디자인 레시피'다.
+  value: 주최 서울시·서울디자인재단
+  source_url: https://mediahub.seoul.go.kr/archives/2019559
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f37
+  claim: '''디자인산업 스펙트럼'' 전시(DDP 디자인둘레길 약 110m 구간)와 ''그린칩스 서울 페스티벌''(DDP 어울림광장)은 행사 기간 동안 매일 오전 11시부터 오후 8시까지 운영하고, 입장료는 무료다.'
+  value: 11:00~20:00, 무료 (둘레길·어울림광장)
+  source_url: https://news.seoul.go.kr/culture/archives/534805
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 아침 초안의 '10:00~20:00'은 DDP 시설 상시 시간과 섞인 값 → 11:00로 고침.
+- id: f38
+  claim: 공간 이름 '디자인둘레길'은 서울시 보도자료에 실제로 나오는 표현이다('DDP 디자인둘레길에서 열리는 스펙트럼 전시').
+  value: 명칭 '디자인둘레길' 사용 가능
+  source_url: https://www.gukjenews.com/news/articleView.html?idxno=3720735
+  source_type: press
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f39
+  claim: 어울림광장 그린칩스 서울 페스티벌은 올해 4회째다. 지속가능 디자인 제품·서비스 판로개척 지원사업에 참여한 20개 기업이 생활용품·문구·패션잡화·가구 등을 전시하고 체험 기회를 제공한다.
+  value: 그린칩스 20개사, ~10/25
+  source_url: https://news.seoul.go.kr/culture/archives/534805
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f40
+  claim: 유료 행사인 DDP디자인페어는 DDP 아트홀 전관에서 10/14~10/18에 열렸고 이미 끝났다. 운영시간은 14일 14:00~20:00, 15~17일 11:00~20:00, 18일 11:00~18:00였다.
+  value: 디자인페어(유료) 10/18(일) 종료
+  source_url: https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=450
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f41
+  claim: DDP디자인페어 관람료는 얼리버드 9,000원, 정상가(현장) 15,000원이었다(슈퍼얼리버드 6,000원은 따로 있었다).
+  value: 얼리버드 9,000원 / 정상 15,000원 (종료)
+  source_url: https://mediahub.seoul.go.kr/archives/2019100
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 페어가 끝나 카드에는 금액 없이 '유료 페어는 18일에 끝남'만.
+- id: f42
+  claim: DDP 야외 팔거리에서 '디자인마켓'이 1차 10/16~18, 2차 10/23~25에 열린다(총 6일). 리빙소품·일러스트·패션잡화·F&B 등 셀러 약 200곳이 참여한다.
+  value: 디자인마켓 2차 10/23(금)~10/25(일)
+  source_url: https://www.artkoreatv.com/news/articleView.html?idxno=105121
+  source_type: press
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 서울경제 https://m.sedaily.com/article/20101318 · 서울시 프로그램 표와 일치. 2026 마켓 운영시간은 미확인.
+- id: f43
+  claim: 디자인마켓 입장이 무료인지는 확인되지 않았다. 기사들은 마켓 입장료를 적지 않았다.
+  value: 마켓 입장료 미확인
+  source_url: https://mediahub.seoul.go.kr/archives/2019559
+  source_type: official
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 카드에 마켓을 '무료'라고 쓰지 않음.
+- id: f44
+  claim: B 보고서는 '야외 디자인 전시 2차 10/23~25(잔디사랑방·이간수문전시관·어울림광장·뮤지엄 둘레길 등)'를 별도 프로그램으로 보고했다.
+  value: '야외 전시 2차: 별도 행사인지 불분명'
+  source_url: https://www.specialtimes.co.kr/news/articleView.html?idxno=472456
+  source_type: press
+  checked_at: '2026-10-21'
+  status: unverified
+  note: 디자인마켓과 같은 장소·일정이라 혼동 가능성 큼. 따로 쓰지 않음.
+- id: f45
+  claim: 서울 디자인로드(5개 권역 150곳)와 연계 프로그램은 10/25까지 이어진다. 공간마다 운영시간과 요금이 다르다.
+  value: 디자인로드 150곳 ~10/25 (스팟별 상이)
+  source_url: https://www.newsis.com/view/NISX20261001_0003811065
+  source_type: press
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f46
+  claim: DDP 시설 상시 운영시간은 10:00~20:00이다.
+  value: DDP 상시 10:00~20:00
+  source_url: https://www.ddp.or.kr/
+  source_type: official
+  checked_at: '2026-10-21'
+  status: confirmed
+  note: 서울디자인위크 무료 구역(11:00~20:00)과 다름.
+- id: f47
+  claim: 14일 개막식과 함께 열린 서울디자인어워드 2026에 91개국 1,204개 프로젝트가 접수됐다.
+  value: 91개국 1,204개 프로젝트
+  source_url: https://www.artkoreatv.com/news/articleView.html?idxno=105121
+  source_type: press
+  checked_at: '2026-10-21'
+  status: confirmed
+- id: f48
+  claim: '''5일간 DDP 방문객 29만명·입장 500m 줄, 10월 15~26일'' 보도자료는 작년(12회, 2025년) 자료다.'
+  value: 작년 수치 (사용 금지)
+  source_url: https://opengov.seoul.go.kr/press/34580666
+  source_type: official
+  checked_at: '2026-10-21'
+  status: last_year
+  note: 카드에 쓰지 않음.
+slides:
+- role: cover
+  headline: |-
+    이번 주 끝나는
+    서울 무료 나들이 3곳
+  sub: 억새는 금요일, 한강·디자인위크는 일요일 마감
+  info: []
+  point: ''
+  visual: 해 질 무렵 완만한 언덕 위로 은빛 억새밭이 넓게 펼쳐진 풍경을 화면 전체에 깐다. 역광을 받은 억새 이삭이 반짝이고, 멀리 강과 도시 건물 윤곽이 옅은 노을빛 안개 속에 흐릿하게 보인다. 억새 사이 흙길에 아주 작은 뒷모습 실루엣 2명. 실제 카메라로 찍은 듯한 자연광과 억새의 거친 질감, 과한 보정·광택 없음. 위쪽 하늘에 큰 흰 제목 2줄이 들어갈 여백을 둔다. 표지판·글씨·로고 없음.
+  fact_ids:
+  - f1
+  - f4
+  - f18
+  - f21
+  - f35
+  - f37
+- role: item
+  headline: |-
+    서울억새축제
+    10/23(금) 마감
+  sub: 마포 하늘공원 · 주말 중 축제일은 금요일뿐
+  info:
+  - 10/17~10/23(금) · 입장 무료
+  - 10:00~21:00 · 일정 변경 가능
+  - 라이팅쇼 19시부터 30분 간격 (예정)
+  point: 체험은 현장접수 위주, 토·일엔 축제 프로그램 없어요
+  visual: 푸른 저녁 하늘 아래 은빛 억새밭 사이로 난 흙길, 길가의 낮은 따뜻한 색 조명이 막 켜져 억새 이삭을 옆에서 비추는 실사풍 사진 타일. 멀리 작은 뒷모습 2~3명. 자연스러운 저녁빛과 억새의 거친 질감, 과한 광택이나 CG 느낌 없음. 안내판·표지판 글씨 없음.
+  fact_ids:
+  - f1
+  - f2
+  - f3
+  - f4
+  - f5
+  - f11
+- role: item
+  headline: |-
+    한강페스티벌 가을
+    10/25(일) 마감
+  sub: 이번 주말 프로그램은 강서·뚝섬·반포
+  info:
+  - 뚝섬 청년 셰프 푸드트럭 · 금~일
+  - 강서 어린이 짚라인 토·일 13~17시
+  - 공연·체험 무료, 일부 유료
+  point: 음식은 판매, 현장 운영 방식은 공식 누리집 확인
+  visual: 맑은 가을 오후의 넓은 강변 공원 잔디밭, 강물 위로 햇살이 반짝이고 뒤쪽에 글씨·로고가 없는 무지 흰색 푸드트럭 두세 대가 흐릿하게 서 있는 실사풍 사진 타일. 잔디 위 돗자리에 앉은 작은 뒷모습 몇 명, 멀리 다리 윤곽이 옅게 보인다. 자연광, 생활감 있는 질감. 간판·현수막 글씨 없음.
+  fact_ids:
+  - f18
+  - f19
+  - f21
+  - f22
+  - f24
+  - f31
+- role: item
+  headline: |-
+    서울디자인위크
+    10/25(일) 마감
+  sub: DDP 중심 · 성수·연희·서촌·압구정 150곳
+  info:
+  - 어울림광장·디자인둘레길 무료
+  - 무료 구역 11:00~20:00
+  - 야외 디자인마켓 2차 10/23~25
+  point: 유료 디자인페어는 10/18에 끝났어요
+  visual: 은회색 금속 패널로 덮인 부드러운 곡선형 현대 건축물(특정 건물을 그대로 재현하지 않음) 앞 야외 광장에 흰 천막을 친 작은 마켓 부스가 줄지어 선 가을 오후 실사풍 사진 타일. 부스 위 도자기·문구·천 가방 같은 소품이 흐릿하게 보이고, 사람은 작은 뒷모습만. 자연광, 실제 거리 사진 같은 질감. 간판·현수막·상표 글씨 없음.
+  fact_ids:
+  - f35
+  - f37
+  - f38
+  - f40
+  - f42
+  - f45
+- role: tip
+  headline: 가기 전 체크
+  sub: 억새는 해 진 뒤 귀갓길까지 챙기세요
+  info:
+  - 억새 전기차 19시 끝, 밤엔 걸어서 하산
+  - 6호선 월드컵경기장역 도보 약 40분
+  - 금 아침 3~8℃ 예보, 밤 언덕은 겉옷
+  point: DDP 무료 구역은 11시에 열어요. 주말 예보는 전날 확인
+  visual: 어스름한 저녁, 억새가 양옆에 늘어선 언덕 내리막 흙길에서 겉옷을 걸친 작은 뒷모습 한 사람이 휴대폰 손전등으로 발밑을 비추며 걸어 내려가는 실사풍 사진 타일. 편한 운동화 차림, 멀리 도시 불빛이 부드러운 보케로 번진다. 자연스러운 저녁빛, 과한 보정 없음. 글씨·표지판 없음.
+  fact_ids:
+  - f6
+  - f7
+  - f10
+  - f16
+  - f37
+- role: summary
+  headline: 마감순 주말 코스
+  sub: 금요일 저녁 억새부터, 일요일엔 DDP·한강
+  info:
+  - 금 10/23 저녁 · 하늘공원 억새
+  - 토 10/24 오후 · 강서·뚝섬 한강
+  - 일 10/25 · DDP·한강 마지막 날
+  point: 토·일 하늘공원은 축제 없음, 운영시간은 발표 전
+  visual: '가을 오후 강변 잔디 위에 펼친 피크닉 매트를 위에서 내려다본 실사풍 사진 타일: 글씨가 없는 무지 종이 지도, 연필, 무지 보온병, 억새 몇 줄기와 낙엽 몇 장. 따뜻한 햇살과 자연스러운 그림자. 로고·글씨·숫자 없음.'
+  fact_ids:
+  - f1
+  - f15
+  - f18
+  - f22
+  - f24
+  - f35
+  - f42
+- role: cta
+  headline: |-
+    저장해 두고
+    같이 갈 친구에게 보내기
+  sub: 10월 21일 기준, 변경될 수 있어요
+  info:
+  - '출처: 서울시·서울디자인재단·기상청'
+  - 한강 일정은 서울시 한강페스티벌 누리집
+  point: 금요일 억새, 일요일 한강·디자인위크 마감
+  visual: '창가 나무 테이블 위를 위에서 내려다본 주말 나들이 준비 장면 사진 타일: 억새 몇 줄기, 숫자와 글씨가 없는 빈 칸만 있는 작은 탁상 달력, 무지 텀블러, 접힌 니트 머플러. 따뜻한 오후 햇살, 로고·글씨 없음.'
+  fact_ids:
+  - f1
+  - f18
+  - f31
+  - f35
+  - f36
+caption: |
+  이번 주 끝나는 서울 무료 나들이 3곳
+  서울억새축제 · 한강페스티벌 · 서울디자인위크 · 서울 주말 가볼만한곳
+
+  ✔ 억새축제(마포 하늘공원) 10/23(금)까지 · 입장 무료
+  ✔ 10:00~21:00, 라이팅쇼 19시부터 30분 간격(예정) · 전기차는 19시에 끝나요
+  ✔ 토·일엔 억새축제 프로그램이 없어요 (하늘공원 운영시간은 발표 전)
+  ✔ 한강페스티벌 가을 10/25(일)까지 · 공연·체험 무료, 음식·일부 프로그램 유료
+  ✔ 뚝섬 청년 셰프 푸드트럭 금~일 · 강서 어린이 짚라인 토·일 13~17시
+  ✔ 서울디자인위크 10/25(일)까지 · 어울림광장·디자인둘레길 무료(11:00~20:00)
+  ✔ DDP 야외 디자인마켓 2차 10/23~25 · 유료 디자인페어는 끝났어요
+
+  저장해 두고, 같이 갈 친구에게 보내 주세요.
+  정보는 10월 21일 기준이에요.
+hashtags:
+- 서울억새축제
+- 한강페스티벌
+- 서울디자인위크
+- 서울가볼만한곳
+- 주말나들이
+alt_text: 은빛 억새밭과 강변 공원, 곡선형 건물 앞 야외 마켓 사진 위에 이번 주 끝나는 서울억새축제(10월 23일 금요일까지)와 한강페스티벌 가을·서울디자인위크(10월 25일 일요일까지)의 날짜·시간·무료 구역, 가기 전 체크와 마감순 주말 코스를 정리한 카드뉴스 7장이에요.
+notes: |-
+  - 2장 '10:00~21:00'·'19시부터 30분 간격 (예정)', 4장 '11:00~20:00'(10:00 아님), 5장 '3~8℃' 숫자가 그대로 나왔는지 확인하세요.
+  - 4장 곡선 건물은 실제 건물처럼 보여도 괜찮지만 간판·로고·현수막 글씨가 생기면 지워 달라고 다시 요청하세요. 3장 푸드트럭 차체·6장 지도·7장 달력에도 글씨가 없어야 해요.
+  - 1·2·5장 억새 사진에 얼굴이 보이는 사람이 나오면 작은 뒷모습으로 바꿔 달라고 하세요.
