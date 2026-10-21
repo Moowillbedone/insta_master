@@ -23,11 +23,26 @@ LIMITS = {"headline": 18, "sub": 32, "info": 24, "point": 40}
 ROLES = {"cover", "item", "summary", "tip", "cta"}
 FACT_STATUS = {"confirmed", "planned", "last_year", "unverified"}
 # 확정이 아닌 사실이 슬라이드에 들어가면 붙어 있어야 하는 꼬리표
-HEDGE_WORDS = ("예정", "작년", "미정", "발표 전", "추후", "변경", "기준")
+HEDGE_WORDS = ("예정", "작년", "미정", "발표 전", "추후", "변경", "기준", "2025년")
+# 이미지 글자·그림 묘사·캡션에 넣지 않는 말 (사용자 운영 원칙: 사람이 만든 카드뉴스처럼).
+# 예측 자료는 "○○ 발표 기준", "절정 시기"처럼 출처로 표현한다.
+NO_WORDS = ("AI", "인공지능", "생성 이미지", "예측", "예상")
+NO_WORDS_ALLOW = ("계절예측",)   # 실제 메뉴·고유명사는 그대로 써야 해서 예외
+
+
+def _no_words(text: str) -> list[str]:
+    for a in NO_WORDS_ALLOW:
+        text = text.replace(a, "")
+    return [w for w in NO_WORDS if w in text]
+
+
 BANNED = ("무조건", "100%", "역대급", "최저가 보장", "완벽", "필수템", "인생템")
-EXPERIENCE = ("다녀왔", "먹어보니", "가보니", "써보니", "입어보니", "내돈내산", "직접 가")
+EXPERIENCE = ("다녀왔", "먹어보니", "가보니", "써보니", "입어보니", "내돈내산", "직접 가", "직접 찍")
 # Meta가 노출을 줄이는 참여 유도(engagement bait) 문구 — 공유는 "보내기"로 유도한다
 BAIT = ("태그", "댓글 달", "댓글로", "좋아요 누르", "팔로우하면", "리그램", "공유하면", "추첨")
+# 게시 후 스토리로 공유해 모으는 프로필 하이라이트 5개 (분야 → 하이라이트)
+HIGHLIGHTS = {"축제": "축제", "전시": "축제", "팝업": "팝업", "핫플": "팝업", "신상": "팝업",
+              "맛집": "맛집", "혜택": "혜택", "생활꿀팁": "혜택", "시즌": "시즌", "이슈": "시즌"}
 NUM_RE = re.compile(r"\d{1,2}\.\d{1,2}|\d{1,3}(?:,\d{3})+원?|\d+원|\d{1,2}:\d{2}|\d+%")
 
 
@@ -53,13 +68,20 @@ def load_package(day: str) -> dict:
     p = package_path(day)
     if not p.exists():
         raise SystemExit(f"패키지가 없어요: {p.relative_to(ROOT)} — python doha.py daily-new {day}")
-    return load_yaml(p) or {}
+    pkg = load_yaml(p) or {}
+    # 장 번호는 적힌 값과 상관없이 순서로 매긴다 (YAML 1.1은 `no:` 키를 False 로 읽음)
+    for i, s in enumerate(pkg.get("slides") or [], 1):
+        if isinstance(s, dict):
+            s.pop(False, None)
+            s["_no"] = i
+    return pkg
 
 
 TEMPLATE = """# 매일 정보형 카드뉴스 패키지 — 형식은 docs/11-daily-cardnews.md
 date: {day}
 status: draft          # draft → ready(검수 통과) → posted
 style: {style}         # brand/infocard-style.yaml 프리셋: info-warm | info-night | info-clean
+highlight: ""          # 비우면 분야로 자동: 축제 | 팝업 | 맛집 | 혜택 | 시즌
 
 topic:
   title: ""            # 카드뉴스 주제 (예: 이번 주 서울 단풍 명소 5곳)
@@ -81,8 +103,7 @@ facts: []
 #    status: confirmed         # confirmed | planned | last_year | unverified
 
 slides: []
-#  - no: 1
-#    role: cover               # cover | item | summary | tip | cta
+#  - role: cover               # 장 번호는 순서대로 자동               # cover | item | summary | tip | cta
 #    headline: ""              # 이미지 큰 글자 (18자 이내, 줄바꿈은 \\n)
 #    sub: ""                   # 작은 글자 (32자 이내)
 #    info: []                  # 정보줄 (각 24자 이내) 예: ["11.1~11.10", "서울숲 일대", "무료"]
@@ -165,6 +186,8 @@ def check_package(pkg: dict) -> tuple[list[str], list[str]]:
             errors.append(f"{where}: headline 이 비어 있어요")
         if not s.get("visual"):
             warns.append(f"{where}: visual(그림 묘사)이 비어 있어요")
+        for w in _no_words(str(s.get("visual") or "")):
+            errors.append(f"{where}.visual: '{w}' 는 그림 묘사에 넣지 않아요")
         for kind, text in _slide_texts(s):
             limit = LIMITS[kind]
             longest = max(len(line) for line in text.split("\n"))
@@ -176,6 +199,8 @@ def check_package(pkg: dict) -> tuple[list[str], list[str]]:
             for w in EXPERIENCE:
                 if w in text:
                     errors.append(f"{where}.{kind}: 체험을 꾸며낸 표현 '{w}'")
+            for w in _no_words(text):
+                errors.append(f"{where}.{kind}: '{w}' 는 넣지 않아요 — '○○ 발표 기준'처럼 출처로 표현하세요")
             for w in BAIT:
                 if w in text:
                     errors.append(f"{where}.{kind}: 참여 유도 문구 '{w}' — Meta가 노출을 줄여요. '저장'·'보내기'로 바꾸세요")
@@ -195,13 +220,13 @@ def check_package(pkg: dict) -> tuple[list[str], list[str]]:
     if not caption:
         errors.append("caption 이 비어 있어요")
     else:
-        if "AI" not in caption:
-            errors.append("캡션에 'AI 생성 이미지' 표기가 없어요")
         if len(caption) > 2200:
             errors.append(f"캡션 {len(caption)}자 > 2,200자")
         for w in BANNED + EXPERIENCE + BAIT:
             if w in caption:
                 errors.append(f"캡션에 '{w}'")
+        for w in _no_words(caption):
+            errors.append(f"캡션에 '{w}' — 사람이 만든 카드뉴스처럼, 출처로 표현하세요")
     tags = pkg.get("hashtags") or []
     if not 3 <= len(tags) <= 5:
         errors.append(f"해시태그는 3~5개 (지금 {len(tags)}개)")
@@ -209,7 +234,22 @@ def check_package(pkg: dict) -> tuple[list[str], list[str]]:
         warns.append("hashtags 는 # 없이 적어요 (출력할 때 붙여요)")
     if not pkg.get("alt_text"):
         warns.append("alt_text 가 비어 있어요")
+    for w in _no_words(str(pkg.get("alt_text") or "")):
+        errors.append(f"alt_text 에 '{w}'")
+    if pkg.get("highlight") and pkg["highlight"] not in set(HIGHLIGHTS.values()):
+        warns.append(f"highlight '{pkg['highlight']}' 는 프로필 하이라이트(축제·팝업·맛집·혜택·시즌)가 아니에요")
     return errors, warns
+
+
+def highlight_for(pkg: dict) -> str:
+    """이 게시물을 모을 하이라이트. highlight 값이 없으면 분야(첫 번째로 맞는 것)로 정한다."""
+    if pkg.get("highlight"):
+        return str(pkg["highlight"])
+    cat = str((pkg.get("topic") or {}).get("category") or "")
+    for part in re.split(r"[/·,|\s]+", cat):
+        if part in HIGHLIGHTS:
+            return HIGHLIGHTS[part]
+    return ""
 
 
 def cmd_check(args) -> int:
@@ -239,7 +279,7 @@ def style_block(style_key: str) -> str:
 
 
 def slide_prompt(s: dict, total: int) -> str:
-    lines = [f"[{s.get('no')}/{total}장 — 공통 스타일 그대로, 이전 장과 같은 시리즈로]"]
+    lines = [f"[{s['_no']}/{total}장 — 공통 스타일 그대로, 이전 장과 같은 시리즈로]"]
     role = s.get("role")
     lines.append(f"- 역할: {'표지' if role == 'cover' else '마지막 장' if role == 'cta' else '본문'}")
     lines.append(f"- 그림: {str(s.get('visual') or '').strip()}")
@@ -262,7 +302,9 @@ def render_md(pkg: dict) -> str:
     slides = pkg.get("slides") or []
     facts = pkg.get("facts") or []
     out = [f"# {day} 오늘의 카드뉴스: {topic.get('title', '')}", ""]
-    out += [f"- 분야: {topic.get('category', '')} · 스타일: `{pkg.get('style')}` · {len(slides)}장",
+    hl = highlight_for(pkg)
+    out += [f"- 분야: {topic.get('category', '')} · 스타일: `{pkg.get('style')}` · {len(slides)}장"
+            + (f" · 하이라이트: '{hl}'" if hl else ""),
             f"- 왜 오늘: {topic.get('why_now', '')}"]
     sc = topic.get("score") or {}
     if sc:
@@ -289,15 +331,16 @@ def render_md(pkg: dict) -> str:
             "### 공통 스타일 (1번만 붙여넣기)", "", "```text", style_block(pkg.get("style")), "```", "",
             "### 장별 요청"]
     for s in slides:
-        out += ["", f"**{s.get('no')}장 · {s.get('role')}**", "", "```text", slide_prompt(s, len(slides)), "```"]
+        out += ["", f"**{s['_no']}장 · {s.get('role')}**", "", "```text", slide_prompt(s, len(slides)), "```"]
     tags = " ".join("#" + str(t).lstrip("#") for t in pkg.get("hashtags") or [])
     out += ["", "## 캡션 (그대로 복사)", "", "```text", str(pkg.get("caption") or "").strip(), "", tags, "```", "",
             "## 대체 텍스트 (고급 설정 → 접근성)", "", "```text", str(pkg.get("alt_text") or ""), "```", "",
             "## 올리기 전 체크", "",
             "- [ ] 이미지 글자 오탈자·숫자가 사실 확인표와 같은지",
             "- [ ] 로고·간판 글씨·실존 인물 얼굴·캐릭터가 그려지지 않았는지",
-            "- [ ] 앱에서 'AI 정보(AI 라벨)' 켜기",
             "- [ ] 캡션 첫 줄이 '더 보기' 전에 보이는지",
+            *([f"- [ ] 올린 게시물 → 공유(종이비행기) → 스토리에 추가 → 올린 스토리의 하이라이트 버튼 → '{hl}'에 추가"]
+              if hl else []),
             "- [ ] 올린 뒤 이 파일의 status 를 posted 로 (또는 Claude에게 '올렸어'라고 알려 주기)"]
     if pkg.get("notes"):
         out += ["", "## 메모", "", str(pkg["notes"])]

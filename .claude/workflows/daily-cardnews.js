@@ -126,8 +126,9 @@ RECENT CHECKED: ${JSON.stringify(pick.recent_topics_checked || [])}
 FACT PACK: ${JSON.stringify(facts)}
 Steps:
 1) python doha.py daily-new ${DATE} --style ${pick.chosen.style}   (if it already exists, edit it instead)
-2) Fill content/daily/${DATE}/package.yaml following the template comments and docs/11: topic (title, category, why_now, trend_evidence with source/url/note/seen_at, score), backups, recent_topics_checked, facts (copy the fact pack exactly; no new facts without sources), slides (5-8: cover → items → summary/tip → cta), each slide with headline (<=18 chars per line), sub, info lines (<=24), point (<=40), visual (a concrete photoreal or illustrated scene for ChatGPT; no logos, no readable signage, no real faces/characters), fact_ids. Non-confirmed facts must carry 예정/작년/미정/발표 전 wording on the slide. The cta slide states the info date ("${DATE} 기준, 변경될 수 있어요") and asks to save/share.
-   caption: hook line (<=22 chars) → line 2 search keywords → 4-8 short ✔ lines with the key facts (same hedges) → save/share line → final line "이미지는 AI로 생성했어요. 정보는 ${DATE} 기준이에요." hashtags 3-5 (no #). alt_text 1 sentence.
+2) Fill content/daily/${DATE}/package.yaml following the template comments and docs/11: topic (title, category, why_now, trend_evidence with source/url/note/seen_at, score), backups, recent_topics_checked, facts (copy the fact pack exactly; no new facts without sources), slides (5-8: cover → items → summary/tip → cta), each slide with headline (<=18 chars per line), sub, info lines (<=24), point (<=40), visual (a concrete scene for ChatGPT that looks like a real photo — natural light, no CG look; no logos, no readable signage, no real faces/characters), fact_ids. Non-confirmed facts must carry 예정/작년/2025년/미정/발표 전 wording on the slide. The cta slide states the info date ("○월 ○일 기준, 변경될 수 있어요") and asks to save/share.
+   caption: hook line (<=22 chars) → line 2 search keywords → 4-8 short ✔ lines with the key facts (same hedges) → save/share line → final line "정보는 ○월 ○일 기준이에요." hashtags 3-5 (no #). alt_text 1 sentence. highlight: one of 축제|팝업|맛집|혜택|시즌 (the profile highlight this post belongs in; matches the category).
+   HUMAN-MADE STYLE (owner rule): never write "AI", "인공지능", "생성 이미지", "예측" or "예상" in slide text, visual, caption or alt_text (daily-check blocks them). Express forecasts through the source ("산림청 발표 기준", "절정 시기"). Never claim a personal visit or photo ("직접 가봤어요", "직접 찍은") either.
 3) python doha.py daily-check ${DATE} → fix until 0 errors (and resolve warnings where sensible).
 4) python doha.py daily-md ${DATE}
 Korean: natural, friendly 존댓말, short. Return the topic title and slide headlines.`,
@@ -138,7 +139,7 @@ const review = await agent(`${CTX}
 Adversarial review of content/daily/${DATE}/package.yaml and package.md. Up to 12 searches.
 1) Re-verify the 5 most important facts (dates, prices, places, deadlines) against independent searches; fix values/status/hedges in package.yaml if wrong; remove any URL not seen in search results.
 2) Copy: hook strength, natural Korean, no exaggeration, no fabricated experience, slide text short enough to render cleanly as image text; headlines must stand alone.
-3) Prompts: each slide's visual is concrete and safe (no logos/signage text/real faces/IP characters), consistent with the style preset; the text to render is exact.
+3) Prompts: each slide's visual is concrete and safe (no logos/signage text/real faces/IP characters), reads like a real photo, consistent with the style preset; the text to render is exact; no "AI"/"예측"/"예상" wording anywhere (owner rule — forecasts are phrased via the source).
 4) Re-run python doha.py daily-check ${DATE} and python doha.py daily-md ${DATE}. Set status: ready in package.yaml if 0 errors.
 Return a <=120-word summary of fixes.`,
   { label: 'review', phase: 'Review' })
