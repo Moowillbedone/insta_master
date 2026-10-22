@@ -1,0 +1,431 @@
+# 매일 정보형 카드뉴스 패키지 — 형식은 docs/11-daily-cardnews.md
+date: '2026-10-22'
+status: ready
+style: info-warm
+highlight: 시즌
+topic:
+  title: 스타벅스 겨울 시즌 시작 10/22 — 음료·디저트·굿즈·혜택 한눈에
+  category: 신상
+  why_now: 스타벅스 코리아 겨울(크리스마스) 시즌이 오늘 10/22(목) 시작합니다. 대상 푸드 7종 20% 할인은 10/25(일)까지 4일, 시즌 음료 별 추가 적립은 10/28(수)까지, 겨울 e-프리퀀시는 오늘부터 12/31까지라 마감일을 모은 목록의 저장 가치가 큽니다. 목요일 아침에 올리면 점심·퇴근길 카페 계획과 할인 마지막 날(일요일)까지 바로 씁니다. 오늘 아침 루틴 초안(푸시 실패, 검증 전)에서 틀린 부분('무알코올' → 공식 표현 '논알코올', '시즌 푸드 6종'·'발표 전' 표현 삭제, 디저트 이름 3개 정정, 별 적립 조건 추가, 빠진 겨울 e-프리퀀시 추가)을 고쳐 다시 만든 패키지입니다. 협찬이 아닌 정보 게시물이라 광고 문구는 쓰지 않았습니다.
+  trend_evidence:
+  - source: official
+    url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+    note: '신세계그룹 뉴스룸 10/21 공식 보도자료: 시즌 음료 4종(신제품 1·재출시 3), 토피 넛 라떼 2002년부터 누적 4000만 잔, 푸드 20% 할인 10/22~25, 별 적립 ~10/28'
+    seen_at: '2026-10-22'
+  - source: news
+    url: https://www.newspim.com/news/view/20261021000073
+    note: 뉴스핌 10/21 '스타벅스, 22일 겨울 시즌 시작…토피 넛 라떼 4000만잔 판매' — 음료 4종, 별 적립 조건, 순차 출시
+    seen_at: '2026-10-22'
+  - source: news
+    url: https://www.mt.co.kr/living/2026/10/21/2026102109264180372
+    note: 머니투데이 10/21 '4000만잔 팔린 겨울음료 돌아온다…스타벅스, 크리스마스 시즌 돌입' — 디저트 이름 전체, 비프 멜트 재출시, 베어리스타 MD
+    seen_at: '2026-10-22'
+  - source: news
+    url: https://nwww.newsis.com/view/NISX20261021_0003834442
+    note: 뉴시스 10/21 '"토피넛 라떼 돌아왔다" 스타벅스, 크리스마스 시즌 메뉴 선봬'
+    seen_at: '2026-10-22'
+  - source: news
+    url: https://www.fnnews.com/news/202610210924490698
+    note: 파이낸셜뉴스 10/21 '크리스마스 시즌 선점.. 음료·푸드 라인업 대폭 강화' — 디저트 라인업 중심
+    seen_at: '2026-10-22'
+  - source: news
+    url: https://www.etoday.co.kr/news/view/2638448
+    note: 이투데이 그래픽 스토리 '2026 스타벅스 겨울 e-프리퀀시, 재빠른 수령 방법은?' (e-프리퀀시 시작 전) — 혜택 정리형 콘텐츠 수요 신호
+    seen_at: '2026-10-22'
+  score:
+    timeliness: 5
+    save_share: 5
+    breadth: 5
+    visual: 4
+    verifiability: 4
+    risk: 1
+    total: 22
+backups:
+- title: 10월 말 끝나는 서울 전시 + 새로 여는 전시
+  category: 전시
+  why_now: (미확인 아이디어, 미채점) 아침 루틴 초안의 예비 주제. 전시별 기간·장소·요금은 아직 공식 출처로 확인하지 않았어요.
+  score_total: 0
+- title: K-세일페스타 달라진 점 총정리
+  category: 혜택
+  why_now: (미확인 아이디어, 미채점) 아침 초안 메모 기준 10/29~11/15 행사라 다음 주 혜택 주제로 맞음. 기간·참여 브랜드·할인 조건은 공식 발표로 다시 확인해야 해요.
+  score_total: 0
+recent_topics_checked:
+- 2026-10-20 단풍 절정 달력 (시즌) — 분야·내용 겹침 없음
+- 2026-10-21 이번 주 끝나는 서울 무료 나들이 3곳 (축제, 하이라이트 '시즌') — 분야 겹침 없음. 하이라이트 '시즌'은 사흘째지만 분야는 시즌→축제→신상으로 연속되지 않음
+facts:
+- id: f1
+  claim: 스타벅스 코리아가 10/21 보도자료로 2026 겨울(크리스마스) 시즌을 알렸고, 시즌 음료는 10/22(목)부터 판매한다. 여러 매체는 '22일부터 전국 매장에서'라고 썼고, 뉴스핌은 음료·푸드·굿즈를 '22일부터 순차적으로' 선보인다고 썼다.
+  value: 10/22(목)부터 판매 시작 (발표 10/21)
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: '신세계그룹 뉴스룸에 실린 공식 보도자료. ''순차적으로'' 표현: https://www.newspim.com/news/view/20261021000073 · 그래서 굿즈 장은 ''10/22부터 차례로 출시''로 씀.'
+- id: f2
+  claim: '시즌 음료는 4종이다: 토피 넛 라떼, 윈터 스카치 바닐라 라떼, 클래식 뱅쇼 히비스커스 티, 살구 조이풀 메들리 티 라떼 (공식 표기 띄어쓰기 그대로).'
+  value: 시즌 음료 4종
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 뉴스핌도 4종을 ▲로 나열. 인사이트(insight.co.kr/news/578606)의 '시즌 한정 음료 7종'은 다른 보도와 어긋남(7은 할인 대상 푸드 수) → 쓰지 않음.
+- id: f3
+  claim: 4종 중 토피 넛 라떼, 윈터 스카치 바닐라 라떼, 클래식 뱅쇼 히비스커스 티 3종은 재출시이고, 신제품은 살구 조이풀 메들리 티 라떼 1종뿐이다.
+  value: 신제품 1종 + 재출시 3종
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 인사이트 등 일부 매체가 윈터 스카치 바닐라 라떼를 '신메뉴'로 썼지만, 공식 보도자료·뉴스핌·머니투데이는 재출시로 씀.
+- id: f4
+  claim: 토피 넛 라떼는 2002년 국내에 처음 나와 매년 겨울 판매됐고, 누적 판매량이 4천만 잔을 넘어섰다.
+  value: 2002년 국내 출시 · 누적 4000만 잔 이상
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: '보도자료 표현은 ''4천만 잔을 넘어섰다''이고 정확한 누적 수는 없음 → 카드에 ''돌파'' 대신 ''이상''. 같은 내용: https://www.newspim.com/news/view/20261021000073 · https://www.mt.co.kr/living/2026/10/21/2026102109264180372'
+- id: f5
+  claim: 토피 넛 라떼는 에스프레소에 토피 넛 시럽을 넣어 고소한 풍미를 낸 라떼다.
+  value: 에스프레소+토피 넛 시럽
+  source_url: https://www.joongangenews.com/news/articleView.html?idxno=556824
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+- id: f6
+  claim: 스타벅스 코리아의 2025년 크리스마스 시즌 보도자료는 토피 넛 라떼 누적 판매량을 3800만 잔으로 밝혔다. 4000만 잔은 2026년에 갱신된 수치다.
+  value: 2025년 기준 3800만 잔
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-2025-christmas-season-begins/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: last_year
+  note: 검색 요약으로만 확인, 원문은 열어 보지 못함. 카드에 쓰지 않음.
+- id: f7
+  claim: 살구 조이풀 메들리 티 라떼가 이번 시즌 유일한 신제품 음료다. 올여름 인기였던 '살구 조이풀 메들리 쉐이큰 티'를 겨울용 티 라떼로 바꾼 음료다.
+  value: 신제품 · 여름 '쉐이큰 티'의 겨울 버전
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: '여름 음료 공식 메뉴 페이지: https://www.starbucks.co.kr/menu/drink_view.do?product_cd=9200000007118 · 검색 요약 기준 보도자료에 여름 음료가 2030 여성에게 인기였다는 문장이 있음(카드에 쓰지 않음).'
+- id: f8
+  claim: 윈터 스카치 바닐라 라떼는 진한 커피에 버터스카치 풍미를 더한 라떼이고, 올해 다시 나온다.
+  value: 버터스카치 풍미 라떼 · 재출시
+  source_url: https://www.newspim.com/news/view/20261021000073
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 공식 보도자료도 재출시로 분류.
+- id: f9
+  claim: 윈터 스카치 바닐라 라떼는 2025년 10월 30일 신제품으로 처음 나왔고, 스타벅스 코리아는 한 달 만에 200만 잔이 팔려 토피 넛 라떼보다 빨랐다고 밝혔다.
+  value: 2025.10.30 첫 출시 · 한 달 200만 잔
+  source_url: https://www.wikitree.co.kr/articles/1100599
+  source_type: press
+  checked_at: '2026-10-22'
+  status: last_year
+  note: 검색 결과에 기사 연도가 보이지 않음. 2026년 10월 30일은 아직 오지 않아 2025년으로 판단. 카드에 쓰지 않음.
+- id: f10
+  claim: 클래식 뱅쇼 히비스커스 티는 재출시 음료다. 레드와인 맛을 내도록 만든 베이스로 클래식 뱅쇼를 재현했고, 스타벅스는 '논 알코올' 음료라고 표기한다.
+  value: 논알코올 · 재출시
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 카드에는 공식 표현 '논알코올'을 씀. '무알코올'은 알코올 0.00%를 뜻하는 표시라 출처에 없는 말이어서 쓰지 않음.
+- id: f11
+  claim: 클래식 뱅쇼 히비스커스 티는 2025년 '2차 크리스마스 시즌'에 판매됐다. 레드와인 맛 베이스에 자몽·오렌지·레몬·사과를 넣고 끓여 논알코올로 만든 음료로 소개됐다.
+  value: 2025년 2차 크리스마스 시즌 판매
+  source_url: https://www.smarttoday.co.kr/ko-kr/articles/97537
+  source_type: press
+  checked_at: '2026-10-22'
+  status: last_year
+  note: '연도는 기사 맥락(10/30 출시 윈터 스카치 바닐라 라떼 200만 잔 언급)으로 판단. 작년 2차 시즌 공식 보도자료: https://www.shinsegaegroupnewsroom.com/starbucks-christmas-season-vin-chaud-launch/ · 그림에 과일 고명을 넣지 않음.'
+- id: f12
+  claim: 2025년에는 10월 시즌 시작 뒤 '2차 크리스마스 시즌'으로 음료를 더 냈다(캐모마일 허니 티 라떼, 뱅쇼 티 등). 2026년 발표는 1차 라인업만 다루고, 올해 2차 발표는 찾지 못했다.
+  value: 작년엔 2차 시즌 음료 추가
+  source_url: https://www.smarttoday.co.kr/ko-kr/articles/97537
+  source_type: press
+  checked_at: '2026-10-22'
+  status: last_year
+  note: 그래서 3장 제목을 '10/22 출시 음료 4종 / 신제품은 하나'로 범위를 한정함.
+- id: f13
+  claim: 10/28(수)까지 스타벅스 리워드 그린·골드 회원이 시즌 음료 4종을 구매하면 별을 최대 3개까지 추가 적립해 준다.
+  value: ~10/28(수) 그린·골드, 시즌 음료 4종 구매 시 별 최대 3개 추가
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 뉴스핌 동일(https://www.newspim.com/news/view/20261021000073). 기사엔 '28일까지'로만 나오며 10/21 발행 기준 10/28(수). 잔당 적립 수, 4종을 모두 사야 3개인지 같은 적립 방식은 보도에 없음 → 카드·캡션에 '1잔당' 같은 말을 쓰지 않음.
+- id: f14
+  claim: 10/21 보도자료에 나온 시즌 디저트는 누텔라 촉촉 생크림 케이크, 누텔라 바게트 소금빵, 루돌프 쿠키 치즈 케이크, 산타 레드벨벳 치즈 케이크, 트리 말차 크런치 케이크, 스노우맨 마카롱 '등'이다. 목록이 '등'으로 끝나 닫힌 목록이 아니다.
+  value: 누텔라 촉촉 생크림 케이크·누텔라 바게트 소금빵·루돌프 쿠키 치즈 케이크·산타 레드벨벳 치즈 케이크·트리 말차 크런치 케이크·스노우맨 마카롱 등
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 머니투데이(https://www.mt.co.kr/living/2026/10/21/2026102109264180372)·파이낸셜뉴스(https://www.fnnews.com/news/202610210924490698) 10/21 기사에 같은 이름. 뉴스룸 페이지 날짜는 검색 결과에 보이지 않음. 누텔라 메뉴 2종은 누텔라 스프레드 사용. 아침 초안의 '누텔라 생크림 케이크', '바게트 소금빵', '루돌프 쿠키'는 틀린 이름이라 고침.
+- id: f15
+  claim: 지난겨울 인기였던 비프 멜트 바게트 샌드위치가 이번 시즌 다시 나온다. 바게트에 소고기 필링, 콜비잭 치즈, 구운 양파, 파프리카를 넣었다.
+  value: 비프 멜트 바게트 샌드위치 재출시
+  source_url: https://www.fnnews.com/news/202610210924490698
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 머니투데이 10/21도 보도. 보도에서 '재출시'라고 밝힌 푸드는 이것뿐.
+- id: f16
+  claim: 시즌 푸드의 총 종수와 품목별 신규·재출시 구분은 보도에 없다. 기사들은 디저트 라인업 강화·'신제품'으로 묶어 소개하고, 재출시는 비프 멜트 바게트 샌드위치만 밝혔다.
+  value: '푸드 총 종수·품목별 신규 여부: 보도에 없음'
+  source_url: https://www.mt.co.kr/living/2026/10/21/2026102109264180372
+  source_type: press
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 이름이 나온 디저트 6종 + 샌드위치 = 최소 7종이라 '시즌 푸드 6종'은 사실로 쓸 수 없음 → 4장에 종 수를 쓰지 않음.
+- id: f17
+  claim: 10/22(목)부터 10/25(일)까지 4일간 대상 푸드 7종을 20% 할인 판매한다.
+  value: 대상 푸드 7종 20% 할인 10/22(목)~10/25(일)
+  source_url: https://www.shinsegaegroupnewsroom.com/starbucks-winter-christmas-season/
+  source_type: official
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 보도자료 표현 '단 4일간'. 뉴스룸 페이지는 프록시에서 열리지 않아 검색 스니펫으로 확인. 세계일보·머니투데이·중앙이코노미뉴스·뉴스웍스(https://www.newsworks.co.kr/news/articleView.html?idxno=900282) 10/21 기사도 같은 내용이고, 10/22 아침 재검색에서도 같음.
+- id: f18
+  claim: 할인 대상 푸드 7종의 품목명은 보도자료와 기사 어디에도 없다. 4장의 시즌 디저트가 할인 대상인지도 알 수 없다.
+  value: '대상 7종 품목명: 보도에 없음 → 앱·매장 확인'
+  source_url: https://www.segye.com/newsView/20261021510366
+  source_type: press
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 10/21~22 검색에서 7종 목록은 나오지 않음. 할인 대상 7종과 시즌 디저트 목록을 같은 것으로 쓰지 않음(누텔라 촉촉 생크림 케이크 포함 여부도 모름). '발표 전'이라는 근거는 없어 '앱 공지 기준으로 확인'으로 씀.
+- id: f19
+  claim: 푸드 할인이 사이렌 오더·앱 전용인지, 회원 전용인지, 1인 수량 제한이나 제외 매장이 있는지는 보도에 없다.
+  value: '주문 방식·회원·수량 조건: 보도에 없음'
+  source_url: https://www.joongangenews.com/news/articleView.html?idxno=556824
+  source_type: press
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 카드·캡션에 '앱 전용' 같은 조건을 지어내지 않음.
+- id: f20
+  claim: 시즌 푸드 가격은 찾은 보도 어디에도 나오지 않았다.
+  value: '푸드 가격: 보도에 없음'
+  source_url: https://www.mt.co.kr/living/2026/10/21/2026102109264180372
+  source_type: press
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 10/22 판매 시작 뒤 앱·매장에서 확인. 카드에 가격을 쓰지 않음.
+- id: f21
+  claim: 시즌 굿즈(MD)는 진저브레드와 마시멜로에서 영감을 얻은 베어리스타 디자인의 텀블러·머그, '트리 댄싱 베어리스타 인형' 등이다.
+  value: 진저브레드·마시멜로 모티브 베어리스타 텀블러·머그, '트리 댄싱 베어리스타 인형' 등
+  source_url: https://www.discoverynews.kr/news/articleView.html?idxno=1104589
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 머니투데이 10/21, 중앙이코노미뉴스(https://www.joongangenews.com/news/articleView.html?idxno=556824)도 보도. 선물·수집 수요를 겨냥했다는 보도. 그림에는 곰 캐릭터·인형 얼굴을 그리지 않음(캐릭터 IP).
+- id: f22
+  claim: 굿즈 가격은 보도에 없고, 트리 댄싱 베어리스타 인형의 공식 판매가도 검색 결과에 없다.
+  value: '굿즈 가격: 보도에 없음'
+  source_url: https://www.joongangenews.com/news/articleView.html?idxno=556824
+  source_type: press
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 지난 댄싱 베어리스타 인형의 KREAM·11번가 리셀가를 올해 가격처럼 쓰지 않음. 판매가 10/22부터라 '발표 전'으로 쓰지 않고, 카드에는 '가격·품목별 입고는 앱·매장 공지 기준으로 확인하세요'로만 씀.
+- id: f23
+  claim: 대부분의 보도는 시즌 굿즈를 10/22부터 선보인다고 썼고, 한 매체는 음료·푸드·굿즈를 '22일부터 순차적으로' 선보인다고 썼다. 품목별 출시일은 보도에 없다.
+  value: 10/22부터 (일부 보도 '순차 출시', 품목별 일정은 보도에 없음)
+  source_url: https://m.news.nate.com/view/20261021n21910
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 확정은 시작일뿐 → 카드에 '10/22부터 차례로 출시', '입고는 앱·매장 확인'.
+- id: f24
+  claim: '''2026 겨울 e-프리퀀시''를 10/22부터 12/31까지 진행한다. 미션 음료 3잔을 포함해 제조 음료 17잔을 사서 e-스티커 17개를 모으면 기본 증정품 1개를 앱으로 예약하고, 지정한 날 고른 매장에서 받는다.'
+  value: 겨울 e-프리퀀시 10/22~12/31, 미션 3잔 포함 17잔
+  source_url: https://www.coxnews.co.kr/news/articleView.html?idxno=6471
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 마이데일리 https://www.mydaily.co.kr/page/view/2026101510213216378 · 이투데이 https://www.etoday.co.kr/news/view/2636117 · 아주경제 https://www.ajunews.com/view/20261015102206662 와 일치. 아침 초안에는 빠져 있었음.
+- id: f25
+  claim: 기본 증정품은 렉슨 포터블 스피커(Mino T, 그린·핑크), 가방(코듀로이 백팩·캔버스 토트백), 몰스킨 협업 플래너(2027 데일리·언데이티드)다. 17개를 채운 뒤 제조 음료 5잔을 더 사면 미니 노트 키링, 10잔을 더 사면 북 커버를 예약할 수 있다.
+  value: 렉슨 스피커·가방·몰스킨 플래너 / +5잔 키링, +10잔 북 커버
+  source_url: https://www.ttlnews.com/news/articleView.html?idxno=3152194
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 검색 요약에 '기본 증정품 8종' 표현도 있음. 북 커버 예약 시작일은 원문이 깨져 확인 못 해 쓰지 않음.
+- id: f26
+  claim: e-프리퀀시에 예약 취소 대기 기능이 처음 생겼다. 예약이 마감된 일부 증정품·수령일에 한해 당일 오전 7시부터 대기를 신청하고, 취소 물량이 나오면 오후 3시에 알림을 보낸다.
+  value: 예약 취소 대기 첫 도입 (07시 신청·15시 알림)
+  source_url: https://www.newscj.com/news/articleView.html?idxno=3440609
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 머니투데이 10/16(https://www.mt.co.kr/living/2026/10/16/2026101623163495759)도 예약 편의성 확대를 다룸. 카드에는 쓰지 않음.
+- id: f27
+  claim: '출시 첫 4일 ''더블 리워드'': 10/22~10/25에 플래너를 받으면 언데이티드 플래너 1권 또는 미니 노트 키링 1개를 더 준다. 기간마다 품목이 다르고, 한정 수량 선착순이다. 기준은 예약일이 아니라 실제 수령일이다.'
+  value: 10/22~25 플래너 수령 시 플래너 1권 또는 키링 1개 추가 (선착순)
+  source_url: https://www.segye.com/newsView/20261015508152
+  source_type: press
+  checked_at: '2026-10-22'
+  status: confirmed
+  note: 비즈워치(https://news.bizwatch.co.kr/article/consumer/2026/10/15/0004)·이투데이(https://www.etoday.co.kr/news/view/2638448) 10/15 기사도 같은 내용. 날짜별 품목 배분은 확인 못 함 → 캡션에 '추가 증정(한정 수량 선착순)'까지만.
+- id: f28
+  claim: 'e-프리퀀시 유의사항: 생수·요거트·병음료, 무료 음료 쿠폰 사용, 40% 이상 할인 쿠폰 사용 음료는 스티커가 적립되지 않는다. 예약은 첫 예약 포함 7일간 1인 최대 5개, 키오스크 주문은 스티커만 적립, 소진 시 무료 음료 쿠폰으로 대체될 수 있다.'
+  value: 적립 제외·7일 5개 제한·소진 시 쿠폰 대체
+  source_url: https://www.coxnews.co.kr/news/articleView.html?idxno=6471
+  source_type: press
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 10/15~21 기사들의 검색 요약에서 본 내용이라 정확한 기사 문장을 특정하지 못함. 카드·캡션에 쓰지 않음.
+- id: f29
+  claim: e-프리퀀시 미션 음료 목록은 매체마다 다르게 보도됐다(크리스마스 시즌과 함께 공개한다는 보도, 시즌 음료·글레이즈드 계열·리저브 제조 음료를 꼽은 보도).
+  value: '미션 음료 목록: 보도마다 다름'
+  source_url: https://www.coxnews.co.kr/news/articleView.html?idxno=6471
+  source_type: press
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 카드·캡션에 미션 음료를 확정 목록처럼 쓰지 않음. '미션 3잔 포함 17잔'까지만.
+- id: f30
+  claim: starbucks.co.kr 검색 결과에는 2026 크리스마스 푸드·MD 페이지가 아직 색인되지 않았고 일반 푸드 목록 페이지만 나왔다.
+  value: '공식몰 시즌 페이지: 검색에 안 나옴'
+  source_url: https://www.starbucks.co.kr/menu/food_list.do
+  source_type: official
+  checked_at: '2026-10-22'
+  status: unverified
+  note: 메뉴 이름·가격은 10/22 출시 뒤 공식 앱·누리집에서 다시 확인.
+slides:
+- role: cover
+  headline: |-
+    스타벅스 겨울 시즌
+    오늘(10/22)부터 시작
+  sub: 대상 푸드 20% 할인은 10/25(일)까지 4일만
+  info: []
+  point: ''
+  visual: 10월 말 비 갠 오후, 따뜻한 조명이 켜진 카페 창가의 나무 테이블 위에 김이 살짝 오르는 갈색 라떼가 담긴 무지 흰색 머그, 뚜껑을 덮은 무지 흰색 종이컵, 작은 케이크 한 조각이 놓인 무지 접시, 작은 솔방울 두 개와 짧은 전나무 가지 하나를 눈높이에서 비스듬히 찍은 장면을 화면 전체에 깐다. 테이블 끝에는 막 켜진 꼬마전구 줄이 느슨하게 놓여 있다. 창밖으로 노랗게 물든 가로수와 젖은 보도, 접은 우산을 든 작은 뒷모습 한 명이 흐릿하게 보인다. 실제 카메라로 찍은 듯한 자연광과 나무 결·도자기의 생활감 있는 질감, 과한 보정·광택·CG 느낌 없음. 위쪽은 창 위의 흐린 하늘과 부드럽게 번진 실내 벽면으로 단순하게 비워 두어, 큰 흰 제목 2줄·노란 하이라이트 밑줄과 그 바로 아래 흰 작은 글씨 한 줄이 또렷하게 읽히게 한다. 간판·로고·상표·컵 글씨 없음, 모든 컵과 접시는 무지.
+  fact_ids:
+  - f1
+  - f2
+  - f14
+  - f21
+  - f17
+  - f13
+- role: item
+  headline: |-
+    토피 넛 라떼
+    올해도 돌아왔어요
+  sub: 신메뉴가 아니라 매년 겨울 다시 나오는 음료
+  info:
+  - 2002년 국내 첫 출시
+  - 누적 판매 4000만 잔 이상
+  - 10/22(목)부터 전국 매장
+  point: 에스프레소에 토피 넛 시럽을 넣은 라떼예요
+  visual: 10월 말 늦은 오후, 창가로 비스듬히 들어오는 햇살과 따뜻한 실내 조명 아래 나무 테이블에 놓인 무지 투명 유리컵 속 휘핑크림을 얹은 연갈색 라떼를 위에서 비스듬히 내려다본 실사풍 사진 타일. 크림 위에 잘게 부순 갈색 토핑이 조금 뿌려져 있고, 옆에 무지 리넨 냅킨과 작은 티스푼, 마른 노란 은행잎 한 장이 놓여 있다. 광고 촬영처럼 각 잡은 연출이 아니라 카페에서 자연스럽게 찍은 일상 사진 같은 구도. 실제 카메라로 찍은 듯한 자연광과 유리컵의 물기·나무 결 질감, 과한 보정·광택·CG 느낌 없음. 사람 없음. 로고·컵 글씨·상표 없음.
+  fact_ids:
+  - f1
+  - f3
+  - f4
+  - f5
+- role: item
+  headline: |-
+    10/22 출시 음료 4종
+    신제품은 하나
+  sub: 토피 넛 라떼 포함 3종은 돌아온 메뉴예요
+  info:
+  - 살구 조이풀 메들리 티 라떼 · 신제품
+  - 윈터 스카치 바닐라 라떼 · 돌아온 메뉴
+  - 클래식 뱅쇼 히비스커스 티 · 돌아온 메뉴
+  point: 뱅쇼 티는 레드와인 맛을 낸 논알코올 음료예요
+  visual: 10월 말 맑은 오후, 카페 창가의 좁은 나무 선반 위에 나란히 놓인 무지 투명 유리컵 세 잔(살구빛이 도는 연주황 티 라떼, 크림을 얹은 베이지색 라떼, 맑은 붉은빛 과일차)을 눈높이에서 옆으로 바라본 실사풍 사진 타일. 창밖으로 노랗게 물든 가로수가 흐릿하게 보이고, 비스듬한 햇살이 컵을 통과해 선반에 옅은 색 그림자를 드리운다. 실제 카메라로 찍은 듯한 자연광과 유리·나무의 질감, 과한 보정·CG 느낌 없음. 사람 없음. 로고·컵 글씨·상표·메뉴판 글씨 없음.
+  fact_ids:
+  - f2
+  - f3
+  - f7
+  - f8
+  - f10
+- role: item
+  headline: |-
+    크리스마스 디저트
+    대표 메뉴 한눈에
+  sub: 누텔라 촉촉 생크림 케이크·누텔라 바게트 소금빵
+  info:
+  - 루돌프 쿠키 치즈 케이크·스노우맨 마카롱
+  - 산타 레드벨벳 치즈 케이크
+  - 트리 말차 크런치 케이크 등
+  point: 비프 멜트 바게트 샌드위치도 다시 나와요
+  visual: 따뜻한 조명이 켜진 카페의 유리 쇼케이스 안에 흰 생크림 케이크 조각, 길쭉한 바게트 모양 소금빵, 붉은 레드벨벳 치즈 케이크 조각, 초록빛 말차 케이크 조각, 흰 마카롱 몇 개가 무지 흰 접시와 나무 받침 위에 놓인 모습을 눈높이에서 비스듬히 찍은 실사풍 사진 타일. 유리에 실내 조명이 은은하게 비치고, 쇼케이스 옆 창으로 10월 말 노란 가로수가 흐릿하게 보이고, 유리 표면에 옅은 반사가 남아 있다. 광고 촬영처럼 각 잡은 연출이 아니라 매장에서 자연스럽게 찍은 일상 사진 같은 구도. 실제 카메라로 찍은 듯한 매장 조명과 은은한 창빛, 생크림·빵 껍질의 생활감 있는 질감, 과한 보정·광택·CG 느낌 없음. 사람 없음. 가격표·이름표·로고·글씨 없음, 캐릭터 장식 없음.
+  fact_ids:
+  - f14
+  - f15
+- role: item
+  headline: |-
+    크리스마스 굿즈
+    텀블러·머그·인형 등
+  sub: 진저브레드·마시멜로 모티브 베어리스타 디자인
+  info:
+  - 트리 댄싱 베어리스타 인형
+  - 10/22부터 차례로 출시
+  point: 가격·품목별 입고는 앱·매장 공지 기준으로 확인하세요
+  visual: 따뜻한 조명이 켜진 매장 한쪽의 나무 진열 선반 위에 크림색·진저브레드 갈색·연분홍 마시멜로색의 무지 텀블러 두세 개와 무지 도자기 머그, 폭신한 흰 천 소품이 놓여 있고, 선반 끝에 작은 솔방울과 꼬마전구 줄이 걸린 장면을 눈높이에서 비스듬히 찍은 실사풍 사진 타일. 뒤쪽 창으로 10월 말 오후의 노란 가로수가 흐릿하게 보인다. 실제 카메라로 찍은 듯한 자연광과 도자기 유약·스테인리스·천의 질감, 과한 보정·광택·CG 느낌 없음. 광고 촬영처럼 각 잡은 연출이 아니라 매장에서 자연스럽게 찍은 일상 사진 같은 구도. 사람 없음. 곰 캐릭터나 인형 얼굴은 그리지 않음. 로고·가격표·상표·글씨 없음, 모든 소품 무지.
+  fact_ids:
+  - f1
+  - f21
+  - f22
+  - f23
+- role: summary
+  headline: |-
+    놓치기 쉬운
+    혜택 기간 정리
+  sub: 별은 그린·골드 회원이 시즌 음료 구매 시 적립
+  info:
+  - 푸드 7종 20% 할인 10/25(일)까지
+  - 별 최대 3개 추가 10/28(수)까지
+  - e-프리퀀시 미션 포함 17잔 12/31까지
+  point: 할인 대상 7종 품목은 앱 공지 기준으로 확인하세요
+  visual: '10월 말 오전, 카페 창가 나무 테이블을 위에서 내려다본 실사풍 사진 타일: 펼쳐 둔 글씨 없는 빈 노트와 연필, 라떼가 담긴 무지 흰색 머그, 마른 단풍잎 두세 장. 창으로 들어온 비스듬한 햇살이 길고 부드러운 그림자를 만든다. 실제 카메라로 찍은 듯한 자연광과 종이·나무 결의 질감, 과한 보정·CG 느낌 없음. 사람 없음. 로고·글씨·숫자 없음.'
+  fact_ids:
+  - f13
+  - f17
+  - f18
+  - f24
+- role: cta
+  headline: |-
+    저장해 두고
+    같이 갈 친구에게 보내기
+  sub: 10월 22일 기준, 변경될 수 있어요
+  info:
+  - '출처: 스타벅스 코리아 공식 발표'
+  - 최신 정보는 앱 공지에서 확인
+  point: 푸드 할인 10/25(일), 별 추가 적립 10/28(수)까지
+  visual: 해 질 무렵 카페 창가의 나무 의자 위에 접힌 니트 머플러, 무지 텀블러, 뚜껑을 덮은 무지 흰색 종이컵이 놓인 장면을 눈높이에서 비스듬히 찍은 실사풍 사진 타일. 창밖으로 노랗게 물든 가로수와 막 켜진 가로등이 흐릿하게 보이고, 보도에 작은 뒷모습 한 명이 지나간다. 실내의 낮고 따뜻한 조명이 머플러의 니트 결을 비춘다. 실제 카메라로 찍은 듯한 자연광과 니트·나무의 질감, 과한 보정·광택·CG 느낌 없음. 간판·로고·상표·컵 글씨 없음.
+  fact_ids:
+  - f1
+  - f13
+  - f17
+caption: |
+  스타벅스 겨울 시즌 오늘(10/22) 시작, 대상 푸드 20% 할인은 10/25(일)까지
+  스타벅스 겨울 시즌 · 토피 넛 라떼 · 크리스마스 디저트 · 겨울 e-프리퀀시
+
+  ✔ 시즌 음료 4종 중 신제품은 살구 조이풀 메들리 티 라떼 하나 (여름 '살구 조이풀 메들리 쉐이큰 티'의 겨울 버전)
+  ✔ 토피 넛 라떼·윈터 스카치 바닐라 라떼·클래식 뱅쇼 히비스커스 티(논알코올)는 다시 나온 메뉴
+  ✔ 토피 넛 라떼는 2002년 첫 출시, 누적 판매 4000만 잔 이상
+  ✔ 크리스마스 디저트: 누텔라 촉촉 생크림 케이크, 누텔라 바게트 소금빵, 루돌프 쿠키 치즈 케이크, 산타 레드벨벳 치즈 케이크, 트리 말차 크런치 케이크, 스노우맨 마카롱 등
+  ✔ 비프 멜트 바게트 샌드위치도 다시 나와요
+  ✔ 대상 푸드 7종 20% 할인 10/22(목)~10/25(일) · 대상 7종 목록은 앱·매장에서 확인하세요
+  ✔ 그린·골드 회원은 시즌 음료 구매 시 별 최대 3개 추가 적립, 10/28(수)까지
+  ✔ 겨울 e-프리퀀시 10/22~12/31 · 미션 3잔 포함 17잔 · 10/22~25에 플래너를 받으면 추가 증정 (한정 수량 선착순)
+  ✔ 굿즈는 10/22부터 차례로 출시 · 가격은 앱·매장에서 확인하세요
+
+  저장해 두고, 같이 갈 친구에게 보내 주세요.
+  정보는 10월 22일 기준이에요.
+hashtags:
+- 스타벅스
+- 스타벅스겨울시즌
+- 토피넛라떼
+- 크리스마스디저트
+- 스타벅스e프리퀀시
+alt_text: 카페 창가의 라떼와 디저트, 무지 텀블러 사진 위에 스타벅스 겨울 시즌(10월 22일 시작)의 시즌 음료 4종과 신제품, 크리스마스 디저트, 굿즈, 푸드 할인(10월 25일까지)·별 추가 적립(10월 28일까지)·겨울 e-프리퀀시 기간을 정리한 카드뉴스 7장이에요.
+notes: |-
+  - 1장 '20%'·'10/25(일)', 2장 '2002년'·'4000만 잔 이상', 3장 '논알코올'(무알코올 아님), 6장 '20%'·'10/25(일)까지'·'10/28(수)까지'·'12/31까지'·'미션 포함 17잔' 숫자와 글자가 그대로 나왔는지 확인하세요.
+  - 4장 디저트 이름은 공식 표기('누텔라 촉촉 생크림 케이크', '누텔라 바게트 소금빵', '루돌프 쿠키 치즈 케이크')와 띄어쓰기까지 같아야 해요. 작은 글씨 1줄 + 정보줄 3줄에 6개 + '등'.
+  - 컵·텀블러·머그·쇼케이스에 로고나 글씨(특히 초록 원형 로고)가 생기면 지워 달라고 다시 요청하세요. 5장에 곰 캐릭터·인형 얼굴이 나오면 무지 소품으로 바꿔 달라고 하세요.
+  - 그림 속 음료·디저트·굿즈는 분위기 사진이라 실제 제품 모양과 다를 수 있어요.
+  - 게시 전에 앱에서 할인 대상 7종·굿즈 가격이 보이면 캡션에 한 줄 더할 수 있어요(카드 이미지는 그대로 둬도 됨).
